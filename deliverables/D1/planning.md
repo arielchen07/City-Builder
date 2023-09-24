@@ -6,18 +6,13 @@
  
 #### Q1: What is the product?
 
- > Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Specify if you have a partner and who they are.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app, browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
-    * Assume your the reader knows nothing about the partner or the problem domain and provide the necessary context. 
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
-testing this edit
+A city building game involving bringing real world objects into a virtual world.
+We are partnering with Project: Human City. They are developing an app named Spotstitch, a social app. 
+Our team is responsible for developing a game feature as a part of the social app.
+The game is a city builder game, where the user builds and manages a city. In order to build their city, the different components of infrastructure will be obtained by scanning objects in the real world with the app’s AR camera.
+Spotstitch has a web client as well as a mobile app. The mobile app will be responsible for scanning the real world objects, while the game itself will take place on the web app.
+Everyone who uses the Spostitch app will likely play the game as well. It is designed for people who enjoy city building games and want to bring the real world into their game. It also promotes real world interaction and incentivises people to explore their city.
+
 
 #### Q2: Who are your target users?
 
