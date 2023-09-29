@@ -148,7 +148,7 @@ Current 3rd Party API / Applications:
 - Geolocation Services: Google Maps API
 - Database Services: SQLserver, MongoDB
 - AR services: A-flaw AR (considering ARCore/ARKit)
-- 
+  
 p.s. Additional may be added during process
 
 ----
