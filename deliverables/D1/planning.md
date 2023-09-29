@@ -46,6 +46,8 @@ With this interactive game developed, we hope to enhance users’ real world exp
  * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
  * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
 Web game features:
+
+
 User Story 1: Place object into game map
 As someone who wants to design a city/town layout, I want to be able to select an item from my inventory and place it at a desired position on the map in the city builder game, in order to carry out my city plans and create a simulation of the city I want to design.
 Acceptance Criteria:
@@ -72,6 +74,7 @@ User Story 5: Trading items in inventory
 As someone aspiring to design a city or town layout, my intention is to utilize the virtual currency available in the Spotstich mobile app. This will enable me to enhance the appearance or "skin" of various objects within my inventory, thus contributing to the overall aesthetic and appeal of my virtual city or townscape.
 Acceptance Criteria:
 When a user is within the Spotstich mobile app and navigates to the trade section, they can specify the desired item from their inventory that they wish to upgrade and confirm their order. At this point, the selected item in their inventory will undergo an upgrade process, and the virtual currency required for the upgrade will be deducted as per the price.
+
 
 
 
