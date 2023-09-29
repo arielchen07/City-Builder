@@ -88,6 +88,66 @@ When a user is within the Spotstich mobile app and navigates to the trade sectio
  * How will you deploy the application?
  * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
  * Will you be using third party applications or APIs? If so, what are they?
+ The project involves developing a cross-platform game that enables users to create and play augmented reality (AR) games with geolocation features, real-time interaction, and customizable maps. 
+The frontend will be built using React Native for mobile apps and React.js for web apps. 
+The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
+Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
+The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
+
+Current 3rd Party API / Applications:
+- Geolocation Services: Google Maps API
+- Database Services: SQLserver, MongoDB
+- AR services: A-flaw AR (considering ARCore/ARKit)
+p.s. Additional may be added during process
+
+TECHNOLOGY STACK:
+1. Frontend:
+    a. Web Apps:
+        i. Languages & Libraries: React.js
+        ii. Products: SpotStitch, Co-quest, Lotus Learning
+    b. Mobile Apps:
+        i. Languages & Libraries: React Native, Flutter
+        ii. Products: SpotStitch, Co-quest, Lotus Learning
+2. Backend:
+    a. API Layer:
+        i. Languages & Frameworks: Unix, C++, Node.js, Python (Django/Flask)
+        ii. Types: RESTful, GraphQL
+    b. Business Logic:
+        i. Custom modules for SpotStitch, Co-quest, Lotus Learning
+    c. AI and Machine Learning:
+        i. Libraries: GPT-4 (for NLP tasks), TensorFlow, PyTorch
+    d. Database:
+        i. Relational Database: PostgreSQL
+        ii. NoSQL Database: MongoDB
+3. DevOps:
+    a. Containerization: Docker
+    b. Orchestration: Kubernetes
+    c. Cloud Services: AWS, Azure
+4. Security:
+    a. Authentication: JWT, OAuth 2.0
+    b. Data Encryption:
+        i. SSL/TLS (for data in transit)
+        ii. AES (for data at rest)
+5. Blockchain:
+    a. Smart Contracts: Solidity (for Ethereum-based contracts)
+    b. Decentralized Storage: IPFS
+6. Real-Time Processing:
+    a. WebSockets: For real-time updates and transactions
+    b. Message Queuing: RabbitMQ
+7. Analytics:
+    a. User Analytics: Google Analytics or custom analytics engine
+    b. Monitoring Tools: Prometheus, Grafana
+8. Patterns:
+    a. Microservices Architecture: Separate microservices for products like SpotStitch, Co-quest, Lotus Learning
+    b. Event-Driven Architecture: For real-time features and decoupling
+    c. MVC (Model-View-Controller): Structuring frontend and backend
+    d. Repository Pattern: For database interaction
+    e. Factory Pattern: For AI/ML model creation
+    f. Singleton Pattern: For shared resources
+    g. Observer Pattern: For real-time updates
+p.s. Will be modify during the process
+
+![process](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/c2297834-6a89-41b9-a164-c8ec5697f688)
 
 ----
 ## Intellectual Property Confidentiality Agreement 
