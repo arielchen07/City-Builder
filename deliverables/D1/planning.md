@@ -168,6 +168,8 @@ p.s. Additional may be added during process
 
 Briefly describe which option you have agreed to.
 
+We agreed to option 5 for now. Our partner shared the <em>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License</em> document with us. We will discuss further with our partner about this license and will probably move to option 3 later.
+
 ----
 
 ## Teamwork Details
