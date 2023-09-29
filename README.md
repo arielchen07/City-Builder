@@ -30,7 +30,7 @@ City building game (Web game):
  * View friends' city design
 
 Spotstich Mobile App:
- * Trade items in inventory with other users of the Spotstich Mobile App
+ * Trade for different "skin" of objects in inventory of the Spotstich Mobile App to enhance the appearance of objects
  * Scan objects using the AR camera API and store scanned object into the user's inventory
 ​
 ## Instructions
