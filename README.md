@@ -1,5 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
-Game Engine/ Code Connoisseurs
+# Game Engine/ Code Connoisseurs
 ​
 > _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
 ​
