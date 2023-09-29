@@ -44,34 +44,34 @@ With this interactive game developed, we hope to enhance users’ real world exp
  * At least 5 user stories concerning the main features of the application - note that this can broken down further
  * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
  * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
- * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
-
+ * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)  
 
 Web game features:
 
-User Story 1: Place object into game map  
+**User Story 1:** Place object into game map  
 As someone who wants to design a city/town layout, I want to be able to select an item from my inventory and place it at a desired position on the map in the city builder game, in order to carry out my city plans and create a simulation of the city I want to design.  
 Acceptance Criteria:  
 Given the user is in the city builder game and has items in their inventory, when they select an item and choose a location on the map, then the item is placed at the specified location.
 
-User Story 2: Delete object from game map  
+**User Story 2:** Delete object from game map  
 As someone who wants to design a city/town layout, I want to delete objects from the map in the city builder game and have them reappear in my inventory, in order to refine/redo my city plans if I’m not satisfied with my previous design.  
 Acceptance Criteria:  
 Given the user is in the city builder game and has placed objects on the map, when they select an object on the map and choose to delete it, then the object is removed from the map and added back to the user's inventory.
 
-User Story 3: Visit friend’s map  
+**User Story 3:** Visit friend’s map  
 As someone who likes to see other people’s designs of cities, I want to be able to visit my friends' cities in the city builder game, in order to tour their city designs and get some inspiration from other people’s work.  
 Acceptance Criteria:  
 Given the user is in the city builder game, when they access the friend's list and select a friend’s city to visit, then the corresponding friend’s city game map, according to the last time they saved, will be displayed on the screen. 
 
 Mobile App features:  
-User Story 4: Scan objects in real world and place into inventory  
+
+**User Story 4:** Scan objects in real world and place into inventory  
 As someone who likes to collect and record interesting things from the real world, I want to scan an item which is not included in my current inventory but exists in real-life world using Spotstitch's mobile app and then add it into my inventory. So that I can collect interesting items from the real world.
 Each time I scan the object and add it into my inventory, I will get some virtual currency in my wallet.  
 Acceptance Criteria:  
 Given the user is in the city builder game and wants to add objects in their inventory, when they scan a real-life item and select “upload to inventory” option, then the item is added in their own inventory. 
 
-User Story 5: Trading items in inventory  
+**User Story 5:** Trading items in inventory  
 As someone aspiring to design a city or town layout, my intention is to utilize the virtual currency available in the Spotstich mobile app. This will enable me to enhance the appearance or "skin" of various objects within my inventory, thus contributing to the overall aesthetic and appeal of my virtual city or townscape.  
 Acceptance Criteria:  
 When a user is within the Spotstich mobile app and navigates to the trade section, they can specify the desired item from their inventory that they wish to upgrade and confirm their order. At this point, the selected item in their inventory will undergo an upgrade process, and the virtual currency required for the upgrade will be deducted as per the price.
