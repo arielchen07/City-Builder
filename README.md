@@ -49,13 +49,17 @@ Spotstich Mobile App:
 Describe your Git/GitHub workflow. Essentially, we want to understand how your team members share codebase, avoid conflicts and deploys the application.
 ​
  * Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.  
-We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.  
  * If applicable, specify any naming conventions or standards you decide to adopt.
-We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)
  * Describe your overall deployment process from writing code to viewing a live application
  * What deployment tool(s) are you using? And how?
- * Don't forget to **briefly justify why** you chose this workflow or particular aspects of it!  
+ * Don't forget to **briefly justify why** you chose this workflow or particular aspects of it!
 
+Pull request:  
+We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.   
+Naming conventions:  
+We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)  
+Deployment:  
+(Will update once we get to the implementation stage of the project)  
 
  ## Coding Standards and Guidelines
  Keep this section brief, a maximum of 2-3 lines. You would want to read through this [article](https://www.geeksforgeeks.org/coding-standards-and-guidelines/) to get more context about what this section is for before attempting to answer.
