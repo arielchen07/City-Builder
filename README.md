@@ -1,10 +1,14 @@
-# YOUR PRODUCT/TEAM NAME
+# Game Engine/ Code Connoisseurs
 ​
 > _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
 ​
 ## Partner Intro
  * Include the names, emails, titles, primary or secondary point of contact at the partner organization
  * Provide a short description about the partner organization. (2-4 lines)
+ 
+ James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact
+ 
+ Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas to hfor global impact, focusing on addressing human inequality, social injustice, and access to basic needs. 
 
 ## Description about the project
 Keep this section very brief.
