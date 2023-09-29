@@ -88,6 +88,8 @@ When a user is within the Spotstich mobile app and navigates to the trade sectio
  * How will you deploy the application?
  * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
  * Will you be using third party applications or APIs? If so, what are they?
+ 
+ 
  The project involves developing a cross-platform game that enables users to create and play augmented reality (AR) games with geolocation features, real-time interaction, and customizable maps. 
 The frontend will be built using React Native for mobile apps and React.js for web apps. 
 The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
