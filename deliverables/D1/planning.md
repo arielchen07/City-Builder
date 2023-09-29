@@ -77,7 +77,7 @@ As someone aspiring to design a city or town layout, my intention is to utilize 
 Acceptance Criteria:
 When a user is within the Spotstich mobile app and navigates to the trade section, they can specify the desired item from their inventory that they wish to upgrade and confirm their order. At this point, the selected item in their inventory will undergo an upgrade process, and the virtual currency required for the upgrade will be deducted as per the price.
 
-Approval from partner for user stories:
+Approval from partner for user stories:  
 
 <img width="706" alt="User Story Partner Approval" src="https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/51133017/54af4ad3-1055-4fdb-9e06-aeec3b8627e5">
 
