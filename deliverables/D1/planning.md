@@ -90,100 +90,53 @@ Approval from partner for user stories:
  * Will you be using third party applications or APIs? If so, what are they?
  
 
-# Technology Stack
+Technology Stack
+- Frontend:
+  - Web Apps:
+    - Languages & Libraries: React.js
+  - Mobile Apps:
+    - Languages & Libraries: React Native (JS)
 
-## Frontend
+- Backend:
+  - API Layer:
+    - Languages & Frameworks: Unix, C++, Node.js, Python (Django/Flask)
+    - Types: RESTful, GraphQL
+  - Business Logic:
+    - Custom modules for SpotStitch
+  - AI and Machine Learning:
+  - Database:
+    - Relational Database: PostgreSQL
+    - NoSQL Database (if needed): MongoDB
 
-### Web Apps
-- **Languages & Libraries:** React.js
+- DevOps:
+  - Containerization: Docker
+  - Orchestration: Kubernetes
+  - Cloud Services: AWS, Azure
 
-### Mobile Apps
-- **Languages & Libraries:** React Native (JS)
+- Security (optional):
+  - Authentication: JWT, OAuth 2.0
+  - Data Encryption: SSL/TLS (for data in transit), AES (for data at rest)
 
-## Backend
+- Blockchain (optional):
+  - Smart Contracts: Solidity (for Ethereum-based contracts)
+  - Decentralized Storage: IPFS
 
-### API Layer
-- **Languages & Frameworks:** Unix, C++, Node.js, Python (Django/Flask)
-- **Types:** RESTful, GraphQL
+- Real-Time Processing:
+  - WebSockets: For real-time updates and transactions
+  - Message Queuing: RabbitMQ
 
-### Business Logic
-- Custom modules for SpotStitch
+- Analytics (optional):
+  - User Analytics: Google Analytics or custom analytics engine
+  - Monitoring Tools: Prometheus, Grafana
 
-### AI and Machine Learning
+- Patterns:
+  - Event-Driven Architecture: For real-time features and decoupling
+  - MVC (Model-View-Controller): Structuring frontend and backend
+  - Repository Pattern: For database interaction
+  - Factory Pattern: ML model creation
+  - Singleton Pattern: For shared resources
+  - Observer Pattern: For real-time updates
 
-## Database
-
-### Relational Database
-- PostgreSQL
-
-### NoSQL Database (if needed)
-- MongoDB
-
-## DevOps
-
-### Containerization
-- Docker
-
-### Orchestration
-- Kubernetes
-
-### Cloud Services
-- AWS, Azure
-
-## Security (optional)
-
-### Authentication
-- JWT, OAuth 2.0
-
-### Data Encryption
-- SSL/TLS (for data in transit)
-- AES (for data at rest)
-
-## Blockchain (optional)
-
-### Smart Contracts
-- Solidity (for Ethereum-based contracts)
-
-### Decentralized Storage
-- IPFS
-
-## Real-Time Processing
-
-### WebSockets
-- For real-time updates and transactions
-
-### Message Queuing
-- RabbitMQ
-
-## Analytics (optional)
-
-### User Analytics
-- Google Analytics or custom analytics engine
-
-### Monitoring Tools
-- Prometheus, Grafana
-
-## Patterns
-
-### Event-Driven Architecture
-- For real-time features and decoupling
-
-### MVC (Model-View-Controller)
-- Structuring frontend and backend
-
-### Repository Pattern
-- For database interaction
-
-### Factory Pattern
-- ML model creation
-
-### AI models (optional)
-
-### Singleton Pattern
-- For shared resources
-
-### Observer Pattern
-- For real-time updates
 
 p.s. Will be modify during the process
  
