@@ -21,6 +21,15 @@ City building game is a web-based creative city-building game that aims to conne
  * Describe the key features in the application that the user can access.
  * Provide a breakdown or detail for each feature.
  * This section will be used to assess the value of the features built
+
+City building game (Web game):
+ * Add objects from inventory to selected location on the game map
+ * Delete selected object from the game map
+ * View friends' city design
+
+Spotstich Mobile App:
+ * Trade items in inventory with other users of the Spotstich Mobile App
+ * Scan objects using the AR camera API and store scanned object into the user's inventory
 ​
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective
