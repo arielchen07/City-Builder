@@ -92,51 +92,79 @@ Approval from partner for user stories:
 
 Technology Stack
 - Frontend:
-  - Web Apps:
-    - Languages & Libraries: React.js
-  - Mobile Apps:
-    - Languages & Libraries: React Native (JS)
+    - Web Apps:
+        - Languages & Libraries: 
+            - React.js
+    - Mobile Apps:
+        - Languages & Libraries: 
+            - React Native (JS)
 
 - Backend:
-  - API Layer:
-    - Languages & Frameworks: Unix, C++, Node.js, Python (Django/Flask)
-    - Types: RESTful, GraphQL
-  - Business Logic:
-    - Custom modules for SpotStitch
-  - Machine Learning
-  - Database:
-    - Relational Database: PostgreSQL
-    - NoSQL Database (if needed): MongoDB
+    - API Layer:
+        - Languages & Frameworks: 
+            - Unity
+            - Blender
+            - MagicaVoxel
+    - Business Logic:
+        - (optional) AI: 
+            - GPT-4 API 
+        - (optional) Machine Learning: 
+            - TensorFlow
+        - Relational Database: 
+            - PostgreSQL
+        - NoSQL Database: 
+            - MongoDB (if needed)
 
 - DevOps:
-  - Containerization: Docker
-  - Orchestration: Kubernetes
-  - Cloud Services: AWS, Azure
+    - Containerization: 
+        - Docker
+    - Orchestration: 
+        - Kubernetes
+    - Cloud Services: 
+        - AWS
+        - Azure
 
-- Security (optional):
-  - Authentication: JWT, OAuth 2.0
-  - Data Encryption: SSL/TLS (for data in transit), AES (for data at rest)
+- Security: (optional)
+    - Authentication: 
+        - JWT
+        - OAuth 2.0
+    - Data Encryption:
+        - SSL/TLS (for data in transit)
+        - AES (for data at rest)
 
-- Blockchain (optional):
-  - Smart Contracts: Solidity (for Ethereum-based contracts)
-  - Decentralized Storage: IPFS
+- Blockchain: (optional)
+    - Smart Contracts: 
+        - Solidity (for Ethereum-based contracts)
+    - Decentralized Storage: 
+        - IPFS
 
 - Real-Time Processing:
-  - WebSockets: For real-time updates and transactions
-  - Message Queuing: RabbitMQ
+    - WebSockets: 
+        - For real-time updates and transactions
+    - Message Queuing: 
+        - RabbitMQ
 
-- Analytics (optional):
-  - User Analytics: Google Analytics or custom analytics engine
-  - Monitoring Tools: Prometheus, Grafana
+- Analytics: (optional)
+    - User Analytics: 
+        - Google Analytics or custom analytics engine
+    - Monitoring Tools: 
+        - Prometheus
+        - Grafana
 
 - Patterns:
-  - Event-Driven Architecture: For real-time features and decoupling
-  - MVC (Model-View-Controller): Structuring frontend and backend
-  - Repository Pattern: For database interaction
-  - Factory Pattern: ML model creation
-  - Singleton Pattern: For shared resources
-  - Observer Pattern: For real-time updates
-  - 
+    - Event-Driven Architecture: 
+        - For real-time features and decoupling
+    - MVC (Model-View-Controller): 
+        - Structuring frontend and backend
+    - Repository Pattern: 
+        - For database interaction
+    - Factory Pattern: 
+        - ML model creation
+    - Singleton Pattern: 
+        - For shared resources
+    - Observer Pattern: 
+        - For real-time updates
+
 p.s. Will be modify during the process
  
  
@@ -145,7 +173,8 @@ The frontend will be built using React Native for mobile apps and React.js for w
 The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
 Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
 The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
-![process](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/c2297834-6a89-41b9-a164-c8ec5697f688)
+![2](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/a1448609-d23f-444e-a9ff-ae4c1542a811)
+
 Current 3rd Party API / Applications:
 - Geolocation Services: Google Maps API
 - Database Services: SQLserver, MongoDB
