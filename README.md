@@ -58,11 +58,11 @@ Describe your Git/GitHub workflow. Essentially, we want to understand how your t
  * What deployment tool(s) are you using? And how?
  * Don't forget to **briefly justify why** you chose this workflow or particular aspects of it!
 
-Pull request:  
+**Pull request:**  
 We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.   
-Naming conventions:  
+**Naming conventions:**  
 We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)  
-Deployment:  
+**Deployment:**  
 (Will update once we get to the implementation stage of the project)  
 
  ## Coding Standards and Guidelines
