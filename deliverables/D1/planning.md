@@ -66,7 +66,6 @@ Given the user is in the city builder game, when they access the friend's list a
 
 Mobile App features:  
 
-
 User Story 4: Scan objects in real world and place into inventory
 As someone who likes to collect and record interesting things from the real world, I want to scan an item which is not included in my current inventory but exists in real-life world using Spotstitch's mobile app and then add it into my inventory. So that I can collect interesting items from the real world.
 Each time I scan the object and add it into my inventory, I will get some virtual currency in my wallet.
@@ -78,7 +77,8 @@ As someone aspiring to design a city or town layout, my intention is to utilize 
 Acceptance Criteria:
 When a user is within the Spotstich mobile app and navigates to the trade section, they can specify the desired item from their inventory that they wish to upgrade and confirm their order. At this point, the selected item in their inventory will undergo an upgrade process, and the virtual currency required for the upgrade will be deducted as per the price.
 
-
+Approval from partner for user stories:
+<img width="706" alt="User Story Partner Approval" src="https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/51133017/54af4ad3-1055-4fdb-9e06-aeec3b8627e5">
 
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
