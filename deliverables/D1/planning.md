@@ -51,17 +51,17 @@ Web game features:
 
 * User Story 1: Place object into game map  
 
-As someone who wants to design a city/town layout, I want to be able to select an item from my inventory and place it at a desired position on the map in the city builder game, in order to carry out my city plans and create a simulation of the city I want to design.  
+ As someone who wants to design a city/town layout, I want to be able to select an item from my inventory and place it at a desired position on the map in the city builder game, in order to carry out my city plans and create a simulation of the city I want to design.  
 
-Acceptance Criteria:
-Given the user is in the city builder game and has items in their inventory, when they select an item and choose a location on the map, then the item is placed at the specified location.
+ Acceptance Criteria:
+ Given the user is in the city builder game and has items in their inventory, when they select an item and choose a location on the map, then the item is placed at the specified location.
 
 * User Story 2: Delete object from game map  
 
-As someone who wants to design a city/town layout, I want to delete objects from the map in the city builder game and have them reappear in my inventory, in order to refine/redo my city plans if I’m not satisfied with my previous design.  
+ As someone who wants to design a city/town layout, I want to delete objects from the map in the city builder game and have them reappear in my inventory, in order to refine/redo my city plans if I’m not satisfied with my previous design.  
 
-Acceptance Criteria:
-Given the user is in the city builder game and has placed objects on the map, when they select an object on the map and choose to delete it, then the object is removed from the map and added back to the user's inventory.
+ Acceptance Criteria:
+ Given the user is in the city builder game and has placed objects on the map, when they select an object on the map and choose to delete it, then the object is removed from the map and added back to the user's inventory.
 
 * User Story 3: Visit friend’s map  
 
