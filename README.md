@@ -79,3 +79,9 @@ The web game (mainly done in Unity) will follow [Google C# Style Guide](https://
 ​
  * What type of license will you apply to your codebase? And why?
  * What affect does it have on the development and use of your codebase?
+
+We are using [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en) by the requirement of our partner. Anyone is free to share and adapt materials of this code base given that they do the following:  
+ * give appropriate credit, provide a link to the license, and indicate if changes were made
+ * do not use the codebase for commercial purposes
+ * use the same license as this codebase, when you share and adapt the material
+ * do not restrict others from doing anything this license permits
