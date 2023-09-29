@@ -20,6 +20,9 @@ Everyone who uses the Spostitch app will likely play the game as well. It is des
  * Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
  * **Feel free to use personas. You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).**
 
+User1: https://app.xtensio.com/8dlfki1b
+User2: https://app.xtensio.com/hwv7hm1q
+
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
 > Short (1 - 2 min' read max)
