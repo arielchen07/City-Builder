@@ -8,6 +8,8 @@
  
  James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact
  
+ P.S. will introduce one developer and one project manager around Oct. 6th
+
  Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas to hfor global impact, focusing on addressing human inequality, social injustice, and access to basic needs. 
 
 ## Description about the project
