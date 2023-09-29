@@ -171,7 +171,7 @@ p.s. Will be modify during the process
  The project involves developing a cross-platform game that enables users to create and play augmented reality (AR) games with geolocation features, real-time interaction, and customizable maps. 
 The frontend will be built using React Native for mobile apps and React.js for web apps. 
 The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
-Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
+Backend (Unity, C#, blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing (Optional).
 The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
 ![2](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/a1448609-d23f-444e-a9ff-ae4c1542a811)
 
