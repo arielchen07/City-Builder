@@ -89,12 +89,6 @@ Approval from partner for user stories:
  * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
  * Will you be using third party applications or APIs? If so, what are they?
  
- 
- The project involves developing a cross-platform game that enables users to create and play augmented reality (AR) games with geolocation features, real-time interaction, and customizable maps. 
-The frontend will be built using React Native for mobile apps and React.js for web apps. 
-The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
-Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
-The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
 
 TECHNOLOGY STACK:
 1. Frontend:
@@ -142,7 +136,13 @@ TECHNOLOGY STACK:
     f. Singleton Pattern: For shared resources
     g. Observer Pattern: For real-time updates
 p.s. Will be modify during the process
-
+ 
+ 
+ The project involves developing a cross-platform game that enables users to create and play augmented reality (AR) games with geolocation features, real-time interaction, and customizable maps. 
+The frontend will be built using React Native for mobile apps and React.js for web apps. 
+The mobile terminal is used for AR recognizations. (considering Aflaw for AR third-party API)
+Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
+The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
 ![process](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/c2297834-6a89-41b9-a164-c8ec5697f688)
 Current 3rd Party API / Applications:
 - Geolocation Services: Google Maps API
