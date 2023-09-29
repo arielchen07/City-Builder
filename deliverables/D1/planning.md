@@ -103,7 +103,7 @@ Technology Stack
     - Types: RESTful, GraphQL
   - Business Logic:
     - Custom modules for SpotStitch
-  - AI and Machine Learning:
+  - Machine Learning
   - Database:
     - Relational Database: PostgreSQL
     - NoSQL Database (if needed): MongoDB
@@ -136,8 +136,7 @@ Technology Stack
   - Factory Pattern: ML model creation
   - Singleton Pattern: For shared resources
   - Observer Pattern: For real-time updates
-
-
+  - 
 p.s. Will be modify during the process
  
  
