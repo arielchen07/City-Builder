@@ -96,12 +96,6 @@ The mobile terminal is used for AR recognizations. (considering Aflaw for AR thi
 Backend (Unity, c , blender (may use AI tools) )will handle data storage, business logic, and user authentication. It will interact with databases like PostgreSQL and MongoDB. The backend will also incorporate AI/ML components for data analysis and natural language processing.
 The project will also feature real-time processing for events and notifications, and analytics tools will track user behavior. 
 
-Current 3rd Party API / Applications:
-- Geolocation Services: Google Maps API
-- Database Services: SQLserver, MongoDB
-- AR services: A-flaw AR (considering ARCore/ARKit)
-p.s. Additional may be added during process
-
 TECHNOLOGY STACK:
 1. Frontend:
     a. Web Apps:
@@ -150,6 +144,12 @@ TECHNOLOGY STACK:
 p.s. Will be modify during the process
 
 ![process](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/c2297834-6a89-41b9-a164-c8ec5697f688)
+Current 3rd Party API / Applications:
+- Geolocation Services: Google Maps API
+- Database Services: SQLserver, MongoDB
+- AR services: A-flaw AR (considering ARCore/ARKit)
+- 
+p.s. Additional may be added during process
 
 ----
 ## Intellectual Property Confidentiality Agreement 
