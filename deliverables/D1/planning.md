@@ -90,51 +90,101 @@ Approval from partner for user stories:
  * Will you be using third party applications or APIs? If so, what are they?
  
 
-TECHNOLOGY STACK:
-1. Frontend:
-    a. Web Apps:
-        i. Languages & Libraries: React.js
-        ii. Products: SpotStitch, Co-quest, Lotus Learning
-    b. Mobile Apps:
-        i. Languages & Libraries: React Native, Flutter
-        ii. Products: SpotStitch, Co-quest, Lotus Learning
-2. Backend:
-    a. API Layer:
-        i. Languages & Frameworks: Unix, C++, Node.js, Python (Django/Flask)
-        ii. Types: RESTful, GraphQL
-    b. Business Logic:
-        i. Custom modules for SpotStitch, Co-quest, Lotus Learning
-    c. AI and Machine Learning:
-        i. Libraries: GPT-4 (for NLP tasks), TensorFlow, PyTorch
-    d. Database:
-        i. Relational Database: PostgreSQL
-        ii. NoSQL Database: MongoDB
-3. DevOps:
-    a. Containerization: Docker
-    b. Orchestration: Kubernetes
-    c. Cloud Services: AWS, Azure
-4. Security:
-    a. Authentication: JWT, OAuth 2.0
-    b. Data Encryption:
-        i. SSL/TLS (for data in transit)
-        ii. AES (for data at rest)
-5. Blockchain:
-    a. Smart Contracts: Solidity (for Ethereum-based contracts)
-    b. Decentralized Storage: IPFS
-6. Real-Time Processing:
-    a. WebSockets: For real-time updates and transactions
-    b. Message Queuing: RabbitMQ
-7. Analytics:
-    a. User Analytics: Google Analytics or custom analytics engine
-    b. Monitoring Tools: Prometheus, Grafana
-8. Patterns:
-    a. Microservices Architecture: Separate microservices for products like SpotStitch, Co-quest, Lotus Learning
-    b. Event-Driven Architecture: For real-time features and decoupling
-    c. MVC (Model-View-Controller): Structuring frontend and backend
-    d. Repository Pattern: For database interaction
-    e. Factory Pattern: For AI/ML model creation
-    f. Singleton Pattern: For shared resources
-    g. Observer Pattern: For real-time updates
+# Technology Stack
+
+## Frontend
+
+### Web Apps
+- **Languages & Libraries:** React.js
+
+### Mobile Apps
+- **Languages & Libraries:** React Native (JS)
+
+## Backend
+
+### API Layer
+- **Languages & Frameworks:** Unix, C++, Node.js, Python (Django/Flask)
+- **Types:** RESTful, GraphQL
+
+### Business Logic
+- Custom modules for SpotStitch
+
+### AI and Machine Learning
+
+## Database
+
+### Relational Database
+- PostgreSQL
+
+### NoSQL Database (if needed)
+- MongoDB
+
+## DevOps
+
+### Containerization
+- Docker
+
+### Orchestration
+- Kubernetes
+
+### Cloud Services
+- AWS, Azure
+
+## Security (optional)
+
+### Authentication
+- JWT, OAuth 2.0
+
+### Data Encryption
+- SSL/TLS (for data in transit)
+- AES (for data at rest)
+
+## Blockchain (optional)
+
+### Smart Contracts
+- Solidity (for Ethereum-based contracts)
+
+### Decentralized Storage
+- IPFS
+
+## Real-Time Processing
+
+### WebSockets
+- For real-time updates and transactions
+
+### Message Queuing
+- RabbitMQ
+
+## Analytics (optional)
+
+### User Analytics
+- Google Analytics or custom analytics engine
+
+### Monitoring Tools
+- Prometheus, Grafana
+
+## Patterns
+
+### Event-Driven Architecture
+- For real-time features and decoupling
+
+### MVC (Model-View-Controller)
+- Structuring frontend and backend
+
+### Repository Pattern
+- For database interaction
+
+### Factory Pattern
+- ML model creation
+
+### AI models (optional)
+
+### Singleton Pattern
+- For shared resources
+
+### Observer Pattern
+- For real-time updates
+
 p.s. Will be modify during the process
  
  
