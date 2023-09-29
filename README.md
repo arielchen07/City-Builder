@@ -39,14 +39,14 @@ Spotstich Mobile App:
  * Provide clear steps for using each feature described in the previous section.
  * This section is critical to testing your application and must be done carefully and thoughtfully.
 
-(Will update once we get to the implementation stage of the project)
+(Will update after we reach the implementation stage of the project)
  
  ## Development requirements
  * What are the technical requirements for a developer to set up on their machine or server (e.g. OS, libraries, etc.)?
  * Briefly describe instructions for setting up and running the application. You should address this part like how one would expect a README doc of real-world deployed application would be.
  * You can see this [example](https://github.com/alichtman/shallow-backup#readme) to get started.
 
-(Will update once we get to the implementation stage of the project)
+(Will update after we reach the implementation stage of the project)
  
  ## Deployment and Github Workflow
 ​
@@ -60,10 +60,12 @@ Describe your Git/GitHub workflow. Essentially, we want to understand how your t
 
 **Pull request:**  
 We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.   
+
 **Naming conventions:**  
 We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)  
+
 **Deployment:**  
-(Will update once we get to the implementation stage of the project)  
+(Will update after we reach the implementation stage of the project)  
 
  ## Coding Standards and Guidelines
  Keep this section brief, a maximum of 2-3 lines. You would want to read through this [article](https://www.geeksforgeeks.org/coding-standards-and-guidelines/) to get more context about what this section is for before attempting to answer.
