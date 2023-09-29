@@ -63,7 +63,8 @@ As someone who likes to see other people’s designs of cities, I want to be abl
 Acceptance Criteria:
 Given the user is in the city builder game, when they access the friend's list and select a friend’s city to visit, then the corresponding friend’s city game map, according to the last time they saved, will be displayed on the screen. 
 
-Mobile App features:
+Mobile App features:  
+
 
 User Story 4: Scan objects in real world and place into inventory
 As someone who likes to collect and record interesting things from the real world, I want to scan an item which is not included in my current inventory but exists in real-life world using Spotstitch's mobile app and then add it into my inventory. So that I can collect interesting items from the real world.
