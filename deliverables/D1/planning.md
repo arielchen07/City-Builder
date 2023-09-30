@@ -228,7 +228,9 @@ Describe the different roles on the team and the responsibilities associated wit
 
 List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
+ * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up.
+This part is not graded but may be reviewed later.  
+
 Roles:  
 Partner Liaison: main point of contact with partner  
 Scrummaster: sub-team lead  
