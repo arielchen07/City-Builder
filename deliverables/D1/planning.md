@@ -248,19 +248,24 @@ Sirui (Ariel): Web App developer, will be working on web game Unity backend that
 
 
 #### Q8: How will you work as a team?
-
-Weekly meetings with partner at Fridays 12:30 - 13:30, online  
-Weekly TA meetings in the range of 20:00 - 21:00 on Sundays, online  
-ad hoc internal meetings, online  
+Describe meetings (and other events) you are planning to have.  
+ * When and where? Recurring or ad hoc? In-person or online?
  * What's the purpose of each meeting?  
-Partner meetings are to make sure we are on the same page with the partner and to communicate any design changes and clarify implementations.  
-TA meetings are to ask any course-specific questions.  
-Internal meetings are for anything that seems too complicated to just slack about.  
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.  
+ * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
+
+  Weekly meetings with partner at Fridays 12:30 - 13:30, online  
+  Weekly TA meetings in the range of 20:00 - 21:00 on Mondays, online  
+  ad hoc internal meetings, online  
+  
+  Partner meetings are to make sure we are on the same page with the partner and to communicate any design changes and clarify implementations.  
+  TA meetings are to ask any course-specific questions and also technical questions related to the project.  
+  Internal meetings are for making significant decisions together such as code architecture, design choices and progress updates. Subteams will arrange their own meeting time to coordinate details.  
+  
  * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
    
-During the first meeting with our partner, we went over the app that they were currently developing, and clarified what they wanted us to build. We received documentation for the designs of the game that the previous team had worked on. We also decided on future weekly meetings and communication methods going forward, which will also be the regular meeting schedule we will use. If we find that we need more time, we will schedule an internal meeting at a different time.  
-During the second meeting on September 29th, we went over the mockups we had and talked about some details regarding the functionalities of the AR camera that the organization had already built. We also confirmed our confidentiality policies and user stories. The team is ready to move onto more in depth design and development stages.  
+During the first meeting with our partner, we went over the app that they were currently developing, and clarified what they wanted us to build. We were presented with two choices of the project topic: following the existing ganme design documents to create a web-based game or ustilizing AI to generate games with specified features (which involves some research on our own to start). We decided to implement the pre-designed game as the scope will be more achievable in the given time frame. So, we received documentations for the designs of the game that the previous team had worked on. We also decided on future weekly meeting schedules and communication methods going forward. If we find that we have more issues to discuss on our own, we will schedule an internal meeting at a different time.  
+
+During the second meeting on September 29th, we went over the mockups we had created and talked about some details regarding the functionalities of the AR camera that the organization had already built. We also confirmed our confidentiality policies and user stories. Our partner will introduce one more developer to assist our development on AR camera API and one project manager to facilitate the team work. We are ready to move onto more in depth design and development stages.  
 
   
 #### Q9: How will you organize your team?
@@ -274,20 +279,24 @@ List/describe the artifacts you will produce in order to organize your team.
    * How do tasks get assigned to team members?
    * How do you determine the status of work from inception to completion?
   
-We will use notion to keep track of a todo list, task boards etc. We will create weekly milestones to work on. We will plan the milestones out in a chronological order so that completing them will complete the app before the deadline. We will break milestones down into smaller objectives for individual members to complete. The team has decided what parts of the project they want to work on, so tasks will be assigned based on what part of the project it’s for. We will determine smaller objectives to be in progress, completion, or dropped.
+We will use Notion to keep track of a todo list, task boards etc. We will create weekly milestones to work on. We will plan the milestones out in a chronological order so that completing them will complete the app before the deadline. We will break milestones down into smaller objectives for individual members to complete. The team has decided what parts of the project they want to work on, so tasks will be assigned based on what part of the project it’s for. We will determine smaller objectives to be in progress, completion, or dropped.
 
 #### Q10: What are the rules regarding how your team works?
 
 **Communications:**
- * What is the expected frequency? What methods/channels will be used?   
-Slack: primary mode of contact, everyone is expected to read all messages on the channels related to the team project.  
-Zoom: synchronous meetings when necessary  
- * If you have a partner project, what is your process for communicating with your partner?  
+ * What is the expected frequency? What methods/channels will be used?
+
+Slack: primary mode of contact, everyone is expected to read all messages on the channels related to the team project within 24h.  
+Zoom: synchronous meetings when necessary 
+
+ * If you have a partner project, what is your process for communicating with your partner?
+
 Weekly Zoom meetings with partner, Slack for more urgent problems/simple questions
 
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?  
-We expect everyone to let us know beforehand if they won’t be there for a meeting etc, if someone doesn’t join without justified reason/unexpectedly does not deliver on a task then they know that it will reflect on their peer reviews and individual marks.  
+We expect everyone to let us know beforehand if they won’t be there for a meeting etc. If someone fails to join meetings without justified reasons or fails to complete assigned tasks without informing the team on time, then they should know that it will reflect on their peer reviews and individual marks.
+
  * How will you address the issue if one person doesn't contribute or is not responsive?  
 Attempt to reach out to them and if they still refuse to respond/not fix their behavior then reflect it in peer reviews and bring it up with TAs.
 
