@@ -254,7 +254,8 @@ Partner meetings are to make sure we are on the same page with the partner and t
 TA meetings are to ask any course-specific questions.  
 Internal meetings are for anything that seems too complicated to just slack about.  
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.  
- * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:  
+ * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
+   
 During the first meeting with our partner, we went over the app that they were currently developing, and clarified what they wanted us to build. We received documentation for the designs of the game that the previous team had worked on. We also decided on future weekly meetings and communication methods going forward, which will also be the regular meeting schedule we will use. If we find that we need more time, we will schedule an internal meeting at a different time.  
 During the second meeting on September 29th, we went over the mockups we had and talked about some details regarding the functionalities of the AR camera that the organization had already built. We also confirmed our confidentiality policies and user stories. The team is ready to move onto more in depth design and development stages.  
 
