@@ -249,8 +249,14 @@ List/describe the artifacts you will produce in order to organize your team.
 
 **Communications:**
  * What is the expected frequency? What methods/channels will be used? 
+Slack: primary mode of contact, everyone is expected to read all messages on the channels related to the team project.
+Zoom: synchronous meetings when necessary
  * If you have a partner project, what is your process for communicating with your partner?
- 
+Weekly Zoom meetings with partner, Slack for more urgent problems/simple questions
+
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
- * How will you address the issue if one person doesn't contribute or is not responsive? 
+We expect everyone to let us know beforehand if they won’t be there for a meeting etc, if someone doesn’t join without justified reason/unexpectedly does not deliver on a task then they know that it will reflect on their peer reviews and individual marks.
+ * How will you address the issue if one person doesn't contribute or is not responsive?
+Attempt to reach out to them and if they still refuse to respond/not fix their behavior then reflect it in peer reviews and bring it up with TAs.
+
