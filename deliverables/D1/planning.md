@@ -211,10 +211,10 @@ Do a team-building activity in-person or online. This can be playing an online g
 * Share at least three fun facts from members of you team (total not 3 for each member).  
 
 ![Picture1](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/51133017/67195d12-499a-4dc0-8257-ee1b2838c135)  
-We played a few online icebreakers such as codenames, bombparty, and among us while video calling on Zoom so everyone got to know each other more.
-Ricky has already made 5 games!!
-Yahya has a substantial board game library in his dorms.
-Krystal never rode a rollercoaster before!
+We played a few online icebreakers such as codenames, bombparty, and among us while video calling on Zoom so everyone got to know each other more.  
+Ricky has already made 5 games!!  
+Yahya has a substantial board game library in his dorms.  
+Krystal never rode a rollercoaster before!  
 
 
 
