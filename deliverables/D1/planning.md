@@ -227,6 +227,7 @@ Weekly Zoom meetings with partner, Slack for more urgent problems/simple questio
 
 **Collaboration**
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?  
+
 We will remind the team about the incoming meeting in our slack channel. We expect everyone to let us know beforehand if they won’t be there for a meeting etc. If someone fails to join meetings without justified reasons or fails to complete assigned tasks without informing the team on time, then they should know that it will reflect on their peer reviews and individual marks.
 
  * How will you address the issue if one person doesn't contribute or is not responsive?
