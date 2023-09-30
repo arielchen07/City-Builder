@@ -209,6 +209,12 @@ Do a team-building activity in-person or online. This can be playing an online g
 * Get to know each other on a more personal level.
 * Provide a few sentences on what you did and share a picture or other evidence of your team building activity.
 * Share at least three fun facts from members of you team (total not 3 for each member).
+  
+We played a few online icebreakers such as codenames, bombparty, and among us while video calling on Zoom so everyone got to know each other more.
+Ricky has already made 5 games!!
+Yahya has a substantial board game library in his dorms.
+Krystal never rode a rollercoaster before!
+
 
 
 #### Q7: What are the roles & responsibilities on the team?
@@ -222,17 +228,36 @@ Describe the different roles on the team and the responsibilities associated wit
 List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
+Roles:  
+Partner Liaison: main point of contact with partner  
+Scrummaster: sub-team lead  
+Mobile app developer: member of the mobile app team  
+Web app developer: member of the web app team  
+Meeting Minutes tracker: keeps track of the meeting minutes  
+
+Ricky: Software Developer and Scrummaster for the web game using Unity for front end. Has previous experience with game development and using unity. Partner liaison by self nomination.  
+Ruiting: Web App developer, will be working mainly on web game Unity backend that includes the game logic and connection to the mobile app database. Interested in gaining experience with Unity. Has previous experience in computer graphics (CSC317) and some experience in Blender. 
+KeGong: Mobile App developer, will be working mainly on mobile app frontend and inventory, had experience on web full stack development.  
+Krystal: Mobile App developer, will be working mainly on mobile app React frontend and Django Backend with experience on full stack development and testing.  
+Yahya: Mobile App developer, Meeting Minutes Tracker, will work on integrating the API for the AR camera and processing scanned objects. Interested in this technology the most, but have no previous experience.  
+Sirui (Ariel): Web App developer, will be working on web game Unity backend that includes the game logic. During the meantime, I will also contribute to the AR camera part. I am interested in developing apps and also AR. Has experience in computer vision research and is familiar with image recognition and object matching techniques that might be helpful for the game overall.  
+
 
 
 #### Q8: How will you work as a team?
 
-Describe meetings (and other events) you are planning to have. 
- * When and where? Recurring or ad hoc? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
- * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
-   * You must keep track of meeting minutes and add them to your repo under "documents/minutes" folder
-   * You must have a regular meeting schedule established for the rest of the term.  
+Weekly meetings with partner at Fridays 12:30 - 13:30, online  
+Weekly TA meetings in the range of 20:00 - 21:00 on Sundays, online  
+ad hoc internal meetings, online  
+ * What's the purpose of each meeting?  
+Partner meetings are to make sure we are on the same page with the partner and to communicate any design changes and clarify implementations.  
+TA meetings are to ask any course-specific questions.  
+Internal meetings are for anything that seems too complicated to just slack about.  
+ * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.  
+ * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:  
+During the first meeting with our partner, we went over the app that they were currently developing, and clarified what they wanted us to build. We received documentation for the designs of the game that the previous team had worked on. We also decided on future weekly meetings and communication methods going forward, which will also be the regular meeting schedule we will use. If we find that we need more time, we will schedule an internal meeting at a different time.  
+During the second meeting on September 29th, we went over the mockups we had and talked about some details regarding the functionalities of the AR camera that the organization had already built. We also confirmed our confidentiality policies and user stories. The team is ready to move onto more in depth design and development stages.  
+
   
 #### Q9: How will you organize your team?
 
@@ -244,14 +269,16 @@ List/describe the artifacts you will produce in order to organize your team.
    * **How do you prioritize tasks?**
    * How do tasks get assigned to team members?
    * How do you determine the status of work from inception to completion?
+  
+We will use notion to keep track of a todo list, task boards etc. We will create weekly milestones to work on. We will plan the milestones out in a chronological order so that completing them will complete the app before the deadline. We will break milestones down into smaller objectives for individual members to complete. The team has decided what parts of the project they want to work on, so tasks will be assigned based on what part of the project it’s for. We will determine smaller objectives to be in progress, completion, or dropped.
 
 #### Q10: What are the rules regarding how your team works?
 
 **Communications:**
- * What is the expected frequency? What methods/channels will be used? 
-Slack: primary mode of contact, everyone is expected to read all messages on the channels related to the team project.
-Zoom: synchronous meetings when necessary
- * If you have a partner project, what is your process for communicating with your partner?
+ * What is the expected frequency? What methods/channels will be used?   
+Slack: primary mode of contact, everyone is expected to read all messages on the channels related to the team project.  
+Zoom: synchronous meetings when necessary  
+ * If you have a partner project, what is your process for communicating with your partner?  
 Weekly Zoom meetings with partner, Slack for more urgent problems/simple questions
 
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
