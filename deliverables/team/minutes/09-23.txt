@@ -1,1 +1,6 @@
-2023-09-23	14:00	1 hour	Internal + partner	Brought up to speed on the project
+2023-09-23	14:00	1 hour	Internal + partner	
+Brought up to speed on the project:
+Went over the app that they were currently developing, and clarified what they wanted us to build. 
+We were presented with two choices of the project topic: following the existing ganme design documents to create a web-based game or ustilizing AI to generate games with specified features (which involves some research on our own to start). 
+We decided to implement the pre-designed game as the scope will be more achievable in the given time frame. So, we received documentations for the designs of the game that the previous team had worked on. 
+We also decided on future weekly meeting schedules and communication methods going forward.   
