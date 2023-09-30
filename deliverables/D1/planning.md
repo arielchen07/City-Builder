@@ -279,7 +279,13 @@ List/describe the artifacts you will produce in order to organize your team.
    * How do tasks get assigned to team members?
    * How do you determine the status of work from inception to completion?
   
-We will use Notion to keep track of a todo list, task boards etc. We will create weekly milestones to work on. We will plan the milestones out in a chronological order so that completing them will complete the app before the deadline. We will break milestones down into smaller objectives for individual members to complete. The team has decided what parts of the project they want to work on, so tasks will be assigned based on what part of the project it’s for. We will determine smaller objectives to be in progress, completion, or dropped.
+We will use Notion to keep track of a todo list, task boards etc. and will update every meeting minutes to this github repository. 
+
+We will prioritize fundamental features of the whole game, which are described in our user stories. If extra time remains after complete these features, we will consider adding other features to enhance gaming experiences.  
+
+Tasks are assigned based on each memebers' interests, skills and prior experiences. We split into 2 subteams working on web-app and mobile app. Each team has at least 1 member with prior experience in this field. For example, web game team has member with game development experience in Unity.
+
+To determine the status of work from inception to completion, we will first split tasks into key milestones. By setting the objectives and expected deadlines for each milestone, we can better determine the progress and make corresponding changes to our schedule if needed.
 
 #### Q10: What are the rules regarding how your team works?
 
@@ -295,8 +301,9 @@ Weekly Zoom meetings with partner, Slack for more urgent problems/simple questio
 
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?  
-We expect everyone to let us know beforehand if they won’t be there for a meeting etc. If someone fails to join meetings without justified reasons or fails to complete assigned tasks without informing the team on time, then they should know that it will reflect on their peer reviews and individual marks.
+We will remind the team about the incoming meeting in our slack channel. We expect everyone to let us know beforehand if they won’t be there for a meeting etc. If someone fails to join meetings without justified reasons or fails to complete assigned tasks without informing the team on time, then they should know that it will reflect on their peer reviews and individual marks.
 
- * How will you address the issue if one person doesn't contribute or is not responsive?  
-Attempt to reach out to them and if they still refuse to respond/not fix their behavior then reflect it in peer reviews and bring it up with TAs.
+ * How will you address the issue if one person doesn't contribute or is not responsive?
+
+Attempt to reach out to them and if they still refuse to respond or change their attitude and behaviors, then bring it up with TAs and reflect it in peer reviews.
 
