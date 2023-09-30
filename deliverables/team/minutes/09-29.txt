@@ -1,0 +1,4 @@
+
+Went over the mockups we had created and talked about some details regarding the functionalities of the AR camera that the organization had already built. 
+We also confirmed our confidentiality policies and user stories. 
+Our partner will introduce one more developer to assist our development on AR camera API and one project manager to facilitate the team work. We are ready to move onto more in depth design and development stages.  
