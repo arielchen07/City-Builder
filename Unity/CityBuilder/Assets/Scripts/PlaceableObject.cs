@@ -62,7 +62,8 @@ public class PlaceableObject : MonoBehaviour
         currentlyColliding.Clear();
         BoxCollider collider = GetComponent<BoxCollider>();
         Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
-        Vector3 worldHalfExtents = collider.transform.TransformVector(collider.size * 0.5f);
+        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
+        
         Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
         foreach(Collider col in cols){
             if(col.CompareTag("Tile"))

@@ -45,6 +45,9 @@ public class PlacementSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha6)){
             HoverObject(placeableObjects[5]);
         }
+        if(Input.GetKeyDown(KeyCode.Alpha7)){
+            HoverObject(placeableObjects[6]);
+        }
 
         if(currentlyPlacing != null){
             if(Input.GetKeyDown(KeyCode.Mouse0)){

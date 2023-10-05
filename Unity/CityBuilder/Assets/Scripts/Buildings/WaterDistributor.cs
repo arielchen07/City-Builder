@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerGenerator : PlaceableObject
+public class WaterDistributor : PlaceableObject
 {
-    public GameObject powerRange;
-    public int maxPower;
-    public int currPowerAllocated;
+    public GameObject waterRange;
+    public int maxWater;
+    public int currWaterAllocated;
     public float updateInterval = 2f;
     public float timer = 0;
 
@@ -39,20 +39,20 @@ public class PowerGenerator : PlaceableObject
 
     public override void OnPlace()
     {
-        BoxCollider collider = powerRange.GetComponent<BoxCollider>();
+        BoxCollider collider = waterRange.GetComponent<BoxCollider>();
         Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
         Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
         Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
-        currPowerAllocated = 0;
+        currWaterAllocated = 0;
         foreach (Collider col in cols) {
             House h = col.gameObject.GetComponent<House>();
             if (h != null) {
-                if (currPowerAllocated + h.powerCost <= maxPower) {
-                    currPowerAllocated += h.powerCost;
-                    h.powerAllocated = h.powerCost;
+                if (currWaterAllocated + h.waterCost <= maxWater) {
+                    currWaterAllocated += h.waterCost;
+                    h.waterAllocated = h.waterCost;
                 } else {
-                    h.powerAllocated = maxPower - currPowerAllocated;
-                    currPowerAllocated = maxPower;
+                    h.waterAllocated = maxWater - currWaterAllocated;
+                    currWaterAllocated = maxWater;
                     break;
                 }
             }
