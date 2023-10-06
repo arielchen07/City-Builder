@@ -5,18 +5,12 @@ using UnityEngine.Animations;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] public float cameraSensitivity;
-    [SerializeField] public float zoomSensitivity;
+    public float cameraSensitivity;
+    public float zoomSensitivity;
     public Camera cam;
     Vector3 moveDir;
     float camSize = 5;
     // WASD controls for the camera
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         moveDir = new Vector3(0,0,0);
@@ -40,6 +34,6 @@ public class CameraController : MonoBehaviour
         camSize = Mathf.Clamp(camSize, 1, 10);
         cam.orthographicSize = camSize;
         moveDir = WInput + SInput + AInput + DInput; //has issues with normalizing movement when for example w and a are pressed at the same time, but if normalized, the sqrt2 multiplier to w and s will stop working
-        transform.Translate(moveDir * cameraSensitivity * 0.05f); //0.05 is an arbitrary number to slow down the movement, so that a moveSpeed of 1 is manageable
+        transform.Translate(0.05f * cameraSensitivity * moveDir); //0.05 is an arbitrary number to scale down the movement speeed, so that a moveSpeed of 1 is manageable
     }
 }

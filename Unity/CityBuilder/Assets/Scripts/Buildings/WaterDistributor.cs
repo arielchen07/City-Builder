@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterDistributor : PlaceableObject
 {
-    public GameObject waterRange;
+    public GameObject serviceRange;
     public int maxWater;
     public int currWaterAllocated;
     public float updateInterval = 2f;
@@ -39,14 +39,13 @@ public class WaterDistributor : PlaceableObject
 
     public override void OnPlace()
     {
-        BoxCollider collider = waterRange.GetComponent<BoxCollider>();
-        Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
-        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
-        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
+        BoxCollider serviceRangeCollider = serviceRange.GetComponent<BoxCollider>();
+        Vector3 worldCenter = serviceRangeCollider.transform.TransformPoint(serviceRangeCollider.center);
+        Vector3 worldHalfExtents = Vector3.Scale(serviceRangeCollider.size, serviceRangeCollider.transform.lossyScale) * 0.5f;
+        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, serviceRangeCollider.transform.rotation);
         currWaterAllocated = 0;
         foreach (Collider col in cols) {
-            House h = col.gameObject.GetComponent<House>();
-            if (h != null) {
+            if (col.gameObject.TryGetComponent<House>(out var h)) {
                 if (currWaterAllocated + h.waterCost <= maxWater) {
                     currWaterAllocated += h.waterCost;
                     h.waterAllocated = h.waterCost;

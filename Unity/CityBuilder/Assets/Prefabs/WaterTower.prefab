@@ -234,8 +234,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6626131716160063637}
   - component: {fileID: 9063443622114730612}
-  m_Layer: 3
-  m_Name: WaterRange
+  m_Layer: 0
+  m_Name: ServiceRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,8 +318,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.2, z: 0.8}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.8, y: 0.45974806, z: 0.8}
+  m_Center: {x: 0, y: 0.129874, z: 0}
 --- !u!114 &5768320123429984422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 0
   hasBeenPlaced: 0
-  waterRange: {fileID: 3701178208540854148}
+  serviceRange: {fileID: 3701178208540854148}
   maxWater: 50
   currWaterAllocated: 0
   updateInterval: 2

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerGenerator : PlaceableObject
 {
-    public GameObject powerRange;
+    public GameObject serviceRange;
     public int maxPower;
     public int currPowerAllocated;
     public float updateInterval = 2f;
@@ -39,14 +39,13 @@ public class PowerGenerator : PlaceableObject
 
     public override void OnPlace()
     {
-        BoxCollider collider = powerRange.GetComponent<BoxCollider>();
-        Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
-        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
-        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
+        BoxCollider serviceRangeCollider = serviceRange.GetComponent<BoxCollider>();
+        Vector3 worldCenter = serviceRangeCollider.transform.TransformPoint(serviceRangeCollider.center);
+        Vector3 worldHalfExtents = Vector3.Scale(serviceRangeCollider.size, serviceRangeCollider.transform.lossyScale) * 0.5f;
+        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, serviceRangeCollider.transform.rotation);
         currPowerAllocated = 0;
         foreach (Collider col in cols) {
-            House h = col.gameObject.GetComponent<House>();
-            if (h != null) {
+            if (col.gameObject.TryGetComponent<House>(out var h)) {
                 if (currPowerAllocated + h.powerCost <= maxPower) {
                     currPowerAllocated += h.powerCost;
                     h.powerAllocated = h.powerCost;

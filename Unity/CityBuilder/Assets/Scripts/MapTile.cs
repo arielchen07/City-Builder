@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class MapTile : MonoBehaviour
 {
-    [SerializeField] public bool isOccupied;
-    [SerializeField] public GameObject placedObject;
-    
-    void Start()
-    {
-        
-    }
+    public bool isOccupied;
+    public GameObject placedObject;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
