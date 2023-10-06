@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: WaterSmall
   m_Shader: {fileID: -6465566751694194690, guid: c76e9c99ff46730408cb7b011297c2a9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_25dcdb8818eb4a72a3fb51d17cad089e: 0.08
+    - Vector1_25dcdb8818eb4a72a3fb51d17cad089e: 0.01
     - Vector1_3c1dbb406278452fb75d41d05c9506c5: 10
     - Vector1_765e4359a470409e8828a8ffebfabd36: 7
     - Vector1_7b2613a6d73e47d980eb333d6d844309: 0.1
