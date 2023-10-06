@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 public class Road : MonoBehaviour
 {
@@ -14,13 +13,23 @@ public class Road : MonoBehaviour
     void Start(){
         ChooseActiveRoadObject(1); 
         adjacentRoads = new List<GameObject>();
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
+        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
+        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
+        foreach (Collider col in cols) {
+            if (col.gameObject.CompareTag("Tile")) {
+                col.gameObject.GetComponent<MapTile>().isOccupied = true;
+                col.gameObject.GetComponent<MapTile>().placedObject = gameObject;
+            }
+        }
+        transform.parent = GameObject.Find("RoadsContainer").transform;
     }
 
     void Update(){
-        OnPlace();
+        CheckAdjacentRoads();
     }
-
-    public void OnPlace()
+    public void CheckAdjacentRoads()
     {
         adjacentRoads.Clear();
         //check for roads in each adjacent tile

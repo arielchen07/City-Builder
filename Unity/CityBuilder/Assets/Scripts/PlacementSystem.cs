@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -42,6 +40,9 @@ public class PlacementSystem : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.R)){ //place roads
             beginPlacingContinuousObjects = true;
+            if(currentlyPlacing != null) {
+                DropObject();
+            }
         }
         if (beginPlacingContinuousObjects) {
             PlaceContinuousObjects(road);
@@ -52,13 +53,7 @@ public class PlacementSystem : MonoBehaviour
                 PlaceObject();
             }
             else if(Input.GetKeyDown(KeyCode.Escape)){
-                if(currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true) {
-                    currentlyPlacing.transform.SetPositionAndRotation(oldPosition, Quaternion.Euler(oldRotation));
-                    currentlyPlacing.GetComponent<PlaceableObject>().isHovering = false;
-                    currentlyPlacing.transform.parent = null;
-                } else {
-                    Destroy(currentlyPlacing);
-                }
+                DropObject();
                 currentlyPlacing = null;
                 inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");    
             }
@@ -108,6 +103,17 @@ public class PlacementSystem : MonoBehaviour
         currentlyPlacing = newBuilding;
         currentlyPlacing.transform.Rotate(currentRotation);
         AssignObjectToCursor();
+    }
+
+    void DropObject() {
+        if(currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true) {
+            currentlyPlacing.transform.SetPositionAndRotation(oldPosition, Quaternion.Euler(oldRotation));
+            currentlyPlacing.GetComponent<PlaceableObject>().isHovering = false;
+            currentlyPlacing.transform.parent = null;
+        } else {
+            Destroy(currentlyPlacing);
+        }
+        currentlyPlacing = null;
     }
 
     void AssignObjectToCursor(){
