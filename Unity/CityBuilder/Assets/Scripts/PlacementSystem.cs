@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class PlacementSystem : MonoBehaviour
     Vector3 oldPosition;
     Vector3 oldRotation;
     bool beginPlacingContinuousObjects = false;
+    public SaveSystem saveSystem;
     void Start()
     {
         currentRotation = new Vector3(0,0,0);
@@ -38,7 +40,22 @@ public class PlacementSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha3)){
             HoverObject(placeableObjects[2]);
         }
-        if(Input.GetKeyDown(KeyCode.R)){ //place roads
+
+        // Key press for save/load the game, testing purpose only, will be replaced by click button in UI
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SaveGameObjects();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            LoadGameObjects();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            ClearGameMap();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)){ //place roads
             beginPlacingContinuousObjects = true;
             if(currentlyPlacing != null) {
                 DropObject();
@@ -147,6 +164,73 @@ public class PlacementSystem : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0)) {
             beginPlacingContinuousObjects = false;
+        }
+    }
+
+    void ClearGameMap()
+    {
+        // TODO: this function does not delete the game object in hierarchy (unity interface), need to delete that object as well
+        foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
+        {
+            Destroy(item);
+        }
+        foreach (var item in GameObject.FindObjectsOfType<Road>())
+        {
+            Destroy(item);
+        }
+    }
+    void SaveGameObjects()
+    {
+        StructureObjsSerialization structureObjs = new StructureObjsSerialization();
+
+        Debug.Log("Printing objects in the scene");
+        PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
+        foreach (PlaceableObject rb in placeableObjects)
+        {
+            structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+        }
+
+
+        Road[] roads = GameObject.FindObjectsOfType<Road>();
+        foreach (Road rb in roads)
+        {
+            structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+        }
+
+        print(structureObjs.structureObjData.Count);
+        var structureObjJson = JsonUtility.ToJson(structureObjs);
+        Debug.Log(structureObjJson);
+        saveSystem.SaveData(structureObjJson);
+    }
+
+    void LoadGameObjects()
+    {
+        ClearGameMap();
+        var structureObjJson = saveSystem.LoadData();
+        if (String.IsNullOrEmpty(structureObjJson))
+            return;
+        StructureObjsSerialization structureObjs = JsonUtility.FromJson<StructureObjsSerialization>(structureObjJson);
+
+        print(structureObjs.structureObjData.Count);
+        foreach (var structure in structureObjs.structureObjData)
+        {
+            print(structure.name);
+            if (structure.name.IndexOf("Road") != -1)
+            {
+                GameObject roadObj = Instantiate(road);
+                roadObj.transform.position = structure.position.GetValue();
+            }
+            else
+            {
+                foreach (var placeableObj in placeableObjects)
+                {
+                    if (structure.name.IndexOf(placeableObj.name) != -1)
+                    {
+                        GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
+                        break;
+                    }
+                }
+            }
         }
     }
 }
