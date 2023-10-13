@@ -91,8 +91,7 @@ public class MapDataManager : MonoBehaviour
                         GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
 
                         // Update colliding tiles
-                        building.GetComponent<PlaceableObject>().GetCollidingTiles();
-                        foreach (GameObject tile in building.GetComponent<PlaceableObject>().currentlyColliding)
+                        foreach (GameObject tile in building.GetComponent<PlaceableObject>().GetCollidingTiles())
                         {
                             tile.GetComponent<MapTile>().isOccupied = true;
                             tile.GetComponent<MapTile>().placedObject = building;
