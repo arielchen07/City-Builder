@@ -4291,7 +4291,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1223942979}
   - component: {fileID: 1223942980}
-  - component: {fileID: 1223942981}
   m_Layer: 0
   m_Name: PlacementSystem
   m_TagString: Untagged
@@ -4333,21 +4332,6 @@ MonoBehaviour:
   - {fileID: 4145400034378755712, guid: 89fda581521f0184badbd12aeb8d43fa, type: 3}
   - {fileID: 6594877488714937865, guid: 187e73d90ed06914694c5f049e1774e8, type: 3}
   road: {fileID: 5388757486949290415, guid: 7dffb4a92d261c5469b0777ae571938d, type: 3}
-  saveSystem: {fileID: 1223942981}
---- !u!114 &1223942981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223942978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9cc53469e836434597dfb0e48e5bc50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveName: SaveData_
-  saveDataIndex: 1
 --- !u!4 &1253772745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3517940271047565212, guid: 52a535f045183c643904a1b99b04380a, type: 3}
@@ -6096,6 +6080,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27756ec1c285fe0429b7c4a8c39f54d1, type: 3}
+--- !u!1 &1726606795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726606799}
+  - component: {fileID: 1726606798}
+  - component: {fileID: 1726606797}
+  - component: {fileID: 1726606796}
+  m_Layer: 0
+  m_Name: MapDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1726606796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726606795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86758e28c630d3a4ca6bdaebc06ee029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryLst:
+  - {fileID: 8063164154546413119, guid: d314447c804246146853ceb64da71c5b, type: 3}
+  - {fileID: 6594877488714937865, guid: 187e73d90ed06914694c5f049e1774e8, type: 3}
+  - {fileID: 4145400034378755712, guid: 89fda581521f0184badbd12aeb8d43fa, type: 3}
+  - {fileID: 3402843517139241138, guid: 6f844c749cb506f4c9cc88fc96fb14bd, type: 3}
+  - {fileID: 5388757486949290415, guid: 7dffb4a92d261c5469b0777ae571938d, type: 3}
+--- !u!114 &1726606797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726606795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cc53469e836434597dfb0e48e5bc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveName: SaveData_
+  saveDataIndex: 1
+--- !u!114 &1726606798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726606795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad21ffa3864f2c4183216315d531662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveSystem: {fileID: 1726606797}
+  inventory: {fileID: 1726606796}
+--- !u!4 &1726606799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726606795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.018906593, y: -0.45860863, z: 0.30213213}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1730872297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7004629271889236236, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
