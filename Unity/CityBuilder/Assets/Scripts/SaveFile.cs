@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
     [Range(0, 10)]
