@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -169,21 +170,28 @@ public class PlacementSystem : MonoBehaviour
 
     void ClearGameMap()
     {
-        // TODO: this function does not delete the game object in hierarchy (unity interface), need to delete that object as well
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
         {
-            Destroy(item);
+            Destroy(item.gameObject);
         }
+
+        
         foreach (var item in GameObject.FindObjectsOfType<Road>())
         {
-            Destroy(item);
+            Destroy(item.gameObject);
         }
+
+        foreach (var item in GameObject.FindObjectsOfType<MapTile>())
+        {
+            item.isOccupied = false;
+            item.placedObject = null;
+        }
+        Debug.Log("Objects cleared");
     }
     void SaveGameObjects()
     {
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
-        Debug.Log("Printing objects in the scene");
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
         foreach (PlaceableObject rb in placeableObjects)
         {
@@ -197,7 +205,6 @@ public class PlacementSystem : MonoBehaviour
             structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
         }
 
-        print(structureObjs.structureObjData.Count);
         var structureObjJson = JsonUtility.ToJson(structureObjs);
         Debug.Log(structureObjJson);
         saveSystem.SaveData(structureObjJson);
@@ -211,7 +218,6 @@ public class PlacementSystem : MonoBehaviour
             return;
         StructureObjsSerialization structureObjs = JsonUtility.FromJson<StructureObjsSerialization>(structureObjJson);
 
-        print(structureObjs.structureObjData.Count);
         foreach (var structure in structureObjs.structureObjData)
         {
             print(structure.name);
@@ -222,11 +228,21 @@ public class PlacementSystem : MonoBehaviour
             }
             else
             {
+                // Find the corresponding building prefab by name
                 foreach (var placeableObj in placeableObjects)
                 {
                     if (structure.name.IndexOf(placeableObj.name) != -1)
                     {
                         GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
+
+                        // Update colliding tiles
+                        building.GetComponent<PlaceableObject>().GetCollidingTiles();
+                        print(building.GetComponent<PlaceableObject>().currentlyColliding.Count);
+                        foreach (GameObject tile in building.GetComponent<PlaceableObject>().currentlyColliding)
+                        {
+                            tile.GetComponent<MapTile>().isOccupied = true;
+                            tile.GetComponent<MapTile>().placedObject = building;
+                        }
                         break;
                     }
                 }
