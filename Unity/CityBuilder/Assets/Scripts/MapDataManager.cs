@@ -7,6 +7,7 @@ public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryManager inventory;
+
     private void Update()
     {
         // Key press for save/load the game, testing purpose only, will be replaced by click button in UI
@@ -23,6 +24,7 @@ public class MapDataManager : MonoBehaviour
             ClearGameMap();
         }
     }
+
     void ClearGameMap()
     {
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
@@ -42,6 +44,7 @@ public class MapDataManager : MonoBehaviour
             item.placedObject = null;
         }
     }
+
     void SaveGameObjects()
     {
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();

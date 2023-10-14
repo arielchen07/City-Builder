@@ -32,7 +32,6 @@ public class StructureObjSerialization
     }
 }
 
-
 [Serializable]
 public class Vector3Serialization
 {
