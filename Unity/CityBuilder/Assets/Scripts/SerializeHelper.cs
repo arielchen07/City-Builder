@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 [Serializable]
@@ -31,6 +30,7 @@ public class StructureObjSerialization
         this.rotation = new Vector3Serialization(rotation);
     }
 }
+
 
 [Serializable]
 public class Vector3Serialization
