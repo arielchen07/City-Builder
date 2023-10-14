@@ -8,7 +8,7 @@
  
  James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact
  
- P.S. will introduce one developer and one project manager around Oct. 6th
+ P.S. will introduce one developer and one project manager later October due to scheduling chanllenge.
 
  Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs. 
 
@@ -17,7 +17,12 @@ Keep this section very brief.
  * Provide a high-level description of your application and it's value from an end-user's perspective
  * What is the problem you're trying to solve? Is there any context required to understand **why** the application solves this problem?
 
-City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City). Through the interaction with the AR camera, the city-building game encourages users to discover new things in the real world around them.
+City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City). 
+
+Our product could potentially revolutionize how users engage their physical environment with virtual games. It will encourage people to explore the local environment and surrounding objects, capture and record them with a vivid 3D model instead of a 2D picture. For real life urban planners, this product might improve their efficiency of initializing city planning and inspire them with creative and effective design. 
+
+With this interactive game developed, we hope to enhance users’ real world exploration and social interaction which could yield significant positive social impact. This also aligns with the mission of our partner, Project: Human City. As a non-profit organization, Project: Human City aims to enhance the lives of city residents on and off the app with various initiatives and projects. We together want to create a difference in people’s lives.
+
 ​
 ## Key Features
  * Describe the key features in the application that the user can access.
