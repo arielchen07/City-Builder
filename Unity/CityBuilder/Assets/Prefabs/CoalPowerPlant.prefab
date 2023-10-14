@@ -129,8 +129,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 1.9001244, z: 1.8}
-  m_Center: {x: 0, y: 0.8500622, z: 0}
+  m_Size: {x: 1.8, y: 0.5136641, z: 1.8}
+  m_Center: {x: 0, y: 0.15683207, z: 0}
 --- !u!54 &6177155832838749129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  powerRange: {fileID: 5630164164284756430}
+  serviceRange: {fileID: 5630164164284756430}
   maxPower: 50
   currPowerAllocated: 0
   updateInterval: 2
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 5456886290602470248}
   - component: {fileID: 766598723977091695}
   m_Layer: 0
-  m_Name: PowerRange
+  m_Name: ServiceRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

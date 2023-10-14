@@ -47,7 +47,7 @@ public class House : PlaceableObject
         }
         powerX = powerAllocated / powerCost;
         waterX = waterAllocated / waterCost;
-        sewageX = sewageAllocated /sewageCost;
+        sewageX = sewageAllocated / sewageCost;
         gasX = gasAllocated / gasCost;
         internetX = internetAllocated / internetCost;
         float utilMod = basePopulation / 10;

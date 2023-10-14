@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerGenerator : PlaceableObject
+public class SewagePlant : PlaceableObject
 {
     public GameObject serviceRange;
-    public int maxPower;
-    public int currPowerAllocated;
+    public int maxSewage;
+    public int currSewageAllocated;
     public float updateInterval = 2f;
     public float timer = 0;
 
@@ -43,18 +43,19 @@ public class PowerGenerator : PlaceableObject
         Vector3 worldCenter = serviceRangeCollider.transform.TransformPoint(serviceRangeCollider.center);
         Vector3 worldHalfExtents = Vector3.Scale(serviceRangeCollider.size, serviceRangeCollider.transform.lossyScale) * 0.5f;
         Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, serviceRangeCollider.transform.rotation);
-        currPowerAllocated = 0;
+        currSewageAllocated = 0;
         foreach (Collider col in cols) {
             if (col.gameObject.TryGetComponent<House>(out var h)) {
-                if (currPowerAllocated + h.powerCost <= maxPower) {
-                    currPowerAllocated += h.powerCost;
-                    h.powerAllocated = h.powerCost;
+                if (currSewageAllocated + h.sewageCost <= maxSewage) {
+                    currSewageAllocated += h.sewageCost;
+                    h.sewageAllocated = h.sewageCost;
                 } else {
-                    h.powerAllocated = maxPower - currPowerAllocated;
-                    currPowerAllocated = maxPower;
+                    h.sewageAllocated = maxSewage - currSewageAllocated;
+                    currSewageAllocated = maxSewage;
                     break;
                 }
             }
         }
     }
 }
+

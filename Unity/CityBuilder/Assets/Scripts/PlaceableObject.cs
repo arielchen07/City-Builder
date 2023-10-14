@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
@@ -74,6 +72,6 @@ public class PlaceableObject : MonoBehaviour
         return currentlyColliding;
     }
     public virtual void OnPlace() {
-
+        //implemented in child classes, not using an interface cause its the only function so far that is implemented dynamically across subclasses
     }
 }
