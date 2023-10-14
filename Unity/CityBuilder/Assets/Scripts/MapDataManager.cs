@@ -41,7 +41,6 @@ public class MapDataManager : MonoBehaviour
             item.isOccupied = false;
             item.placedObject = null;
         }
-        Debug.Log("Objects cleared");
     }
     void SaveGameObjects()
     {
@@ -61,7 +60,6 @@ public class MapDataManager : MonoBehaviour
         }
 
         var structureObjJson = JsonUtility.ToJson(structureObjs);
-        Debug.Log(structureObjJson);
         saveSystem.SaveData(structureObjJson);
     }
 
@@ -81,13 +79,13 @@ public class MapDataManager : MonoBehaviour
                 {
                     if (structure.name.IndexOf("Road") != -1)
                     {
-                        // road object
+                        // Create road object
                         GameObject roadObj = Instantiate(placeableObj);
                         roadObj.transform.position = structure.position.GetValue();
                     }
                     else
                     {
-                        // building object
+                        // Create building object
                         GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
 
                         // Update colliding tiles
