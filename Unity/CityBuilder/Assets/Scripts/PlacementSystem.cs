@@ -102,7 +102,7 @@ public class PlacementSystem : MonoBehaviour
         isSelectingObject = false;
     }
 
-    void HoverObject(GameObject objectToPlace){
+    public void HoverObject(GameObject objectToPlace){
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         if(currentlyPlacing != null){
             Destroy(currentlyPlacing);
@@ -114,7 +114,7 @@ public class PlacementSystem : MonoBehaviour
         AssignObjectToCursor();
     }
 
-    void DropObject() {
+    public void DropObject() {
         if(currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true) {
             currentlyPlacing.transform.SetPositionAndRotation(oldPosition, Quaternion.Euler(oldRotation));
             currentlyPlacing.GetComponent<PlaceableObject>().isHovering = false;
