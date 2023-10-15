@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryManager inventory;
+    public PlacementSystem placementSystem;
+    [SerializeField] private InputManager inputManager;
 
     private void Update()
     {
@@ -25,10 +29,14 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-    void ClearGameMap()
+    public void ClearGameMap()
     {
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
         {
+            //if (item.gameObject != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing())
+            //{
+            //    Destroy(item.gameObject);
+            //}
             Destroy(item.gameObject);
         }
 
@@ -45,14 +53,23 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-    void SaveGameObjects()
+    public void SaveGameObjects()
     {
+        //    if (placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing() != null)
+        //    {
+        //        Debug.Log("Cannot save, please put all items on map");
+        //        return;
+        //    }
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
         foreach (PlaceableObject rb in placeableObjects)
         {
-            structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+            if (rb.gameObject != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing())
+            {
+                structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+            }
+            //structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
         }
 
 
@@ -66,7 +83,7 @@ public class MapDataManager : MonoBehaviour
         saveSystem.SaveData(structureObjJson);
     }
 
-    void LoadGameObjects()
+    public void LoadGameObjects()
     {
         ClearGameMap();
         var structureObjJson = saveSystem.LoadData();
@@ -91,17 +108,26 @@ public class MapDataManager : MonoBehaviour
                         // Create building object
                         GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
 
-                        // Update colliding tiles
+                        // Update colliding tiles and building state
+                        building.transform.parent = null;
                         foreach (GameObject tile in building.GetComponent<PlaceableObject>().GetCollidingTiles())
                         {
                             tile.GetComponent<MapTile>().isOccupied = true;
                             tile.GetComponent<MapTile>().placedObject = building;
                         }
+                        inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
+
+                        building.GetComponent<PlaceableObject>().isHovering = false;
+                        building.GetComponent<PlaceableObject>().hasBeenPlaced = true;
                     }
                         
                     break;
                 }
             }
         }
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
