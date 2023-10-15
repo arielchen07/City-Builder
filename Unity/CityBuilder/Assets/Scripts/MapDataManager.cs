@@ -9,7 +9,7 @@ public class MapDataManager : MonoBehaviour
     public SaveFile saveSystem;
     public InventoryManager inventory;
     public PlacementSystem placementSystem;
-    [SerializeField] private InputManager inputManager;
+    public InputManager inputManager;
 
     private void Update()
     {
@@ -32,10 +32,6 @@ public class MapDataManager : MonoBehaviour
     {
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
         {
-            //if (item.gameObject != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing())
-            //{
-            //    Destroy(item.gameObject);
-            //}
             Destroy(item.gameObject);
         }
 
@@ -54,11 +50,6 @@ public class MapDataManager : MonoBehaviour
 
     public void SaveGameObjects()
     {
-        //    if (placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing() != null)
-        //    {
-        //        Debug.Log("Cannot save, please put all items on map");
-        //        return;
-        //    }
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
@@ -68,7 +59,6 @@ public class MapDataManager : MonoBehaviour
             {
                 structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
             }
-            //structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
         }
 
 
