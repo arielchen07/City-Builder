@@ -38,7 +38,7 @@ public class PlacementSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha3)){
             HoverObject(placeableObjects[2]);
         }
-        if (Input.GetKeyDown(KeyCode.R)){ //place roads
+        if(Input.GetKeyDown(KeyCode.R)){ //place roads
             beginPlacingContinuousObjects = true;
             if(currentlyPlacing != null) {
                 DropObject();
