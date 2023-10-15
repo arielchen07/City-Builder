@@ -8,12 +8,13 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject[] placeableObjects;
     public GameObject road;
-    GameObject currentlyPlacing;
-    GameObject currentlySelecting;
+    public GameObject currentlyPlacing;
+    public GameObject currentlySelecting;
     Vector3 currentRotation;
     Vector3 oldPosition;
     Vector3 oldRotation;
     bool beginPlacingContinuousObjects = false;
+    bool isSelectingObject = false;
     void Start()
     {
         currentRotation = new Vector3(0,0,0);
@@ -23,27 +24,14 @@ public class PlacementSystem : MonoBehaviour
         //update pointer position
         Vector3 mousePos = inputManager.GetSelectedMapPosition();
         pointer.transform.position = mousePos;
-
+        //get object the cursor is currently colliding with
         if(inputManager.hitObject != null){
             currentlySelecting = inputManager.hitObject;
         }
+        //checks for key inputs to spawn objects
+        SpawnObjectOnKey();
 
-        //these are just for testing. Actual placement will be called from UI
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            HoverObject(placeableObjects[0]);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            HoverObject(placeableObjects[1]);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3)){
-            HoverObject(placeableObjects[2]);
-        }
-        if(Input.GetKeyDown(KeyCode.R)){ //place roads
-            beginPlacingContinuousObjects = true;
-            if(currentlyPlacing != null) {
-                DropObject();
-            }
-        }
+        //
         if (beginPlacingContinuousObjects) {
             PlaceContinuousObjects(road);
         }
@@ -54,7 +42,6 @@ public class PlacementSystem : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.Escape)){
                 DropObject();
-                currentlyPlacing = null;
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow)){
                 currentlyPlacing.transform.Rotate(new Vector3(0,90,0));
@@ -68,11 +55,32 @@ public class PlacementSystem : MonoBehaviour
                 Destroy(currentlyPlacing);
                 currentlyPlacing = null;
             }
+
         inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
         } else if (currentlySelecting != null) {
             if (currentlySelecting.CompareTag("Object")) {
                 if (Input.GetKeyDown(KeyCode.Mouse0)) {
                     SelectObject();
+                }
+            }
+        }
+    }
+
+    void SpawnObjectOnKey() {
+        if(!isSelectingObject){
+            if(Input.GetKeyDown(KeyCode.Alpha1)){
+                HoverObject(placeableObjects[0]);
+            }
+            if(Input.GetKeyDown(KeyCode.Alpha2)){
+                HoverObject(placeableObjects[1]);
+            }
+            if(Input.GetKeyDown(KeyCode.Alpha3)){
+                HoverObject(placeableObjects[2]);
+            }
+            if(Input.GetKeyDown(KeyCode.R)){ //place roads
+                beginPlacingContinuousObjects = true;
+                if(currentlyPlacing != null) {
+                    DropObject();
                 }
             }
         }
@@ -91,6 +99,7 @@ public class PlacementSystem : MonoBehaviour
             currentlyPlacing.GetComponent<PlaceableObject>().OnPlace();
             currentlyPlacing = null;
         }
+        isSelectingObject = false;
     }
 
     void HoverObject(GameObject objectToPlace){
@@ -114,6 +123,7 @@ public class PlacementSystem : MonoBehaviour
             Destroy(currentlyPlacing);
         }
         currentlyPlacing = null;
+        isSelectingObject = false;
     }
 
     void AssignObjectToCursor(){
@@ -123,6 +133,7 @@ public class PlacementSystem : MonoBehaviour
     }
 
     void SelectObject() {
+        isSelectingObject = true;
         currentlyPlacing = currentlySelecting;
         oldPosition = currentlyPlacing.transform.position;
         oldRotation = currentlyPlacing.transform.rotation.eulerAngles;
