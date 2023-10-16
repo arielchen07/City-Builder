@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -31,36 +32,38 @@ public class PlacementSystem : MonoBehaviour
         //checks for key inputs to spawn objects
         SpawnObjectOnKey();
 
-        //
-        if (beginPlacingContinuousObjects) {
-            PlaceContinuousObjects(road);
-        }
 
-        if(currentlyPlacing != null && !beginPlacingContinuousObjects){
-            if(Input.GetKeyDown(KeyCode.Mouse0)){
-                PlaceObject();
-            }
-            else if(Input.GetKeyDown(KeyCode.Escape)){
-                DropObject();
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow)){
-                currentlyPlacing.transform.Rotate(new Vector3(0,90,0));
-                currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow)){
-                currentlyPlacing.transform.Rotate(new Vector3(0,-90,0));
-                currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
-            }
-            else if (Input.GetKeyDown(KeyCode.Delete)) {
-                Destroy(currentlyPlacing);
-                currentlyPlacing = null;
+        if(!EventSystem.current.IsPointerOverGameObject()){
+            if (beginPlacingContinuousObjects) {
+                PlaceContinuousObjects(road);
             }
 
-        inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
-        } else if (currentlySelecting != null) {
-            if (currentlySelecting.CompareTag("Object")) {
-                if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                    SelectObject();
+            if(currentlyPlacing != null && !beginPlacingContinuousObjects){
+                if(Input.GetKeyDown(KeyCode.Mouse0)){
+                    PlaceObject();
+                }
+                else if(Input.GetKeyDown(KeyCode.Escape)){
+                    DropObject();
+                }
+                else if (Input.GetKeyDown(KeyCode.LeftArrow)){
+                    currentlyPlacing.transform.Rotate(new Vector3(0,90,0));
+                    currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow)){
+                    currentlyPlacing.transform.Rotate(new Vector3(0,-90,0));
+                    currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
+                }
+                else if (Input.GetKeyDown(KeyCode.Delete)) {
+                    Destroy(currentlyPlacing);
+                    currentlyPlacing = null;
+                }
+
+            inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
+            } else if (currentlySelecting != null) {
+                if (currentlySelecting.CompareTag("Object")) {
+                    if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                        SelectObject();
+                    }
                 }
             }
         }
@@ -76,6 +79,9 @@ public class PlacementSystem : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Alpha3)){
                 HoverObject(placeableObjects[2]);
+            }
+            if(Input.GetKeyDown(KeyCode.Alpha4)){
+                HoverObject(placeableObjects[3]);
             }
             if(Input.GetKeyDown(KeyCode.R)){ //place roads
                 beginPlacingContinuousObjects = true;

@@ -136,9 +136,9 @@ GameObject:
   - component: {fileID: 6594877488714937862}
   - component: {fileID: 3632836858942846725}
   - component: {fileID: 2623607430309232127}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SewagePlant
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 6594877488855682300}
   - component: {fileID: 6594877488855682303}
   - component: {fileID: 6594877488855682302}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 6594877488927209627}
   - component: {fileID: 6594877488927209626}
   - component: {fileID: 6594877488927209629}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 6594877489062795551}
   - component: {fileID: 6594877489062795550}
   - component: {fileID: 6594877489062795553}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 6594877489777636607}
   - component: {fileID: 6594877489777636606}
   - component: {fileID: 6594877489777636353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 6594877490550669066}
   - component: {fileID: 6594877490550669069}
   - component: {fileID: 6594877490550669068}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,6 +775,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 78dbce06d7a5a9640b36a9539299f164, type: 3}
       propertyPath: m_Name
       value: sewagePlant1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 78dbce06d7a5a9640b36a9539299f164, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 78dbce06d7a5a9640b36a9539299f164, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78dbce06d7a5a9640b36a9539299f164, type: 3}
