@@ -1,60 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class NewTestScript
 {
-    //[SetUp]
-    //public void ResetScene()
-    //{
-    //    //EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
-    //    SceneManager.CreateNewScene()
-
-    //}
-    private GameObject placementSystemGO;
-    private PlacementSystem placementSystem;
-
+    private GameObject house = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/SingleHouse1.prefab");
+    PlacementSystem ps;
     [SetUp]
-    public void SetUp()
+    public void LoadScene()
     {
-        // Create a new GameObject and add the PlacementSystem component to it.
-        //GameObject gameObject = new GameObject();
-        //placementSystem = gameObject.AddComponent<PlacementSystem>();
-        placementSystemGO = new GameObject("PlacementSystem");
-        placementSystem = placementSystemGO.AddComponent<PlacementSystem>();
+        SceneManager.LoadScene("MainScene");
     }
 
     [UnityTest]
     public IEnumerator InitialCurrentlyPlacingStateTest()
     {
-        //var gameObject = new GameObject();
-        //var placementSystem = gameObject.AddComponent<PlacementSystem>();
-
-        Assert.IsNotNull(placementSystem);
-
-        Assert.AreEqual(null, placementSystem.currentlyPlacing);
-
-        yield return null;
+        yield return new WaitForSeconds(1);
+        ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>(); 
+        Assert.AreEqual(ps.currentlyPlacing, null);
     }
 
     [UnityTest]
     public IEnumerator HoverObjectTest()
     {
-        //var gameObject = new GameObject();
-        //var placementSystem = gameObject.AddComponent<PlacementSystem>();
-
-        placementSystem.HoverObject(new GameObject());
-
-        yield return new WaitForSeconds(5);
-
-        Assert.AreNotEqual(null, placementSystem.currentlyPlacing);
-
-
-        yield return null;
+        yield return new WaitForSeconds(1);
+        ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>(); 
+        GameObject newHouse = UnityEngine.Object.Instantiate(house);
+        ps.HoverObject(newHouse);
+        Assert.AreNotEqual(ps.currentlyPlacing, null);
     }
 }

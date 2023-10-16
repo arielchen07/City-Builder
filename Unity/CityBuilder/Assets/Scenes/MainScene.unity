@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2514,19 +2514,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 36.7634
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -31.181099
       objectReference: {fileID: 0}
     - target: {fileID: 923379632785007249, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_Sprite
@@ -2853,19 +2853,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 36.7634
       objectReference: {fileID: 0}
     - target: {fileID: 658390138605678114, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -31.181099
       objectReference: {fileID: 0}
     - target: {fileID: 923379632785007249, guid: e6aaba32396aa4780b1170e3af3d04cd, type: 3}
       propertyPath: m_Sprite
@@ -4985,7 +4985,7 @@ GameObject:
   - component: {fileID: 1223942980}
   m_Layer: 0
   m_Name: PlacementSystem
-  m_TagString: Untagged
+  m_TagString: PlacementSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5016,6 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f87ea4e73e16d4f9b03b943a286aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testInt: 10
   pointer: {fileID: 1062023144}
   inputManager: {fileID: 1137430705}
   placeableObjects:

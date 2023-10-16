@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Object
   - Tile
+  - PlacementSystem
   layers:
   - Default
   - TransparentFX
