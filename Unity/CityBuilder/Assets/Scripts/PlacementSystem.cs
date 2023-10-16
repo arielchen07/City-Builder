@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
+    public int testInt = 10;
     [SerializeField] private GameObject pointer;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject[] placeableObjects;
