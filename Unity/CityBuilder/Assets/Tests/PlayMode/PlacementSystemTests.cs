@@ -52,15 +52,9 @@ public class PlacementSystemTests
     {
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
-        foreach (GameObject tile in ps.currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding)
-        {
-            tile.GetComponent<MapTile>().isOccupied = false;
-            tile.GetComponent<MapTile>().placedObject = null;
-        }
         ps.HoverObject(newHouse);
-        //Assert.AreEqual(true, newHouse.GetComponent<PlaceableObject>().canBePlaced);
+        yield return new WaitForSeconds(10);
         ps.PlaceObject();
-        yield return new WaitForSeconds(1);
         Assert.AreEqual(null, ps.currentlyPlacing);
     }
 
