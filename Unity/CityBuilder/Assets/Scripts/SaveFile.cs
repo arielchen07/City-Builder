@@ -11,12 +11,13 @@ using UnityEngine.UI;
 public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
+
     [Range(0, 10)]
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
 
     public void SaveData(string dataToSave)
-    {     
+    {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
         {
             Debug.Log("Successfully saved data to file");
@@ -56,10 +57,11 @@ public class SaveFile : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Saved to server failed: " + request.error);
+                Debug.LogError("Save to server failed: " + request.error);
             }
         }
     }
+
     public string LoadData()
     {
         string data = "";
@@ -70,6 +72,7 @@ public class SaveFile : MonoBehaviour
 
         return data;
     }
+
     private bool ReadFromFile(string name, out string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
@@ -85,24 +88,32 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
+
     public void LoadDataServer()
     {
-        StartCoroutine(GetRequestServer((UnityWebRequest request) =>
-        {
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                print("Readfromserver recieved: " + request.downloadHandler.text);
-                Debug.Log("Successfully loaded data from server");
-                mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
-            }
-            else
-            {
-                Debug.LogError("Load from server failed: " + request.error);
-            }
-        }));
+        StartCoroutine(
+            GetRequestServer(
+                (UnityWebRequest request) =>
+                {
+                    // call to load game objects after recieved data from get request
+                    if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        print("Readfromserver recieved: " + request.downloadHandler.text);
+                        Debug.Log("Successfully loaded data from server");
+                        mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
+                    }
+                    else
+                    {
+                        Debug.LogError("Load from server failed: " + request.error);
+                    }
+                }
+            )
+        );
     }
+
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
+        // send get request to server, triggers callback after response recieved
         using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
         {
             request.SetRequestHeader("Content-Type", "application/json");

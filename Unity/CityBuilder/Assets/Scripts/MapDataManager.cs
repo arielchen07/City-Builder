@@ -84,23 +84,6 @@ public class MapDataManager : MonoBehaviour
         saveSystem.SaveData(structureObjJson);
     }
 
-    //public void LoadGameObjects(bool fromLocal)
-    //{
-    //    print(saveSystem);
-    //    print(inventory);
-    //    print(placementSystem);
-    //    print(inputManager);
-    //    if (fromLocal)
-    //    {
-    //        var structureObjJson = saveSystem.LoadData();
-    //        ReDrawGameObjects(structureObjJson);
-    //    }
-    //    else
-    //    {
-    //        saveSystem.LoadDataServer();
-    //    }
-    //}
-
     public void ReDrawGameObjects(string structureObjJson)
     {
         ClearGameMap();
