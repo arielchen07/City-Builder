@@ -2,30 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
     [Range(0, 10)]
     public int saveDataIndex = 1;
+    public MapDataManager mapDataManager;
 
     public void SaveData(string dataToSave)
-    {
+    {     
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
         {
-            Debug.Log("Successfully saved data");
+            Debug.Log("Successfully saved data to file");
         }
-    }
-
-    public string LoadData()
-    {
-        string data = "";
-        if (ReadFromFile(saveName + saveDataIndex, out data))
-        {
-            Debug.Log("Successfully loaded data");
-        }
-        return data;
+        StartCoroutine(SendToServer(dataToSave));
     }
 
     private bool WriteToFile(string name, string content)
@@ -45,6 +41,35 @@ public class SaveFile : MonoBehaviour
         return false;
     }
 
+    IEnumerator SendToServer(string data)
+    {
+        using (var request = new UnityWebRequest("http://localhost:3000", "POST"))
+        {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Successfully saved data to server");
+            }
+            else
+            {
+                Debug.LogError("Saved to server failed: " + request.error);
+            }
+        }
+    }
+    public string LoadData()
+    {
+        string data = "";
+        if (ReadFromFile(saveName + saveDataIndex, out data))
+        {
+            Debug.Log("Successfully loaded data from file");
+        }
+
+        return data;
+    }
     private bool ReadFromFile(string name, out string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
@@ -59,5 +84,30 @@ public class SaveFile : MonoBehaviour
             content = "";
         }
         return false;
+    }
+    public void LoadDataServer()
+    {
+        StartCoroutine(GetRequestServer((UnityWebRequest request) =>
+        {
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                print("Readfromserver recieved: " + request.downloadHandler.text);
+                Debug.Log("Successfully loaded data from server");
+                mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
+            }
+            else
+            {
+                Debug.LogError("Load from server failed: " + request.error);
+            }
+        }));
+    }
+    IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            callback(request);
+        }
     }
 }
