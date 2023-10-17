@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MapDataManager : MonoBehaviour
 {
@@ -13,16 +12,24 @@ public class MapDataManager : MonoBehaviour
 
     private void Update()
     {
-        // Key press for save/load the game, testing purpose only, will be replaced by click button in UI
+        // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveGameObjects();
+            SaveGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadGameObjects();
+            LoadGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            SaveGameObjectsServer();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            LoadGameObjectsServer();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ClearGameMap();
         }
@@ -34,7 +41,6 @@ public class MapDataManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-
 
         foreach (var item in GameObject.FindObjectsOfType<Road>())
         {
@@ -48,19 +54,36 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-    public void SaveGameObjects()
+    public void SaveGameObjectsServer()
+    {
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataServer(structureObjJson);
+    }
+
+    public void SaveGameObjectsLocal()
+    {
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataLocal(structureObjJson);
+    }
+    public string SerializeAllGameObjects()
     {
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
         foreach (PlaceableObject rb in placeableObjects)
         {
-            if (rb.gameObject != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing())
+            if (
+                rb.gameObject
+                != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing()
+            )
             {
-                structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+                structureObjs.AddObj(
+                    rb.name,
+                    rb.transform.position,
+                    rb.transform.rotation.eulerAngles
+                );
             }
         }
-
 
         Road[] roads = GameObject.FindObjectsOfType<Road>();
         foreach (Road rb in roads)
@@ -69,16 +92,28 @@ public class MapDataManager : MonoBehaviour
         }
 
         var structureObjJson = JsonUtility.ToJson(structureObjs);
-        saveSystem.SaveData(structureObjJson);
+        return structureObjJson;
     }
 
-    public void LoadGameObjects()
+    public void LoadGameObjectsServer()
+    {
+        saveSystem.LoadDataServer();
+    }
+
+    public void LoadGameObjectsLocal()
+    {
+        var structureObjJson = saveSystem.LoadDataLocal();
+        ReDrawGameObjects(structureObjJson);
+    }
+    public void ReDrawGameObjects(string structureObjJson)
     {
         ClearGameMap();
-        var structureObjJson = saveSystem.LoadData();
+
         if (String.IsNullOrEmpty(structureObjJson))
             return;
-        StructureObjsSerialization structureObjs = JsonUtility.FromJson<StructureObjsSerialization>(structureObjJson);
+        StructureObjsSerialization structureObjs = JsonUtility.FromJson<StructureObjsSerialization>(
+            structureObjJson
+        );
 
         foreach (var structure in structureObjs.structureObjData)
         {
@@ -95,26 +130,36 @@ public class MapDataManager : MonoBehaviour
                     else
                     {
                         // Create building object
-                        GameObject building = Instantiate(placeableObj, structure.position.GetValue(), Quaternion.Euler(structure.rotation.GetValue()));
+                        GameObject building = Instantiate(
+                            placeableObj,
+                            structure.position.GetValue(),
+                            Quaternion.Euler(structure.rotation.GetValue())
+                        );
 
                         // Update colliding tiles and building state
                         building.transform.parent = null;
-                        foreach (GameObject tile in building.GetComponent<PlaceableObject>().GetCollidingTiles())
+                        foreach (
+                            GameObject tile in building
+                                .GetComponent<PlaceableObject>()
+                                .GetCollidingTiles()
+                        )
                         {
                             tile.GetComponent<MapTile>().isOccupied = true;
                             tile.GetComponent<MapTile>().placedObject = building;
                         }
-                        inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
+                        inputManager.placementLayermask =
+                            LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
 
                         building.GetComponent<PlaceableObject>().isHovering = false;
                         building.GetComponent<PlaceableObject>().hasBeenPlaced = true;
                     }
-                        
+
                     break;
                 }
             }
         }
     }
+
     public void ExitGame()
     {
         Application.Quit();
