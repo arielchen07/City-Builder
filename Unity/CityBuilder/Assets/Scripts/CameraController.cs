@@ -35,13 +35,13 @@ public class CameraController : MonoBehaviour
         {
             DInput = new Vector3(1, 0, -1);
         }
+        moveDir = WInput + SInput + AInput + DInput; //has issues with normalizing movement when for example w and a are pressed at the same time, but if normalized, the sqrt2 multiplier to w and s will stop working
+        transform.Translate(0.05f * cameraSensitivity * moveDir); //0.05 is an arbitrary number to scale down the movement speeed, so that a moveSpeed of 1 is manageable
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             camSize -= Input.mouseScrollDelta.y * zoomSensitivity;
             camSize = Mathf.Clamp(camSize, 1, 10);
             cam.orthographicSize = camSize;
-            moveDir = WInput + SInput + AInput + DInput; //has issues with normalizing movement when for example w and a are pressed at the same time, but if normalized, the sqrt2 multiplier to w and s will stop working
-            transform.Translate(0.05f * cameraSensitivity * moveDir); //0.05 is an arbitrary number to scale down the movement speeed, so that a moveSpeed of 1 is manageable
         }
     }
 }
