@@ -36,6 +36,31 @@ app.get('/', (req, res) => {
                 name: "SingleHouse1(Clone)",
                 position: { x: 0.5, y: 0.0, z: 2.5 },
                 rotation: { x: 0.0, y: 0.0, z: 0.0 }
+            },
+            {
+                name: "Road(Clone)",
+                position: { x: 4.0, y: 0.0, z: 1.0 },
+                rotation: { x: 0.0, y: 0.0, z: 0.0 }
+            },
+            {
+                name: "Road(Clone)",
+                position: { x: 3.0, y: 0.0, z: 1.0 },
+                rotation: { x: 0.0, y: 0.0, z: 0.0 }
+            },
+            {
+                name: "Road(Clone)",
+                position: { x: 2.0, y: 0.0, z: 1.0 },
+                rotation: { x: 0.0, y: 0.0, z: 0.0 }
+            },
+            {
+                name: "Road(Clone)",
+                position: { x: 1.0, y: 0.0, z: 1.0 },
+                rotation: { x: 0.0, y: 0.0, z: 0.0 }
+            },
+            {
+                name: "Road(Clone)",
+                position: { x: 0.0, y: 0.0, z: 1.0 },
+                rotation: { x: 0.0, y: 0.0, z: 0.0 }
             }
         ]
     };
