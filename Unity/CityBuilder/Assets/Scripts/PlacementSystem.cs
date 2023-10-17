@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlacementSystem : MonoBehaviour
 {
+    public int testInt = 10;
     [SerializeField] private GameObject pointer;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject[] placeableObjects;
@@ -92,7 +93,7 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    void PlaceObject(){
+    public void PlaceObject(){
         if (currentlyPlacing.GetComponent<PlaceableObject>().CanBePlaced()){
             currentlyPlacing.transform.parent = null;
             foreach(GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding){
@@ -138,7 +139,7 @@ public class PlacementSystem : MonoBehaviour
         currentlyPlacing.GetComponent<PlaceableObject>().isHovering = true;
     }
 
-    void SelectObject() {
+    public void SelectObject() {
         isSelectingObject = true;
         currentlyPlacing = currentlySelecting;
         oldPosition = currentlyPlacing.transform.position;
