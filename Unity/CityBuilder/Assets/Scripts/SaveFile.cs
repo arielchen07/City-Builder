@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class SaveFile : MonoBehaviour
 {
@@ -16,23 +13,22 @@ public class SaveFile : MonoBehaviour
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
 
-    public void SaveData(string dataToSave)
+    public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
         {
             Debug.Log("Successfully saved data to file");
         }
-        StartCoroutine(SendToServer(dataToSave));
     }
 
-    private bool WriteToFile(string name, string content)
+    public bool WriteToFile(string name, string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
 
         try
         {
             File.WriteAllText(fullPath, content);
-            Debug.Log("File path: " + fullPath);
+            Debug.Log("Filepath: " + fullPath);
             return true;
         }
         catch (Exception e)
@@ -42,7 +38,11 @@ public class SaveFile : MonoBehaviour
         return false;
     }
 
-    IEnumerator SendToServer(string data)
+    public void SaveDataServer(string dataToSave)
+    {
+        StartCoroutine(PostRequestServer(dataToSave));
+    }
+    IEnumerator PostRequestServer(string data)
     {
         using (var request = new UnityWebRequest("http://localhost:3000", "POST"))
         {
@@ -61,8 +61,7 @@ public class SaveFile : MonoBehaviour
             }
         }
     }
-
-    public string LoadData()
+    public string LoadDataLocal()
     {
         string data = "";
         if (ReadFromFile(saveName + saveDataIndex, out data))

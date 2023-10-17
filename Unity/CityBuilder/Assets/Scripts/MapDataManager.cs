@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MapDataManager : MonoBehaviour
 {
@@ -16,22 +15,23 @@ public class MapDataManager : MonoBehaviour
         // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveGameObjects();
+            SaveGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            // Load from local file
-            var structureObjJson = saveSystem.LoadData();
-            ReDrawGameObjects(structureObjJson);
+            LoadGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            ClearGameMap();
+            SaveGameObjectsServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            // Load from server
-            saveSystem.LoadDataServer();
+            LoadGameObjectsServer();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            ClearGameMap();
         }
     }
 
@@ -54,7 +54,18 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-    public void SaveGameObjects()
+    public void SaveGameObjectsServer()
+    {
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataServer(structureObjJson);
+    }
+
+    public void SaveGameObjectsLocal()
+    {
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataLocal(structureObjJson);
+    }
+    public string SerializeAllGameObjects()
     {
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
@@ -81,9 +92,19 @@ public class MapDataManager : MonoBehaviour
         }
 
         var structureObjJson = JsonUtility.ToJson(structureObjs);
-        saveSystem.SaveData(structureObjJson);
+        return structureObjJson;
     }
 
+    public void LoadGameObjectsServer()
+    {
+        saveSystem.LoadDataServer();
+    }
+
+    public void LoadGameObjectsLocal()
+    {
+        var structureObjJson = saveSystem.LoadDataLocal();
+        ReDrawGameObjects(structureObjJson);
+    }
     public void ReDrawGameObjects(string structureObjJson)
     {
         ClearGameMap();
