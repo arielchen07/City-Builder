@@ -129,39 +129,6 @@ public class SaveFile : MonoBehaviour
         return data;
     }
 
-    public void LoadTilesServer()
-    {
-        StartCoroutine(
-            GetTilesRequestServer(
-                (UnityWebRequest request) =>
-                {
-                // call to load tiles after receiving data from get request
-                if (request.result == UnityWebRequest.Result.Success)
-                    {
-                        print("Tiles data received from server: " + request.downloadHandler.text);
-                        Debug.Log("Successfully loaded tiles from server");
-                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
-                    }
-                    else
-                    {
-                        Debug.LogError("Load tiles from server failed: " + request.error);
-                    }
-                }
-            )
-        );
-    }
-
-    IEnumerator GetTilesRequestServer(Action<UnityWebRequest> callback)
-    {
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
-        {
-            request.SetRequestHeader("Content-Type", "application/json");
-            yield return request.SendWebRequest();
-            callback(request);
-        }
-    }
-
-
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
         // send get request to server, triggers callback after response recieved
