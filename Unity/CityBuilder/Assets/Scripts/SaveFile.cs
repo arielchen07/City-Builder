@@ -99,6 +99,7 @@ public class SaveFile : MonoBehaviour
                     {
                         print("Readfromserver recieved: " + request.downloadHandler.text);
                         Debug.Log("Successfully loaded data from server");
+                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
                         mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
                     }
                     else
@@ -116,11 +117,6 @@ public class SaveFile : MonoBehaviour
         {
             Debug.Log("Successfully saved tiles to file");
         }
-    }
-
-    public void SaveTilesServer(string tilesData)
-    {
-        StartCoroutine(PostTilesRequestServer(tilesData));
     }
 
     public string LoadTilesLocal()
@@ -153,26 +149,6 @@ public class SaveFile : MonoBehaviour
                 }
             )
         );
-    }
-
-    IEnumerator PostTilesRequestServer(string data)
-    {
-        using (var request = new UnityWebRequest("http://localhost:3001", "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
-            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("Successfully saved tiles to server");
-            }
-            else
-            {
-                Debug.LogError("Save tiles to server failed: " + request.error);
-            }
-        }
     }
 
     IEnumerator GetTilesRequestServer(Action<UnityWebRequest> callback)

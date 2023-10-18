@@ -16,15 +16,18 @@ public class MapDataManager : MonoBehaviour
         // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveTilesServer();
+            SaveGameObjectsLocal();
+            SaveTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadTilesServer();
+            LoadGameObjectsLocal();
+            LoadTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             SaveGameObjectsServer();
+            SaveTilesServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
@@ -189,18 +192,13 @@ public class MapDataManager : MonoBehaviour
     public void SaveTilesServer()
     {
         var tilesJson = SerializeMapTiles();
-        saveSystem.SaveTilesServer(tilesJson);
+        saveSystem.SaveDataServer(tilesJson);
     }
 
     public void LoadTilesLocal()
     {
         var tilesJson = saveSystem.LoadTilesLocal();
         DrawTilesFromJson(tilesJson);
-    }
-
-    public void LoadTilesServer()
-    {
-        saveSystem.LoadTilesServer();
     }
 
     public void DrawTilesFromJson(string tilesJson)
