@@ -99,6 +99,7 @@ public class SaveFile : MonoBehaviour
                     {
                         print("Readfromserver recieved: " + request.downloadHandler.text);
                         Debug.Log("Successfully loaded data from server");
+                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
                         mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
                     }
                     else
@@ -108,6 +109,24 @@ public class SaveFile : MonoBehaviour
                 }
             )
         );
+    }
+
+    public void SaveTilesLocal(string tilesData)
+    {
+        if (WriteToFile("Tiles_" + saveName + saveDataIndex, tilesData))
+        {
+            Debug.Log("Successfully saved tiles to file");
+        }
+    }
+
+    public string LoadTilesLocal()
+    {
+        string data = "";
+        if (ReadFromFile("Tiles_" + saveName + saveDataIndex, out data))
+        {
+            Debug.Log("Successfully loaded tiles to file");
+        }
+        return data;
     }
 
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)

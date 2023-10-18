@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MapDataManager : MonoBehaviour
@@ -16,14 +16,17 @@ public class MapDataManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             SaveGameObjectsLocal();
+            SaveTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
+            LoadTilesLocal();
             LoadGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             SaveGameObjectsServer();
+            SaveTilesServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
@@ -33,7 +36,12 @@ public class MapDataManager : MonoBehaviour
         {
             ClearGameMap();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            RemoveAllTiles();
+        }
     }
+
 
     public void ClearGameMap()
     {
@@ -157,6 +165,87 @@ public class MapDataManager : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    public string SerializeMapTiles()
+    {
+        TileObjsSerialization tileObjs = new TileObjsSerialization();
+
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
+        }
+
+        var tilesJson = JsonUtility.ToJson(tileObjs);
+        return tilesJson;
+    }
+
+    public void SaveTilesLocal()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveTilesLocal(tilesJson);
+    }
+
+    public void SaveTilesServer()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveDataServer(tilesJson);
+    }
+
+    public void LoadTilesLocal()
+    {
+        var tilesJson = saveSystem.LoadTilesLocal();
+        DrawTilesFromJson(tilesJson);
+    }
+
+    public void DrawTilesFromJson(string tilesJson)
+    {
+        RemoveAllTiles();
+        if (String.IsNullOrEmpty(tilesJson))
+            return;
+        TileObjsSerialization tileObjs = JsonUtility.FromJson<TileObjsSerialization>(tilesJson);
+
+        Transform landTransform = GameObject.Find("Land").transform;
+
+
+        foreach (var tile in tileObjs.tileData)
+        {
+            foreach (var tileObj in ObjList("Assets/Prefabs"))
+            {
+                if (tile.name.IndexOf(tileObj.name) != -1)
+                {
+                    GameObject tileInst = Instantiate(tileObj, tile.position.GetValue(), Quaternion.Euler(tile.rotation.GetValue()));
+                    tileInst.transform.SetParent(landTransform, true);
+                    tile.isOccupied = false;
+                }
+            }
+        }
+    }
+
+    public List<GameObject> ObjList(string folderPath)
+    {
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new string[] { folderPath });
+        List<GameObject> prefabs = new List<GameObject>();
+
+        foreach (var guid in guids)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            prefabs.Add(prefab);
+        }
+
+        return prefabs;
+    }
+
+    public void RemoveAllTiles()
+    {
+        ClearGameMap();
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            Destroy(tile.gameObject);
         }
     }
 
