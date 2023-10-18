@@ -54,23 +54,25 @@ public class TileObjsSerialization
 {
     public List<TileSerialization> tileData = new List<TileSerialization>();
 
-    public void AddTile(string name, Vector3 position, bool isOccupied)
+    public void AddTile(string name, Vector3 position, Vector3 rotation, bool isOccupied)
     {
-        tileData.Add(new TileSerialization(name, position, isOccupied));
+        tileData.Add(new TileSerialization(name, position, rotation, isOccupied));
     }
 }
 
 [Serializable]
 public class TileSerialization
 {
-    public string tileName;
+    public string name;
     public Vector3Serialization position;
+    public Vector3Serialization rotation;
     public bool isOccupied;
 
-    public TileSerialization(string tileName, Vector3 position, bool isOccupied)
+    public TileSerialization(string name, Vector3 position, Vector3 rotation, bool isOccupied)
     {
-        this.tileName = tileName;
+        this.name = name;
         this.position = new Vector3Serialization(position);
+        this.rotation = new Vector3Serialization(rotation);
         this.isOccupied = isOccupied;
     }
 }

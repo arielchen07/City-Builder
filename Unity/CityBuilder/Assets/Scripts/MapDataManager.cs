@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MapDataManager : MonoBehaviour
@@ -15,25 +16,30 @@ public class MapDataManager : MonoBehaviour
         // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveGameObjectsLocal();
+            SaveTilesServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadGameObjectsLocal();
+            LoadTilesServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SaveTilesLocal();
+            SaveGameObjectsServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            LoadTilesLocal();
+            LoadGameObjectsServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ClearGameMap();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            RemoveAllTiles();
+        }
     }
+
 
     public void ClearGameMap()
     {
@@ -167,7 +173,7 @@ public class MapDataManager : MonoBehaviour
         MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
         foreach (MapTile tile in tiles)
         {
-            tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.isOccupied);
+            tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
         }
 
         var tilesJson = JsonUtility.ToJson(tileObjs);
@@ -199,25 +205,52 @@ public class MapDataManager : MonoBehaviour
 
     public void DrawTilesFromJson(string tilesJson)
     {
+        RemoveAllTiles();
+        if (String.IsNullOrEmpty(tilesJson))
+            return;
         TileObjsSerialization tileObjs = JsonUtility.FromJson<TileObjsSerialization>(tilesJson);
-        foreach (var tileData in tileObjs.tileData)
+
+        foreach (var tile in tileObjs.tileData)
         {
-            MapTile tile = GetTileByName(tileData.tileName, tileData.position.GetValue());
-            if (tile != null)
+            foreach (var tileObj in ObjList("Assets/Prefabs"))
             {
-                tile.isOccupied = tileData.isOccupied;
+                if (tile.name.IndexOf(tileObj.name) != -1)
+                {
+                    GameObject tileInst = Instantiate(tileObj, tile.position.GetValue(), Quaternion.Euler(tile.rotation.GetValue()));
+
+                    inputManager.placementLayermask =
+                            LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
+
+                    tile.isOccupied = false;
+                }
             }
         }
+
     }
 
-    private MapTile GetTileByName(string tileName, Vector3 position)
+    public List<GameObject> ObjList(string folderPath)
     {
-        GameObject tileObject = GameObject.Find(tileName);
-        if (tileObject != null)
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new string[] { folderPath });
+        List<GameObject> prefabs = new List<GameObject>();
+
+        foreach (var guid in guids)
         {
-            return tileObject.GetComponent<MapTile>();
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            prefabs.Add(prefab);
         }
-        return null;
+
+        return prefabs;
+    }
+
+    public void RemoveAllTiles()
+    {
+        ClearGameMap();
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            Destroy(tile.gameObject);
+        }
     }
 
     public void ExitGame()

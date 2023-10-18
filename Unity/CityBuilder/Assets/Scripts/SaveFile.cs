@@ -128,7 +128,7 @@ public class SaveFile : MonoBehaviour
         string data = "";
         if (ReadFromFile("Tiles_" + saveName + saveDataIndex, out data))
         {
-            Debug.Log("Successfully loaded tiles from file");
+            Debug.Log("Successfully loaded tiles to file");
         }
         return data;
     }
