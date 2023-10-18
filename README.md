@@ -3,7 +3,7 @@
 
 ## Run Windows Deployed version:
 Requirement: 
-- Download Node.js (for running the server)
+- Download Node.js and Express.js (for running the server)
 
 Run Server: 
 - Clone sub team repo
@@ -18,7 +18,7 @@ Run Unity game:
 
 ## Run WebGL Deployed version:
 Requirement: 
-- Download Node.js (for running the server)
+- Download Node.js and Express.js (for running the server)
 - Download Python on your machine (this is used to start a simple HTTP server for viewing the game in a browser)
 
 Run Server: Same as the server instruction for Windows deployment  
@@ -33,7 +33,7 @@ Run Unity game:
 Requirement: 
 - Download Unity Hub
 - In Unity Hub, download Unity Editor version 2020.3.20f1
-- Download Node.js (for running the server)
+- Download Node.js and Express.js (for running the server)
 - Download Python (for starting a HTTP server to view the WebGl deployment of the game)
 
 Run Server: Same as the server instruction for Windows deployment 
