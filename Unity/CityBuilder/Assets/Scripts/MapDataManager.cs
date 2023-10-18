@@ -20,8 +20,8 @@ public class MapDataManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadGameObjectsLocal();
             LoadTilesLocal();
+            LoadGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
@@ -207,6 +207,9 @@ public class MapDataManager : MonoBehaviour
             return;
         TileObjsSerialization tileObjs = JsonUtility.FromJson<TileObjsSerialization>(tilesJson);
 
+        Transform landTransform = GameObject.Find("Land").transform;
+
+
         foreach (var tile in tileObjs.tileData)
         {
             foreach (var tileObj in ObjList("Assets/Prefabs"))
@@ -214,15 +217,11 @@ public class MapDataManager : MonoBehaviour
                 if (tile.name.IndexOf(tileObj.name) != -1)
                 {
                     GameObject tileInst = Instantiate(tileObj, tile.position.GetValue(), Quaternion.Euler(tile.rotation.GetValue()));
-
-                    inputManager.placementLayermask =
-                            LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
-
+                    tileInst.transform.SetParent(landTransform, true);
                     tile.isOccupied = false;
                 }
             }
         }
-
     }
 
     public List<GameObject> ObjList(string folderPath)
