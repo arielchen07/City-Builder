@@ -110,6 +110,82 @@ public class SaveFile : MonoBehaviour
         );
     }
 
+    public void SaveTilesLocal(string tilesData)
+    {
+        if (WriteToFile("Tiles_" + saveName + saveDataIndex, tilesData))
+        {
+            Debug.Log("Successfully saved tiles to file");
+        }
+    }
+
+    public void SaveTilesServer(string tilesData)
+    {
+        StartCoroutine(PostTilesRequestServer(tilesData));
+    }
+
+    public string LoadTilesLocal()
+    {
+        string data = "";
+        if (ReadFromFile("Tiles_" + saveName + saveDataIndex, out data))
+        {
+            Debug.Log("Successfully loaded tiles from file");
+        }
+        return data;
+    }
+
+    public void LoadTilesServer()
+    {
+        StartCoroutine(
+            GetTilesRequestServer(
+                (UnityWebRequest request) =>
+                {
+                // call to load tiles after receiving data from get request
+                if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        print("Tiles data received from server: " + request.downloadHandler.text);
+                        Debug.Log("Successfully loaded tiles from server");
+                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
+                    }
+                    else
+                    {
+                        Debug.LogError("Load tiles from server failed: " + request.error);
+                    }
+                }
+            )
+        );
+    }
+
+    IEnumerator PostTilesRequestServer(string data)
+    {
+        using (var request = new UnityWebRequest("http://localhost:3001", "POST"))
+        {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Successfully saved tiles to server");
+            }
+            else
+            {
+                Debug.LogError("Save tiles to server failed: " + request.error);
+            }
+        }
+    }
+
+    IEnumerator GetTilesRequestServer(Action<UnityWebRequest> callback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            callback(request);
+        }
+    }
+
+
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
         // send get request to server, triggers callback after response recieved

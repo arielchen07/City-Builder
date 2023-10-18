@@ -23,11 +23,11 @@ public class MapDataManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SaveGameObjectsServer();
+            SaveTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            LoadGameObjectsServer();
+            LoadTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
@@ -158,6 +158,66 @@ public class MapDataManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public string SerializeMapTiles()
+    {
+        TileObjsSerialization tileObjs = new TileObjsSerialization();
+
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.isOccupied);
+        }
+
+        var tilesJson = JsonUtility.ToJson(tileObjs);
+        return tilesJson;
+    }
+
+    public void SaveTilesLocal()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveTilesLocal(tilesJson);
+    }
+
+    public void SaveTilesServer()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveTilesServer(tilesJson);
+    }
+
+    public void LoadTilesLocal()
+    {
+        var tilesJson = saveSystem.LoadTilesLocal();
+        DrawTilesFromJson(tilesJson);
+    }
+
+    public void LoadTilesServer()
+    {
+        saveSystem.LoadTilesServer();
+    }
+
+    public void DrawTilesFromJson(string tilesJson)
+    {
+        TileObjsSerialization tileObjs = JsonUtility.FromJson<TileObjsSerialization>(tilesJson);
+        foreach (var tileData in tileObjs.tileData)
+        {
+            MapTile tile = GetTileByName(tileData.tileName, tileData.position.GetValue());
+            if (tile != null)
+            {
+                tile.isOccupied = tileData.isOccupied;
+            }
+        }
+    }
+
+    private MapTile GetTileByName(string tileName, Vector3 position)
+    {
+        GameObject tileObject = GameObject.Find(tileName);
+        if (tileObject != null)
+        {
+            return tileObject.GetComponent<MapTile>();
+        }
+        return null;
     }
 
     public void ExitGame()

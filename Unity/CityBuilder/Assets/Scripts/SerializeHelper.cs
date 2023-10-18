@@ -31,7 +31,6 @@ public class StructureObjSerialization
     }
 }
 
-
 [Serializable]
 public class Vector3Serialization
 {
@@ -47,5 +46,31 @@ public class Vector3Serialization
     public Vector3 GetValue()
     {
         return new Vector3(x, y, z);
+    }
+}
+
+[Serializable]
+public class TileObjsSerialization
+{
+    public List<TileSerialization> tileData = new List<TileSerialization>();
+
+    public void AddTile(string name, Vector3 position, bool isOccupied)
+    {
+        tileData.Add(new TileSerialization(name, position, isOccupied));
+    }
+}
+
+[Serializable]
+public class TileSerialization
+{
+    public string tileName;
+    public Vector3Serialization position;
+    public bool isOccupied;
+
+    public TileSerialization(string tileName, Vector3 position, bool isOccupied)
+    {
+        this.tileName = tileName;
+        this.position = new Vector3Serialization(position);
+        this.isOccupied = isOccupied;
     }
 }
