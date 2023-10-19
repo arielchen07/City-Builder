@@ -218,7 +218,6 @@ public class MapDataManager : MonoBehaviour
                 {
                     GameObject tileInst = Instantiate(tileObj, tile.position.GetValue(), Quaternion.Euler(tile.rotation.GetValue()));
                     tileInst.transform.SetParent(landTransform, true);
-                    tile.isOccupied = false;
                 }
             }
         }
