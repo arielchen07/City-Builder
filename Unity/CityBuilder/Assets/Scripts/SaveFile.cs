@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
+    public string tileSaveName = "TileData_";
 
     [Range(0, 10)]
     public int saveDataIndex = 1;
@@ -87,6 +88,23 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
+    public void SaveTilesLocal(string tilesData)
+    {
+        if (WriteToFile(tileSaveName + saveDataIndex, tilesData))
+        {
+            Debug.Log("Successfully saved tiles to file");
+        }
+    }
+
+    public string LoadTilesLocal()
+    {
+        string data = "";
+        if (ReadFromFile(tileSaveName + saveDataIndex, out data))
+        {
+            Debug.Log("Successfully loaded tiles to file");
+        }
+        return data;
+    }
 
     public void LoadDataServer()
     {
@@ -109,24 +127,6 @@ public class SaveFile : MonoBehaviour
                 }
             )
         );
-    }
-
-    public void SaveTilesLocal(string tilesData)
-    {
-        if (WriteToFile("Tiles_" + saveName + saveDataIndex, tilesData))
-        {
-            Debug.Log("Successfully saved tiles to file");
-        }
-    }
-
-    public string LoadTilesLocal()
-    {
-        string data = "";
-        if (ReadFromFile("Tiles_" + saveName + saveDataIndex, out data))
-        {
-            Debug.Log("Successfully loaded tiles to file");
-        }
-        return data;
     }
 
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
