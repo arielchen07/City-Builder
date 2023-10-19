@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6951,6 +6951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveName: SaveData_
+  tileSaveName: TileData_
   saveDataIndex: 1
   mapDataManager: {fileID: 1726606798}
 --- !u!114 &1726606798
@@ -8000,6 +8001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveName: SaveData_
+  tileSaveName: TileData_
   saveDataIndex: 1
   mapDataManager: {fileID: 1726606798}
 --- !u!4 &1923160142

@@ -20,7 +20,6 @@ public class StructureObjSerialization
     public string name;
     public Vector3Serialization position;
     public Vector3Serialization rotation;
-    //public int buildingPrefabindex;
 
     public StructureObjSerialization(string name, Vector3 position, Vector3 rotation)
     {
