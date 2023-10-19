@@ -42,7 +42,6 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-
     public void ClearGameMap()
     {
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
@@ -73,6 +72,7 @@ public class MapDataManager : MonoBehaviour
         var structureObjJson = SerializeAllGameObjects();
         saveSystem.SaveDataLocal(structureObjJson);
     }
+
     public string SerializeAllGameObjects()
     {
         StructureObjsSerialization structureObjs = new StructureObjsSerialization();
@@ -113,6 +113,7 @@ public class MapDataManager : MonoBehaviour
         var structureObjJson = saveSystem.LoadDataLocal();
         ReDrawGameObjects(structureObjJson);
     }
+
     public void ReDrawGameObjects(string structureObjJson)
     {
         ClearGameMap();
@@ -212,7 +213,7 @@ public class MapDataManager : MonoBehaviour
 
         foreach (var tile in tileObjs.tileData)
         {
-            foreach (var tileObj in ObjList("Assets/Prefabs"))
+            foreach (var tileObj in inventory.inventoryLst)
             {
                 if (tile.name.IndexOf(tileObj.name) != -1)
                 {
@@ -222,21 +223,6 @@ public class MapDataManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public List<GameObject> ObjList(string folderPath)
-    {
-        string[] guids = AssetDatabase.FindAssets("t:Prefab", new string[] { folderPath });
-        List<GameObject> prefabs = new List<GameObject>();
-
-        foreach (var guid in guids)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-            prefabs.Add(prefab);
-        }
-
-        return prefabs;
     }
 
     public void RemoveAllTiles()
