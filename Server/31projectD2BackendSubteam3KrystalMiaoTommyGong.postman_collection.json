@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "2d54df4a-e099-4221-b0be-f1aba1eee2de",
+		"name": "301D2BackendSubteam3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24424095",
+		"_collection_link": "https://cloudy-spaceship-299627.postman.co/workspace/New-Team-Workspace~d0f8ce1e-a93a-4d9b-af98-4a26002e389f/collection/24424095-2d54df4a-e099-4221-b0be-f1aba1eee2de?action=share&source=collection_link&creator=24424095"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Krystal@gmail.com\",\n    \"password\": \"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"email\": \"Krystal@gmail.com\",\n    \"password\": \"1234567\"\n    \n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create item for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create another item for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view all items for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "increase the quantity of a specific item in for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/inc/652b140709a62e6afea56a67",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"inc",
+						"652b140709a62e6afea56a67"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "decrease the quantity of a specific item for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/dec/652b146609a62e6afea56a6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"dec",
+						"652b146609a62e6afea56a6e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a specific item for a specific user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/652addf6d9f6dbd784eceb34/delete/652b146609a62e6afea56a6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"652addf6d9f6dbd784eceb34",
+						"delete",
+						"652b146609a62e6afea56a6e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "display a specific user profile",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
