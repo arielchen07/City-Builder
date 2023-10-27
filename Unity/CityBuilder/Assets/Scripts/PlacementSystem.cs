@@ -167,4 +167,14 @@ public class PlacementSystem : MonoBehaviour
             beginPlacingContinuousObjects = false;
         }
     }
+
+    public GameObject GetCurrentlyPlacing()
+    {
+        return this.currentlyPlacing;
+    }
+
+    public GameObject GetCurrentlySelecting()
+    {
+        return this.currentlySelecting;
+    }
 }
