@@ -117,8 +117,8 @@ public class SaveFile : MonoBehaviour
                     {
                         print("Readfromserver recieved: " + request.downloadHandler.text);
                         Debug.Log("Successfully loaded data from server");
-                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
-                        mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
+                        //mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
+                        mapDataManager.ReDrawGameMap(request.downloadHandler.text);
                     }
                     else
                     {

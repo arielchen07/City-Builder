@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class StructureObjsSerialization
+public class MapSerialization
 {
     public List<StructureObjSerialization> structureObjData = new List<StructureObjSerialization>();
+    public List<TileSerialization> tileData = new List<TileSerialization>();
 
-    public void AddObj(string name, Vector3 position, Vector3 rotation)
+    public void AddStructure(string name, Vector3 position, Vector3 rotation)
     {
         structureObjData.Add(new StructureObjSerialization(name, position, rotation));
+    }
+
+    public void AddTile(string name, Vector3 position, Vector3 rotation, bool isOccupied)
+    {
+        tileData.Add(new TileSerialization(name, position, rotation, isOccupied));
     }
 
 }
