@@ -18,7 +18,11 @@ const userSchema = new Schema({
     },
     items: {
       type: [String]
+    },
+    maps: {
+      type: [String]
     }
+
 }, { timestamps: true });
 
 

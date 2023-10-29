@@ -7,7 +7,8 @@ const mapSchema = new Schema({
         type: String
     },
     mapData: {
-        type: String
+        type: String,
+        default: '1234abcdkrystal'
     }
 }, { timestamps: true });
 

@@ -6,9 +6,15 @@ const jwt = require('jsonwebtoken');
 const createMap = async (req, res) => {
     try {
         const userID = req.params.userID;
+        console.log(userID);
         const mapData = req.body.mapData;
         const map = await Map.create({ userID, mapData});
         const user = await User.findById(userID);
+
+        // if (!user) {
+        //     return res.status(404).json({ message: 'User not found' });
+        // }
+
         user.maps.push(map._id);
         await user.save();
         res.status(201).json(map);

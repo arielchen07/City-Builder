@@ -7,6 +7,6 @@ const {
 
 router.post('/:userID/createmap', getUserIDMiddleware, createMap);
 
-router.post('/:userID/delete/:itemID', getUserIDMiddleware, getMapIDMiddleware, deleteMap);
+router.post('/:userID/deletemap/:mapID', getUserIDMiddleware, getMapIDMiddleware, deleteMap);
 
 module.exports = router;
