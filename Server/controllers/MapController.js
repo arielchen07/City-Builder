@@ -23,17 +23,44 @@ const createMap = async (req, res) => {
     }
 };
 
-// const showAllMatch = (req, res) => {
-//     const userID = req.params.userID;
-//     Item.find({ userID: userID })
-//     .then(items => {
-//         res.json({ items });
-//     })
-//     .catch(error => {
-//         console.error(error);
-//         res.status(500).json({ message: 'showAllMatch Error' });
-//     });
-// };
+const saveMap = async (req, res) => {
+    try{
+        // const temp = "abcdefg"
+        const mapID = req.params.mapID;
+        const map = await Map.findById(mapID);
+        map.mapData = req.body.mapData;
+        await map.save();
+        res.status(201).json(map);
+    } catch (e) {
+        res.status(400).json({ message: 'Error Updating Map' });
+    }
+
+}
+
+const loadAllMaps = (req, res) => {
+    const userID = req.params.userID;
+    Map.find({ userID: userID })
+    .then(maps => {
+        res.json({ maps });
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).json({ message: 'showAllMatch Error' });
+    });
+};
+
+const loadMap = (req, res) => {
+    const mapID = req.params.mapID;
+    
+    Map.findById( mapID )
+    .then(maps => {
+        res.json({ maps });
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).json({ message: 'showAllMatch Error' });
+    });
+};
 
 // const decOne = (req, res) => {
 //     const itemID = req.params.itemID;
@@ -80,6 +107,9 @@ const createMap = async (req, res) => {
 //         res.status(500).json({ message: 'increase error' });
 //     });
 // };
+
+
+
 
 const deleteMap = (req, res) => {
     const mapID = req.params.mapID;
@@ -132,5 +162,5 @@ const getMapIDMiddleware = async (req, res, next) => {
 // };
 
 module.exports = {
-    createMap, deleteMap, getUserIDMiddleware, getMapIDMiddleware
+    createMap, deleteMap, getUserIDMiddleware, getMapIDMiddleware, saveMap, loadAllMaps, loadMap
 };
