@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -41,11 +42,29 @@ public class SaveFile : MonoBehaviour
 
     public void SaveDataServer(string dataToSave)
     {
-        StartCoroutine(PostRequestServer(dataToSave));
+        MapRequestBody data = new MapRequestBody(dataToSave);
+        var mapDataRequestBody = JsonUtility.ToJson(data);
+        StartCoroutine(PostRequestServer(mapDataRequestBody));
+        //StartCoroutine(PostRequestServer(dataToSave));
     }
     IEnumerator PostRequestServer(string data)
     {
-        using (var request = new UnityWebRequest("http://localhost:3000", "POST"))
+        //byte[] dataToSend = System.Text.Encoding.UTF8.GetBytes(data);
+        //using (UnityWebRequest request = UnityWebRequest.Put("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/savemap", dataToSend))
+        //{
+        //    request.SetRequestHeader("Content-Type", "application/json");
+        //    yield return request.SendWebRequest();
+        //    if (request.result == UnityWebRequest.Result.Success)
+        //    {
+        //        Debug.Log("Successfully saved data to server");
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError("Save to server failed: " + request.error);
+        //    }
+        //}
+
+        using (var request = new UnityWebRequest("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/savemap", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -116,9 +135,16 @@ public class SaveFile : MonoBehaviour
                     if (request.result == UnityWebRequest.Result.Success)
                     {
                         print("Readfromserver recieved: " + request.downloadHandler.text);
-                        Debug.Log("Successfully loaded data from server");
                         //mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
-                        mapDataManager.ReDrawGameMap(request.downloadHandler.text);
+                        string data = request.downloadHandler.text;
+                        if (String.IsNullOrEmpty(data))
+                            return;
+                        var mapRequestBody = JsonUtility.FromJson<MapRequestBody>(
+                            data
+                        );
+                        Debug.Log("Successfully loaded data from server");
+                        mapDataManager.ReDrawGameMap(mapRequestBody.mapData);
+                        //mapDataManager.ReDrawGameMap(request.downloadHandler.text);
                     }
                     else
                     {
@@ -132,7 +158,7 @@ public class SaveFile : MonoBehaviour
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
         // send get request to server, triggers callback after response recieved
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
+        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/map"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
