@@ -58,8 +58,6 @@ public class PlacementSystem : MonoBehaviour
                     Destroy(currentlyPlacing);
                     currentlyPlacing = null;
                 }
-
-            inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
             } else if (currentlySelecting != null) {
                 if (currentlySelecting.CompareTag("Object")) {
                     if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -68,8 +66,16 @@ public class PlacementSystem : MonoBehaviour
                 }
             }
         }
-    }
 
+        if(isSelectingObject) {
+            inputManager.placementLayermask = LayerMask.GetMask("Ground");
+        } else {
+            inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
+        }
+    }
+    /*
+    For manual testing
+    */
     void SpawnObjectOnKey() {
         if(!isSelectingObject){
             if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -92,7 +98,9 @@ public class PlacementSystem : MonoBehaviour
             }
         }
     }
-
+    /*
+    PlaceObject is called when the user is currently selecting an object and wants to place it.
+    */
     public void PlaceObject(){
         if (currentlyPlacing.GetComponent<PlaceableObject>().CanBePlaced()){
             currentlyPlacing.transform.parent = null;
@@ -109,8 +117,12 @@ public class PlacementSystem : MonoBehaviour
         isSelectingObject = false;
     }
 
+    /*
+    HoverObject is called when the user creates a new building and needs to place it.
+    */
     public void HoverObject(GameObject objectToPlace){
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
+        isSelectingObject = true;
         if(currentlyPlacing != null){
             Destroy(currentlyPlacing);
             currentlyPlacing = null;
@@ -121,6 +133,10 @@ public class PlacementSystem : MonoBehaviour
         AssignObjectToCursor();
     }
 
+    /*
+    DropObject is called when the user selects an object and presses escape. Ie the player wants to move an object but decides
+    to not move it.
+    */
     public void DropObject() {
         if(currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true) {
             currentlyPlacing.transform.SetPositionAndRotation(oldPosition, Quaternion.Euler(oldRotation));
@@ -138,8 +154,12 @@ public class PlacementSystem : MonoBehaviour
         pointer.GetComponent<PointerDetector>().AlignObject();
         currentlyPlacing.GetComponent<PlaceableObject>().isHovering = true;
     }
-
+    /*
+    SelectObject is called when a user hovers their cursor over an object and wants to select it.
+    */
     public void SelectObject() {
+        Debug.Log("selecting object");
+        inputManager.placementLayermask = LayerMask.GetMask("Ground");
         isSelectingObject = true;
         currentlyPlacing = currentlySelecting;
         oldPosition = currentlyPlacing.transform.position;
@@ -151,7 +171,6 @@ public class PlacementSystem : MonoBehaviour
         currentlyPlacing.transform.parent = pointer.GetComponent<PointerDetector>().indicator.transform;
         currentlyPlacing.transform.localPosition = new Vector3(0,0,0);
         AssignObjectToCursor();
-        inputManager.placementLayermask = LayerMask.GetMask("Ground");
     }
 
     void PlaceContinuousObjects(GameObject objectToPlace){
