@@ -54,7 +54,7 @@ const loadMap = (req, res) => {
     
     Map.findById( mapID )
     .then(maps => {
-        res.json({ maps });
+        res.json(maps.mapData);
     })
     .catch(error => {
         console.error(error);
