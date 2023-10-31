@@ -92,17 +92,3 @@ public class Vector3Serialization
     }
 }
 
-[Serializable]
-public class DictionarySerialization
-{
-    public DictItem[] dictionary;
-}
-
-
-[Serializable]
-public class DictItem
-{
-    public string key;
-    public string value;
-}
-
