@@ -186,39 +186,6 @@ public class MapDataManager : MonoBehaviour
             }
         }
     }
-
-    //public string SerializeMapTiles()
-    //{
-    //    TileObjsSerialization tileObjs = new TileObjsSerialization();
-
-    //    MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
-    //    foreach (MapTile tile in tiles)
-    //    {
-    //        tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
-    //    }
-
-    //    var tilesJson = JsonUtility.ToJson(tileObjs);
-    //    return tilesJson;
-    //}
-
-    //public void SaveTilesLocal()
-    //{
-    //    var tilesJson = SerializeMapTiles();
-    //    saveSystem.SaveTilesLocal(tilesJson);
-    //}
-
-    //public void SaveTilesServer()
-    //{
-    //    var tilesJson = SerializeMapTiles();
-    //    saveSystem.SaveDataServer(tilesJson);
-    //}
-
-    //public void LoadTilesLocal()
-    //{
-    //    var tilesJson = saveSystem.LoadTilesLocal();
-    //    DrawTilesFromJson(tilesJson);
-    //}
-
     public void DrawTilesFromJson(MapSerialization mapObjs)
     {
         // Draw map tiles

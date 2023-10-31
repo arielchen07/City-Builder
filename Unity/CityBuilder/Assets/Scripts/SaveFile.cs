@@ -45,25 +45,11 @@ public class SaveFile : MonoBehaviour
         MapRequestBody data = new MapRequestBody(dataToSave);
         var mapDataRequestBody = JsonUtility.ToJson(data);
         StartCoroutine(PostRequestServer(mapDataRequestBody));
-        //StartCoroutine(PostRequestServer(dataToSave));
     }
     IEnumerator PostRequestServer(string data)
     {
-        //byte[] dataToSend = System.Text.Encoding.UTF8.GetBytes(data);
-        //using (UnityWebRequest request = UnityWebRequest.Put("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/savemap", dataToSend))
-        //{
-        //    request.SetRequestHeader("Content-Type", "application/json");
-        //    yield return request.SendWebRequest();
-        //    if (request.result == UnityWebRequest.Result.Success)
-        //    {
-        //        Debug.Log("Successfully saved data to server");
-        //    }
-        //    else
-        //    {
-        //        Debug.LogError("Save to server failed: " + request.error);
-        //    }
-        //}
-
+        // Currently using hard coded URL to store to a specific map id of a specific user in database
+        // will change this later
         using (var request = new UnityWebRequest("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/savemap", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
@@ -134,9 +120,8 @@ public class SaveFile : MonoBehaviour
                     // call to load game objects after recieved data from get request
                     if (request.result == UnityWebRequest.Result.Success)
                     {
-                        print("Readfromserver recieved: " + request.downloadHandler.text);
-                        //mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
                         string data = request.downloadHandler.text;
+                        print("Readfromserver recieved: " + data);
                         if (String.IsNullOrEmpty(data))
                             return;
                         var mapRequestBody = JsonUtility.FromJson<MapRequestBody>(
@@ -144,7 +129,6 @@ public class SaveFile : MonoBehaviour
                         );
                         Debug.Log("Successfully loaded data from server");
                         mapDataManager.ReDrawGameMap(mapRequestBody.mapData);
-                        //mapDataManager.ReDrawGameMap(request.downloadHandler.text);
                     }
                     else
                     {
@@ -157,6 +141,9 @@ public class SaveFile : MonoBehaviour
 
     IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
+        // Currently using hard coded URL to load from a specific map id of a specific user in database
+        // will change this later
+
         // send get request to server, triggers callback after response recieved
         using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/653ec4e425a27ebf3456dbbe/map"))
         {
