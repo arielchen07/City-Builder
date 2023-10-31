@@ -14,19 +14,19 @@ public class MapDataManager : MonoBehaviour
         // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveGameObjectsLocal();
+            SaveGameMapLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadGameObjectsLocal();
+            LoadGameMapLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SaveGameObjectsServer();
+            SaveGameMapServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            LoadGameObjectsServer();
+            LoadGameMapServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
@@ -66,13 +66,13 @@ public class MapDataManager : MonoBehaviour
             Destroy(tile.gameObject);
         }
     }
-    public void SaveGameObjectsServer()
+    public void SaveGameMapServer()
     {
         var mapDataJson = SerializeAllGameObjects();
         saveSystem.SaveDataServer(mapDataJson);
     }
 
-    public void SaveGameObjectsLocal()
+    public void SaveGameMapLocal()
     {
         var mapDataJson = SerializeAllGameObjects();
         saveSystem.SaveDataLocal(mapDataJson);
@@ -114,12 +114,12 @@ public class MapDataManager : MonoBehaviour
         return mapDataJson;
     }
 
-    public void LoadGameObjectsServer()
+    public void LoadGameMapServer()
     {
         saveSystem.LoadDataServer();
     }
 
-    public void LoadGameObjectsLocal()
+    public void LoadGameMapLocal()
     {
         var mapDataJson = saveSystem.LoadDataLocal();
         ReDrawGameMap(mapDataJson);

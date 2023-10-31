@@ -93,24 +93,6 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
-    public void SaveTilesLocal(string tilesData)
-    {
-        if (WriteToFile(tileSaveName + saveDataIndex, tilesData))
-        {
-            Debug.Log("Successfully saved tiles to file");
-        }
-    }
-
-    public string LoadTilesLocal()
-    {
-        string data = "";
-        if (ReadFromFile(tileSaveName + saveDataIndex, out data))
-        {
-            Debug.Log("Successfully loaded tiles to file");
-        }
-        return data;
-    }
-
     public void LoadDataServer()
     {
         StartCoroutine(
