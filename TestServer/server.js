@@ -13,6 +13,11 @@ app.use(cors({
 }));
 app.use(bodyParser.json()); // Middleware to parse JSON request body
 
+app.put('/', (req, res) => {
+   console.log('Received PUT request:', JSON.stringify(req.body), req.body);
+   res.send('POST request received');
+});
+
 app.post('/', (req, res) => {
     console.log('Received POST request:', JSON.stringify(req.body));
     res.send('POST request received');

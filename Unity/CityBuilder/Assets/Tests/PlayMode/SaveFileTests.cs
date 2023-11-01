@@ -68,31 +68,5 @@ public class SaveFileTests
         yield return null;
     }
 
-    [UnityTest]
-    public IEnumerator TestSaveTilesLocal()
-    {
-        // this test assumes that WriteToFile works as intended
-        saveFile.tileSaveName = "unitTest";
-        saveFile.SaveTilesLocal("Testing SaveTilesLocal");
-        string path = Path.Combine(Application.persistentDataPath, "unitTest1");
-
-        Assert.IsTrue(File.Exists(path), "Expected file to exist after WriteToFile.");
-        Assert.AreEqual(File.ReadAllText(path), "Testing SaveTilesLocal", "Written content doesn't match the expected content.");
-
-        yield return null;
-    }
-
-    [UnityTest]
-    public IEnumerator TestLoadTilesLocal()
-    {
-        // this test assumes that WriteToFile works as intended
-        saveFile.WriteToFile("unitTest1", "Testing LoadTilesLocal");
-        saveFile.tileSaveName = "unitTest";
-        string load = saveFile.LoadTilesLocal();
-
-        Assert.AreEqual(load, "Testing LoadTilesLocal", "Loaded content doesn't match the expected content.");
-
-        yield return null;
-    }
 }
 
