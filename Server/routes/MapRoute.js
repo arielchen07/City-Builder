@@ -16,6 +16,4 @@ router.get('/:userID/allmap',getUserIDMiddleware, loadAllMaps);
 router.get('/:mapID/map',getMapIDMiddleware, loadMap);
 
 
-
-
 module.exports = router;
