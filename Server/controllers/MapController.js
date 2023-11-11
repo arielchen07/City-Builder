@@ -7,15 +7,18 @@ const createMap = async (req, res) => {
     try {
         const userID = req.params.userID;
         console.log(userID);
-        const mapData = req.body.mapData;
-        const map = await Map.create({ userID, mapData});
+        const mapData = req.body.mapData || '1234abcdkrystal';
+        const mapName = req.body.mapName || 'Map1'; 
+        //console.log(userID, mapData, mapName);
+        const map = await Map.create({ userID, mapData, mapName});
+        //console.log(map._id, map.userID, map.mapData, map.mapName);
         const user = await User.findById(userID);
-
-        // if (!user) {
-        //     return res.status(404).json({ message: 'User not found' });
-        // }
-
-        user.maps.push(map._id);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const mapDetails = `${map._id}:${mapName}`;
+        user.maps.push(mapDetails);
         await user.save();
         res.status(201).json(map);
     } catch (e) {

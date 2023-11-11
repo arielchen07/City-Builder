@@ -21,7 +21,7 @@ public class SaveFile : MonoBehaviour
         {
             Debug.Log("Successfully saved data to file");
         }
-    }
+    } 
 
     public bool WriteToFile(string name, string content)
     {

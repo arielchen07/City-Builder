@@ -9,6 +9,10 @@ const mapSchema = new Schema({
     mapData: {
         type: String,
         default: '1234abcdkrystal'
+    },
+    mapName:{
+        type: String,
+        default:'Map1'
     }
 }, { timestamps: true });
 
