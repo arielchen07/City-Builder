@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: c9f4867eba1c54317a9e22540ce59195
+guid: 6e28e3a95f3dcfb43ab776aa4370275b
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -8832314042096313629
-    second: SingleHouseIcon_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -116,28 +113,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: SingleHouseIcon_0
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 27
-        width: 250
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ea9720ac215d6580800000000000000
-      internalID: -8832314042096313629
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
