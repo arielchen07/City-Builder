@@ -3,14 +3,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
- 
-
-
+using UnityEngine.SceneManagement;
 
 public static class GlobalVariables
 {
     public static string UserID { get; set; }
     public static string MapID {get; set;}
+    public static bool IsNewUser { get; set;}
 }
 
 public class Login : MonoBehaviour{
@@ -24,7 +23,7 @@ public class Login : MonoBehaviour{
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private Transform loginWindowTransform;
-    [SerializeField] private MapDataManager mapManager;
+    //[SerializeField] private MapDataManager mapManager;
     [SerializeField] private Transform loginBackgroundTransform;  
 
     [System.Serializable]
@@ -65,6 +64,16 @@ public class Login : MonoBehaviour{
 
     public class CreateMapResponse{
         public string mapID;
+    }
+
+    private void Start()
+    {
+        usernameInputField.text = "";  // Clear the username field
+        emailInputField.text = "";     // Clear the email field
+        passwordInputField.text = "";  // Clear the password field
+        loginButton.interactable = true;
+        signupButton.interactable = true;
+        alertText.text = "LOG IN";
     }
     public void OnLoginClick()
     {
@@ -129,14 +138,17 @@ public class Login : MonoBehaviour{
                     yield break;
                 }
 
-                mapManager.LoadGameMapServer(GlobalVariables.MapID);
+                //mapManager.LoadGameMapServer(GlobalVariables.MapID);
                 //Debug.Log("UID:" + GlobalVariables.UserID);
+                
+                GlobalVariables.IsNewUser = false;
 
                 alertText.text = "Welcome";
         
                 loginButton.interactable = false;
               
-                StartCoroutine(MoveLoginWindowUp());
+                //StartCoroutine(MoveLoginWindowUp());
+                SceneManager.LoadScene("MainScene");
             }
             else
             {
@@ -190,7 +202,7 @@ public class Login : MonoBehaviour{
                     signupButton.interactable = false;
 
                     StartCoroutine(TryCreateMap());
-                    StartCoroutine(MoveLoginWindowUp());
+                    //StartCoroutine(MoveLoginWindowUp());
 
                 }
                 else
@@ -210,25 +222,25 @@ public class Login : MonoBehaviour{
 
     private IEnumerator TryCreateMap()
     {
-        mapManager.LoadGameMapServer();
+        //mapManager.LoadGameMapServer();
         // TODO: Call generate map here to generate a new map, then send this new map to server
-        string tempData = mapManager.SerializeAllGameObjects();
-        print("TEMP DATA:" + tempData);
+        //string tempData = mapManager.SerializeAllGameObjects();
+        //print("TEMP DATA:" + tempData);
 
-        MapData mapData = new MapData
-        {
-            mapData = tempData,
+        //MapData mapData = new MapData
+        //{
+        //    mapData = tempData,
    
-        };
+        //};
       
-        string jsonData = JsonUtility.ToJson(mapData, true);  
-        print("Json resp: "+ jsonData);
+        //string jsonData = JsonUtility.ToJson(mapData, true);  
+        //print("Json resp: "+ jsonData);
         
         string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
         print(createMapUrl);
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
-        byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
-        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        //byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
+        //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         request.timeout = 10;
@@ -243,8 +255,9 @@ public class Login : MonoBehaviour{
                     GlobalVariables.MapID = createmap.mapID;
                     Debug.Log("MapID: " + GlobalVariables.MapID);
                     
-                    
-         
+                    GlobalVariables.IsNewUser = true;
+                    SceneManager.LoadScene("MainScene");
+
                 }
                 else
                 {

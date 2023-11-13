@@ -19,7 +19,7 @@ public class Logout : MonoBehaviour
     {
         logoutButton.interactable = false;
         print("map id: " + GlobalVariables.MapID);
-        //mapManager.SaveGameMapServer(GlobalVariables.UserID);
+        //mapManager.SaveGameMapServer(GlobalVariables.MapID);
 
         string mapData = mapManager.SerializeAllGameObjects();
         print("mapdata: " + mapData);
@@ -58,14 +58,15 @@ public class Logout : MonoBehaviour
                         // Reset or clear session-related data
                         GlobalVariables.UserID = string.Empty;
                         GlobalVariables.MapID = string.Empty;
+                        GlobalVariables.IsNewUser = true;
 
-                        
-                        StartCoroutine(MoveLoginWindowDown());
-                        
+
+                        //StartCoroutine(MoveLoginWindowDown());
+
                         //Application.Quit();
 
                         // Return to the login or main scene
-                        // SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
+                        SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
                     }
                     else
                     {

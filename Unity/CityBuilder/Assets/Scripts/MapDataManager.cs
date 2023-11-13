@@ -9,6 +9,19 @@ public class MapDataManager : MonoBehaviour
     public PlacementSystem placementSystem;
     public InputManager inputManager;
 
+    private void Start()
+    {
+        print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
+        if (GlobalVariables.IsNewUser)
+        {
+            LoadGameMapServer(); // will be changed to Generate game map
+            SaveGameMapServer(GlobalVariables.MapID);
+        } else
+        {
+            LoadGameMapServer(GlobalVariables.MapID);
+        }
+    }
+
     private void Update()
     {
         // Key press for save/load the game, will be replaced by click button in UI at later stage
