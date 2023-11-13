@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     bool inventoryIsOpen = false;
     bool isSubMenuOpen = false;
     bool isRightMenuOpen = true;
+    bool inventoryWasOpen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,21 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void CloseInventory(){
+        if(inventoryIsOpen){
+            inventoryWasOpen = true;
+        } else {
+            inventoryWasOpen = false;
+        }
+        inventory.GetComponent<Animator>().SetTrigger("toggle");
+        inventory.GetComponent<Animator>().SetBool("isOpen", false);
+    }
+    public void OpenInventory(){
+        if(inventoryWasOpen){
+            inventory.GetComponent<Animator>().SetTrigger("toggle");
+            inventory.GetComponent<Animator>().SetBool("isOpen", true);      
+        }  
     }
     public void ToggleInventory(){
         inventoryIsOpen = !inventoryIsOpen;

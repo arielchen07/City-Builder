@@ -267,7 +267,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 1, z: 20}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4145400034378755712
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 0
   hasBeenPlaced: 0
+  objectName: Placeable Object
   serviceRange: {fileID: 3701178208540854148}
   maxWater: 50
   currWaterAllocated: 0
@@ -793,7 +794,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7004629271889236237, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
 --- !u!4 &5877815112044923341 stripped
 Transform:

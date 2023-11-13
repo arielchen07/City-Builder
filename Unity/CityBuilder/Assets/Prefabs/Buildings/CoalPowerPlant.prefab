@@ -169,6 +169,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
+  objectName: Placeable Object
   serviceRange: {fileID: 5630164164284756430}
   maxPower: 50
   currPowerAllocated: 0
@@ -298,7 +299,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 1, z: 20}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8701225775057271701
 PrefabInstance:
   m_ObjectHideFlags: 0

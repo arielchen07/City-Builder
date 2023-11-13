@@ -89,6 +89,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
+  objectName: Placeable Object
   serviceRange: {fileID: 367899122777900509}
   maxPower: 50
   currPowerAllocated: 0
@@ -137,7 +138,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 1, z: 20}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1779594676398625192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1310,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7004629271889236237, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7004629271889236237, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
 --- !u!4 &3026698710525523779 stripped
 Transform:
