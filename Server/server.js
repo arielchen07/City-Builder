@@ -13,7 +13,6 @@ const bodyParser = require('body-parser')
 
 const UserRoute = require('./routes/UserRoute');
 const ItemRoute = require('./routes/ItemRoute');
-const MapRoute = require('./routes/MapRoute');
 
 // Connect to the MongoDB database
 mongoose.connect('mongodb+srv://admin:020826@cluster0.wersqd9.mongodb.net/lalala?retryWrites=true&w=majority', {
@@ -53,6 +52,5 @@ app.listen(PORT, () => {
 
 app.use('/api', UserRoute);
 app.use('/api', ItemRoute);
-app.use('/api', MapRoute);
 
 module.exports = app

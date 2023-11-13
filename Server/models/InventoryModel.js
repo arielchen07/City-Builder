@@ -8,13 +8,7 @@ const itemSchema = new Schema({
     },
     quantity: {
         type: Number
-    },
-    category:{
-        type: String
-    },
-    name:{
-        type: String
-    },
+    }
 }, { timestamps: true });
 
 const Item = mongoose.model('Item', itemSchema);

@@ -6,9 +6,9 @@ public class SerializeHelperTests
     [Test]
     public void TestAddObj()
     {
-        var structureObjsSerialization = new MapSerialization();
+        var structureObjsSerialization = new StructureObjsSerialization();
 
-        structureObjsSerialization.AddStructure("TestObject", new Vector3(1, 2, 3), new Vector3(0, 90, 0));
+        structureObjsSerialization.AddObj("TestObject", new Vector3(1, 2, 3), new Vector3(0, 90, 0));
 
         Assert.AreEqual(1, structureObjsSerialization.structureObjData.Count, "Expected one object in the list.");
         var addedObj = structureObjsSerialization.structureObjData[0];
