@@ -40,13 +40,27 @@ public class SaveFile : MonoBehaviour
         return false;
     }
 
-    public void SaveDataServer(string mapID, string dataToSave)
+    public void SaveDataServer(string mapID, string dataToSave, bool logout = false)
     {
         MapRequestBody data = new MapRequestBody(dataToSave);
         var mapDataRequestBody = JsonUtility.ToJson(data);
-        StartCoroutine(PostRequestServer(mapID, mapDataRequestBody));
+        StartCoroutine(
+            PostRequestServer(mapID, mapDataRequestBody,
+                (UnityWebRequest request) =>
+                {
+                    if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        Debug.Log("Successfully saved data to server");
+                    }
+                    else
+                    {
+                        Debug.LogError("Save to server failed: " + request.error);
+                    }
+                }
+            )
+        );
     }
-    IEnumerator PostRequestServer(string mapID, string data)
+    public static IEnumerator PostRequestServer(string mapID, string data, Action<UnityWebRequest> callback)
     {
         // Currently using hard coded URL to store to a specific map id of a specific user in database
         // will change this later
@@ -57,14 +71,7 @@ public class SaveFile : MonoBehaviour
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("Successfully saved data to server");
-            }
-            else
-            {
-                Debug.LogError("Save to server failed: " + request.error);
-            }
+            callback(request);
         }
     }
     public string LoadDataLocal()
@@ -121,7 +128,7 @@ public class SaveFile : MonoBehaviour
         );
     }
 
-    IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
+    public static IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
     {
         // Currently using hard coded URL to load from a specific map id of a specific user in database
         // will change this later

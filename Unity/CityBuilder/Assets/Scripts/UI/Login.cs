@@ -69,14 +69,16 @@ public class Login : MonoBehaviour{
     public void OnLoginClick()
     {
         alertText.text = "Signing in ...";
-        loginButton.interactable = false;
+        // loginButton.interactable = false;
         StartCoroutine(TryLogin());
+        
     }
     public void OnSignupClick()  
     {
         alertText.text = "Signing up ...";
-        signupButton.interactable = false;
+        //signupButton.interactable = false;
         StartCoroutine(TrySignup());
+        
     }
 
  
@@ -193,7 +195,7 @@ public class Login : MonoBehaviour{
                 }
                 else
                 {
-                    alertText.text = "Signup Failed";
+                    alertText.text = "Signup Failed, Try Again";
                     signupButton.interactable = true;
                 }
             }
@@ -208,7 +210,7 @@ public class Login : MonoBehaviour{
 
     private IEnumerator TryCreateMap()
     {
-        //mapManager.LoadGameMapServer();
+        mapManager.LoadGameMapServer();
         // TODO: Call generate map here to generate a new map, then send this new map to server
         string tempData = mapManager.SerializeAllGameObjects();
         print("TEMP DATA:" + tempData);
@@ -280,6 +282,13 @@ public class Login : MonoBehaviour{
 
         loginWindowTransform.position = endPosition1;  
         loginBackgroundTransform.position = endPosition2;
+        usernameInputField.text = "";  // Clear the username field
+        emailInputField.text = "";     // Clear the email field
+        passwordInputField.text = "";  // Clear the password field
+        loginButton.interactable = true;
+        signupButton.interactable = true;
+        alertText.text = "LOG IN";
+
     }
 }
 

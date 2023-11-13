@@ -96,6 +96,26 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    const userID = req.params.userID;
+    const user = await User.findById(userID);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.status = 'offline';
+    await user.save();
+
+    res.json({ message: 'User logged out successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
 
   const userProfile = async (req, res) => {
     const userID = req.params.userID;
@@ -116,5 +136,5 @@ const login = async (req, res) => {
   
   
   
-module.exports = {register, login, userProfile};
+module.exports = {register, login, userProfile, logout};
 
