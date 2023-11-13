@@ -87,7 +87,7 @@ public class GameMapTests
         Assert.IsNotNull(GameObject.Find("Tile1"), "Tile1 does not exist before RemoveAllTiles.");
         Assert.IsNotNull(GameObject.Find("Tile2"), "Tile2 does not exist before RemoveAllTiles.");
 
-        mapDataManager.RemoveAllTiles();
+        mapDataManager.ClearGameMap();
 
         yield return null;
 

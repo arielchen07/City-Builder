@@ -1,0 +1,7 @@
+2023-10-23	8:00-9:00 group weekly meeting
+Meeting notes:
+These are the temtative tasks that we need to finish before D3 deadlines:
+1. Combine D2 works from 3 sub-teams to the main repo — GOAL for this week 10.23-10.30
+2. Development: map generation & inventory system
+	Ask our partner James for trading(user profile) and AR camera on Friday 10.27
+3. Deployment: environment setup & automatic deployment through GitHub

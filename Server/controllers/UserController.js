@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/UserModel');
+const Item = require('../models/InventoryModel')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -21,8 +22,13 @@ const register = async(req, res) => {
           }
         //If a new email, create user
         const user = await User.create({name, email, password});
+        const item1 = await Item.create({userID: user._id, quantity:10, category: "building", name: "singleHouse"});
+        user.items.push(item1._id);
+        user.status = "online";
+        await user.save();
         
-        res.status(201).json(user);
+        // res.status(201).json({user, item1});
+        res.status(200).json({ userID: user._id });
       } catch (e) {
         let msg;
         // if(e.code == 11000){
@@ -65,30 +71,30 @@ const register = async(req, res) => {
 // }
 
 const login = async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      console.log(req.body)
-      const user = await User.findOne({ email });
-  
-      if (!user) {
-        return res.status(401).json({ error: 'User not found' });
-      }
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-  
-      if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Password not match' });
-      }
-      user.status = 'online';
-      await user.save();
+  try {
+    const { email, password } = req.body;
+    console.log(req.body)
+    const user = await User.findOne({ email });
 
-      const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-  
-      res.status(200).json({ user, token });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ error: 'Internal server error' });
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
     }
-  };
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Password not match' });
+    }
+    user.status = 'online';
+    await user.save();
+    
+    // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.status(200).json({ userID: user._id, mapID: user.maps[0]});
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
   const userProfile = async (req, res) => {
@@ -111,3 +117,4 @@ const login = async (req, res) => {
   
   
 module.exports = {register, login, userProfile};
+
