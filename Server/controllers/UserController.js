@@ -24,9 +24,11 @@ const register = async(req, res) => {
         const user = await User.create({name, email, password});
         const item1 = await Item.create({userID: user._id, quantity:10, category: "building", name: "singleHouse"});
         user.items.push(item1._id);
+        user.status = "online";
         await user.save();
         
-        res.status(201).json({user, item1});
+        // res.status(201).json({user, item1});
+        res.status(200).json({ userID: user._id });
       } catch (e) {
         let msg;
         // if(e.code == 11000){
@@ -85,9 +87,9 @@ const login = async (req, res) => {
     user.status = 'online';
     await user.save();
     
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    // const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
-    res.status(200).json({ user, token });
+    res.status(200).json({ userID: user._id, mapID: user.maps[0]});
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Internal server error' });
@@ -115,3 +117,4 @@ const login = async (req, res) => {
   
   
 module.exports = {register, login, userProfile};
+

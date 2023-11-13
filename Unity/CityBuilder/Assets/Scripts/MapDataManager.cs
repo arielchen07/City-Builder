@@ -66,10 +66,10 @@ public class MapDataManager : MonoBehaviour
             Destroy(tile.gameObject);
         }
     }
-    public void SaveGameMapServer()
+    public void SaveGameMapServer(string mapID = "65517d52b753aa75060ea633")
     {
         var mapDataJson = SerializeAllGameObjects();
-        saveSystem.SaveDataServer(mapDataJson);
+        saveSystem.SaveDataServer(mapID, mapDataJson);
     }
 
     public void SaveGameMapLocal()
@@ -114,9 +114,9 @@ public class MapDataManager : MonoBehaviour
         return mapDataJson;
     }
 
-    public void LoadGameMapServer()
+    public void LoadGameMapServer(string mapID = "65517d52b753aa75060ea633")
     {
-        saveSystem.LoadDataServer();
+        saveSystem.LoadDataServer(mapID);
     }
 
     public void LoadGameMapLocal()

@@ -3,22 +3,32 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+ 
 
-public class Login : MonoBehaviour
+
+
+public static class GlobalVariables
 {
+    public static string UserID { get; set; }
+    public static string MapID {get; set;}
+}
+
+public class Login : MonoBehaviour{
     [SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
     [SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register"; 
+     
     [SerializeField] private TextMeshProUGUI alertText;
     [SerializeField] private Button loginButton;
     [SerializeField] private Button signupButton;  
     [SerializeField] private TMP_InputField usernameInputField;  
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
-    [SerializeField] private Transform loginWindowTransform;  
-
+    [SerializeField] private Transform loginWindowTransform;
+    [SerializeField] private MapDataManager mapManager;
     [SerializeField] private Transform loginBackgroundTransform;  
 
     [System.Serializable]
+
     public class LoginData
     {
         public string email;
@@ -30,8 +40,32 @@ public class Login : MonoBehaviour
         public string email;
         public string password;
     }
-    
 
+    [System.Serializable]
+    public class MapData
+    {
+        public string mapData;
+        public string mapName;
+        
+
+    }
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public string userID;
+        public string mapID;
+
+    }
+
+    [System.Serializable]   
+    public class SignupResponse
+    {
+        public string userID;
+    }
+
+    public class CreateMapResponse{
+        public string mapID;
+    }
     public void OnLoginClick()
     {
         alertText.text = "Signing in ...";
@@ -45,6 +79,7 @@ public class Login : MonoBehaviour
         StartCoroutine(TrySignup());
     }
 
+ 
 
     private IEnumerator TryLogin()
     {
@@ -56,7 +91,9 @@ public class Login : MonoBehaviour
 
         if (string.IsNullOrEmpty(loginData.email) || string.IsNullOrEmpty(loginData.password))
         {
-            Debug.LogError("Email or password is empty");
+            Debug.LogError("aaEmail or password is empty");
+            Debug.Log(loginData.email);
+            Debug.Log(loginData.password);
             yield break;  
         }
          
@@ -77,9 +114,25 @@ public class Login : MonoBehaviour
             
             if (!string.IsNullOrEmpty(request.downloadHandler.text))
             {
-                alertText.text = "Welcome";
-                loginButton.interactable = false;
+                LoginResponse login = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+                GlobalVariables.UserID = login.userID;
+                string mapIDName = login.mapID;
+                int colonIndex = mapIDName.IndexOf(':');
+                if (colonIndex != -1) {
+                    string mapID = mapIDName.Substring(0, colonIndex);
+                    GlobalVariables.MapID = mapID;
+                    //Debug.Log("mapID:" + mapID);
+                }else{
+                    Debug.Log("Fail to catch MapID");
+                    yield break;
+                }
 
+                mapManager.LoadGameMapServer(GlobalVariables.MapID);
+                //Debug.Log("UID:" + GlobalVariables.UserID);
+
+                alertText.text = "Welcome";
+        
+                loginButton.interactable = false;
               
                 StartCoroutine(MoveLoginWindowUp());
             }
@@ -128,9 +181,15 @@ public class Login : MonoBehaviour
             {
                 if (!string.IsNullOrEmpty(request.downloadHandler.text))
                 {
+                    SignupResponse signup = JsonUtility.FromJson<SignupResponse>(request.downloadHandler.text);
+                    GlobalVariables.UserID = signup.userID;
+                    Debug.Log("UID:" + GlobalVariables.UserID);
                     alertText.text = "Signup Successful";
                     signupButton.interactable = false;
+
+                    StartCoroutine(TryCreateMap());
                     StartCoroutine(MoveLoginWindowUp());
+
                 }
                 else
                 {
@@ -147,7 +206,57 @@ public class Login : MonoBehaviour
         }
     }
 
-    
+    private IEnumerator TryCreateMap()
+    {
+        //mapManager.LoadGameMapServer();
+        // TODO: Call generate map here to generate a new map, then send this new map to server
+        string tempData = mapManager.SerializeAllGameObjects();
+        print("TEMP DATA:" + tempData);
+
+        MapData mapData = new MapData
+        {
+            mapData = tempData,
+   
+        };
+      
+        string jsonData = JsonUtility.ToJson(mapData, true);  
+        print("Json resp: "+ jsonData);
+        
+        string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
+        print(createMapUrl);
+        UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
+        byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.timeout = 10;
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+            {
+                if (!string.IsNullOrEmpty(request.downloadHandler.text))
+                {
+                    CreateMapResponse createmap = JsonUtility.FromJson<CreateMapResponse>(request.downloadHandler.text);
+                    GlobalVariables.MapID = createmap.mapID;
+                    Debug.Log("MapID: " + GlobalVariables.MapID);
+                    
+                    
+         
+                }
+                else
+                {
+                    alertText.text = "Create Map Failed";
+                }
+            }
+            else
+            {
+                Debug.LogError($"Error during create map: {request.error}");
+                alertText.text = $"Create Map Error: {request.error}";
+            }
+
+        
+    }
 
     private IEnumerator MoveLoginWindowUp()
     {
@@ -173,3 +282,4 @@ public class Login : MonoBehaviour
         loginBackgroundTransform.position = endPosition2;
     }
 }
+
