@@ -14,32 +14,35 @@ public class MapDataManager : MonoBehaviour
         // Key press for save/load the game, will be replaced by click button in UI at later stage
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SaveGameMapLocal();
+            SaveGameObjectsLocal();
+            SaveTilesLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            LoadGameMapLocal();
+            LoadTilesLocal();
+            LoadGameObjectsLocal();
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SaveGameMapServer();
+            SaveGameObjectsServer();
+            SaveTilesServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            LoadGameMapServer();
+            LoadGameObjectsServer();
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            RemoveStructureObjs();
+            ClearGameMap();
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            ClearGameMap();
+            RemoveAllTiles();
         }
     }
-    public void RemoveStructureObjs()
+
+    public void ClearGameMap()
     {
-        // Remove all building and roads on game map
         foreach (var item in GameObject.FindObjectsOfType<PlaceableObject>())
         {
             Destroy(item.gameObject);
@@ -57,30 +60,21 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
-    public void ClearGameMap()
+    public void SaveGameObjectsServer()
     {
-        RemoveStructureObjs();
-        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
-        foreach (MapTile tile in tiles)
-        {
-            Destroy(tile.gameObject);
-        }
-    }
-    public void SaveGameMapServer(string mapID = "65517d52b753aa75060ea633")
-    {
-        var mapDataJson = SerializeAllGameObjects();
-        saveSystem.SaveDataServer(mapID, mapDataJson);
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataServer(structureObjJson);
     }
 
-    public void SaveGameMapLocal()
+    public void SaveGameObjectsLocal()
     {
-        var mapDataJson = SerializeAllGameObjects();
-        saveSystem.SaveDataLocal(mapDataJson);
+        var structureObjJson = SerializeAllGameObjects();
+        saveSystem.SaveDataLocal(structureObjJson);
     }
 
     public string SerializeAllGameObjects()
     {
-        MapSerialization mapObjs = new MapSerialization();
+        StructureObjsSerialization structureObjs = new StructureObjsSerialization();
 
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
         foreach (PlaceableObject rb in placeableObjects)
@@ -90,7 +84,7 @@ public class MapDataManager : MonoBehaviour
                 != placementSystem.GetComponent<PlacementSystem>().GetCurrentlyPlacing()
             )
             {
-                mapObjs.AddStructure(
+                structureObjs.AddObj(
                     rb.name,
                     rb.transform.position,
                     rb.transform.rotation.eulerAngles
@@ -101,48 +95,35 @@ public class MapDataManager : MonoBehaviour
         Road[] roads = GameObject.FindObjectsOfType<Road>();
         foreach (Road rb in roads)
         {
-            mapObjs.AddStructure(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
+            structureObjs.AddObj(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
         }
 
-        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
-        foreach (MapTile tile in tiles)
-        {
-            mapObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
-        }
-
-        var mapDataJson = JsonUtility.ToJson(mapObjs);
-        return mapDataJson;
+        var structureObjJson = JsonUtility.ToJson(structureObjs);
+        return structureObjJson;
     }
 
-    public void LoadGameMapServer(string mapID = "65517d52b753aa75060ea633")
+    public void LoadGameObjectsServer()
     {
-        saveSystem.LoadDataServer(mapID);
+        saveSystem.LoadDataServer();
     }
 
-    public void LoadGameMapLocal()
+    public void LoadGameObjectsLocal()
     {
-        var mapDataJson = saveSystem.LoadDataLocal();
-        ReDrawGameMap(mapDataJson);
+        var structureObjJson = saveSystem.LoadDataLocal();
+        ReDrawGameObjects(structureObjJson);
     }
 
-    public void ReDrawGameMap(string mapDataJson)
+    public void ReDrawGameObjects(string structureObjJson)
     {
         ClearGameMap();
 
-        if (String.IsNullOrEmpty(mapDataJson))
+        if (String.IsNullOrEmpty(structureObjJson))
             return;
-        MapSerialization mapObjs = JsonUtility.FromJson<MapSerialization>(
-            mapDataJson
+        StructureObjsSerialization structureObjs = JsonUtility.FromJson<StructureObjsSerialization>(
+            structureObjJson
         );
 
-        DrawTilesFromJson(mapObjs);
-        DrawStructureObjects(mapObjs);
-
-    }
-    public void DrawStructureObjects(MapSerialization mapObjs)
-    {
-        // Redraw buildings and roads
-        foreach (var structure in mapObjs.structureObjData)
+        foreach (var structure in structureObjs.structureObjData)
         {
             foreach (var placeableObj in inventory.inventoryLst)
             {
@@ -186,12 +167,50 @@ public class MapDataManager : MonoBehaviour
             }
         }
     }
-    public void DrawTilesFromJson(MapSerialization mapObjs)
+
+    public string SerializeMapTiles()
     {
-        // Draw map tiles
+        TileObjsSerialization tileObjs = new TileObjsSerialization();
+
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            tileObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
+        }
+
+        var tilesJson = JsonUtility.ToJson(tileObjs);
+        return tilesJson;
+    }
+
+    public void SaveTilesLocal()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveTilesLocal(tilesJson);
+    }
+
+    public void SaveTilesServer()
+    {
+        var tilesJson = SerializeMapTiles();
+        saveSystem.SaveDataServer(tilesJson);
+    }
+
+    public void LoadTilesLocal()
+    {
+        var tilesJson = saveSystem.LoadTilesLocal();
+        DrawTilesFromJson(tilesJson);
+    }
+
+    public void DrawTilesFromJson(string tilesJson)
+    {
+        RemoveAllTiles();
+        if (String.IsNullOrEmpty(tilesJson))
+            return;
+        TileObjsSerialization tileObjs = JsonUtility.FromJson<TileObjsSerialization>(tilesJson);
+
         Transform landTransform = GameObject.Find("Land").transform;
 
-        foreach (var tile in mapObjs.tileData)
+
+        foreach (var tile in tileObjs.tileData)
         {
             foreach (var tileObj in inventory.inventoryLst)
             {
@@ -201,6 +220,16 @@ public class MapDataManager : MonoBehaviour
                     tileInst.transform.SetParent(landTransform, true);
                 }
             }
+        }
+    }
+
+    public void RemoveAllTiles()
+    {
+        ClearGameMap();
+        MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
+        foreach (MapTile tile in tiles)
+        {
+            Destroy(tile.gameObject);
         }
     }
 

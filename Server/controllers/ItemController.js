@@ -6,12 +6,9 @@ const jwt = require('jsonwebtoken');
 const createItem = async (req, res) => {
     try {
         const userID = req.params.userID;
-        const quantity = req.body.quantity || 2;
-        const category = req.body.category;
-        const name = req.body.name;
-        const item = await Item.create({ userID, quantity, category, name });
+        const quantity = req.body.quantity || 20;
+        const item = await Item.create({ userID, quantity });
         const user = await User.findById(userID);
-        
         user.items.push(item._id);
         await user.save();
         res.status(201).json(item);

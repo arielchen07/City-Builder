@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -21,7 +20,7 @@ public class SaveFile : MonoBehaviour
         {
             Debug.Log("Successfully saved data to file");
         }
-    } 
+    }
 
     public bool WriteToFile(string name, string content)
     {
@@ -40,17 +39,13 @@ public class SaveFile : MonoBehaviour
         return false;
     }
 
-    public void SaveDataServer(string mapID, string dataToSave)
+    public void SaveDataServer(string dataToSave)
     {
-        MapRequestBody data = new MapRequestBody(dataToSave);
-        var mapDataRequestBody = JsonUtility.ToJson(data);
-        StartCoroutine(PostRequestServer(mapID, mapDataRequestBody));
+        StartCoroutine(PostRequestServer(dataToSave));
     }
-    IEnumerator PostRequestServer(string mapID, string data)
+    IEnumerator PostRequestServer(string data)
     {
-        // Currently using hard coded URL to store to a specific map id of a specific user in database
-        // will change this later
-        using (var request = new UnityWebRequest("http://localhost:3000/api/" + mapID + "/savemap", "POST"))
+        using (var request = new UnityWebRequest("http://localhost:3000", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -93,24 +88,37 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
-    public void LoadDataServer(string mapID)
+    public void SaveTilesLocal(string tilesData)
+    {
+        if (WriteToFile(tileSaveName + saveDataIndex, tilesData))
+        {
+            Debug.Log("Successfully saved tiles to file");
+        }
+    }
+
+    public string LoadTilesLocal()
+    {
+        string data = "";
+        if (ReadFromFile(tileSaveName + saveDataIndex, out data))
+        {
+            Debug.Log("Successfully loaded tiles to file");
+        }
+        return data;
+    }
+
+    public void LoadDataServer()
     {
         StartCoroutine(
-            GetRequestServer(mapID,
+            GetRequestServer(
                 (UnityWebRequest request) =>
                 {
                     // call to load game objects after recieved data from get request
                     if (request.result == UnityWebRequest.Result.Success)
                     {
-                        string data = request.downloadHandler.text;
-                        print("Readfromserver recieved: " + data);
-                        if (String.IsNullOrEmpty(data))
-                            return;
-                        var mapRequestBody = JsonUtility.FromJson<MapRequestBody>(
-                            data
-                        );
+                        print("Readfromserver recieved: " + request.downloadHandler.text);
                         Debug.Log("Successfully loaded data from server");
-                        mapDataManager.ReDrawGameMap(mapRequestBody.mapData);
+                        mapDataManager.DrawTilesFromJson(request.downloadHandler.text);
+                        mapDataManager.ReDrawGameObjects(request.downloadHandler.text);
                     }
                     else
                     {
@@ -121,13 +129,10 @@ public class SaveFile : MonoBehaviour
         );
     }
 
-    IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
+    IEnumerator GetRequestServer(Action<UnityWebRequest> callback)
     {
-        // Currently using hard coded URL to load from a specific map id of a specific user in database
-        // will change this later
-
         // send get request to server, triggers callback after response recieved
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/" + mapID + "/map"))
+        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
