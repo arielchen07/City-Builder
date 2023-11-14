@@ -18,7 +18,11 @@ const userSchema = new Schema({
     },
     items: {
       type: [String]
+    },
+    maps: {
+      type: [String]
     }
+
 }, { timestamps: true });
 
 
@@ -51,5 +55,6 @@ userSchema.pre('save', function (next) {
   
 
 const User = mongoose.model('User', userSchema);
+
 
 module.exports = User;
