@@ -155,6 +155,7 @@ MonoBehaviour:
   cameraSensitivity: 1
   zoomSensitivity: 0.5
   cam: {fileID: 1774183340}
+  isLocked: 0
 --- !u!4 &8335894
 Transform:
   m_ObjectHideFlags: 0
@@ -683,8 +684,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Email
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774183342}
+      - m_Target: {fileID: 1127663213}
         m_TargetAssemblyTypeName: Login, TestScripts
         m_MethodName: OnLoginClick
         m_Mode: 1
@@ -2459,8 +2460,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Log In
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2534,6 +2535,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092909878}
   m_CullTransparentMesh: 1
+--- !u!1 &1127663212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127663214}
+  - component: {fileID: 1127663213}
+  m_Layer: 0
+  m_Name: LoginManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1127663213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127663212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b67531060f98e14a8151f002678d3e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  authenticationEndpoint: http://localhost:3000/api/login
+  registrationEndpoint: http://localhost:3000/api/register
+  alertText: {fileID: 1092909880}
+  loginButton: {fileID: 483810828}
+  signupButton: {fileID: 1744071812}
+  usernameInputField: {fileID: 2112689208}
+  emailInputField: {fileID: 85460923}
+  passwordInputField: {fileID: 855356504}
+  loginWindowTransform: {fileID: 804803974}
+  loginBackgroundTransform: {fileID: 804803974}
+--- !u!4 &1127663214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127663212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1187202975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,8 +2647,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Username (register only)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3495,7 +3549,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774183342}
+      - m_Target: {fileID: 1127663213}
         m_TargetAssemblyTypeName: Login, TestScripts
         m_MethodName: OnSignupClick
         m_Mode: 1
@@ -3734,7 +3788,6 @@ GameObject:
   - component: {fileID: 1774183340}
   - component: {fileID: 1774183344}
   - component: {fileID: 1774183343}
-  - component: {fileID: 1774183342}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3785,28 +3838,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1774183342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774183339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f990afa16984f73bd41cc699803563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  authenticationEndpoint: http://localhost:3000/api/login
-  registrationEndpoint: http://localhost:3000/api/register
-  alertText: {fileID: 1092909880}
-  loginButton: {fileID: 483810828}
-  signupButton: {fileID: 1744071812}
-  usernameInputField: {fileID: 2112689208}
-  emailInputField: {fileID: 85460923}
-  passwordInputField: {fileID: 855356504}
-  loginWindowTransform: {fileID: 804803974}
-  loginBackgroundTransform: {fileID: 1978368260}
 --- !u!114 &1774183343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3920,8 +3951,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Password
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

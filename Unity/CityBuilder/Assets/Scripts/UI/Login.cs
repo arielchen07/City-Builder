@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static Login;
 
 public static class GlobalVariables
 {
@@ -22,9 +23,8 @@ public class Login : MonoBehaviour{
     [SerializeField] private TMP_InputField usernameInputField;  
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
-    [SerializeField] private Transform loginWindowTransform;
-    //[SerializeField] private MapDataManager mapManager;
-    [SerializeField] private Transform loginBackgroundTransform;  
+    //[SerializeField] private Transform loginWindowTransform;
+    //[SerializeField] private Transform loginBackgroundTransform;  
 
     [System.Serializable]
 
@@ -90,8 +90,6 @@ public class Login : MonoBehaviour{
         
     }
 
- 
-
     private IEnumerator TryLogin()
     {
         LoginData loginData = new LoginData
@@ -102,9 +100,11 @@ public class Login : MonoBehaviour{
 
         if (string.IsNullOrEmpty(loginData.email) || string.IsNullOrEmpty(loginData.password))
         {
-            Debug.LogError("aaEmail or password is empty");
+            Debug.LogError("Email or password is empty");
             Debug.Log(loginData.email);
             Debug.Log(loginData.password);
+            alertText.text = "Some fields are empty";
+            loginButton.interactable = true;
             yield break;  
         }
          
@@ -158,7 +158,7 @@ public class Login : MonoBehaviour{
         }
         else
         {
-            alertText.text = "Incorrect";
+            alertText.text = "Login Info Incorrect";
             loginButton.interactable = true;
         }
     }
@@ -175,6 +175,8 @@ public class Login : MonoBehaviour{
         if (string.IsNullOrEmpty(signupData.name) || string.IsNullOrEmpty(signupData.email) || string.IsNullOrEmpty(signupData.password))
         {
             Debug.LogError("Name, email or password is empty");
+            alertText.text = "Some fields are empty";
+            signupButton.interactable = true;
             yield break;  
         }
         
@@ -202,8 +204,6 @@ public class Login : MonoBehaviour{
                     signupButton.interactable = false;
 
                     StartCoroutine(TryCreateMap());
-                    //StartCoroutine(MoveLoginWindowUp());
-
                 }
                 else
                 {
@@ -273,35 +273,35 @@ public class Login : MonoBehaviour{
         
     }
 
-    private IEnumerator MoveLoginWindowUp()
-    {
-        yield return new WaitForSeconds(2);
-        Vector3 startPosition1 = loginWindowTransform.position;
-        Vector3 endPosition1 = startPosition1 + new Vector3(0, 700, 0);  
-        Vector3 startPosition2 = loginBackgroundTransform.position;
-        Vector3 endPosition2 = startPosition2 + new Vector3(0, -700, 0);  
+    //private IEnumerator MoveLoginWindowUp()
+    //{
+    //    yield return new WaitForSeconds(2);
+    //    Vector3 startPosition1 = loginWindowTransform.position;
+    //    Vector3 endPosition1 = startPosition1 + new Vector3(0, 700, 0);  
+    //    Vector3 startPosition2 = loginBackgroundTransform.position;
+    //    Vector3 endPosition2 = startPosition2 + new Vector3(0, -700, 0);  
 
-        float duration = 1.0f;  
-        float elapsedTime = 0;
+    //    float duration = 1.0f;  
+    //    float elapsedTime = 0;
 
-        while (elapsedTime < duration)
-        {
-            loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+    //    while (elapsedTime < duration)
+    //    {
+    //        loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
+    //        elapsedTime += Time.deltaTime;
+    //        loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        loginWindowTransform.position = endPosition1;  
-        loginBackgroundTransform.position = endPosition2;
-        usernameInputField.text = "";  // Clear the username field
-        emailInputField.text = "";     // Clear the email field
-        passwordInputField.text = "";  // Clear the password field
-        loginButton.interactable = true;
-        signupButton.interactable = true;
-        alertText.text = "LOG IN";
+    //    loginWindowTransform.position = endPosition1;  
+    //    loginBackgroundTransform.position = endPosition2;
+    //    usernameInputField.text = "";  // Clear the username field
+    //    emailInputField.text = "";     // Clear the email field
+    //    passwordInputField.text = "";  // Clear the password field
+    //    loginButton.interactable = true;
+    //    signupButton.interactable = true;
+    //    alertText.text = "LOG IN";
 
-    }
+    //}
 }
 

@@ -7,6 +7,7 @@ using System.Text;
 using System;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine.SceneManagement;
+using static Login;
 
 public class Logout : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class Logout : MonoBehaviour
         logoutButton.interactable = false;
         print("map id: " + GlobalVariables.MapID);
         //mapManager.SaveGameMapServer(GlobalVariables.MapID);
+        if (string.IsNullOrEmpty(GlobalVariables.MapID))
+        {
+            Debug.Log("No valid MapID, map will not be saved");
+            logoutButton.interactable = true;
+            return;
+        }
 
         string mapData = mapManager.SerializeAllGameObjects();
         print("mapdata: " + mapData);
