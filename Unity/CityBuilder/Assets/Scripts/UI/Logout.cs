@@ -7,19 +7,26 @@ using System.Text;
 using System;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine.SceneManagement;
+using static Login;
 
 public class Logout : MonoBehaviour
 {
     [SerializeField] private string logoutEndpoint = "http://localhost:3000/api/";
     [SerializeField] private Button logoutButton;
     [SerializeField] private MapDataManager mapManager;
-    [SerializeField] private Transform loginBackgroundTransform; 
-    [SerializeField] private Transform loginWindowTransform;
+    // [SerializeField] private Transform loginBackgroundTransform; 
+    // [SerializeField] private Transform loginWindowTransform;
     public void OnLogoutClick()
     {
         logoutButton.interactable = false;
         print("map id: " + GlobalVariables.MapID);
-        //mapManager.SaveGameMapServer(GlobalVariables.UserID);
+
+        if (string.IsNullOrEmpty(GlobalVariables.MapID))
+        {
+            Debug.Log("No valid MapID, map will not be saved");
+            logoutButton.interactable = true;
+            return;
+        }
 
         string mapData = mapManager.SerializeAllGameObjects();
         print("mapdata: " + mapData);
@@ -58,14 +65,15 @@ public class Logout : MonoBehaviour
                         // Reset or clear session-related data
                         GlobalVariables.UserID = string.Empty;
                         GlobalVariables.MapID = string.Empty;
+                        GlobalVariables.IsNewUser = true;
 
-                        
-                        StartCoroutine(MoveLoginWindowDown());
-                        
+
+                        //StartCoroutine(MoveLoginWindowDown());
+
                         //Application.Quit();
 
                         // Return to the login or main scene
-                        // SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
+                        SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
                     }
                     else
                     {
@@ -93,31 +101,31 @@ public class Logout : MonoBehaviour
 
 
 
-   private IEnumerator MoveLoginWindowDown()
-    {
-        yield return new WaitForSeconds(2);
-        Vector3 startPosition1 = loginWindowTransform.position;
-        Vector3 endPosition1 = startPosition1 + new Vector3(0, -700, 0);  
-        Vector3 startPosition2 = loginBackgroundTransform.position;
-        Vector3 endPosition2 = startPosition2 + new Vector3(0, 700, 0);  
+//    private IEnumerator MoveLoginWindowDown()
+//     {
+//         yield return new WaitForSeconds(2);
+//         Vector3 startPosition1 = loginWindowTransform.position;
+//         Vector3 endPosition1 = startPosition1 + new Vector3(0, -700, 0);  
+//         Vector3 startPosition2 = loginBackgroundTransform.position;
+//         Vector3 endPosition2 = startPosition2 + new Vector3(0, 700, 0);  
 
-        float duration = 1.0f;  
-        float elapsedTime = 0;
+//         float duration = 1.0f;  
+//         float elapsedTime = 0;
 
-        while (elapsedTime < duration)
-        {
-            loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+//         while (elapsedTime < duration)
+//         {
+//             loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
+//             elapsedTime += Time.deltaTime;
+//             loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
+//             elapsedTime += Time.deltaTime;
+//             yield return null;
+//         }
 
-        // loginWindowTransform.position = endPosition1;  
-        loginBackgroundTransform.position = endPosition2;
-        logoutButton.interactable = true;
-        mapManager.ClearGameMap();
+//         // loginWindowTransform.position = endPosition1;  
+//         loginBackgroundTransform.position = endPosition2;
+//         logoutButton.interactable = true;
+//         mapManager.ClearGameMap();
 
-    }
+//     }
 }
 

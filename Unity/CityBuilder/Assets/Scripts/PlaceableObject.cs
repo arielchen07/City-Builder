@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class PlaceableObject : MonoBehaviour
     public bool isHovering;
     public bool evenDimensions;
     public bool hasBeenPlaced = false;
+    public string objectName = "Placeable Object";
     
     void Start()
     {

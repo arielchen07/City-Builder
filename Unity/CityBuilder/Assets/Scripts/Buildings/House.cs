@@ -53,4 +53,23 @@ public class House : PlaceableObject
         float utilMod = basePopulation / 10;
         population = (int)(basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
     }
+
+    public string GetPopulation(){
+        return population.ToString();
+    }
+    public string GetPower(){
+        return powerAllocated.ToString() + " / " + powerCost.ToString();
+    }
+    public string GetWater(){
+        return waterAllocated.ToString() + " / " + waterCost.ToString();
+    }
+    public string GetSewage(){
+        return sewageAllocated.ToString() + " / " + sewageCost.ToString();
+    }
+    public string GetGas(){
+        return gasAllocated.ToString() + " / " + gasCost.ToString();
+    }
+    public string GetInternet(){
+        return internetAllocated.ToString() + " / " + internetCost.ToString();
+    }
 }

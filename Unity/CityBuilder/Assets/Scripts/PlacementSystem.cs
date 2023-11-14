@@ -12,11 +12,15 @@ public class PlacementSystem : MonoBehaviour
     public GameObject road;
     public GameObject currentlyPlacing;
     public GameObject currentlySelecting;
+    public GameObject currentlyHovering;
+    public GameObject objectMenu;
+    public CameraController cameraController;
+    public MenuManager menuManager;
     Vector3 currentRotation;
     Vector3 oldPosition;
     Vector3 oldRotation;
     bool beginPlacingContinuousObjects = false;
-    bool isSelectingObject = false;
+    public bool isSelectingObject = false;
     void Start()
     {
         currentRotation = new Vector3(0,0,0);
@@ -28,7 +32,7 @@ public class PlacementSystem : MonoBehaviour
         pointer.transform.position = mousePos;
         //get object the cursor is currently colliding with
         if(inputManager.hitObject != null){
-            currentlySelecting = inputManager.hitObject;
+            currentlyHovering = inputManager.hitObject;
         }
         //checks for key inputs to spawn objects
         SpawnObjectOnKey();
@@ -47,24 +51,25 @@ public class PlacementSystem : MonoBehaviour
                     DropObject();
                 }
                 else if (Input.GetKeyDown(KeyCode.LeftArrow)){
-                    currentlyPlacing.transform.Rotate(new Vector3(0,90,0));
-                    currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
+                    RotateObject(true);
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow)){
-                    currentlyPlacing.transform.Rotate(new Vector3(0,-90,0));
-                    currentRotation = currentlyPlacing.transform.rotation.eulerAngles;
+                    RotateObject(false);
                 }
                 else if (Input.GetKeyDown(KeyCode.Delete)) {
                     Destroy(currentlyPlacing);
                     currentlyPlacing = null;
                 }
-            } else if (currentlySelecting != null) {
-                if (currentlySelecting.CompareTag("Object")) {
-                    if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            } else if (currentlyHovering != null) {
+                if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                    if (currentlyHovering.CompareTag("Object")) {
                         SelectObject();
+                    } else if (currentlySelecting != null){
+                        DeselectObject();
                     }
                 }
             }
+
         }
 
         if(isSelectingObject) {
@@ -98,6 +103,14 @@ public class PlacementSystem : MonoBehaviour
             }
         }
     }
+    public void RotateObject(bool rotateLeft){
+        float yRot = -90f;
+        if(rotateLeft){
+            yRot = 90f;
+        }
+        currentlySelecting.transform.Rotate(new Vector3(0,yRot,0));
+        currentRotation = currentlySelecting.transform.rotation.eulerAngles;
+    }
     /*
     PlaceObject is called when the user is currently selecting an object and wants to place it.
     */
@@ -115,6 +128,7 @@ public class PlacementSystem : MonoBehaviour
             currentlyPlacing = null;
         }
         isSelectingObject = false;
+        DeselectObject();
     }
 
     /*
@@ -157,11 +171,33 @@ public class PlacementSystem : MonoBehaviour
     /*
     SelectObject is called when a user hovers their cursor over an object and wants to select it.
     */
-    public void SelectObject() {
-        Debug.Log("selecting object");
-        inputManager.placementLayermask = LayerMask.GetMask("Ground");
+    public void SelectObject() {        
         isSelectingObject = true;
+        currentlySelecting = currentlyHovering;
+        ToggleObjectMenu();
+        cameraController.ZoomToItem(currentlySelecting.transform.position);
+        menuManager.CloseInventory();
+        objectMenu.GetComponent<ObjectMenuManager>().UpdateInfo(currentlySelecting);
+    }
+    public void ToggleObjectMenu(){
+        Animator objectMenuAnim = objectMenu.GetComponent<Animator>();
+        objectMenuAnim.SetBool("isOpen", isSelectingObject);
+        objectMenuAnim.SetTrigger("toggle");
+    }
+
+    public void DeselectObject(){
+        isSelectingObject = false;
+        currentlySelecting = null;
+        ToggleObjectMenu();
+        cameraController.isLocked = false;
+        menuManager.OpenInventory();
+    }
+
+    public void MoveObject(){
         currentlyPlacing = currentlySelecting;
+        isSelectingObject = false;
+        ToggleObjectMenu();
+        inputManager.placementLayermask = LayerMask.GetMask("Ground");
         oldPosition = currentlyPlacing.transform.position;
         oldRotation = currentlyPlacing.transform.rotation.eulerAngles;
         foreach(GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding){

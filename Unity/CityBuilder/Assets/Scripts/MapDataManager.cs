@@ -1,14 +1,29 @@
+using CoreFoundation;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryManager inventory;
     public PlacementSystem placementSystem;
     public InputManager inputManager;
-
+    private void Start()
+    {
+        print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
+        if (!string.IsNullOrEmpty(GlobalVariables.MapID))
+        {
+            if (GlobalVariables.IsNewUser)
+            {
+                LoadGameMapServer(); // will be changed to Generate game map
+                SaveGameMapServer(GlobalVariables.MapID);
+            }
+            else
+            {
+                LoadGameMapServer(GlobalVariables.MapID);
+            }
+        }
+    }
     private void Update()
     {
         // Key press for save/load the game, will be replaced by click button in UI at later stage
@@ -44,19 +59,16 @@ public class MapDataManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-
         foreach (var item in GameObject.FindObjectsOfType<Road>())
         {
             Destroy(item.gameObject);
         }
-
         foreach (var item in GameObject.FindObjectsOfType<MapTile>())
         {
             item.isOccupied = false;
             item.placedObject = null;
         }
     }
-
     public void ClearGameMap()
     {
         RemoveStructureObjs();
@@ -71,17 +83,14 @@ public class MapDataManager : MonoBehaviour
         var mapDataJson = SerializeAllGameObjects();
         saveSystem.SaveDataServer(mapID, mapDataJson);
     }
-
     public void SaveGameMapLocal()
     {
         var mapDataJson = SerializeAllGameObjects();
         saveSystem.SaveDataLocal(mapDataJson);
     }
-
     public string SerializeAllGameObjects()
     {
         MapSerialization mapObjs = new MapSerialization();
-
         PlaceableObject[] placeableObjects = GameObject.FindObjectsOfType<PlaceableObject>();
         foreach (PlaceableObject rb in placeableObjects)
         {
@@ -97,47 +106,38 @@ public class MapDataManager : MonoBehaviour
                 );
             }
         }
-
         Road[] roads = GameObject.FindObjectsOfType<Road>();
         foreach (Road rb in roads)
         {
             mapObjs.AddStructure(rb.name, rb.transform.position, rb.transform.rotation.eulerAngles);
         }
-
         MapTile[] tiles = GameObject.FindObjectsOfType<MapTile>();
         foreach (MapTile tile in tiles)
         {
             mapObjs.AddTile(tile.gameObject.name, tile.transform.position, tile.transform.rotation.eulerAngles, tile.isOccupied);
         }
-
         var mapDataJson = JsonUtility.ToJson(mapObjs);
         return mapDataJson;
     }
-
     public void LoadGameMapServer(string mapID = "65517d52b753aa75060ea633")
     {
         saveSystem.LoadDataServer(mapID);
     }
-
     public void LoadGameMapLocal()
     {
         var mapDataJson = saveSystem.LoadDataLocal();
         ReDrawGameMap(mapDataJson);
     }
-
     public void ReDrawGameMap(string mapDataJson)
     {
         ClearGameMap();
-
         if (String.IsNullOrEmpty(mapDataJson))
             return;
         MapSerialization mapObjs = JsonUtility.FromJson<MapSerialization>(
             mapDataJson
         );
-
         DrawTilesFromJson(mapObjs);
         DrawStructureObjects(mapObjs);
-
     }
     public void DrawStructureObjects(MapSerialization mapObjs)
     {
@@ -162,7 +162,6 @@ public class MapDataManager : MonoBehaviour
                             structure.position.GetValue(),
                             Quaternion.Euler(structure.rotation.GetValue())
                         );
-
                         // Update colliding tiles and building state
                         building.transform.parent = null;
                         foreach (
@@ -176,11 +175,9 @@ public class MapDataManager : MonoBehaviour
                         }
                         inputManager.placementLayermask =
                             LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
-
                         building.GetComponent<PlaceableObject>().isHovering = false;
                         building.GetComponent<PlaceableObject>().hasBeenPlaced = true;
                     }
-
                     break;
                 }
             }
@@ -190,7 +187,6 @@ public class MapDataManager : MonoBehaviour
     {
         // Draw map tiles
         Transform landTransform = GameObject.Find("Land").transform;
-
         foreach (var tile in mapObjs.tileData)
         {
             foreach (var tileObj in inventory.inventoryLst)
@@ -203,7 +199,6 @@ public class MapDataManager : MonoBehaviour
             }
         }
     }
-
     public void ExitGame()
     {
         Application.Quit();

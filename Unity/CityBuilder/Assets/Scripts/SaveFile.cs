@@ -5,28 +5,23 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-
 public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
     public string tileSaveName = "TileData_";
-
     [Range(0, 10)]
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
-
     public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
         {
             Debug.Log("Successfully saved data to file");
         }
-    } 
-
+    }
     public bool WriteToFile(string name, string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
-
         try
         {
             File.WriteAllText(fullPath, content);
@@ -39,7 +34,6 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
-
     public void SaveDataServer(string mapID, string dataToSave, bool logout = false)
     {
         MapRequestBody data = new MapRequestBody(dataToSave);
@@ -81,10 +75,8 @@ public class SaveFile : MonoBehaviour
         {
             Debug.Log("Successfully loaded data from file");
         }
-
         return data;
     }
-
     private bool ReadFromFile(string name, out string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
@@ -127,12 +119,10 @@ public class SaveFile : MonoBehaviour
             )
         );
     }
-
     public static IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
     {
         // Currently using hard coded URL to load from a specific map id of a specific user in database
         // will change this later
-
         // send get request to server, triggers callback after response recieved
         using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/" + mapID + "/map"))
         {
