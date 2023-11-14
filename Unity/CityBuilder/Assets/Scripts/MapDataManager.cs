@@ -6,7 +6,7 @@ using UnityEngine;
 public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
-    public InventoryManager inventory;
+    public InventoryList inventory;
     public PlacementSystem placementSystem;
     public InputManager inputManager;
     public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3" });

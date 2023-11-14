@@ -50,7 +50,7 @@ const decOne = (req, res) => {
         return item.save();
     })
     .then(updatedItem => {
-        res.json({ item: updatedItem });
+        res.json(updatedItem);
     })
     .catch(error => {
         if (['Item not found', 'Item quantity is already 0 or less'].includes(error.message)) return;
@@ -70,7 +70,7 @@ const addOne = (req, res) => {
         return item.save();
     })
     .then(updatedItem => {
-        res.json({ item: updatedItem });
+        res.json(updatedItem);
     })
     .catch(error => {
         if (error.message === 'Item not found') return;
