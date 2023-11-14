@@ -1,3 +1,4 @@
+using CoreFoundation;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,17 @@ public class MapDataManager : MonoBehaviour
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
-        if (GlobalVariables.IsNewUser)
+        if (!string.IsNullOrEmpty(GlobalVariables.MapID))
         {
-            LoadGameMapServer(); // will be changed to Generate game map
-            SaveGameMapServer(GlobalVariables.MapID);
-        } else
-        {
-            LoadGameMapServer(GlobalVariables.MapID);
+            if (GlobalVariables.IsNewUser)
+            {
+                LoadGameMapServer(); // will be changed to Generate game map
+                SaveGameMapServer(GlobalVariables.MapID);
+            }
+            else
+            {
+                LoadGameMapServer(GlobalVariables.MapID);
+            }
         }
     }
     private void Update()
