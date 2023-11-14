@@ -9402,6 +9402,9 @@ MonoBehaviour:
   - {fileID: 7004629271889236235, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
   - {fileID: 3517940271047565213, guid: 52a535f045183c643904a1b99b04380a, type: 3}
   - {fileID: 211771763075448819, guid: 27756ec1c285fe0429b7c4a8c39f54d1, type: 3}
+  - {fileID: 919132149155446097, guid: 386fff3bdeee35d49a039ab053eac2ff, type: 3}
+  - {fileID: 919132149155446097, guid: 0f61bcb15c4208347b68a3d52536737c, type: 3}
+  - {fileID: 919132149155446097, guid: be1715a158c229140b6866978fc3c957, type: 3}
 --- !u!114 &1586827657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9415,7 +9418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveName: SaveData_
-  tileSaveName: TileData_
   saveDataIndex: 1
   mapDataManager: {fileID: 1586827658}
 --- !u!114 &1586827658
@@ -9434,6 +9436,10 @@ MonoBehaviour:
   inventory: {fileID: 1586827656}
   placementSystem: {fileID: 1223942980}
   inputManager: {fileID: 1137430705}
+  WIDTH: 10
+  LENGTH: 10
+  WATER_PERCENTAGE: 30
+  TREES_PER_TILE: 5
 --- !u!4 &1586827659
 Transform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 public class SaveFile : MonoBehaviour
 {
     public string saveName = "SaveData_";
-    public string tileSaveName = "TileData_";
     [Range(0, 10)]
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;

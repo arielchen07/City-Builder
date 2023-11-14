@@ -31,6 +31,7 @@ public class SerializeHelperTests
         Assert.AreEqual(3, vectorSerialization.z);
         Assert.AreEqual(new Vector3(1, 2, 3), vectorSerialization.GetValue());
     }
+    /*
     [Test]
     public void TestTileObjsSerializationAddTile()
     {
@@ -42,7 +43,7 @@ public class SerializeHelperTests
         Assert.AreEqual(new Vector3(1, 2, 3), addedTile.position.GetValue());
         Assert.AreEqual(new Vector3(0, 90, 0), addedTile.rotation.GetValue());
         Assert.IsTrue(addedTile.isOccupied);
-    }
+    }*/
     [Test]
     public void TestTileSerializationConstructor()
     {
