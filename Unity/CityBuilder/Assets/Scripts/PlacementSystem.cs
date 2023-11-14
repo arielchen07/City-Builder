@@ -128,6 +128,7 @@ public class PlacementSystem : MonoBehaviour
             currentlyPlacing = null;
         }
         isSelectingObject = false;
+        DeselectObject();
     }
 
     /*
