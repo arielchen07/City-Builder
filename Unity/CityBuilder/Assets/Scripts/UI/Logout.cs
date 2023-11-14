@@ -20,7 +20,7 @@ public class Logout : MonoBehaviour
     {
         logoutButton.interactable = false;
         print("map id: " + GlobalVariables.MapID);
-        //mapManager.SaveGameMapServer(GlobalVariables.MapID);
+
         if (string.IsNullOrEmpty(GlobalVariables.MapID))
         {
             Debug.Log("No valid MapID, map will not be saved");

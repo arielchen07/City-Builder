@@ -132,14 +132,10 @@ public class Login : MonoBehaviour{
                 if (colonIndex != -1) {
                     string mapID = mapIDName.Substring(0, colonIndex);
                     GlobalVariables.MapID = mapID;
-                    //Debug.Log("mapID:" + mapID);
                 }else{
                     Debug.Log("Fail to catch MapID");
                     yield break;
                 }
-
-                //mapManager.LoadGameMapServer(GlobalVariables.MapID);
-                //Debug.Log("UID:" + GlobalVariables.UserID);
                 
                 GlobalVariables.IsNewUser = false;
 
@@ -221,26 +217,10 @@ public class Login : MonoBehaviour{
     }
 
     private IEnumerator TryCreateMap()
-    {
-        //mapManager.LoadGameMapServer();
-        // TODO: Call generate map here to generate a new map, then send this new map to server
-        //string tempData = mapManager.SerializeAllGameObjects();
-        //print("TEMP DATA:" + tempData);
-
-        //MapData mapData = new MapData
-        //{
-        //    mapData = tempData,
-   
-        //};
-      
-        //string jsonData = JsonUtility.ToJson(mapData, true);  
-        //print("Json resp: "+ jsonData);
-        
+    {        
         string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
         print(createMapUrl);
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
-        //byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
-        //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         request.timeout = 10;
