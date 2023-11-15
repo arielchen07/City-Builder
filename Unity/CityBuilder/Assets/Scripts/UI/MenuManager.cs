@@ -63,4 +63,16 @@ public class MenuManager : MonoBehaviour
         subMenu.GetComponent<Animator>().SetTrigger("toggle");
         subMenu.GetComponent<Animator>().SetBool("isOpen", isSubMenuOpen);
     }
+
+    public bool GetInventoryIsOpen(){
+        return inventoryIsOpen;
+    }
+
+    public bool GetIsSubMenuOpen(){
+        return isSubMenuOpen;
+    }
+
+    public bool GetIsRightMenuOpen(){
+        return isRightMenuOpen;
+    }
 }

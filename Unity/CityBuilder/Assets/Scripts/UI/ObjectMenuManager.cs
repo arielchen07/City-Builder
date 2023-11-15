@@ -14,16 +14,6 @@ public class ObjectMenuManager : MonoBehaviour
     public Text internet;
     public Text naturalGas;
     public GameObject currentlySelecting;
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
 
     public void UpdateInfo(GameObject selectedObject){
         if(selectedObject.TryGetComponent<House>(out var h)){
@@ -51,5 +41,9 @@ public class ObjectMenuManager : MonoBehaviour
 
     public void RotateRight(){
         ps.RotateObject(false);
+    }
+
+    public void DestroySelf(){
+        Destroy(gameObject);
     }
 }
