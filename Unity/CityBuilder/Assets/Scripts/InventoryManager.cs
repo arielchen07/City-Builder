@@ -22,9 +22,9 @@ public class InventoryManager : MonoBehaviour
         //toServer.RegularUpdateInventory(userID);
         // TODO: Initialize inventory with some amount of items
 
-        Dictionary<string, inventoryItem> residentialDict = initializeInventoryCategory(initResList, INITQUANTITY);
-
-        itemInventoryDict.Add("residential", residentialDict);
+        if (!string.IsNullOrEmpty(GlobalVariables.UserID)){
+            toServer.LoadInventoryFromServer(userID);
+        }
     }
 
     void Update()
@@ -98,5 +98,28 @@ public class InventoryManager : MonoBehaviour
         {
             itemInventoryDict[item.category] = createDictByCategory(item.name, item.quantity, item._id);
         }
+    }
+
+    public int GetItemQuantity(string itemName, string category){
+        if (itemInventoryDict.ContainsKey(category)){
+            if(itemInventoryDict[category].ContainsKey(itemName)){
+                return itemInventoryDict[category][itemName].quantity;
+            }
+        }
+        return 0;
+    }
+
+    public string GetItemID(string itemName, string category){
+        if (itemInventoryDict.ContainsKey(category)){
+            if(itemInventoryDict[category].ContainsKey(itemName)){
+                return itemInventoryDict[category][itemName].itemID;
+            }
+        }
+        return null;
+    }
+
+    public void UpdateItemQuantityToServer(string itemID, int quantityChanged){
+        // Update number of item by +/-1: UpdateItemServer(userID, itemID, +/-1);
+        toServer.UpdateItemToServer(userID, itemID, quantityChanged);
     }
 }
