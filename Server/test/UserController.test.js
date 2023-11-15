@@ -10,9 +10,9 @@ const request = supertest(app);
 describe('User Registration', () => {
   it('should successfully register a new user', async () => {
     const newUser = {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: 'password123',
+      name: 'NewUser10',
+      email: 'NewUser@example.com',
+      password: 'password123'
     };
 
     const response = await request
@@ -21,8 +21,10 @@ describe('User Registration', () => {
       .expect(201);
 
     expect(response.body).to.be.an('object');
-    expect(response.body.name).to.equal(newUser.name);
-    expect(response.body.email).to.equal(newUser.email);
+    expect(response.body.userID).to.be.a('string');
+    // expect(response.body.name).to.equal(newUser.name);
+    // expect(response.body.email).to.equal(newUser.email);
+    
 
    
     await User.deleteOne({ email: newUser.email });
@@ -30,8 +32,8 @@ describe('User Registration', () => {
 
   it('should return an error for an already registered user', async () => {
     const existingUser = {
-      name: 'Jane Doe',
-      email: 'janedoe@example.com',
+      name: 'testUser10',
+      email: 'TestUser10@example.com',
       password: 'password456',
     };
 

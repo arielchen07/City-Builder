@@ -28,7 +28,7 @@ const register = async(req, res) => {
         await user.save();
         
         // res.status(201).json({user, item1});
-        res.status(200).json({ userID: user._id });
+        res.status(201).json({ userID: user._id });
       } catch (e) {
         let msg;
         // if(e.code == 11000){
