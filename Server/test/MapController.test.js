@@ -95,3 +95,111 @@ describe('Map Operations', () => {
 });
 
 
+describe('Map Operations 2', () => {
+    let userID;
+    let mapID;
+    
+
+    before(async () => {
+        const user = new User({
+            name: 'Test User 2',
+            email: 'testuser2@example.com',
+            password: 'testpassword123',
+        });
+        const savedUser = await user.save();
+        userID = savedUser._id;
+
+        const newMap = {
+            
+            userID: userID,
+            mapData: "testMapData2",
+            mapName: "testMapName2"
+        };
+
+        const response = await request
+            .post(`/api/${userID}/createmap`)
+            .send(newMap)
+            .expect(201);
+
+        mapID = response.body.mapID;
+    });
+
+    
+    it('should delete a map', async () => {
+       
+
+        console.log(`Attempting to delete map with ID: ${mapID} for user: ${userID}`);
+        const response = await request
+            .post(`/api/${mapID}/savemap`)
+            .expect(201);
+
+        expect(response.body).to.be.an('object');
+      
+        expect(response.body.userID).to.equal(String(userID));
+        expect(response.body._id).to.equal(String(mapID));
+        expect(response.body.mapName).to.equal("testMapName2");
+    });
+
+
+
+    after(async () => {
+        await User.findByIdAndDelete(userID);
+    });
+});
+
+describe('Retrieve All Maps for a User', () => {
+    let userID;
+    let maps = [];
+
+    before(async () => {
+        const user = new User({
+            name: 'Test User 3',
+            email: 'testuser3@example.com',
+            password: 'testpassword123',
+        });
+        const savedUser = await user.save();
+        userID = savedUser._id;
+ 
+        const mapData = [
+            {
+                userID: userID,
+                mapData: "testMapData1",
+                mapName: "testMapName1"
+            },
+            {
+                userID: userID,
+                mapData: "testMapData2",
+                mapName: "testMapName2"
+            },
+        ];
+        for (const data of mapData) {
+            const map = new Map(data);
+            const savedMap = await map.save();
+            maps.push(savedMap);
+        }
+    });
+
+    it('should retrieve all maps for a user', async () => {
+        const response = await request
+            .get(`/api/${userID}/allmap`) 
+            .expect(200); 
+
+        expect(response.body).to.be.an('object');
+        expect(response.body.maps).to.be.an('array').that.has.lengthOf(maps.length);
+
+
+        response.body.maps.forEach((map, index) => {
+            expect(map).to.include({
+                _id: maps[index]._id.toString(),
+                userID: userID.toString(),
+                mapName: maps[index].mapName,
+                
+            });
+        });
+    });
+
+    after(async () => {
+        await User.findByIdAndDelete(userID);
+        await Map.deleteMany({ userID });
+    });
+});
