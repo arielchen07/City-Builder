@@ -13,10 +13,7 @@ public class PlacementSystem : MonoBehaviour
     public GameObject currentlyPlacing;
     public GameObject currentlySelecting;
     public GameObject currentlyHovering;
-    public GameObject gameCanvas;
     public GameObject objectMenu;
-    public GameObject objectMenuPrefab;
-    public GameObject objectMenuHousingPrefab;
     public CameraController cameraController;
     public MenuManager menuManager;
     Vector3 currentRotation;
@@ -183,23 +180,9 @@ public class PlacementSystem : MonoBehaviour
         objectMenu.GetComponent<ObjectMenuManager>().UpdateInfo(currentlySelecting);
     }
     public void ToggleObjectMenu(){
-        if(objectMenu != null){
-            objectMenu.GetComponent<Animator>().SetBool("isOpen", isSelectingObject);
-            objectMenu.GetComponent<Animator>().SetTrigger("toggle");
-        } else {
-            if (currentlySelecting != null){
-                if(currentlySelecting.TryGetComponent<House>(out var h)){
-                    objectMenu = Instantiate(objectMenuHousingPrefab, gameCanvas.transform);
-                } else {
-                    objectMenu = Instantiate(objectMenuPrefab, gameCanvas.transform);
-                }
-                objectMenu.GetComponent<ObjectMenuManager>().ps = this;
-                Animator objectMenuAnim = objectMenu.GetComponent<Animator>();
-                objectMenuAnim.SetBool("isOpen", isSelectingObject);
-                objectMenuAnim.SetTrigger("toggle");
-            }
-
-        }
+        Animator objectMenuAnim = objectMenu.GetComponent<Animator>();
+        objectMenuAnim.SetBool("isOpen", isSelectingObject);
+        objectMenuAnim.SetTrigger("toggle");
     }
 
     public void DeselectObject(){

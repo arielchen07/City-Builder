@@ -8,7 +8,6 @@ TagManager:
   - Tile
   - PlacementSystem
   - Decoration
-  - GameCanvas
   layers:
   - Default
   - TransparentFX

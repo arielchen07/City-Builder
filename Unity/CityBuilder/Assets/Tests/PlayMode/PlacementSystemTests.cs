@@ -10,7 +10,7 @@ using UnityEditor;
 
 public class PlacementSystemTests
 {
-    private GameObject house = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Buildings/SingleHouse1.prefab");
+    private GameObject house = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/SingleHouse1.prefab");
     PlacementSystem ps;
     [SetUp]
     public void LoadScene()
@@ -21,7 +21,7 @@ public class PlacementSystemTests
     [UnityTest]
     public IEnumerator InitialCurrentlyPlacingStateTest()
     {
-        yield return null;
+        yield return new WaitForSeconds(1);
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>(); 
         Assert.AreEqual(null, ps.currentlyPlacing);
     }
@@ -32,7 +32,7 @@ public class PlacementSystemTests
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>(); 
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
         ps.HoverObject(newHouse);
-        yield return null;
+        yield return new WaitForSeconds(1);
         Assert.AreNotEqual(null, ps.currentlyPlacing);
     }
 
@@ -43,7 +43,7 @@ public class PlacementSystemTests
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
         ps.currentlyPlacing = newHouse;
         ps.DropObject();
-        yield return null;
+        yield return new WaitForSeconds(1);
         Assert.AreEqual(null, ps.currentlyPlacing);
     }
 
@@ -53,7 +53,7 @@ public class PlacementSystemTests
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
         ps.HoverObject(newHouse);
-        yield return null;
+        yield return new WaitForSeconds(10);
         ps.PlaceObject();
         Assert.AreEqual(null, ps.currentlyPlacing);
     }
@@ -63,9 +63,9 @@ public class PlacementSystemTests
     {
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
-        ps.currentlyHovering = newHouse;
+        ps.currentlySelecting = newHouse;
         ps.SelectObject();
-        yield return null;
-        Assert.AreEqual(ps.currentlySelecting, ps.currentlyHovering);
+        yield return new WaitForSeconds(1);
+        Assert.AreEqual(ps.currentlyPlacing, ps.currentlySelecting);
     }
 }
