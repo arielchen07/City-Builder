@@ -1,10 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class inventoryItem{
+public class inventoryItem{
     public string name { get; set; }
     public int quantity { get; set; }
     public string itemID { get; set; }
+}
+
+public static class InventoryInfo
+{
+    public static Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict = new Dictionary<string, Dictionary<string, inventoryItem>>();
+    public static bool isNew = true;
+
+    public static int GetItemQuantity(string itemName, string category)
+    {
+        if (InventoryInfo.itemInventoryDict.ContainsKey(category))
+        {
+            if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
+            {
+                Debug.Log("get quantity of item: " + itemName + "in category: " + category);
+                return InventoryInfo.itemInventoryDict[category][itemName].quantity;
+            }
+        }
+        return 0;
+    }
+
+    public static string GetItemID(string itemName, string category)
+    {
+        if (InventoryInfo.itemInventoryDict.ContainsKey(category))
+        {
+            Debug.Log("get id for category: " + category);
+            if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
+            {
+                Debug.Log("get id for item: " + itemName);
+                return InventoryInfo.itemInventoryDict[category][itemName].itemID;
+            }
+        }
+        return null;
+    }
 }
 
 public class InventoryManager : MonoBehaviour
@@ -12,18 +45,16 @@ public class InventoryManager : MonoBehaviour
     public InventoryToServer toServer;
     public ServerInventoryData inventory;
     public string userID = "65517d2ab753aa75060ea62c";
-    Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict= new Dictionary<string, Dictionary<string, inventoryItem>>();
-    private const int INITQUANTITY = 2;
-    private List<string> initResList = new List<string>() {"singleHouse"};
+    //Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict= new Dictionary<string, Dictionary<string, inventoryItem>>();
 
-    private void Start()
+    private void Awake()
     {
         // Regularily gets live inventory information from server and updates unity inventory
         //toServer.RegularUpdateInventory(userID);
         // TODO: Initialize inventory with some amount of items
 
         if (!string.IsNullOrEmpty(GlobalVariables.UserID)){
-            toServer.LoadInventoryFromServer(userID);
+            toServer.LoadInventoryFromServer(GlobalVariables.UserID);
         }
     }
 
@@ -48,6 +79,17 @@ public class InventoryManager : MonoBehaviour
             // Create a new item (item not in server invenotry): CreateItemServer(category, name, amount);
             toServer.CreateItemToServer(userID, "c2", "n2", 1);
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            foreach (var category in InventoryInfo.itemInventoryDict.Keys)
+            {
+                print("category: " + category);
+                foreach( var item in InventoryInfo.itemInventoryDict[category].Keys)
+                {
+                    print("item name: " + item + ", quantity:" + InventoryInfo.itemInventoryDict[category][item].quantity + ", itemID:" + InventoryInfo.itemInventoryDict[category][item].itemID);
+                }
+            }
+        }
     }
 
     private Dictionary<string, inventoryItem> initializeInventoryCategory(List<string> objectNameList, int quantity)
@@ -71,6 +113,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateInventory(ServerInventoryData inventory)
     {
+        print("call UpdateInventory");
         // TODO: change this to actual updates to the Unity inventory data structure and UI
         this.inventory = inventory;
         foreach (var item in inventory.items){
@@ -80,46 +123,30 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateInventoryItem(ServerItemData item)
     {
+        print("call UpdateInventoryItem");
         // TODO: change this to actual updates to the Unity inventory data structure and UI
-        if (itemInventoryDict.ContainsKey(item.category))
+        if (InventoryInfo.itemInventoryDict.ContainsKey(item.category))
         {
-            if (itemInventoryDict[item.category].ContainsKey(item.name))
+            if (InventoryInfo.itemInventoryDict[item.category].ContainsKey(item.name))
             {
-                itemInventoryDict[item.category][item.name].quantity = item.quantity;
-                itemInventoryDict[item.category][item.name].itemID = item._id;
+                InventoryInfo.itemInventoryDict[item.category][item.name].quantity = item.quantity;
+                InventoryInfo.itemInventoryDict[item.category][item.name].itemID = item._id;
             }
             else
             {
-                itemInventoryDict[item.category][item.name] = new inventoryItem { name = item.name, quantity = item.quantity, itemID = item._id };
+                InventoryInfo.itemInventoryDict[item.category][item.name] = new inventoryItem { name = item.name, quantity = item.quantity, itemID = item._id };
             }
 
         }
         else
         {
-            itemInventoryDict[item.category] = createDictByCategory(item.name, item.quantity, item._id);
+            InventoryInfo.itemInventoryDict[item.category] = createDictByCategory(item.name, item.quantity, item._id);
         }
-    }
-
-    public int GetItemQuantity(string itemName, string category){
-        if (itemInventoryDict.ContainsKey(category)){
-            if(itemInventoryDict[category].ContainsKey(itemName)){
-                return itemInventoryDict[category][itemName].quantity;
-            }
-        }
-        return 0;
-    }
-
-    public string GetItemID(string itemName, string category){
-        if (itemInventoryDict.ContainsKey(category)){
-            if(itemInventoryDict[category].ContainsKey(itemName)){
-                return itemInventoryDict[category][itemName].itemID;
-            }
-        }
-        return null;
     }
 
     public void UpdateItemQuantityToServer(string itemID, int quantityChanged){
         // Update number of item by +/-1: UpdateItemServer(userID, itemID, +/-1);
         toServer.UpdateItemToServer(userID, itemID, quantityChanged);
+        print("update item quantity change" + quantityChanged + "to server");
     }
 }
