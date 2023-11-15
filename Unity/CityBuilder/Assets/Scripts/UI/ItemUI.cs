@@ -26,7 +26,7 @@ public class ItemUI : MonoBehaviour
     {
         //new WaitForSeconds(updateInterval);
         int res = UpdateItemQuantity();
-        Debug.Log("item name: " + itemName + "quantity: " + res);
+        //Debug.Log("item name: " + itemName + "quantity: " + res);
     }
 
     private int UpdateItemQuantity(){

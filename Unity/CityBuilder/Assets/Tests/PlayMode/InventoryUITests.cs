@@ -29,7 +29,7 @@ public class InventoryUITests : MonoBehaviour
         yield return null;
         GameCanvas = GameObject.FindWithTag("GameCanvas");
         menuManager = GameCanvas.GetComponent<MenuManager>();
-        menuManager.ToggleInventory();
+        menuManager.ToggleInventory("housing");
         Assert.AreEqual(menuManager.GetInventoryIsOpen(), true);
         Assert.AreEqual(menuManager.GetIsRightMenuOpen(), false);
         Assert.AreEqual(menuManager.GetIsSubMenuOpen(), false);
@@ -44,9 +44,9 @@ public class InventoryUITests : MonoBehaviour
         GameCanvas = GameObject.FindWithTag("GameCanvas");
         menuManager = GameCanvas.GetComponent<MenuManager>();
         //opens the inventory
-        menuManager.ToggleInventory();
+        menuManager.ToggleInventory("housing");
         //closes the inventory
-        menuManager.ToggleInventory();
+        menuManager.ToggleInventory("housing");
         Assert.AreEqual(menuManager.GetInventoryIsOpen(), false);
         Assert.AreEqual(menuManager.GetIsRightMenuOpen(), true);
         Assert.AreEqual(menuManager.GetIsSubMenuOpen(), false);
@@ -95,7 +95,7 @@ public class InventoryUITests : MonoBehaviour
         //opens inventory from submenu
         menuManager.ToggleInventoryFromSubMenu(menuManager.utilSubMenu);
         //closes submenu
-        menuManager.ToggleInventory();
+        menuManager.ToggleInventory("housing");
         Assert.AreEqual(menuManager.GetInventoryIsOpen(), false);
         Assert.AreEqual(menuManager.GetIsRightMenuOpen(), true);
         Assert.AreEqual(menuManager.GetIsSubMenuOpen(), false);
