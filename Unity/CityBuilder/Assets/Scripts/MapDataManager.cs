@@ -104,12 +104,12 @@ public class MapDataManager : MonoBehaviour
         List<GameObject> tileObjects = GetObjectsByName(inventory.inventoryLst, TILES);
         List<GameObject> decors = GetObjectsByName(inventory.inventoryLst, DECOR);
 
-        float[,] tileGrid = GeneratePerlinNoiseGrid(WIDTH, LENGTH, 3); /// the last parameter is the scale, the higher it is, the more "zoomed out" and less detailed it is
-        float[,] decorGrid = GeneratePerlinNoiseGrid(WIDTH, LENGTH, 6);
+        float[,] tileGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 3); /// the last parameter is the scale, the higher it is, the more "zoomed out" and less detailed it is
+        float[,] decorGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 6);
 
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < WIDTH + 1; x++)
         {
-            for (int z = 0; z < LENGTH; z++)
+            for (int z = 0; z < LENGTH + 1; z++)
             {
                 GameObject tile = CreateTile(x, z, tileGrid, tileObjects);
                 CreateDecorations(x, z, decorGrid, decors, tile);
