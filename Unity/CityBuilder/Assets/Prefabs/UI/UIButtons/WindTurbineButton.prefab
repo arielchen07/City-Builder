@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 5884131306741727930}
   - component: {fileID: 5884131306741727928}
   - component: {fileID: 29407762636720277}
+  - component: {fileID: 7048675208211029740}
   m_Layer: 5
   m_Name: WindTurbineButton
   m_TagString: Untagged
@@ -537,16 +538,25 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlacementSystem, TestScripts
-        m_MethodName: HoverObject
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 319250931699200029, guid: 89a93b0ed339b644cb63962d219239a8, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &7048675208211029740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884131306741727931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8416ad922dc40c6843652df3331b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: windTurbineGenerator
+  category: energy
+  quantity: 0
+  itemID: 
+  inventoryManager: {fileID: 0}
+  quantityText: {fileID: 713347097968583613}
+  objectPrefab: {fileID: 319250931699200029, guid: 89a93b0ed339b644cb63962d219239a8, type: 3}
+  updateInterval: 5
+  isNew: 1
