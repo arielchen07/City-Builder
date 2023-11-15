@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class ItemUI : MonoBehaviour
 {
-    public string name;
+    public string itemName;
     public string category;
     public int quantity;
     public string itemID;
-    public InventoryManager invenotryManager;
+    public InventoryManager inventoryManager;
+    public TMPro.TMP_Text quantityText;
 
     // Start is called before the first frame update
     void Start()
     {
         UpdateItemQuantity();
-        itemID = invenotryManager.GetItemID(name, itemID);
+        itemID = inventoryManager.GetItemID(itemName, itemID);
     }
 
     // Update is called once per frame
@@ -30,21 +31,22 @@ public class ItemUI : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ItemUI: You don't have any" + name + "in the inventory!");
+            Debug.LogError("ItemUI: You don't have any" + itemName + "in the inventory!");
         }
     }
 
     private void UpdateItemQuantity(){
-        quantity = invenotryManager.GetItemQuantity(name, category);
+        quantity = inventoryManager.GetItemQuantity(itemName, category);
+        quantityText.text = quantity.ToString();
     }
 
     public void PlaceItem(){
-        invenotryManager.UpdateItemQuantityToServer(itemID, -1);
+        inventoryManager.UpdateItemQuantityToServer(itemID, -1);
         UpdateItemQuantity();
     }
 
     public void RecycleItem(){
-        invenotryManager.UpdateItemQuantityToServer(itemID, 1);
+        inventoryManager.UpdateItemQuantityToServer(itemID, 1);
         UpdateItemQuantity();
     }
 
