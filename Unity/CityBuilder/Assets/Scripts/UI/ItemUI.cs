@@ -10,6 +10,7 @@ public class ItemUI : MonoBehaviour
     public string itemID;
     public InventoryManager inventoryManager;
     public TMPro.TMP_Text quantityText;
+    public GameObject objectPrefab;
 
     // Start is called before the first frame update
     void Start()

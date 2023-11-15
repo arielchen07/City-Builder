@@ -11,6 +11,7 @@ using UnityEditor;
 public class PlacementSystemTests
 {
     private GameObject house = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Buildings/SingleHouse1.prefab");
+    private GameObject houseItem = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/UIButtons/HouseButton.prefab");
     PlacementSystem ps;
     [SetUp]
     public void LoadScene()
@@ -31,7 +32,7 @@ public class PlacementSystemTests
     {
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>(); 
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
-        ps.HoverObject(newHouse);
+        ps.HoverObject(houseItem);
         yield return null;
         Assert.AreNotEqual(null, ps.currentlyPlacing);
     }
@@ -52,7 +53,7 @@ public class PlacementSystemTests
     {
         ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
         GameObject newHouse = UnityEngine.Object.Instantiate(house);
-        ps.HoverObject(newHouse);
+        ps.HoverObject(houseItem);
         yield return null;
         ps.PlaceObject();
         Assert.AreEqual(null, ps.currentlyPlacing);

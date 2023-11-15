@@ -2712,6 +2712,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 4270873371489343059, guid: b30d600bab174504e95801132144c894, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 740489909}
     - target: {fileID: 5360487071153389950, guid: b30d600bab174504e95801132144c894, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 24.999023
@@ -2849,6 +2853,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 1800144438}
+  objectPrefab: {fileID: 8063164154546413119, guid: d314447c804246146853ceb64da71c5b, type: 3}
 --- !u!224 &740489911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7675797048029699196, guid: b30d600bab174504e95801132144c894, type: 3}
@@ -5297,6 +5302,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 5702135773840373561, guid: d07a769fe201ee04c9bc6c365366a802, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1150570249}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d07a769fe201ee04c9bc6c365366a802, type: 3}
 --- !u!1 &1150570249 stripped
@@ -5322,6 +5331,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 1679399193}
+  objectPrefab: {fileID: 6594877488714937865, guid: 187e73d90ed06914694c5f049e1774e8, type: 3}
 --- !u!224 &1150570251 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2225576793674104086, guid: d07a769fe201ee04c9bc6c365366a802, type: 3}
@@ -8641,6 +8651,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3067376070864476407, guid: 54fecee99591f3945883085bc17b9841, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1723456096}
     - target: {fileID: 5115377994796858138, guid: 54fecee99591f3945883085bc17b9841, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8770,6 +8784,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 2003853557}
+  objectPrefab: {fileID: 365202199764420865, guid: a8b68e8e7d87f14499a65bb3d3afecf5, type: 3}
 --- !u!224 &1723456098 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8885982787277443800, guid: 54fecee99591f3945883085bc17b9841, type: 3}
@@ -9157,6 +9172,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 29407762636720277, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1780492648}
     - target: {fileID: 5884131306741727930, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9286,6 +9305,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 181736442}
+  objectPrefab: {fileID: 319250931699200029, guid: 89a93b0ed339b644cb63962d219239a8, type: 3}
 --- !u!224 &1780492650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5884131306741727930, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
@@ -10009,6 +10029,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5715903204428083980, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715903204428083980, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1223942980}
@@ -10016,6 +10040,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 5715903204428083980, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1916757368}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
 --- !u!1 &1916757368 stripped
@@ -10041,6 +10069,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 1886276493}
+  objectPrefab: {fileID: 3402843517139241138, guid: 6f844c749cb506f4c9cc88fc96fb14bd, type: 3}
 --- !u!224 &1916757370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2202875553821931811, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
@@ -10792,6 +10821,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HoverObject
       objectReference: {fileID: 0}
+    - target: {fileID: 6406328435979808366, guid: d8b3be378b6e0e74ebadad91847def97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2085002506}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8b3be378b6e0e74ebadad91847def97, type: 3}
 --- !u!1 &2085002506 stripped
@@ -10817,6 +10850,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 1503918468}
   quantityText: {fileID: 292840567}
+  objectPrefab: {fileID: 4145400034378755712, guid: 89fda581521f0184badbd12aeb8d43fa, type: 3}
 --- !u!224 &2085002508 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 659497854817936449, guid: d8b3be378b6e0e74ebadad91847def97, type: 3}
