@@ -14,8 +14,10 @@ public class ObjectMenuManager : MonoBehaviour
     public Text internet;
     public Text naturalGas;
     public GameObject currentlySelecting;
+    ItemUI item;
 
     public void UpdateInfo(GameObject selectedObject){
+        currentlySelecting = selectedObject;
         if(selectedObject.TryGetComponent<House>(out var h)){
             objectName.text = h.objectName;
             population.text = h.GetPopulation();
@@ -32,7 +34,9 @@ public class ObjectMenuManager : MonoBehaviour
     }
 
     public void Delete(){
-        //todo
+        item = currentlySelecting.GetComponent<PlaceableObject>().item;
+        ps.DeleteObject();
+        item.RecycleItem();
     }
 
     public void RotateLeft(){
