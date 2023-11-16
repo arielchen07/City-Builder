@@ -38,8 +38,9 @@ public class PlacementSystem : MonoBehaviour
         if(inputManager.hitObject != null){
             currentlyHovering = inputManager.hitObject;
         }
-
-
+        if (Input.GetKey(KeyCode.R)){
+            beginPlacingContinuousObjects = true;
+        }
         if(!EventSystem.current.IsPointerOverGameObject()){
             if (beginPlacingContinuousObjects) {
                 PlaceContinuousObjects(road);
