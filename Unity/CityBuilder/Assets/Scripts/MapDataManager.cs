@@ -59,10 +59,10 @@ public class MapDataManager : MonoBehaviour
         {
             ClearGameMap();
         }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GenerateGameMap();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    GenerateGameMap();
+        //}
     }
     public void RemoveStructureObjs()
     {
