@@ -89,7 +89,10 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: solarEnergyPlant
+  displayName: Solar Plant
+  category: energy
+  item: {fileID: 0}
   serviceRange: {fileID: 367899122777900509}
   maxPower: 50
   currPowerAllocated: 0
@@ -1253,6 +1256,10 @@ PrefabInstance:
     - target: {fileID: 7004629271889236235, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
       propertyPath: m_Name
       value: grass1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004629271889236235, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7004629271889236236, guid: a02d39b0af7a4e04fb55b841285eff17, type: 3}
       propertyPath: m_RootOrder

@@ -16,6 +16,8 @@ public class PlaceableObject : MonoBehaviour
     public bool evenDimensions;
     public bool hasBeenPlaced = false;
     public string objectName = "Placeable Object";
+    public string displayName;
+    public string category;
     public ItemUI item;
     
     void Start()

@@ -15,6 +15,8 @@ public class MapDataManager : MonoBehaviour
     public int LENGTH = 10;
     public float WATER_PERCENTAGE = 30f;
     public int TREES_PER_TILE = 5;
+    float timer = 3;
+    float interval = 2f;
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
@@ -35,34 +37,52 @@ public class MapDataManager : MonoBehaviour
     private void Update()
     {
         // Key press for save/load the game, will be replaced by click button in UI at later stage
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            SaveGameMapLocal();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            LoadGameMapLocal();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            SaveGameMapServer();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            LoadGameMapServer();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            RemoveStructureObjs();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ClearGameMap();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    SaveGameMapLocal();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha9))
+        //{
+        //    LoadGameMapLocal();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha8))
+        //{
+        //    SaveGameMapServer();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha7))
+        //{
+        //    LoadGameMapServer();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha6))
+        //{
+        //    RemoveStructureObjs();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    ClearGameMap();
+        //}
         //if (Input.GetKeyDown(KeyCode.M))
         //{
         //    GenerateGameMap();
         //}
+        //print("Time.timeSinceLevelLoad: " + Time.timeSinceLevelLoad);
+        //print("timer: " + timer);
+        //print("Time.deltaTime: " + Time.deltaTime);
+
+        if (Time.timeSinceLevelLoad > timer)
+        {
+            print("more");
+            timer = Time.timeSinceLevelLoad + interval;
+            if (!string.IsNullOrEmpty(GlobalVariables.MapID))
+            {
+                print("save start");
+                SaveGameMapServer(GlobalVariables.MapID);
+            } else
+            {
+                Debug.Log("Cannot save: No avaliable MapID");
+            }
+        }
+        //timer += Time.deltaTime;
     }
     public void RemoveStructureObjs()
     {
