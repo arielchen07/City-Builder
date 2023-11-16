@@ -62,8 +62,8 @@ public class MenuManager : MonoBehaviour
         foreach(GameObject button in buttonList){
             GameObject newButton = Instantiate(button, content.transform);
             newButton.GetComponent<ItemUI>().inventoryManager = inventoryManager;
-            newButton.GetComponent<Button>().onClick.AddListener(() => ps.HoverObject(gameObject));
-            newButton.GetComponent<Button>().onClick.AddListener(() => gameObject.GetComponent<ItemUI>().PlaceItem());
+            newButton.GetComponent<Button>().onClick.AddListener(() => ps.HoverObject(newButton));
+            newButton.GetComponent<Button>().onClick.AddListener(() => newButton.GetComponent<ItemUI>().PlaceItem());
         }
     }
     public void CloseInventory(){

@@ -24,9 +24,7 @@ public class ItemUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //new WaitForSeconds(updateInterval);
-        int res = UpdateItemQuantity();
-        //Debug.Log("item name: " + itemName + "quantity: " + res);
+        UpdateItemQuantity();
     }
 
     private int UpdateItemQuantity(){
