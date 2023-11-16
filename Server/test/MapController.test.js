@@ -21,6 +21,7 @@ describe('Map Creation', () => {
         });
         const savedUser = await user.save();
         userID = savedUser._id;
+
     });
 
     it('should successfully create an Map for a user', async () => {
@@ -33,9 +34,10 @@ describe('Map Creation', () => {
             .post(`/api/${userID}/createmap`)
             .send(newMap)
             .expect(201);
+        mapID = response.body.mapID;
 
         expect(response.body).to.be.an('object');
-        expect(response.body.mapID).to.be.a('string');
+        expect(response.body.mapID).to.equal(mapID);
         // expect(response.body.mapData).to.equal(newMap.mapData);
     });
 
@@ -44,7 +46,7 @@ describe('Map Creation', () => {
     });
 });
 
-describe('Map Operations', () => {
+describe('Create Map Test', () => {
     let userID;
     let mapID;
 
@@ -95,7 +97,7 @@ describe('Map Operations', () => {
 });
 
 
-describe('Map Operations 2', () => {
+describe('Save Map Test', () => {
     let userID;
     let mapID;
     
@@ -125,10 +127,10 @@ describe('Map Operations 2', () => {
     });
 
     
-    it('should delete a map', async () => {
+    it('should save a map', async () => {
        
 
-        console.log(`Attempting to delete map with ID: ${mapID} for user: ${userID}`);
+        console.log(`Attempting to save map with ID: ${mapID} for user: ${userID}`);
         const response = await request
             .post(`/api/${mapID}/savemap`)
             .expect(201);
@@ -147,7 +149,7 @@ describe('Map Operations 2', () => {
     });
 });
 
-describe('Retrieve All Maps for a User', () => {
+describe('Retrieve Maps Test', () => {
     let userID;
     let maps = [];
 
@@ -201,5 +203,55 @@ describe('Retrieve All Maps for a User', () => {
     after(async () => {
         await User.findByIdAndDelete(userID);
         await Map.deleteMany({ userID });
+    });
+});
+
+describe('Load Map Test', () => {
+    let userID;
+    let mapID;
+    let mapData;
+    
+
+    before(async () => {
+        const user = new User({
+            name: 'Test User 2',
+            email: 'testuser2@example.com',
+            password: 'testpassword123',
+        });
+        const savedUser = await user.save();
+        userID = savedUser._id;
+
+        const newMap = {
+            
+            userID: userID,
+            mapData: "testMapData2",
+            mapName: "testMapName2"
+        };
+
+        const response = await request
+            .post(`/api/${userID}/createmap`)
+            .send(newMap)
+            .expect(201);
+
+        mapID = response.body.mapID;
+        mapData = newMap.mapData;
+    });
+
+    
+    it('should load a map', async () => {
+        const response = await request
+            .get(`/api/${mapID}/map`)
+            .expect(200);
+
+        Map.findById(mapID)
+        expect(response.body).to.be.an('object');
+      
+        expect(response.body.mapData).to.equal(mapData);
+    });
+
+
+
+    after(async () => {
+        await User.findByIdAndDelete(userID);
     });
 });

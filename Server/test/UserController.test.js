@@ -7,7 +7,7 @@ const {register, login, userProfile} = require('../controllers/UserController');
 const UserRoute = require('../routes/UserRoute')
 
 const request = supertest(app); 
-describe('User Registration', () => {
+describe('User Registration Test', () => {
   it('should successfully register a new user', async () => {
     const newUser = {
       name: 'NewUser10',
@@ -19,11 +19,11 @@ describe('User Registration', () => {
       .post('/api/register')
       .send(newUser)
       .expect(201);
+    userID = response.body.userID;
 
     expect(response.body).to.be.an('object');
-    expect(response.body.userID).to.be.a('string');
-    // expect(response.body.name).to.equal(newUser.name);
-    // expect(response.body.email).to.equal(newUser.email);
+    expect(response.body.userID).to.equal(userID);
+   
     
 
    
