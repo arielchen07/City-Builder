@@ -9,7 +9,7 @@ const ItemRoute = require('../routes/ItemRoute');
 
 const request = supertest(app);
 
-describe('Item Creation', () => {
+describe('Item Creation Test', () => {
     let userID;
 
     before(async () => {
@@ -36,13 +36,58 @@ describe('Item Creation', () => {
         expect(response.body.userID).to.equal(String(userID));
         expect(response.body.quantity).to.equal(newItem.quantity);
     });
+    after(async () => {
+        await User.findByIdAndDelete(userID);
+    });
+});
+
+describe('Item retrival Test', () => {
+    let userID;
+
+    before(async () => {
+        const user = new User({
+            name: 'Test User 4',
+            email: 'testuser@example.com',
+            password: 'testpassword123',
+        });
+        const savedUser = await user.save();
+        userID = savedUser._id;
+    });
+
+    after(async () => {
+        await User.findByIdAndDelete(userID);
+    });
+    it('should return all item for the user', async () => {
+        const newItem = {
+            quantity: 10
+        };
+
+        const response = await request
+            .get(`/api/${userID}/all`)
+            .send(newItem)
+            .expect(200);
+
+         
+        expect(response.body).to.be.an('object'); 
+        expect(response.body.items).to.be.an('array');
+        response.body.items.forEach(item => {
+            expect(item).to.be.an('object');
+            expect(item._id).to.be.a('string');
+            expect(item.userID).to.equal(String(userID));
+            expect(item.quantity).to.be.a('number');
+            expect(item.category).to.be.a('string');
+            expect(item.name).to.be.a('string');
+            expect(item.createdAt).to.be.a('string');
+            expect(item.updatedAt).to.be.a('string');
+        });
+    });
 
     after(async () => {
         await User.findByIdAndDelete(userID);
     });
 });
 
-describe('Item Operations', () => {
+describe('Increase Decrease Quantity Test', () => {
     let userID;
     let itemID;
 
@@ -95,5 +140,52 @@ describe('Item Operations', () => {
     after(async () => {
         await User.findByIdAndDelete(userID);
         await Item.findByIdAndDelete(itemID);
+    });
+});
+
+describe('Item Deletion Test', () => {
+    let userID;
+    let itemID;
+
+    before(async () => {
+       
+        const user = new User({
+            name: 'Test User 3',
+            email: 'testuser3@example.com',
+            password: 'testpassword123',
+        });
+        const savedUser = await user.save();
+        userID = savedUser._id;
+        console.log("UserID (after creation):", userID); 
+ 
+        const newItem = {
+            quantity: 10,
+            userID: userID
+        };
+        const createdItem = await request
+            .post(`/api/${userID}/create`)
+            .send(newItem)
+            .expect(201);
+        itemID = createdItem.body._id;
+        console.log("ItemID (after creation):", itemID); 
+    });
+
+    it('should successfully delete an item for a user', async () => {
+ 
+        const deleteResponse = await request
+            .post(`/api/${userID}/delete/${itemID}`)
+            .expect(200);
+
+        expect(deleteResponse.body).to.be.an('object');
+        expect(deleteResponse.body.message).to.equal('Item successfully deleted');
+        expect(deleteResponse.body.item._id).to.equal(itemID);
+
+        
+        const deletedItem = await Item.findById(itemID);
+        expect(deletedItem).to.be.null;
+    });
+
+    after(async () => {
+        await User.findByIdAndDelete(userID);
     });
 });
