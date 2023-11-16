@@ -35,8 +35,8 @@ public class ObjectMenuManager : MonoBehaviour
 
     public void Delete(){
         item = currentlySelecting.GetComponent<PlaceableObject>().item;
-        ps.DeleteObject();
         item.RecycleItem();
+        ps.DeleteObject();
     }
 
     public void RotateLeft(){

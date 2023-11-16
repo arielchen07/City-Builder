@@ -18,7 +18,7 @@ public static class InventoryInfo
         {
             if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
             {
-                Debug.Log("get quantity of item: " + itemName + "in category: " + category);
+                //Debug.Log("get quantity of item: " + itemName + "in category: " + category);
                 return InventoryInfo.itemInventoryDict[category][itemName].quantity;
             }
         }
@@ -29,10 +29,10 @@ public static class InventoryInfo
     {
         if (InventoryInfo.itemInventoryDict.ContainsKey(category))
         {
-            Debug.Log("get id for category: " + category);
+            //Debug.Log("get id for category: " + category);
             if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
             {
-                Debug.Log("get id for item: " + itemName);
+                //Debug.Log("get id for item: " + itemName);
                 return InventoryInfo.itemInventoryDict[category][itemName].itemID;
             }
         }
@@ -113,7 +113,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateInventory(ServerInventoryData inventory)
     {
-        print("call UpdateInventory");
+        //print("call UpdateInventory");
         // TODO: change this to actual updates to the Unity inventory data structure and UI
         this.inventory = inventory;
         foreach (var item in inventory.items){
@@ -123,7 +123,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateInventoryItem(ServerItemData item)
     {
-        print("call UpdateInventoryItem");
+        //print("call UpdateInventoryItem");
         // TODO: change this to actual updates to the Unity inventory data structure and UI
         if (InventoryInfo.itemInventoryDict.ContainsKey(item.category))
         {
