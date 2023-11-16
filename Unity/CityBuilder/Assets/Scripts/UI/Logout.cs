@@ -1,13 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using System.Text;
 using System;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine.SceneManagement;
-using static Login;
 
 public class Logout : MonoBehaviour
 {

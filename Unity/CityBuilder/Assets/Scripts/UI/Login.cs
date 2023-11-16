@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static Login;
 
 public static class GlobalVariables
 {
