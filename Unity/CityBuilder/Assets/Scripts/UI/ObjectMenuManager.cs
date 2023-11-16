@@ -19,15 +19,18 @@ public class ObjectMenuManager : MonoBehaviour
     ItemUI item;
 
     public void UpdateInfo(GameObject selectedObject){
+        objectName.text = selectedObject.GetComponent<PlaceableObject>().displayName;
         currentlySelecting = selectedObject;
         if(selectedObject.TryGetComponent<House>(out var h)){
-            objectName.text = h.objectName;
             population.text = h.GetPopulation();
             power.text = h.GetPower();
             water.text = h.GetWater();
             sewage.text = h.GetSewage();
             internet.text = h.GetInternet();
             naturalGas.text = h.GetGas();
+        }
+        else {
+            
         }
     }
 

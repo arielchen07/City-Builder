@@ -344,6 +344,7 @@ MonoBehaviour:
   evenDimensions: 0
   hasBeenPlaced: 0
   objectName: waterTower
+  displayName: Water Tower
   category: water
   item: {fileID: 0}
   serviceRange: {fileID: 3701178208540854148}

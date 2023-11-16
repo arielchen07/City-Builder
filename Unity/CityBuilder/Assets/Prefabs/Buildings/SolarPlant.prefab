@@ -90,6 +90,7 @@ MonoBehaviour:
   evenDimensions: 1
   hasBeenPlaced: 0
   objectName: solarEnergyPlant
+  displayName: Solar Plant
   category: energy
   item: {fileID: 0}
   serviceRange: {fileID: 367899122777900509}

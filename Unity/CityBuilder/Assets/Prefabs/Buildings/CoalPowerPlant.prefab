@@ -170,6 +170,7 @@ MonoBehaviour:
   evenDimensions: 1
   hasBeenPlaced: 0
   objectName: coalPlant
+  displayName: Coal Plant
   category: energy
   item: {fileID: 0}
   serviceRange: {fileID: 5630164164284756430}

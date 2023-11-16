@@ -404,6 +404,7 @@ MonoBehaviour:
   evenDimensions: 1
   hasBeenPlaced: 0
   objectName: singleHouse
+  displayName: Single Family House
   category: housing
   item: {fileID: 0}
   basePopulation: 10

@@ -202,6 +202,7 @@ MonoBehaviour:
   evenDimensions: 1
   hasBeenPlaced: 0
   objectName: sewageTreatment
+  displayName: Sewage Plant
   category: sewage
   item: {fileID: 0}
   serviceRange: {fileID: 2044932535877620316}
