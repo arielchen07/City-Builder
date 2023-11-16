@@ -44,7 +44,19 @@ Spotstich Mobile App:
  * Provide clear steps for using each feature described in the previous section.
  * This section is critical to testing your application and must be done carefully and thoughtfully.
 
-(Will update after we reach the implementation stage of the project)
+Todo: we lack the url for the client side
+
+For new users:
+Upon reaching the Login & Register screen, input the required information—username, email, and password—then click the register button. Subsequently, the Login & Register scene will vanish, unveiling a newly generated map in the game scene.
+
+For existing users:
+Upon arriving at the Login & Register screen, existing users only need to input their email and password, then click the login button. The Login & Register scene will then disappear, revealing the user's previously saved map from the last session within the game scene.
+
+Once in the game scene, users can interact by selecting items from the inventory box located at the top left. They can place the chosen item onto the map by dragging it to the desired position and clicking once more. To remove an item from the map, users can click the item already placed on the map and press the "esc" button.
+
+Upon deciding to log out, the map will automatically save any changes made by the user. By clicking the log-out button, the map will exit, and the user will be successfully logged out.
+
+
  
  ## Development requirements
  * What are the technical requirements for a developer to set up on their machine or server (e.g. OS, libraries, etc.)?

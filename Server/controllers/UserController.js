@@ -22,8 +22,20 @@ const register = async(req, res) => {
           }
         //If a new email, create user
         const user = await User.create({name, email, password});
-        const item1 = await Item.create({userID: user._id, quantity:10, category: "building", name: "singleHouse"});
+        const item1 = await Item.create({userID: user._id, quantity:2, category: "housing", name: "singleHouse"});
+        const item2 = await Item.create({userID: user._id, quantity:2, category: "energy", name: "coalPlant"});
+        const item3 = await Item.create({userID: user._id, quantity:2, category: "energy", name: "windTurbineGenerator"});
+        const item4 = await Item.create({userID: user._id, quantity:2, category: "energy", name: "solarEnergyPlant"});
+        const item5 = await Item.create({userID: user._id, quantity:2, category: "water", name: "waterTower"});
+        const item6 = await Item.create({userID: user._id, quantity:2, category: "sewage", name: "sewageTreatment"});
+
         user.items.push(item1._id);
+        user.items.push(item2._id);
+        user.items.push(item3._id);
+        user.items.push(item4._id);
+        user.items.push(item5._id);
+        user.items.push(item6._id);
+
         user.status = "online";
         await user.save();
         

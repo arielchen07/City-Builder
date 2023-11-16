@@ -101,8 +101,9 @@ describe('Increase Decrease Quantity Test', () => {
         userID = savedUser._id;
 
         const newItem = {
-            quantity: 5,
-            userID: userID
+            
+            quantity: 5
+            
         };
 
         const response = await request
@@ -119,7 +120,7 @@ describe('Increase Decrease Quantity Test', () => {
             .expect(200);
 
         expect(response.body).to.be.an('object');
-        expect(response.body.item.quantity).to.equal(6);
+        expect(response.body.quantity).to.equal(6);
 
         const updatedItem = await Item.findById(itemID);
         expect(updatedItem.quantity).to.equal(6);
@@ -131,7 +132,7 @@ describe('Increase Decrease Quantity Test', () => {
             .expect(200);
 
         expect(response.body).to.be.an('object');
-        expect(response.body.item.quantity).to.equal(5);
+        expect(response.body.quantity).to.equal(5);
 
         const updatedItem = await Item.findById(itemID);
         expect(updatedItem.quantity).to.equal(5);

@@ -15,6 +15,12 @@
 
 To get a local copy up and running follow these simple steps.
 
+### Requirements
+1. Node.js 20.8.0
+2. .NET 7.0
+3. npm 10.1.0
+4. MongoDB 6.1.0
+5. mocha chai
 
 ### Installation
 #### React Backend

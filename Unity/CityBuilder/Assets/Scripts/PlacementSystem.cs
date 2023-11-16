@@ -13,9 +13,13 @@ public class PlacementSystem : MonoBehaviour
     public GameObject currentlyPlacing;
     public GameObject currentlySelecting;
     public GameObject currentlyHovering;
+    public GameObject gameCanvas;
     public GameObject objectMenu;
+    public GameObject objectMenuPrefab;
+    public GameObject objectMenuHousingPrefab;
     public CameraController cameraController;
     public MenuManager menuManager;
+    public InventoryManager inventoryManager;
     Vector3 currentRotation;
     Vector3 oldPosition;
     Vector3 oldRotation;
@@ -34,10 +38,9 @@ public class PlacementSystem : MonoBehaviour
         if(inputManager.hitObject != null){
             currentlyHovering = inputManager.hitObject;
         }
-        //checks for key inputs to spawn objects
-        SpawnObjectOnKey();
-
-
+        if (Input.GetKey(KeyCode.R)){
+            beginPlacingContinuousObjects = true;
+        }
         if(!EventSystem.current.IsPointerOverGameObject()){
             if (beginPlacingContinuousObjects) {
                 PlaceContinuousObjects(road);
@@ -49,16 +52,6 @@ public class PlacementSystem : MonoBehaviour
                 }
                 else if(Input.GetKeyDown(KeyCode.Escape)){
                     DropObject();
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow)){
-                    RotateObject(true);
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow)){
-                    RotateObject(false);
-                }
-                else if (Input.GetKeyDown(KeyCode.Delete)) {
-                    Destroy(currentlyPlacing);
-                    currentlyPlacing = null;
                 }
             } else if (currentlyHovering != null) {
                 if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -78,30 +71,16 @@ public class PlacementSystem : MonoBehaviour
             inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
         }
     }
-    /*
-    For manual testing
-    */
-    void SpawnObjectOnKey() {
-        if(!isSelectingObject){
-            if(Input.GetKeyDown(KeyCode.Alpha1)){
-                HoverObject(placeableObjects[0]);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha2)){
-                HoverObject(placeableObjects[1]);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha3)){
-                HoverObject(placeableObjects[2]);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha4)){
-                HoverObject(placeableObjects[3]);
-            }
-            if(Input.GetKeyDown(KeyCode.R)){ //place roads
-                beginPlacingContinuousObjects = true;
-                if(currentlyPlacing != null) {
-                    DropObject();
-                }
-            }
+    public void DeleteObject(){
+        foreach(GameObject tile in currentlySelecting.GetComponent<PlaceableObject>().currentlyColliding){
+            tile.GetComponent<MapTile>().isOccupied = false;
+            tile.GetComponent<MapTile>().placedObject = null;
         }
+        if(currentlySelecting != null){
+            Destroy(currentlySelecting);
+            currentlySelecting = null;
+        }
+        DeselectObject();
     }
     public void RotateObject(bool rotateLeft){
         float yRot = -90f;
@@ -134,14 +113,16 @@ public class PlacementSystem : MonoBehaviour
     /*
     HoverObject is called when the user creates a new building and needs to place it.
     */
-    public void HoverObject(GameObject objectToPlace){
+    public void HoverObject(GameObject itemObject){
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         isSelectingObject = true;
         if(currentlyPlacing != null){
             Destroy(currentlyPlacing);
             currentlyPlacing = null;
         }
-        GameObject newBuilding = Instantiate(objectToPlace, pointer.GetComponent<PointerDetector>().indicator.transform);
+        ItemUI item = itemObject.GetComponent<ItemUI>();
+        GameObject newBuilding = Instantiate(item.objectPrefab, pointer.GetComponent<PointerDetector>().indicator.transform);
+        newBuilding.GetComponent<PlaceableObject>().item = item;
         currentlyPlacing = newBuilding;
         currentlyPlacing.transform.Rotate(currentRotation);
         AssignObjectToCursor();
@@ -178,11 +159,26 @@ public class PlacementSystem : MonoBehaviour
         cameraController.ZoomToItem(currentlySelecting.transform.position);
         menuManager.CloseInventory();
         objectMenu.GetComponent<ObjectMenuManager>().UpdateInfo(currentlySelecting);
+        objectMenu.GetComponent<ObjectMenuManager>().inventoryManager = inventoryManager;
     }
     public void ToggleObjectMenu(){
-        Animator objectMenuAnim = objectMenu.GetComponent<Animator>();
-        objectMenuAnim.SetBool("isOpen", isSelectingObject);
-        objectMenuAnim.SetTrigger("toggle");
+        if(objectMenu != null){
+            objectMenu.GetComponent<Animator>().SetBool("isOpen", isSelectingObject);
+            objectMenu.GetComponent<Animator>().SetTrigger("toggle");
+        } else {
+            if (currentlySelecting != null){
+                if(currentlySelecting.TryGetComponent<House>(out var h)){
+                    objectMenu = Instantiate(objectMenuHousingPrefab, gameCanvas.transform);
+                } else {
+                    objectMenu = Instantiate(objectMenuPrefab, gameCanvas.transform);
+                }
+                objectMenu.GetComponent<ObjectMenuManager>().ps = this;
+                Animator objectMenuAnim = objectMenu.GetComponent<Animator>();
+                objectMenuAnim.SetBool("isOpen", isSelectingObject);
+                objectMenuAnim.SetTrigger("toggle");
+            }
+
+        }
     }
 
     public void DeselectObject(){

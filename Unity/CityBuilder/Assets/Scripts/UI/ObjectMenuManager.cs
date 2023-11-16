@@ -14,20 +14,14 @@ public class ObjectMenuManager : MonoBehaviour
     public Text internet;
     public Text naturalGas;
     public GameObject currentlySelecting;
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
+    public InventoryManager inventoryManager;
+    public string itemID;
+    ItemUI item;
 
     public void UpdateInfo(GameObject selectedObject){
+        objectName.text = selectedObject.GetComponent<PlaceableObject>().displayName;
+        currentlySelecting = selectedObject;
         if(selectedObject.TryGetComponent<House>(out var h)){
-            objectName.text = h.objectName;
             population.text = h.GetPopulation();
             power.text = h.GetPower();
             water.text = h.GetWater();
@@ -42,7 +36,9 @@ public class ObjectMenuManager : MonoBehaviour
     }
 
     public void Delete(){
-        //todo
+        item = currentlySelecting.GetComponent<PlaceableObject>().item;
+        RecycleItem();
+        ps.DeleteObject();
     }
 
     public void RotateLeft(){
@@ -51,5 +47,15 @@ public class ObjectMenuManager : MonoBehaviour
 
     public void RotateRight(){
         ps.RotateObject(false);
+    }
+
+    public void DestroySelf(){
+        Destroy(gameObject);
+    }
+
+    public void RecycleItem(){
+        PlaceableObject po = currentlySelecting.GetComponent<PlaceableObject>();
+        itemID = InventoryInfo.GetItemID(po.objectName, po.category);
+        inventoryManager.UpdateItemQuantityToServer(itemID, 1);
     }
 }
