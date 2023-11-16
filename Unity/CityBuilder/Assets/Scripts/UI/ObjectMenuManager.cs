@@ -29,9 +29,6 @@ public class ObjectMenuManager : MonoBehaviour
             internet.text = h.GetInternet();
             naturalGas.text = h.GetGas();
         }
-        else {
-            
-        }
     }
 
     public void Move(){
