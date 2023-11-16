@@ -201,7 +201,9 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: sewageTreatment
+  category: sewage
+  item: {fileID: 0}
   serviceRange: {fileID: 2044932535877620316}
   maxSewage: 50
   currSewageAllocated: 0

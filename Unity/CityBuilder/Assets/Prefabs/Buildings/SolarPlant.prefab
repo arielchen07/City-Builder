@@ -89,7 +89,8 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: solarEnergyPlant
+  category: energy
   item: {fileID: 0}
   serviceRange: {fileID: 367899122777900509}
   maxPower: 50

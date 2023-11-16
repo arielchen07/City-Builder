@@ -65,7 +65,8 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 0
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: windTurbineGenerator
+  category: energy
   item: {fileID: 0}
   serviceRange: {fileID: 3604696748789855735}
   maxPower: 20

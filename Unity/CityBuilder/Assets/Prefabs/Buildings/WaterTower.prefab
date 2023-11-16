@@ -343,7 +343,8 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 0
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: waterTower
+  category: water
   item: {fileID: 0}
   serviceRange: {fileID: 3701178208540854148}
   maxWater: 50

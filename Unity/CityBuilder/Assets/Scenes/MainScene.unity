@@ -5689,6 +5689,7 @@ MonoBehaviour:
   objectMenuHousingPrefab: {fileID: 750700453701864823, guid: 8db82639d2e6e5c4da8e59e53ad492ea, type: 3}
   cameraController: {fileID: 1468783142}
   menuManager: {fileID: 1248586517}
+  inventoryManager: {fileID: 1503918468}
   isSelectingObject: 0
 --- !u!1 &1248586512
 GameObject:

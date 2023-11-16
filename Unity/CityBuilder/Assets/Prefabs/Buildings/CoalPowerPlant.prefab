@@ -169,7 +169,9 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: coalPlant
+  category: energy
+  item: {fileID: 0}
   serviceRange: {fileID: 5630164164284756430}
   maxPower: 50
   currPowerAllocated: 0

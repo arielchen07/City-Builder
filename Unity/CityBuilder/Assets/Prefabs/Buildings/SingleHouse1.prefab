@@ -403,7 +403,9 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: Placeable Object
+  objectName: singleHouse
+  category: housing
+  item: {fileID: 0}
   basePopulation: 10
   population: 0
   powerCost: 10

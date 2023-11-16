@@ -19,6 +19,7 @@ public class PlacementSystem : MonoBehaviour
     public GameObject objectMenuHousingPrefab;
     public CameraController cameraController;
     public MenuManager menuManager;
+    public InventoryManager inventoryManager;
     Vector3 currentRotation;
     Vector3 oldPosition;
     Vector3 oldRotation;
@@ -157,6 +158,7 @@ public class PlacementSystem : MonoBehaviour
         cameraController.ZoomToItem(currentlySelecting.transform.position);
         menuManager.CloseInventory();
         objectMenu.GetComponent<ObjectMenuManager>().UpdateInfo(currentlySelecting);
+        objectMenu.GetComponent<ObjectMenuManager>().inventoryManager = inventoryManager;
     }
     public void ToggleObjectMenu(){
         if(objectMenu != null){

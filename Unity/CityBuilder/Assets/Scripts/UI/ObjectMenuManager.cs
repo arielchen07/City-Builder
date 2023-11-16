@@ -14,6 +14,8 @@ public class ObjectMenuManager : MonoBehaviour
     public Text internet;
     public Text naturalGas;
     public GameObject currentlySelecting;
+    public InventoryManager inventoryManager;
+    public string itemID;
     ItemUI item;
 
     public void UpdateInfo(GameObject selectedObject){
@@ -35,7 +37,7 @@ public class ObjectMenuManager : MonoBehaviour
 
     public void Delete(){
         item = currentlySelecting.GetComponent<PlaceableObject>().item;
-        item.RecycleItem();
+        RecycleItem();
         ps.DeleteObject();
     }
 
@@ -49,5 +51,11 @@ public class ObjectMenuManager : MonoBehaviour
 
     public void DestroySelf(){
         Destroy(gameObject);
+    }
+
+    public void RecycleItem(){
+        PlaceableObject po = currentlySelecting.GetComponent<PlaceableObject>();
+        itemID = InventoryInfo.GetItemID(po.objectName, po.category);
+        inventoryManager.UpdateItemQuantityToServer(itemID, 1);
     }
 }
