@@ -1,12 +1,12 @@
 # Game Engine/ Code Connoisseurs
 Note: This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical.​
 ## Partner Intro
-James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact
-The individuals listed below are members of the organization with whom we may collaborate in the later stages of development, and we communicate with them through Slack:
-Cheng-Ming Hsu, Spotstitch Ar Camera Lead
-Dushyant Mehul Lunechiya, Frontend Product lead
-Anupama Kadambi, Backend development Lead
-Ali Hassan Amin, Spotstitch Frontend developer
+James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact  
+The individuals listed below are members of the organization with whom we may collaborate in the later stages of development, and we communicate with them through Slack:  
+Cheng-Ming Hsu, Spotstitch Ar Camera Lead  
+Dushyant Mehul Lunechiya, Frontend Product lead  
+Anupama Kadambi, Backend development Lead  
+Ali Hassan Amin, Spotstitch Frontend developer  
 
 
 Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs.
