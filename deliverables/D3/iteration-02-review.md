@@ -101,6 +101,3 @@ Due to time constraints and our partner's busy schedule, we recorded the demo an
 We have yet to receive feedback from our partner. We will update this document once we hear back from them.
 
 This experience reinforced the importance of clear communication and streamlined processes in collaborative projects. Beyond feature development, delivering a clear and easy-to-understand demonstration is equally important to engage potential users, ensuring they understand how to use the product and enticing them to stay informed about subsequent updates.
-
-** Acknowledge ChatGPT for polishing part of this document, but note that all ideas here are original :)**
-
