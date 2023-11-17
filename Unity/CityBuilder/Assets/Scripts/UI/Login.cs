@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using static Login;
 public static class GlobalVariables
 {
     public static string UserID { get; set; }
@@ -13,9 +13,14 @@ public static class GlobalVariables
 }
 
 public class Login : MonoBehaviour{
-    [SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
-    [SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register"; 
-     
+
+    //[SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
+    //[SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register";
+
+    private string authenticationEndpoint = "https://unity-game-server.onrender.com/api/login";
+    private string registrationEndpoint = "https://unity-game-server.onrender.com/api/register";
+    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+
     [SerializeField] private TextMeshProUGUI alertText;
     [SerializeField] private Button loginButton;
     [SerializeField] private Button signupButton;  
@@ -115,9 +120,12 @@ public class Login : MonoBehaviour{
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.timeout = 10;
+        request.timeout = 300;
 
         yield return request.SendWebRequest();
+
+        print(authenticationEndpoint);
+        print(request.result);
 
         if (request.result == UnityWebRequest.Result.Success)
         {
@@ -184,7 +192,7 @@ public class Login : MonoBehaviour{
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.timeout = 10;
+            request.timeout = 300;
 
             yield return request.SendWebRequest();
 
@@ -216,13 +224,14 @@ public class Login : MonoBehaviour{
     }
 
     private IEnumerator TryCreateMap()
-    {        
-        string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
+    {
+        //string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
+        string createMapUrl = serverAccessEndpoint + GlobalVariables.UserID + "/createmap";
         print(createMapUrl);
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.timeout = 10;
+        request.timeout = 60;
 
         yield return request.SendWebRequest();
 
