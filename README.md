@@ -37,6 +37,8 @@ There are various building types, such as housing, utilities, production etc. Ea
 # Instructions
 
 How to run server
+
+
 The current application host remote server on Render. However we used the free service, to the quality of connection cannot be guaranteed. 
 If user choose to use the remote server, they can simply skip to the “start the game” section. Note that the server spins down if it did not receive any request for 15 minutes. It could take several minutes or more for the service to spin back up.
 On the other hand, a user can choose to start a local server for the backend. To do this:
@@ -49,6 +51,8 @@ If the output indicates an 'app crash', this suggests that the environment confi
 
 
 Start the Game:
+
+
 To commence your City Builder web game experience, please navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.
 (If user chooses to use local server, after starting the server, navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version in your web browser, enter password "codeconnoisseurs" to access the game with local server)
 We also made a demo introducing current features to play: ​​https://utoronto.zoom.us/rec/share/_riVgGoHgsMYBZ7QFPMr6-m60EPLWRVH3y2t6pL5YxuA3yi9OfarXGS3r5vGuWC5.4Kn6_NsqB7Em5PDs?startTime=1700117523000
