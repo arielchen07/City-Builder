@@ -64,9 +64,7 @@ On the other hand, a user can choose to start a local server for the backend. To
 ## Start the Game:
 
 
-- To commence your City Builder web game experience, please navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.  
-
-- (If user chooses to use local server, after starting the server, navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version in your web browser, enter password "codeconnoisseurs" to access the game with local server)  
+- To commence your City Builder web game experience, please navigate to [https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version](https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version) in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.   
 
 We also made a demo introducing current features to play: ​​ 
 https://utoronto.zoom.us/rec/share/_riVgGoHgsMYBZ7QFPMr6-m60EPLWRVH3y2t6pL5YxuA3yi9OfarXGS3r5vGuWC5.4Kn6_NsqB7Em5PDs?startTime=1700117523000  
@@ -75,7 +73,9 @@ Passcode: s2z@HxE**z
 You can either play around the game following the demo or the description below:
 
 
-- At the start of the game, a new user will need to sign up in order to enter the game. A user who had already registered for an account for the game previously will only need to provide their email and password to login.  
+- At the start of the game, a new user will need to sign up in order to enter the game. A user who had already registered for an account for the game previously will only need to provide their email and password to login.
+
+- User also have the choice to play the game with local or remote server backend. Un-check the checkbox at the bottom to use local server. Instructions can be found in the "How to run server" section
 
 
 - After a successful login, the game will load with the corresponding game map. New users will experience an automatically generated, random game map. Returning users will have the game map from their last session automatically loaded upon login.  
@@ -123,6 +123,8 @@ If one chooses to use the remote server for development, one can access by going
 3. Once that it is running, you can access the backend at http://localhost:3000
 4. You can access the database through: https://cloud.mongodb.com/v2/651f66de2b31664012c78bb6#/metrics/replicaSet/651f6806fc79f50af45b831a/explorer/lalala 
 
+A remote server is hosted on Render. If one chooses to use the remote server for development, one can access it by going to the Render website https://render.com/. And login with email: ruiting.chen.soc@gmai.com and password: 1234567890. The deployed server is at unity-game-server. Click on the unity-game-server and go to the log tab to see the messages from the server.
+
 
 ### Unity:
 #### Technology requirements: 
@@ -138,10 +140,7 @@ To set up and run the software (in the Unity development environment):
 To edit scripts, go to Assets/Scripts and double-click on any script, the code will open up in your default editor for unity
 
 
-To test out the save/load map and update/load inventory features of the Unity game together with the database, the developer needs to connect to the backend server (described above)
-
-
-For the Unity game to be able to login/logout, save/load map and update/load inventory properly, the developer also needs to start the server (described above).
+For the Unity game to be able to login/logout, save/load map and update/load inventory properly, and test out the save/load map and update/load inventory features with the database, the developer also needs to start the server (described above).
 
 
 ## Deployment and Github Workflow
