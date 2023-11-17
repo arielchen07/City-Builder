@@ -10,7 +10,7 @@ public class InventoryToServer : MonoBehaviour
     public float updateInterval = 5.0f; // Checks for server inventory data every 5 seconds
 
     //string serverAccessEndpoint = "http://localhost:3000/api/";
-    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+    //string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
 
     public void CreateItemToServer(string userID, string category, string name, int quantity = 2)
     {
@@ -52,7 +52,7 @@ public class InventoryToServer : MonoBehaviour
         InitServerItemData item = new InitServerItemData(category, name, quantity);
         string item_json = JsonUtility.ToJson(item);
 
-        using (var request = new UnityWebRequest(serverAccessEndpoint + userID + "/create", "POST"))
+        using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + userID + "/create", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(item_json);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -108,7 +108,7 @@ public class InventoryToServer : MonoBehaviour
             action = "/dec/";
         }
 
-        using (var request = new UnityWebRequest(serverAccessEndpoint + userID + action + itemID, "POST"))
+        using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + userID + action + itemID, "POST"))
         {
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
@@ -157,7 +157,7 @@ public class InventoryToServer : MonoBehaviour
         // will change this later
 
         // send get request to server, triggers callback after response recieved
-        using (UnityWebRequest request = UnityWebRequest.Get(serverAccessEndpoint + userID + "/all"))
+        using (UnityWebRequest request = UnityWebRequest.Get(GlobalVariables.serverAccessBaseURL + "/api/" + userID + "/all"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();

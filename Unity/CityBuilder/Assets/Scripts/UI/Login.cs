@@ -10,6 +10,7 @@ public static class GlobalVariables
     public static string UserID { get; set; }
     public static string MapID {get; set;}
     public static bool IsNewUser { get; set;}
+    public static string serverAccessBaseURL { get; set;}
 }
 
 public class Login : MonoBehaviour{
@@ -17,9 +18,9 @@ public class Login : MonoBehaviour{
     //[SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
     //[SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register";
 
-    private string authenticationEndpoint = "https://unity-game-server.onrender.com/api/login";
-    private string registrationEndpoint = "https://unity-game-server.onrender.com/api/register";
-    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+    // private string authenticationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/login";
+    // private string registrationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/register";
+    // string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
 
     [SerializeField] private TextMeshProUGUI alertText;
     [SerializeField] private Button loginButton;
@@ -27,6 +28,7 @@ public class Login : MonoBehaviour{
     [SerializeField] private TMP_InputField usernameInputField;  
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
+    [SerializeField] private Toggle serverToggle;
     //[SerializeField] private Transform loginWindowTransform;
     //[SerializeField] private Transform loginBackgroundTransform;  
 
@@ -79,6 +81,14 @@ public class Login : MonoBehaviour{
         signupButton.interactable = true;
         alertText.text = "LOG IN";
     }
+
+    private void Update(){
+        if(serverToggle.isOn){
+            GlobalVariables.serverAccessBaseURL = "https://unity-game-server.onrender.com";
+        } else {
+            GlobalVariables.serverAccessBaseURL = "http://localhost:3000";
+        }
+    }
     public void OnLoginClick()
     {
         alertText.text = "Signing in ...";
@@ -88,6 +98,7 @@ public class Login : MonoBehaviour{
     }
     public void OnSignupClick()  
     {
+        Debug.Log("serever port: " + GlobalVariables.serverAccessBaseURL + "/api/register");
         alertText.text = "Signing up ...";
         //signupButton.interactable = false;
         StartCoroutine(TrySignup());
@@ -115,7 +126,7 @@ public class Login : MonoBehaviour{
         string jsonData = JsonUtility.ToJson(loginData, true);  
         Debug.Log("Sending JSON Data: \n" + jsonData);
  
-        UnityWebRequest request = new UnityWebRequest(authenticationEndpoint, "POST");
+        UnityWebRequest request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/login", "POST");
         byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -124,7 +135,7 @@ public class Login : MonoBehaviour{
 
         yield return request.SendWebRequest();
 
-        print(authenticationEndpoint);
+        print(GlobalVariables.serverAccessBaseURL + "/api/login");
         print(request.result);
 
         if (request.result == UnityWebRequest.Result.Success)
@@ -186,7 +197,7 @@ public class Login : MonoBehaviour{
         string jsonData = JsonUtility.ToJson(signupData, true);  
         Debug.Log("Sending JSON Data: \n" + jsonData);
 
-        using (UnityWebRequest request = UnityWebRequest.Post(registrationEndpoint, jsonData))
+        using (UnityWebRequest request = UnityWebRequest.Post(GlobalVariables.serverAccessBaseURL + "/api/register", jsonData))
         {
             byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -226,7 +237,7 @@ public class Login : MonoBehaviour{
     private IEnumerator TryCreateMap()
     {
         //string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
-        string createMapUrl = serverAccessEndpoint + GlobalVariables.UserID + "/createmap";
+        string createMapUrl = GlobalVariables.serverAccessBaseURL + "/api/" + GlobalVariables.UserID + "/createmap";
         print(createMapUrl);
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
