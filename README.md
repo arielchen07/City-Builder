@@ -17,23 +17,23 @@ With this interactive game developed, we hope to enhance users’ real world exp
 ​
 ## Key Features
 City building game (Web game):  
-- Login/Signup and Logout of the game (Implemented in D3)
-	-New users can sign up for their account with name, email and password
-	-Existing users will be able to login to the game with their email and password
-	-Users can log out of the game when they want to exit
-- Start with a randomly generated empty map (Implemented in D3)
-	- users will have different maps of a fixed size (10x10 tiles), generated from a perlin noise. The map will include grassland, water bodies, trees, etc. The user can start their city at the center and expand outwards.
-- Design your city (Implemented in D3)
-	- Add objects to the map from your inventory
-	- Delete objects from the map and store them back into your inventory
-	- Select objects on the game map and move their position and change their orientation, user can also deselect the item
--S ave and load game map (Implemented in D3)
-	- Users' previous progress on the game map will be saved when they log out from the game, The saved game map with previous progress will be loaded the next time they login
-	- The save and load is done automatically
--Gain resources by collecting them inside the game and in the real world (Future development)
-	- Things like wood can be gathered in game by clearing out forests, and can also be obtained in real life by scanning a tree. Other materials include ores, cement, stone, sand, and clay. These materials are all necessary for constructing buildings.
-- Build different types of buildings and develop your city (Future development)
-	-There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
+- Item 1 Login/Signup and Logout of the game (Implemented in D3)
+	- Subitem 1.1 New users can sign up for their account with name, email and password
+	- Subitem 1.2 Existing users will be able to login to the game with their email and password
+	- Subitem 1.3 Users can log out of the game when they want to exit
+- Item 2 Start with a randomly generated empty map (Implemented in D3)
+	- Subitem 2.1 users will have different maps of a fixed size (10x10 tiles), generated from a perlin noise. The map will include grassland, water bodies, trees, etc. The user can start their city at the center and expand outwards.
+- Item 3 Design your city (Implemented in D3)
+	- Subitem 3.1 Add objects to the map from your inventory
+	- Subitem 3.2 Delete objects from the map and store them back into your inventory
+	- Subiyem 3.3 Select objects on the game map and move their position and change their orientation, user can also deselect the item
+- Item 4 Save and load game map (Implemented in D3)
+	- Subitem 4.1 Users' previous progress on the game map will be saved when they log out from the game, The saved game map with previous progress will be loaded the next time they login
+	- Subitem 4.2 The save and load is done automatically
+-Item 5 Gain resources by collecting them inside the game and in the real world (Future development)
+	- Subitem 5.1 Things like wood can be gathered in game by clearing out forests, and can also be obtained in real life by scanning a tree. Other materials include ores, cement, stone, sand, and clay. These materials are all necessary for constructing buildings.
+- Item 6 Build different types of buildings and develop your city (Future development)
+	- Subitem 6.1 There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
 # Instructions
 
 How to run server
