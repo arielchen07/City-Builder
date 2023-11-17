@@ -2564,16 +2564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b67531060f98e14a8151f002678d3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  authenticationEndpoint: http://localhost:3000/api/login
-  registrationEndpoint: http://localhost:3000/api/register
   alertText: {fileID: 1092909880}
   loginButton: {fileID: 483810828}
   signupButton: {fileID: 1744071812}
   usernameInputField: {fileID: 2112689208}
   emailInputField: {fileID: 85460923}
   passwordInputField: {fileID: 855356504}
-  loginWindowTransform: {fileID: 804803974}
-  loginBackgroundTransform: {fileID: 804803974}
 --- !u!4 &1127663214
 Transform:
   m_ObjectHideFlags: 0

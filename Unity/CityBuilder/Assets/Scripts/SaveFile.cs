@@ -11,6 +11,8 @@ public class SaveFile : MonoBehaviour
     [Range(0, 10)]
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
+    //string serverAccessEndpoint = "http://localhost:3000/api/";
+    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
     public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
@@ -53,11 +55,11 @@ public class SaveFile : MonoBehaviour
             )
         );
     }
-    public static IEnumerator PostRequestServer(string mapID, string data, Action<UnityWebRequest> callback)
+    public IEnumerator PostRequestServer(string mapID, string data, Action<UnityWebRequest> callback)
     {
         // Currently using hard coded URL to store to a specific map id of a specific user in database
         // will change this later
-        using (var request = new UnityWebRequest("http://localhost:3000/api/" + mapID + "/savemap", "POST"))
+        using (var request = new UnityWebRequest(serverAccessEndpoint + mapID + "/savemap", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -118,12 +120,12 @@ public class SaveFile : MonoBehaviour
             )
         );
     }
-    public static IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
+    public IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
     {
         // Currently using hard coded URL to load from a specific map id of a specific user in database
         // will change this later
         // send get request to server, triggers callback after response recieved
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/" + mapID + "/map"))
+        using (UnityWebRequest request = UnityWebRequest.Get(serverAccessEndpoint + mapID + "/map"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
