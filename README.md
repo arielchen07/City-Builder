@@ -117,10 +117,6 @@ For the Unity game to be able to login/logout, save/load map and update/load inv
 
 
 ## Deployment and Github Workflow
-If applicable, specify any naming conventions or standards you decide to adopt.
-Describe your overall deployment process from writing code to viewing a live application
-What deployment tool(s) are you using? And how?
-Don't forget to briefly justify why you chose this workflow or particular aspects of it!
 Pull request:
 We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.
 Naming conventions:
