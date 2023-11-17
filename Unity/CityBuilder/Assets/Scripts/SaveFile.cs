@@ -12,7 +12,7 @@ public class SaveFile : MonoBehaviour
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
     //string serverAccessEndpoint = "http://localhost:3000/api/";
-    string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
+    //string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
     public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
@@ -59,7 +59,7 @@ public class SaveFile : MonoBehaviour
     {
         // Currently using hard coded URL to store to a specific map id of a specific user in database
         // will change this later
-        using (var request = new UnityWebRequest(serverAccessEndpoint + mapID + "/savemap", "POST"))
+        using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + mapID + "/savemap", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -125,7 +125,7 @@ public class SaveFile : MonoBehaviour
         // Currently using hard coded URL to load from a specific map id of a specific user in database
         // will change this later
         // send get request to server, triggers callback after response recieved
-        using (UnityWebRequest request = UnityWebRequest.Get(serverAccessEndpoint + mapID + "/map"))
+        using (UnityWebRequest request = UnityWebRequest.Get(GlobalVariables.serverAccessBaseURL + "/api/" + mapID + "/map"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
