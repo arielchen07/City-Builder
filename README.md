@@ -46,42 +46,42 @@ If user choose to use the remote server, they can simply skip to the “start th
 
 
 On the other hand, a user can choose to start a local server for the backend. To do this: 
-1. First, 'cd' into the Server directory by using terminal  
-2. Then run 'npm install' and wait for the Node Package Manager to complete the download.   
-3. Run 'npm -version' to ensure it is 10.1.0 or above.  
-4. After ensuring that all the environments are fully installed, run 'npm start'.  
-5. When the terminal displays 'Server is running on port 3000, Database Connection Established!', which indicates the Server is running.  
-6. If the output indicates an 'app crash', this suggests that the environment configuration is incomplete. To address this, one should refer to the 'development requirements' section of the documentation to verify the comprehensive fulfillment of all prerequisites.  
+- First, 'cd' into the Server directory by using terminal
+- Then run 'npm install' and wait for the Node Package Manager to complete the download.
+- run 'npm -version' to ensure it is 10.1.0 or above.  
+- After ensuring that all the environments are fully installed, run 'npm start'.  
+- When the terminal displays 'Server is running on port 3000, Database Connection Established!', which indicates the Server is running.  
+- If the output indicates an 'app crash', this suggests that the environment configuration is incomplete. To address this, one should refer to the 'development requirements' section of the documentation to verify the comprehensive fulfillment of all prerequisites.  
 
 
 ## Start the Game:
 
 
-To commence your City Builder web game experience, please navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.  
+- To commence your City Builder web game experience, please navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.  
 
-(If user chooses to use local server, after starting the server, navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version in your web browser, enter password "codeconnoisseurs" to access the game with local server)  
+- (If user chooses to use local server, after starting the server, navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version in your web browser, enter password "codeconnoisseurs" to access the game with local server)  
+
 We also made a demo introducing current features to play: ​​ 
-
 https://utoronto.zoom.us/rec/share/_riVgGoHgsMYBZ7QFPMr6-m60EPLWRVH3y2t6pL5YxuA3yi9OfarXGS3r5vGuWC5.4Kn6_NsqB7Em5PDs?startTime=1700117523000  
 Passcode: s2z@HxE**z  
 
 You can either play around the game following the demo or the description below:
 
 
-At the start of the game, a new user will need to sign up in order to enter the game. A user who had already registered for an account for the game previously will only need to provide their email and password to login.  
+- At the start of the game, a new user will need to sign up in order to enter the game. A user who had already registered for an account for the game previously will only need to provide their email and password to login.  
 
 
-After a successful login, the game will load with the corresponding game map. New users will experience an automatically generated, random game map. Returning users will have the game map from their last session automatically loaded upon login.  
+- After a successful login, the game will load with the corresponding game map. New users will experience an automatically generated, random game map. Returning users will have the game map from their last session automatically loaded upon login.  
 
 
-Once the user enters the game with the generated/loaded map, they can access the inventory bar on the side to select categories of items for placement on the game map.  
-- Clicking on each category in the inventory menu yields the following options:  
-1. Road: The road button is a work in progress (WIP), and users can press the 'r' key for placement. More updates expected in the future.
-2. Housing: Clicking on the housing button directs users to an inventory containing all types of houses. Currently, only the Single Family House is available. More updates expected in the future.
-3. Utilities: Clicking on the utilities button leads to a submenu with subcategories such as energy, sewage, and water. Each subcategory offers different types of buildings to choose from.  
-More categories are anticipated in future updates!  
-- Each building item icon displays a number in the right corner, representing the available quantity for placement. If the number reaches zero, users can no longer place that type of building.  
-- Once a building is placed on the map, users have the option to select/deselect, move, delete, or change the orientation of the building by interacting with it on the game map.  
+- Once the user enters the game with the generated/loaded map, they can access the inventory bar on the side to select categories of items for placement on the game map.  
+	- Clicking on each category in the inventory menu yields the following options:  
+	1. Road: The road button is a work in progress (WIP), and users can press the 'r' key for placement. More updates expected in the future.
+	2. Housing: Clicking on the housing button directs users to an inventory containing all types of houses. Currently, only the Single Family House is available. More updates expected in the future.
+	3. Utilities: Clicking on the utilities button leads to a submenu with subcategories such as energy, sewage, and water. Each subcategory offers different types of buildings to choose from.  
+	More categories are anticipated in future updates!  
+	- Each building item icon displays a number in the right corner, representing the available quantity for placement. If the number reaches zero, users can no longer place that type of building.  
+	- Once a building is placed on the map, users have the option to select/deselect, move, delete, or change the orientation of the building by interacting with it on the game map.  
 When the user decides to conclude their game session and exit, they can click on the logout button located in the top right corner of the screen. Exiting the game at this point ensures that their progress on the game map and changes in the inventory are saved.  
 Following logout, the user will be redirected to the login page, where they can log in again to resume playing.  
 ## Development requirements
