@@ -81,23 +81,23 @@ We scheduled a sequential merging process, starting with the Database subteam, f
 
 #### Q4. How was your product demo?
   In preparation for the demo, we identified key features and outlined a step-by-step demonstration plan in the meeting: 
-    1. register
-    2. generate map
-    3. show inventory
-    4. manipulate inventory
-        a. place 2 different item on to map (show decrease of item quantity in inventory)
-        b. select, move and deselect items
-        c. rotate items
-        d. select and delete items (show increased item quantity in inventory)
-        e. place items until quantity reaches zero (show cannot place that  item any more)
-    5. logout (automatic save)
-    6. log-in
-        a. re-login with previous info
-        b. confirm map and inventory state persistence
-    7. show login/signup with incomplete/incorrect info will trigger corresponding error messages
+    1. register  
+    2. generate map  
+    3. show inventory  
+    4. manipulate inventory  
+        a. place 2 different item on to map (show decrease of item quantity in inventory)  
+        b. select, move and deselect items  
+        c. rotate items  
+        d. select and delete items (show increased item quantity in inventory)  
+        e. place items until quantity reaches zero (show cannot place that  item any more)  
+    5. logout (automatic save)  
+    6. log-in  
+        a. re-login with previous info  
+        b. confirm map and inventory state persistence  
+    7. show login/signup with incomplete/incorrect info will trigger corresponding error messages  
 
 Due to time constraints and our partner's busy schedule, we recorded the demo and shared it with our partner for feedback. (demo link can be found in README)
 
-We have yet to receive feedback from our partner. We will update this document once we hear back from them.
+Our partner thought the project had a great start, but suggested to add more comoplexity into the game. He encourage us to prioritize the development for main features/ functions over content. We plan to follow the suggestions and proceed with enhancing the robustness of the game setup and options for objects.
 
 This experience reinforced the importance of clear communication and streamlined processes in collaborative projects. Beyond feature development, delivering a clear and easy-to-understand demonstration is equally important to engage potential users, ensuring they understand how to use the product and enticing them to stay informed about subsequent updates.
