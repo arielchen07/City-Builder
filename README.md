@@ -117,19 +117,23 @@ If one chooses to use the remote server for development, one can access by going
 4. You can access the database through: https://cloud.mongodb.com/v2/651f66de2b31664012c78bb6#/metrics/replicaSet/651f6806fc79f50af45b831a/explorer/lalala 
 
 
-Unity:
-Technology requirements: 
-Download Unity Hub
-In Unity Hub, download Unity Editor version 2020.3.20f1
-Developer should download unity’s WebGL build support if they wish to build the product to a web app
-Developer can download Python to start a HTTP server to if they wish to view the deployed game website on localhost
+### Unity:
+#### Technology requirements: 
+- Download Unity Hub
+- In Unity Hub, download Unity Editor version 2020.3.20f1
+- Developer should download unity’s WebGL build support if they wish to build the product to a web app
+- Developer can download Python to start a HTTP server to if they wish to view the deployed game website on localhost
 To set up and run the software (in the Unity development environment):
-Clone the team repository
-Open the Unity/CityBuilder folder from Unity Hub using Editor version 2020.3.20f1
-After project loads in Unity, click “File” in the Unity ribbon > “Open Scene”, select from folder Scenes -> choose one of the .unity files, and click open to load the selected scene
-Go to the top and click on the play button to start the game
+- Clone the team repository
+- Open the Unity/CityBuilder folder from Unity Hub using Editor version 2020.3.20f1
+- After project loads in Unity, click “File” in the Unity ribbon > “Open Scene”, select from folder Scenes -> choose one of the .unity files, and click open to load the selected scene
+- Go to the top and click on the play button to start the game
 To edit scripts, go to Assets/Scripts and double-click on any script, the code will open up in your default editor for unity
+
+
 To test out the save/load map and update/load inventory features of the Unity game together with the database, the developer needs to connect to the backend server (described above)
+
+
 For the Unity game to be able to login/logout, save/load map and update/load inventory properly, the developer also needs to start the server (described above).
 
 
