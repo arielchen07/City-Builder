@@ -1,18 +1,25 @@
 # Game Engine/ Code Connoisseurs
 Note: This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical.​
 ## Partner Intro
-James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact  
-The individuals listed below are members of the organization with whom we may collaborate in the later stages of development, and we communicate with them through Slack:  
-Cheng-Ming Hsu, Spotstitch Ar Camera Lead  
-Dushyant Mehul Lunechiya, Frontend Product lead  
-Anupama Kadambi, Backend development Lead  
-Ali Hassan Amin, Spotstitch Frontend developer  
+
+1. James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact  
 
 
-Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs.
+2. The individuals listed below are members of the organization with whom we may collaborate in the later stages of development, and we communicate with them through Slack:  
+	- Cheng-Ming Hsu, Spotstitch Ar Camera Lead  
+	- Dushyant Mehul Lunechiya, Frontend Product lead  
+	- Anupama Kadambi, Backend development Lead  
+	- Ali Hassan Amin, Spotstitch Frontend developer  
+
+
+3. Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs.
 ## Description about the project
 City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City).  
+
+
 Our product could potentially revolutionize how users engage their physical environment with virtual games. It will encourage people to explore the local environment and surrounding objects, capture and record them with a vivid 3D model instead of a 2D picture. For real life urban planners, this product might improve their efficiency of initializing city planning and inspire them with creative and effective design.  
+
+
 With this interactive game developed, we hope to enhance users’ real world exploration and social interaction which could yield significant positive social impact. This also aligns with the mission of our partner, Project: Human City. As a non-profit organization, Project: Human City aims to enhance the lives of city residents on and off the app with various initiatives and projects. We together want to create a difference in people’s lives.  
 ​
 ## Key Features
@@ -138,19 +145,29 @@ For the Unity game to be able to login/logout, save/load map and update/load inv
 
 
 ## Deployment and Github Workflow
-Pull request:
+### Pull request:
 We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.
-Naming conventions:
+
+
+### Naming conventions:
 We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)
-Deployment:
+
+
+### Deployment:
 Our game is supposed to be embedded in a website, which is currently under development by the partner and is not ready for integration. Thus, for deployment, we have temporarily uploaded the game to a third party website (itch.io) for the demo. This website is accessible via a link and password. (See Instruction part above) We have also created a locally hosted server to test the game’s save, load, and update features. Similar to the website, the partner is developing a backend for their product, but that server is not currently available for us. We are expecting to be able to move our server code and integrate it into theirs, but if that doesn’t happen for reasons outside of our control then we will move on with our own server.
+
+
 ## Coding Standards and Guidelines
-Keep this section brief, a maximum of 2-3 lines. You would want to read through this article to get more context about what this section is for before attempting to answer.
-These are 2 optional resources that you might want to go through: article with High level explanation and this article with Detailed Explanation
+These are 2 optional resources that you might want to go through: article with High level explanation and this article with Detailed Explanation.
+
+
 The web game (mainly done in Unity) will follow Google C# Style Guide. The mobile app will follow ​Google JavaScript Style Guide.
+
+
 ## Licenses
 We are using Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License by the requirement of our partner. Anyone is free to share and adapt materials of this code base given that they do the following:
-give appropriate credit, provide a link to the license, and indicate if changes were made
-do not use the codebase for commercial purposes
-use the same license as this codebase, when you share and adapt the material
-do not restrict others from doing anything this license permits	
+
+- give appropriate credit, provide a link to the license, and indicate if changes were made
+- do not use the codebase for commercial purposes
+- use the same license as this codebase, when you share and adapt the material
+- do not restrict others from doing anything this license permits	
