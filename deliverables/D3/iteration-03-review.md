@@ -98,6 +98,6 @@ We scheduled a sequential merging process, starting with the Database subteam, f
 
 Due to time constraints and our partner's busy schedule, we recorded the demo and shared it with our partner for feedback. (demo link can be found in README)
 
-Our partner thought the project had a great start, but suggested to add more comoplexity into the game. He encourage us to prioritize the development for main features/ functions over content. We plan to follow the suggestions and proceed with enhancing the robustness of the game setup and options for objects.
+Our partner thought the project had a great start, but suggested adding more complexity into the game. He encourages us to prioritize the development for main features/ functions over content. We plan to follow the suggestions and proceed with enhancing the robustness of the game setup and options for objects.
 
 This experience reinforced the importance of clear communication and streamlined processes in collaborative projects. Beyond feature development, delivering a clear and easy-to-understand demonstration is equally important to engage potential users, ensuring they understand how to use the product and enticing them to stay informed about subsequent updates.
