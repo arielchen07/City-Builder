@@ -1,8 +1,6 @@
 # Game Engine/ Code Connoisseurs
 Note: This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical.​
 ## Partner Intro
-Include the names, emails, titles, primary or secondary point of contact at the partner organization
-Provide a short description about the partner organization. (2-4 lines)
 James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact
 The individuals listed below are members of the organization with whom we may collaborate in the later stages of development, and we communicate with them through Slack:
 Cheng-Ming Hsu, Spotstitch Ar Camera Lead
@@ -13,17 +11,11 @@ Ali Hassan Amin, Spotstitch Frontend developer
 
 Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs.
 ## Description about the project
-Keep this section very brief.
-Provide a high-level description of your application and it's value from an end-user's perspective
-What is the problem you're trying to solve? Is there any context required to understand why the application solves this problem?
 City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City).
 Our product could potentially revolutionize how users engage their physical environment with virtual games. It will encourage people to explore the local environment and surrounding objects, capture and record them with a vivid 3D model instead of a 2D picture. For real life urban planners, this product might improve their efficiency of initializing city planning and inspire them with creative and effective design.
 With this interactive game developed, we hope to enhance users’ real world exploration and social interaction which could yield significant positive social impact. This also aligns with the mission of our partner, Project: Human City. As a non-profit organization, Project: Human City aims to enhance the lives of city residents on and off the app with various initiatives and projects. We together want to create a difference in people’s lives.
 ​
 ## Key Features
-Describe the key features in the application that the user can access.
-Provide a breakdown or detail for each feature.
-This section will be used to assess the value of the features built
 City building game (Web game):
 Login/Signup and Logout of the game (Implemented in D3)
 New users can sign up for their account with name, email and password
@@ -43,10 +35,7 @@ Things like wood can be gathered in game by clearing out forests, and can also b
 Build different types of buildings and develop your city (Future development)
 There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
 # Instructions
-Clear instructions for how to use the application from the end-user's perspective
-How do you access it? For example: Are accounts pre-created or does a user register? Where do you start? etc.
-Provide clear steps for using each feature described in the previous section.
-This section is critical to testing your application and must be done carefully and thoughtfully.
+
 How to run server
 The current application host remote server on Render. However we used the free service, to the quality of connection cannot be guaranteed. 
 If user choose to use the remote server, they can simply skip to the “start the game” section. Note that the server spins down if it did not receive any request for 15 minutes. It could take several minutes or more for the service to spin back up.
@@ -81,10 +70,6 @@ Once a building is placed on the map, users have the option to select/deselect, 
 When the user decides to conclude their game session and exit, they can click on the logout button located in the top right corner of the screen. Exiting the game at this point ensures that their progress on the game map and changes in the inventory are saved. 
 Following logout, the user will be redirected to the login page, where they can log in again to resume playing.
 ## Development requirements
-What are the technical requirements for a developer to set up on their machine or server (e.g. OS, libraries, etc.)?
-Briefly describe instructions for setting up and running the application. You should address this part like how one would expect a README doc of real-world deployed application would be.
-You can see this example to get started.
-
 
 For Developers, we suggest to use the local server, so that it’s easier to access the log information. 
 If one chooses to use the remote server for development, one can access by going to the Render website, https://render.com/ . And login with email: ruiting.chen.soc@gmai.com and password: 1234567890. The deployed server is at unity-game-server.
@@ -128,8 +113,6 @@ For the Unity game to be able to login/logout, save/load map and update/load inv
 
 
 ## Deployment and Github Workflow
-​Describe your Git/GitHub workflow. Essentially, we want to understand how your team members share codebase, avoid conflicts and deploys the application.​
-Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
 If applicable, specify any naming conventions or standards you decide to adopt.
 Describe your overall deployment process from writing code to viewing a live application
 What deployment tool(s) are you using? And how?
@@ -145,9 +128,6 @@ Keep this section brief, a maximum of 2-3 lines. You would want to read through 
 These are 2 optional resources that you might want to go through: article with High level explanation and this article with Detailed Explanation
 The web game (mainly done in Unity) will follow Google C# Style Guide. The mobile app will follow ​Google JavaScript Style Guide.
 ## Licenses
-​Keep this section as brief as possible. You may read this Github article for a start.​
-What type of license will you apply to your codebase? And why?
-What affect does it have on the development and use of your codebase?
 We are using Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License by the requirement of our partner. Anyone is free to share and adapt materials of this code base given that they do the following:
 give appropriate credit, provide a link to the license, and indicate if changes were made
 do not use the codebase for commercial purposes
