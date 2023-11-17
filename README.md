@@ -38,7 +38,7 @@ City building game (Web game):
  
 # Instructions
 
-##How to run server  
+## How to run server  
 The current application host remote server on Render. However we used the free service, to the quality of connection cannot be guaranteed.  
 If user choose to use the remote server, they can simply skip to the “start the game” section. Note that the server spins down if it did not receive any request for 15 minutes. It could take several minutes or more for the service to spin back up.  
 On the other hand, a user can choose to start a local server for the backend. To do this:  
@@ -50,7 +50,7 @@ When the terminal displays 'Server is running on port 3000, Database Connection 
 If the output indicates an 'app crash', this suggests that the environment configuration is incomplete. To address this, one should refer to the 'development requirements' section of the documentation to verify the comprehensive fulfillment of all prerequisites.  
 
 
-##Start the Game:
+## Start the Game:
 
 
 To commence your City Builder web game experience, please navigate to https://arkye7.itch.io/csc301-code-connoisseurs-city-builder in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.  
