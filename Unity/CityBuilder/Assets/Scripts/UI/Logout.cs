@@ -5,13 +5,14 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
 using System;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine.SceneManagement;
 using static Login;
 
 public class Logout : MonoBehaviour
 {
-    [SerializeField] private string logoutEndpoint = "http://localhost:3000/api/";
+    //[SerializeField] private string logoutEndpoint = "http://localhost:3000/api/";
+    private string logoutEndpoint = "https://unity-game-server.onrender.com/api/";
+
     [SerializeField] private Button logoutButton;
     [SerializeField] private MapDataManager mapManager;
     // [SerializeField] private Transform loginBackgroundTransform; 
@@ -34,7 +35,7 @@ public class Logout : MonoBehaviour
         var mapDataRequestBody = JsonUtility.ToJson(data);
 
         StartCoroutine(
-            SaveFile.PostRequestServer(GlobalVariables.MapID, mapDataRequestBody,
+            mapManager.saveSystem.PostRequestServer(GlobalVariables.MapID, mapDataRequestBody,
                 (UnityWebRequest request) =>
                 {
                     if (request.result == UnityWebRequest.Result.Success)
