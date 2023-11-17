@@ -120,7 +120,7 @@ public class Login : MonoBehaviour{
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.timeout = 60;
+        request.timeout = 300;
 
         yield return request.SendWebRequest();
 
@@ -192,7 +192,7 @@ public class Login : MonoBehaviour{
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.timeout = 60;
+            request.timeout = 300;
 
             yield return request.SendWebRequest();
 
@@ -231,7 +231,7 @@ public class Login : MonoBehaviour{
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.timeout = 30;
+        request.timeout = 60;
 
         yield return request.SendWebRequest();
 
