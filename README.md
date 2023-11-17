@@ -17,9 +17,9 @@ With this interactive game developed, we hope to enhance users’ real world exp
 ​
 ## Key Features
 City building game (Web game):  
-- Item 1 Login/Signup and Logout of the game (Implemented in D3)
-	- Subitem 1.1 New users can sign up for their account with name, email and password
-	- Subitem 1.2 Existing users will be able to login to the game with their email and password
+-  Login/Signup and Logout of the game (Implemented in D3)
+	-  New users can sign up for their account with name, email and password
+	-  Existing users will be able to login to the game with their email and password
 	- Subitem 1.3 Users can log out of the game when they want to exit
 - Item 2 Start with a randomly generated empty map (Implemented in D3)
 	- Subitem 2.1 users will have different maps of a fixed size (10x10 tiles), generated from a perlin noise. The map will include grassland, water bodies, trees, etc. The user can start their city at the center and expand outwards.
