@@ -8,7 +8,8 @@
  * Where: ONLINE
 
 ## Process - Reflection
-
+**note**  
+We used chatGPT to format and polish this document, but all ideas are original and the document has gone through human editing.  
 
 #### Q1. What worked well
 
@@ -97,7 +98,7 @@ We scheduled a sequential merging process, starting with the Database subteam, f
 
 Due to time constraints and our partner's busy schedule, we recorded the demo and shared it with our partner for feedback. (demo link can be found in README)
 
-Not yet received partner’s feedback for our demo video.
+We have yet to receive feedback from our partner. We will update this document once we hear back from them.
 
 This experience reinforced the importance of clear communication and streamlined processes in collaborative projects. Beyond feature development, delivering a clear and easy-to-understand demonstration is equally important to engage potential users, ensuring they understand how to use the product and enticing them to stay informed about subsequent updates.
 
