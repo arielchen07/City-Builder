@@ -87,26 +87,30 @@ Following logout, the user will be redirected to the login page, where they can 
 ## Development requirements
 
 For Developers, we suggest to use the local server, so that it’s easier to access the log information. 
+
+
 If one chooses to use the remote server for development, one can access by going to the Render website, https://render.com/ . And login with email: ruiting.chen.soc@gmai.com and password: 1234567890. The deployed server is at unity-game-server.
-Server:
-	1. Developers need to install .Net and Node.js before running the project.
-	For macOS:
-Installing .NET:  open terminal and run 
--brew install --cask dotnet-sdk
-Installing Node.js: run: brew install node
-For Windows:
-Installing .NET: 
-Go to the webpage:https://dotnet.microsoft.com/zh-cn/download and download the installer of .NET. 
-Run the installer and follow the prompts.
-Installing NVM: 
-Go to the repository: https://github.com/coreybutler/nvm-windows.
-Download and run the NVM installer
-Open a new command prompt after installation, type:
--nvm list available
--nvm install latest
+
+
+### Server:
+1. Developers need to install .Net and Node.js before running the project.
+- For macOS:
+	1. Installing .NET:  open terminal and run :-brew install --cask dotnet-sdk
+	2. Installing Node.js: run: brew install node
+
+- For Windows:
+	1. Installing .NET: 
+		- Go to the webpage:https://dotnet.microsoft.com/zh-cn/download and download the installer of .NET. 
+		- Run the installer and follow the prompts.
+	2. Installing NVM: 
+		- Go to the repository: https://github.com/coreybutler/nvm-windows.
+		- Download and run the NVM installer
+		- Open a new command prompt after installation, type:
+		  	- nvm list available
+			- nvm install latest
 2. After get .Net and Node.js downloaded, open the project and cd to Server folder, run the following commands:
--npm install
--npm start
+- npm install
+- npm start
 3. Once that it is running, you can access the backend at http://localhost:3000
 4. You can access the database through: https://cloud.mongodb.com/v2/651f66de2b31664012c78bb6#/metrics/replicaSet/651f6806fc79f50af45b831a/explorer/lalala 
 
