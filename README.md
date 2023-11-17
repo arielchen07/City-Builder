@@ -34,6 +34,8 @@ City building game (Web game):
 	- Subitem 5.1 Things like wood can be gathered in game by clearing out forests, and can also be obtained in real life by scanning a tree. Other materials include ores, cement, stone, sand, and clay. These materials are all necessary for constructing buildings.
 - Item 6 Build different types of buildings and develop your city (Future development)
 	- Subitem 6.1 There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
+
+ 
 # Instructions
 
 How to run server
