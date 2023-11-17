@@ -10,6 +10,7 @@ public static class GlobalVariables
     public static string UserID { get; set; }
     public static string MapID {get; set;}
     public static bool IsNewUser { get; set;}
+    public static string serverAccessBaseURL { get; set;}
 }
 
 public class Login : MonoBehaviour{
@@ -17,9 +18,9 @@ public class Login : MonoBehaviour{
     //[SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
     //[SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register";
 
-    private string authenticationEndpoint = "https://unity-game-server.onrender.com/api/login";
-    private string registrationEndpoint = "https://unity-game-server.onrender.com/api/register";
-    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+    private string authenticationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/login";
+    private string registrationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/register";
+    string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
 
     [SerializeField] private TextMeshProUGUI alertText;
     [SerializeField] private Button loginButton;

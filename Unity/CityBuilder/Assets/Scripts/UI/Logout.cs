@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Logout : MonoBehaviour
 {
     //[SerializeField] private string logoutEndpoint = "http://localhost:3000/api/";
-    private string logoutEndpoint = "https://unity-game-server.onrender.com/api/";
+    private string logoutEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
 
     [SerializeField] private Button logoutButton;
     [SerializeField] private MapDataManager mapManager;

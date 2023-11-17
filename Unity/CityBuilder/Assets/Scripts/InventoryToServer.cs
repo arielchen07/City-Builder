@@ -10,7 +10,7 @@ public class InventoryToServer : MonoBehaviour
     public float updateInterval = 5.0f; // Checks for server inventory data every 5 seconds
 
     //string serverAccessEndpoint = "http://localhost:3000/api/";
-    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+    string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
 
     public void CreateItemToServer(string userID, string category, string name, int quantity = 2)
     {

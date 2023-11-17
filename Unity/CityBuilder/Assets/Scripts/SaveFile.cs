@@ -12,7 +12,7 @@ public class SaveFile : MonoBehaviour
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
     //string serverAccessEndpoint = "http://localhost:3000/api/";
-    string serverAccessEndpoint = "https://unity-game-server.onrender.com/api/";
+    string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
     public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
