@@ -11,29 +11,29 @@ Ali Hassan Amin, Spotstitch Frontend developer
 
 Project: Human City is a non-profit organization who try to design and create an open ecosystem. They initiate ideas for global impact, focusing on addressing human inequality, social injustice, and access to basic needs.
 ## Description about the project
-City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City).
-Our product could potentially revolutionize how users engage their physical environment with virtual games. It will encourage people to explore the local environment and surrounding objects, capture and record them with a vivid 3D model instead of a 2D picture. For real life urban planners, this product might improve their efficiency of initializing city planning and inspire them with creative and effective design.
-With this interactive game developed, we hope to enhance users’ real world exploration and social interaction which could yield significant positive social impact. This also aligns with the mission of our partner, Project: Human City. As a non-profit organization, Project: Human City aims to enhance the lives of city residents on and off the app with various initiatives and projects. We together want to create a difference in people’s lives.
+City building game is a web-based creative city-building game that aims to connect users closer to the real world. Users obtain inventory resources to build their city by scanning objects (ex: cars, buildings, infrastructures, etc.) in the real world, using the AR camera in the Spotstich mobile app (Spotstich mobile app is a multi-purpose social app developed by Project: Human City).  
+Our product could potentially revolutionize how users engage their physical environment with virtual games. It will encourage people to explore the local environment and surrounding objects, capture and record them with a vivid 3D model instead of a 2D picture. For real life urban planners, this product might improve their efficiency of initializing city planning and inspire them with creative and effective design.  
+With this interactive game developed, we hope to enhance users’ real world exploration and social interaction which could yield significant positive social impact. This also aligns with the mission of our partner, Project: Human City. As a non-profit organization, Project: Human City aims to enhance the lives of city residents on and off the app with various initiatives and projects. We together want to create a difference in people’s lives.  
 ​
 ## Key Features
-City building game (Web game):
-Login/Signup and Logout of the game (Implemented in D3)
-New users can sign up for their account with name, email and password
-Existing users will be able to login to the game with their email and password
-Users can log out of the game when they want to exit
-Start with a randomly generated empty map (Implemented in D3)
-users will have different maps of a fixed size (10x10 tiles), generated from a perlin noise. The map will include grassland, water bodies, trees, etc. The user can start their city at the center and expand outwards.
-Design your city (Implemented in D3)
-Add objects to the map from your inventory
-Delete objects from the map and store them back into your inventory
-Select objects on the game map and move their position and change their orientation, user can also deselect the item
-Save and load game map (Implemented in D3)
-Users' previous progress on the game map will be saved when they log out from the game, The saved game map with previous progress will be loaded the next time they login
-The save and load is done automatically
-Gain resources by collecting them inside the game and in the real world (Future development)
-Things like wood can be gathered in game by clearing out forests, and can also be obtained in real life by scanning a tree. Other materials include ores, cement, stone, sand, and clay. These materials are all necessary for constructing buildings.
-Build different types of buildings and develop your city (Future development)
-There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
+City building game (Web game):  
+- Login/Signup and Logout of the game (Implemented in D3)
+	-New users can sign up for their account with name, email and password
+	-Existing users will be able to login to the game with their email and password
+	-Users can log out of the game when they want to exit
+- Start with a randomly generated empty map (Implemented in D3)
+	- users will have different maps of a fixed size (10x10 tiles), generated from a perlin noise. The map will include grassland, water bodies, trees, etc. The user can start their city at the center and expand outwards.
+- Design your city (Implemented in D3)
+	- Add objects to the map from your inventory
+	- Delete objects from the map and store them back into your inventory
+	- Select objects on the game map and move their position and change their orientation, user can also deselect the item
+-S ave and load game map (Implemented in D3)
+	- Users' previous progress on the game map will be saved when they log out from the game, The saved game map with previous progress will be loaded the next time they login
+	- The save and load is done automatically
+-Gain resources by collecting them inside the game and in the real world (Future development)
+	- Things like wood can be gathered in game by clearing out forests, and can also be obtained in real life by scanning a tree. Other materials include ores, cement, stone, sand, and clay. These materials are all necessary for constructing buildings.
+- Build different types of buildings and develop your city (Future development)
+	-There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
 # Instructions
 
 How to run server
