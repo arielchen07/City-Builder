@@ -81,20 +81,20 @@ We scheduled a sequential merging process, starting with the Database subteam, f
 
 #### Q4. How was your product demo?
   In preparation for the demo, we identified key features and outlined a step-by-step demonstration plan in the meeting: 
-    1. register  
-    2. generate map  
-    3. show inventory  
-    4. manipulate inventory  
-        a. place 2 different item on to map (show decrease of item quantity in inventory)  
-        b. select, move and deselect items  
-        c. rotate items  
-        d. select and delete items (show increased item quantity in inventory)  
-        e. place items until quantity reaches zero (show cannot place that  item any more)  
-    5. logout (automatic save)  
-    6. log-in  
-        a. re-login with previous info  
-        b. confirm map and inventory state persistence  
-    7. show login/signup with incomplete/incorrect info will trigger corresponding error messages  
+1. register  
+2. generate map  
+3. show inventory  
+4. manipulate inventory  
+	-  place 2 different item on to map (show decrease of item quantity in inventory)  
+	-  select, move and deselect items  
+	-  rotate items  
+	-  select and delete items (show increased item quantity in inventory)  
+	-  place items until quantity reaches zero (show cannot place that  item any more)
+5. logout (automatic save)  
+6. log-in  
+	-  re-login with previous info  
+	-  confirm map and inventory state persistence  
+7. show login/signup with incomplete/incorrect info will trigger corresponding error messages  
 
 Due to time constraints and our partner's busy schedule, we recorded the demo and shared it with our partner for feedback. (demo link can be found in README)
 
