@@ -77,6 +77,7 @@ public class PlacementSystem : MonoBehaviour
             tile.GetComponent<MapTile>().placedObject = null;
         }
         if(currentlySelecting != null){
+            currentlySelecting.GetComponent<PlaceableObject>().OnDelete();
             Destroy(currentlySelecting);
             currentlySelecting = null;
         }

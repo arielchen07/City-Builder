@@ -22,12 +22,9 @@ public class House : PlaceableObject
     public float sewageX = 1f;
     public float gasX = 1f;
     public float internetX = 1f;
-    public Dictionary<string, int> providers;
-    public List<GameObject> providersInRange;
     void Start()
     {
         currentlyColliding = new List<GameObject>();
-        providersInRange = new List<GameObject>();
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
     }
@@ -68,29 +65,21 @@ public class House : PlaceableObject
     public string GetInternet(){
         return internetAllocated.ToString() + " / " + internetCost.ToString();
     }
-    public void UpdateUtilities(){
-        providers = new Dictionary<string, int>
-        {
-            { "power", 0 },
-            { "water", 0 },
-            { "sewage", 0 },
-            { "internet", 0 },
-            { "gas", 0 }
-        };
-        foreach (GameObject g in providersInRange) {
-            (string, int) t = g.GetComponent<IProvider>().GetProvided();
-        }
-        int powerAllocated = providers["energy"];
-        int waterAllocated = providers["water"];
-        int sewageAllocated = providers["sewage"];
-        int internetAllocated = providers["internet"];
-        int gasAllocated = providers["gas"];
+    public void UpdatePopulation(){
         powerX = powerAllocated / powerCost;
         waterX = waterAllocated / waterCost;
         sewageX = sewageAllocated / sewageCost;
         gasX = gasAllocated / gasCost;
         internetX = internetAllocated / internetCost;
         float utilMod = basePopulation / 10;
-        population = (int)(basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
+        population = (basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
+    }
+
+    public void ResetUtilities(){
+        powerAllocated = 0;
+        waterAllocated = 0;
+        sewageAllocated = 0;
+        internetAllocated = 0;
+        gasAllocated = 0;
     }
 }
