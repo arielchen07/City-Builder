@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,15 +46,7 @@ public class House : PlaceableObject
             HoverValid.SetActive(false);
             HoverInvalid.SetActive(false);
         }
-        powerX = powerAllocated / powerCost;
-        waterX = waterAllocated / waterCost;
-        sewageX = sewageAllocated / sewageCost;
-        gasX = gasAllocated / gasCost;
-        internetX = internetAllocated / internetCost;
-        float utilMod = basePopulation / 10;
-        population = (int)(basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
     }
-
     public string GetPopulation(){
         return population.ToString();
     }
@@ -71,5 +64,22 @@ public class House : PlaceableObject
     }
     public string GetInternet(){
         return internetAllocated.ToString() + " / " + internetCost.ToString();
+    }
+    public void UpdatePopulation(){
+        powerX = powerAllocated / powerCost;
+        waterX = waterAllocated / waterCost;
+        sewageX = sewageAllocated / sewageCost;
+        gasX = gasAllocated / gasCost;
+        internetX = internetAllocated / internetCost;
+        float utilMod = basePopulation / 10;
+        population = (basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
+    }
+
+    public void ResetUtilities(){
+        powerAllocated = 0;
+        waterAllocated = 0;
+        sewageAllocated = 0;
+        internetAllocated = 0;
+        gasAllocated = 0;
     }
 }

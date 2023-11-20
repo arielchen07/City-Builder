@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SewagePlant : PlaceableObject
+public class SewagePlant : PlaceableObject, IProvider
 {
     public GameObject serviceRange;
     public int maxSewage;
     public int currSewageAllocated;
-    public float updateInterval = 2f;
-    public float timer = 0;
 
     void Start()
     {
@@ -17,10 +15,6 @@ public class SewagePlant : PlaceableObject
         HoverInvalid.SetActive(false);
     }
     void Update() {
-        if (Time.time > timer) {
-            OnPlace();
-            timer = Time.time + updateInterval;
-        }
         currentlyColliding = GetCollidingTiles();
         canBePlaced = CanBePlaced();
         if (isHovering) {
@@ -37,8 +31,7 @@ public class SewagePlant : PlaceableObject
         }
     }
 
-    public override void OnPlace()
-    {
+    public void Allocate(){
         BoxCollider serviceRangeCollider = serviceRange.GetComponent<BoxCollider>();
         Vector3 worldCenter = serviceRangeCollider.transform.TransformPoint(serviceRangeCollider.center);
         Vector3 worldHalfExtents = Vector3.Scale(serviceRangeCollider.size, serviceRangeCollider.transform.lossyScale) * 0.5f;
@@ -46,14 +39,17 @@ public class SewagePlant : PlaceableObject
         currSewageAllocated = 0;
         foreach (Collider col in cols) {
             if (col.gameObject.TryGetComponent<House>(out var h)) {
+                if(currSewageAllocated == maxSewage){
+                    break;
+                }
                 if (currSewageAllocated + h.sewageCost <= maxSewage) {
                     currSewageAllocated += h.sewageCost;
                     h.sewageAllocated = h.sewageCost;
                 } else {
                     h.sewageAllocated = maxSewage - currSewageAllocated;
                     currSewageAllocated = maxSewage;
-                    break;
                 }
+                h.UpdatePopulation();
             }
         }
     }

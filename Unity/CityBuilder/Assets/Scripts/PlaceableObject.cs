@@ -19,6 +19,7 @@ public class PlaceableObject : MonoBehaviour
     public string displayName;
     public string category;
     public ItemUI item;
+    public bool isActive = true;
     
     void Start()
     {
@@ -76,7 +77,12 @@ public class PlaceableObject : MonoBehaviour
         }
         return currentlyColliding;
     }
-    public virtual void OnPlace() {
-        //implemented in child classes, not using an interface cause its the only function so far that is implemented dynamically across subclasses
+    public void OnPlace() {
+        UtilitiesManager.utilManager.UpdateUtilities();
+    }
+
+    public void OnDelete(){
+        isActive = false;
+        UtilitiesManager.utilManager.UpdateUtilities();
     }
 }

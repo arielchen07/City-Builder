@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterDistributor : PlaceableObject
+public class WaterDistributor : PlaceableObject, IProvider
 {
     public GameObject serviceRange;
     public int maxWater;
@@ -37,7 +37,7 @@ public class WaterDistributor : PlaceableObject
         }
     }
 
-    public override void OnPlace()
+    public void Allocate()
     {
         BoxCollider serviceRangeCollider = serviceRange.GetComponent<BoxCollider>();
         Vector3 worldCenter = serviceRangeCollider.transform.TransformPoint(serviceRangeCollider.center);
@@ -46,14 +46,17 @@ public class WaterDistributor : PlaceableObject
         currWaterAllocated = 0;
         foreach (Collider col in cols) {
             if (col.gameObject.TryGetComponent<House>(out var h)) {
+                if(currWaterAllocated == maxWater){
+                    break;
+                }
                 if (currWaterAllocated + h.waterCost <= maxWater) {
                     currWaterAllocated += h.waterCost;
                     h.waterAllocated = h.waterCost;
                 } else {
                     h.waterAllocated = maxWater - currWaterAllocated;
                     currWaterAllocated = maxWater;
-                    break;
                 }
+                h.UpdatePopulation();
             }
         }
     }

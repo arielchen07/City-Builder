@@ -52,5 +52,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CityBuilder.sln"
+    "dotnet.defaultSolution": "CityBuilder.sln",
+    "dotnet.preferCSharpExtension": true
 }
