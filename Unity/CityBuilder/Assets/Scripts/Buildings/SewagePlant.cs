@@ -42,11 +42,12 @@ public class SewagePlant : PlaceableObject, IProvider
                 if(currSewageAllocated == maxSewage){
                     break;
                 }
-                if (currSewageAllocated + h.sewageCost <= maxSewage) {
-                    currSewageAllocated += h.sewageCost;
+                int sewageNeeded = h.sewageCost - h.sewageAllocated;
+                if (currSewageAllocated + sewageNeeded <= maxSewage) {      //can fill up
+                    currSewageAllocated += sewageNeeded;
                     h.sewageAllocated = h.sewageCost;
-                } else {
-                    h.sewageAllocated = maxSewage - currSewageAllocated;
+                } else {                                                    //can't fully fill up
+                    h.sewageAllocated = maxSewage - currSewageAllocated;    // the remaining left in this distributor
                     currSewageAllocated = maxSewage;
                 }
                 h.UpdatePopulation();

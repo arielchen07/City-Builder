@@ -7,8 +7,6 @@ public class WaterDistributor : PlaceableObject, IProvider
     public GameObject serviceRange;
     public int maxWater;
     public int currWaterAllocated;
-    public float updateInterval = 2f;
-    public float timer = 0;
 
     void Start()
     {
@@ -17,10 +15,6 @@ public class WaterDistributor : PlaceableObject, IProvider
         HoverInvalid.SetActive(false);
     }
     void Update() {
-        if (Time.time > timer) {
-            OnPlace();
-            timer = Time.time + updateInterval;
-        }
         currentlyColliding = GetCollidingTiles();
         canBePlaced = CanBePlaced();
         if (isHovering) {
@@ -49,11 +43,12 @@ public class WaterDistributor : PlaceableObject, IProvider
                 if(currWaterAllocated == maxWater){
                     break;
                 }
-                if (currWaterAllocated + h.waterCost <= maxWater) {
-                    currWaterAllocated += h.waterCost;
-                    h.waterAllocated = h.waterCost;
-                } else {
-                    h.waterAllocated = maxWater - currWaterAllocated;
+                int waterNeeded = h.waterCost - h.waterAllocated;
+                if (currWaterAllocated + waterNeeded <= maxWater) {         //can fill up
+                    currWaterAllocated += waterNeeded;
+                    h.internetAllocated = h.internetCost;
+                } else {                                                    //can't fully fill up
+                    h.internetAllocated = maxWater - currWaterAllocated;    // the remaining left in this distributor
                     currWaterAllocated = maxWater;
                 }
                 h.UpdatePopulation();

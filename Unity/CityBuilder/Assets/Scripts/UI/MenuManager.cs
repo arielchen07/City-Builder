@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     public List<GameObject> power;
     public List<GameObject> sewage;
     public List<GameObject> water;
+    public List<GameObject> internet;
     public GameObject content;
     public PlacementSystem ps;
     public InventoryManager inventoryManager;
@@ -49,6 +50,9 @@ public class MenuManager : MonoBehaviour
             break;
             case "water":  
                 buttonList = water;
+            break;
+            case "internet":  
+                buttonList = internet;
             break;
             default:
                 buttonList = housing;
