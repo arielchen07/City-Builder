@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlacementSystem : MonoBehaviour
     Vector3 oldRotation;
     bool beginPlacingContinuousObjects = false;
     public bool isSelectingObject = false;
+    public bool isPlacingContinousObjects = true;
     void Start()
     {
         currentRotation = new Vector3(0,0,0);
@@ -38,14 +40,17 @@ public class PlacementSystem : MonoBehaviour
         if(inputManager.hitObject != null){
             currentlyHovering = inputManager.hitObject;
         }
-        if (Input.GetKey(KeyCode.R)){
-            beginPlacingContinuousObjects = true;
-        }
         if(!EventSystem.current.IsPointerOverGameObject()){
             if (beginPlacingContinuousObjects) {
-                PlaceContinuousObjects(road);
+                menuManager.ToggleRoadPlacementModeButtonVisual(isPlacingContinousObjects);
+                if(isPlacingContinousObjects){
+                    CursorManager.cursorManager.SetCursorMode("placing");
+                    PlaceContinuousObjects(road);
+                } else {
+                    CursorManager.cursorManager.SetCursorMode("deleting");
+                    DeleteContinuousObjects();
+                }
             }
-
             if(currentlyPlacing != null && !beginPlacingContinuousObjects){
                 if(Input.GetKeyDown(KeyCode.Mouse0)){
                     PlaceObject();
@@ -57,7 +62,7 @@ public class PlacementSystem : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0)) {
                     if (currentlyHovering.CompareTag("Object")) {
                         SelectObject();
-                    } else if (currentlySelecting != null){
+                    } else if (currentlySelecting != null && currentlyPlacing != null){
                         DeselectObject();
                     }
                 }
@@ -70,6 +75,16 @@ public class PlacementSystem : MonoBehaviour
         } else {
             inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
         }
+    }
+
+    public void PlaceRoads(){
+        beginPlacingContinuousObjects = true;
+        menuManager.ToggleRightMenu();
+    }
+
+    public void StopPlacingRoads(){
+        beginPlacingContinuousObjects = false;
+        CursorManager.cursorManager.SetCursorMode(""); //default
     }
     public void DeleteObject(){
         foreach(GameObject tile in currentlySelecting.GetComponent<PlaceableObject>().currentlyColliding){
@@ -95,7 +110,9 @@ public class PlacementSystem : MonoBehaviour
     PlaceObject is called when the user is currently selecting an object and wants to place it.
     */
     public void PlaceObject(){
+        CursorManager.cursorManager.SetCursorMode("");
         if (currentlyPlacing.GetComponent<PlaceableObject>().CanBePlaced()){
+            DeselectObject();
             currentlyPlacing.transform.parent = null;
             foreach(GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding){
                 tile.GetComponent<MapTile>().isOccupied = true;
@@ -108,13 +125,13 @@ public class PlacementSystem : MonoBehaviour
             currentlyPlacing = null;
         }
         isSelectingObject = false;
-        DeselectObject();
     }
 
     /*
     HoverObject is called when the user creates a new building and needs to place it.
     */
     public void HoverObject(GameObject itemObject){
+        CursorManager.cursorManager.SetCursorMode("placing");
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         isSelectingObject = true;
         if(currentlyPlacing != null){
@@ -139,6 +156,9 @@ public class PlacementSystem : MonoBehaviour
             currentlyPlacing.GetComponent<PlaceableObject>().isHovering = false;
             currentlyPlacing.transform.parent = null;
         } else {
+            PlaceableObject po = currentlyPlacing.GetComponent<PlaceableObject>();
+            string itemID = InventoryInfo.GetItemID(po.objectName, po.category);
+            inventoryManager.UpdateItemQuantityToServer(itemID, 1);
             Destroy(currentlyPlacing);
         }
         currentlyPlacing = null;
@@ -178,7 +198,6 @@ public class PlacementSystem : MonoBehaviour
                 objectMenuAnim.SetBool("isOpen", isSelectingObject);
                 objectMenuAnim.SetTrigger("toggle");
             }
-
         }
     }
 
@@ -191,6 +210,7 @@ public class PlacementSystem : MonoBehaviour
     }
 
     public void MoveObject(){
+        CursorManager.cursorManager.SetCursorMode("placing");
         currentlyPlacing = currentlySelecting;
         isSelectingObject = false;
         ToggleObjectMenu();
@@ -209,15 +229,52 @@ public class PlacementSystem : MonoBehaviour
     void PlaceContinuousObjects(GameObject objectToPlace){
         GameObject pointerIndicator = pointer.GetComponent<PointerDetector>().indicator;
         if (Input.GetKey(KeyCode.Mouse0)){
-            Collider[] cols = Physics.OverlapSphere(pointerIndicator.transform.position, 0.1f, LayerMask.GetMask("Foreground"));
-            if(cols.Length == 0){
-                Instantiate(objectToPlace, pointerIndicator.transform.position, Quaternion.identity);
-                return;
+            bool canPlace = true;
+            Collider[] cols = Physics.OverlapSphere(pointerIndicator.transform.position, 0.1f, LayerMask.GetMask("Ground"));
+            GameObject closest = cols[0].gameObject;
+            float minDistance = Mathf.Infinity;
+            foreach(Collider col in cols){
+                if(col.TryGetComponent<MapTile>(out var m)){
+                    float distance = Mathf.Abs((col.transform.position-pointerIndicator.transform.position).sqrMagnitude);
+                    if(distance < minDistance){
+                        minDistance = distance;
+                        closest = col.gameObject;
+                    }
+                }
+            }
+            if (closest.GetComponent<MapTile>().isOccupied){
+                canPlace = false;
+            }
+            if(canPlace){
+                GameObject road = Instantiate(objectToPlace, pointerIndicator.transform.position, Quaternion.identity);
+                closest.GetComponent<MapTile>().placedObject = road;
+                closest.GetComponent<MapTile>().isOccupied = true;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0)) {
-            beginPlacingContinuousObjects = false;
+    }
+
+    void DeleteContinuousObjects(){
+        GameObject pointerIndicator = pointer.GetComponent<PointerDetector>().indicator;
+        if (Input.GetKey(KeyCode.Mouse0)){
+            Collider[] cols = Physics.OverlapSphere(pointerIndicator.transform.position, 0.1f, LayerMask.GetMask("Ground"));
+            foreach (Collider col in cols){
+                if(col.TryGetComponent<MapTile>(out var m)){
+                    if(m.placedObject != null && m.placedObject.TryGetComponent<Road>(out var r)){
+                        Destroy(r.gameObject);
+                        m.isOccupied = false;
+                        m.placedObject = null;
+                    }
+                }
+            }
         }
+    }
+
+    public void SetRoadsPlaceMode(){
+        isPlacingContinousObjects = true;
+    }
+
+    public void SetRoadsDeleteMode(){
+        isPlacingContinousObjects = false;
     }
 
     public GameObject GetCurrentlyPlacing()

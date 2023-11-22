@@ -33,10 +33,12 @@ public class ItemUI : MonoBehaviour
         if (quantity == 0)
         {
             gameObject.GetComponent<Button>().interactable = false;
+            transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f,0.5f,0.5f);
         }
         else
         {
             gameObject.GetComponent<Button>().interactable = true;
+            transform.GetChild(0).GetComponent<Image>().color = new Color(1f,1f,1f);
         }
         return quantity;
     }
@@ -47,10 +49,6 @@ public class ItemUI : MonoBehaviour
         inventoryManager.UpdateItemQuantityToServer(itemID, -1);
         quantity = quantity - 1;
         quantityText.text = quantity.ToString();
-        if (quantity == 0)
-        {
-            gameObject.GetComponent<Button>().interactable = false;
-        }
         UpdateItemQuantity();
     }
 
@@ -59,10 +57,6 @@ public class ItemUI : MonoBehaviour
         inventoryManager.UpdateItemQuantityToServer(itemID, 1);
         quantity = quantity + 1;
         quantityText.text = quantity.ToString();
-        if (quantity > 0)
-        {
-            gameObject.GetComponent<Button>().interactable = true;
-        }
         UpdateItemQuantity();
     }
 
