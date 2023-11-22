@@ -25,13 +25,14 @@ public class House : PlaceableObject
     void Start()
     {
         currentlyColliding = new List<GameObject>();
-        adjacentTiles = new List<GameObject>();
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
     }
-    void Update() {
+
+    // Update is called once per frame
+    void Update()
+    {
         currentlyColliding = GetCollidingTiles();
-        adjacentTiles = GetAdjacentTiles();
         canBePlaced = CanBePlaced();
         if (isHovering) {
             if (canBePlaced) {

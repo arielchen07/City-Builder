@@ -13,13 +13,12 @@ public class PowerGenerator : PlaceableObject, IProvider
     void Start()
     {
         currentlyColliding = new List<GameObject>();
-        adjacentTiles = new List<GameObject>();
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
+        housesInRange = new List<GameObject>();
     }
     void Update() {
         currentlyColliding = GetCollidingTiles();
-        adjacentTiles = GetAdjacentTiles();
         canBePlaced = CanBePlaced();
         if (isHovering) {
             if (canBePlaced) {
