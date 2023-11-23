@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
     public GameObject content;
     public PlacementSystem ps;
     public InventoryManager inventoryManager;
+    public GameObject cover;
     // Start is called before the first frame update
     void Start()
     {
@@ -127,5 +128,9 @@ public class MenuManager : MonoBehaviour
 
     public bool GetIsRightMenuOpen(){
         return isRightMenuOpen;
+    }
+
+    public void DestroyCover(){
+        Destroy(cover);
     }
 }
