@@ -29,6 +29,8 @@ public class Login : MonoBehaviour{
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private Toggle serverToggle;
+    public CloudManager cloudManager;
+    public Animator anim;
     //[SerializeField] private Transform loginWindowTransform;
     //[SerializeField] private Transform loginBackgroundTransform;  
 
@@ -79,7 +81,7 @@ public class Login : MonoBehaviour{
         passwordInputField.text = "";  // Clear the password field
         loginButton.interactable = true;
         signupButton.interactable = true;
-        alertText.text = "LOG IN";
+        alertText.text = "Welcome";
     }
 
     private void Update(){
@@ -162,7 +164,8 @@ public class Login : MonoBehaviour{
                 loginButton.interactable = false;
               
                 //StartCoroutine(MoveLoginWindowUp());
-                SceneManager.LoadScene("MainScene");
+                //SceneManager.LoadScene("MainScene");
+                StartLoginAnimations();
             }
             else
             {
@@ -255,7 +258,8 @@ public class Login : MonoBehaviour{
                     Debug.Log("MapID: " + GlobalVariables.MapID);
                     
                     GlobalVariables.IsNewUser = true;
-                    SceneManager.LoadScene("MainScene");
+                    StartLoginAnimations();
+                    //SceneManager.LoadScene("MainScene");
 
                 }
                 else
@@ -270,6 +274,11 @@ public class Login : MonoBehaviour{
             }
 
         
+    }
+
+    public void StartLoginAnimations(){
+        cloudManager.OnLogin();
+        anim.SetTrigger("login");
     }
 
     //private IEnumerator MoveLoginWindowUp()

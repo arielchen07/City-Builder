@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlaceableObject : MonoBehaviour
 {
     public List<GameObject> currentlyColliding;
+    public List<GameObject> adjacentTiles;
     public GameObject HoverValid;
     public GameObject HoverInvalid;
     public Vector3 worldCenter;
@@ -24,6 +25,7 @@ public class PlaceableObject : MonoBehaviour
     void Start()
     {
         currentlyColliding = new List<GameObject>();
+        adjacentTiles = new List<GameObject>();
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
     }
@@ -32,6 +34,7 @@ public class PlaceableObject : MonoBehaviour
     void Update()
     {
         currentlyColliding = GetCollidingTiles();
+        adjacentTiles = GetAdjacentTiles();
         canBePlaced = CanBePlaced();
         if (isHovering) {
             if (canBePlaced) {
@@ -59,6 +62,16 @@ public class PlaceableObject : MonoBehaviour
                 }
             }
         }
+        bool hasRoad = false;
+        foreach(GameObject adjacentTile in adjacentTiles){
+            MapTile tile = adjacentTile.GetComponent<MapTile>();
+            if (tile.placedObject != null && tile.placedObject.TryGetComponent<Road>(out var r)){
+                hasRoad = true;
+            }
+        }
+        if(!hasRoad){
+            return false;
+        }
         return true;
     }
 
@@ -76,6 +89,22 @@ public class PlaceableObject : MonoBehaviour
             }   
         }
         return currentlyColliding;
+    }
+
+    public List<GameObject> GetAdjacentTiles(){
+        adjacentTiles.Clear();
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
+        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
+        
+        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents + new Vector3(1,0,1), collider.transform.rotation);
+        foreach(Collider col in cols){
+            if(col.CompareTag("Tile"))
+            {
+                adjacentTiles.Add(col.gameObject);
+            }   
+        }
+        return adjacentTiles;
     }
     public void OnPlace() {
         UtilitiesManager.utilManager.UpdateUtilities();

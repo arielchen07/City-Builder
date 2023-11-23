@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyColliding: []
+  adjacentTiles: []
   HoverValid: {fileID: 3478956617698699891}
   HoverInvalid: {fileID: 902055142380289558}
   worldCenter: {x: 0, y: 0, z: 0}
@@ -173,11 +174,11 @@ MonoBehaviour:
   displayName: Coal Plant
   category: energy
   item: {fileID: 0}
+  isActive: 1
   serviceRange: {fileID: 5630164164284756430}
   maxPower: 50
   currPowerAllocated: 0
-  updateInterval: 2
-  timer: 0
+  housesInRange: []
 --- !u!1 &3478956617698699891
 GameObject:
   m_ObjectHideFlags: 0
