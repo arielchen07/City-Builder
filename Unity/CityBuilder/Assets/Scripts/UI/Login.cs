@@ -81,7 +81,7 @@ public class Login : MonoBehaviour{
         passwordInputField.text = "";  // Clear the password field
         loginButton.interactable = true;
         signupButton.interactable = true;
-        alertText.text = "Sign In";
+        alertText.text = "LOG IN";
     }
 
     private void Update(){
