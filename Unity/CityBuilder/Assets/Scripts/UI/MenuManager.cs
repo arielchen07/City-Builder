@@ -7,10 +7,14 @@ public class MenuManager : MonoBehaviour
     public GameObject inventory;
     public GameObject rightMenu;
     public GameObject utilSubMenu;
+    public GameObject roadMenu;
+    public Image placeRoads;
+    public Image deleteRoads;
     bool inventoryIsOpen = false;
     bool isSubMenuOpen = false;
     bool isRightMenuOpen = true;
     bool inventoryWasOpen = false;
+    bool isRoadMenuOpen = false;
     public List<GameObject> roads;
     public List<GameObject> housing;
     public List<GameObject> power;
@@ -118,6 +122,26 @@ public class MenuManager : MonoBehaviour
         subMenu.GetComponent<Animator>().SetBool("isOpen", isSubMenuOpen);
     }
 
+    public void ToggleRightMenu(){
+        isRightMenuOpen = !isRightMenuOpen;
+        rightMenu.GetComponent<Animator>().SetTrigger("toggle");
+        rightMenu.GetComponent<Animator>().SetBool("isOpen", isRightMenuOpen);
+    }
+
+    public void ToggleRoadMenu(){
+        isRoadMenuOpen = !isRoadMenuOpen;
+        roadMenu.GetComponent<Animator>().SetTrigger("toggle");
+        roadMenu.GetComponent<Animator>().SetBool("isOpen", isRoadMenuOpen);
+    }
+    public void ToggleRoadPlacementModeButtonVisual(bool isPlacing){
+        if(isPlacing){
+            placeRoads.color = new Color(1,1,1);
+            deleteRoads.color = new Color(0.5f,0.5f,0.5f);
+        }else {
+            placeRoads.color = new Color(0.5f,0.5f,0.5f);
+            deleteRoads.color = new Color(1,1,1);
+        }
+    }
     public bool GetInventoryIsOpen(){
         return inventoryIsOpen;
     }
