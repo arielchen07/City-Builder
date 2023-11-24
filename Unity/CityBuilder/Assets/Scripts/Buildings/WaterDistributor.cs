@@ -48,9 +48,9 @@ public class WaterDistributor : PlaceableObject, IProvider
                 int waterNeeded = h.waterCost - h.waterAllocated;
                 if (currWaterAllocated + waterNeeded <= maxWater) {         //can fill up
                     currWaterAllocated += waterNeeded;
-                    h.internetAllocated = h.internetCost;
+                    h.waterAllocated = h.waterCost;
                 } else {                                                    //can't fully fill up
-                    h.internetAllocated = maxWater - currWaterAllocated;    // the remaining left in this distributor
+                    h.waterAllocated = maxWater - currWaterAllocated;    // the remaining left in this distributor
                     currWaterAllocated = maxWater;
                 }
                 h.UpdatePopulation();

@@ -9,7 +9,9 @@ public class CloudManager : MonoBehaviour
     public float moveSpeed;
     public float spawnInterval;
     float timer = 0;
-    float dayCycle = 24;
+    public float dayCycle = 24;
+    public Vector2 zRange;
+    public float xOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +22,16 @@ public class CloudManager : MonoBehaviour
     void Update()
     {
         if (Time.time > timer){
-            timer += spawnInterval;
-            float z = Random.Range(-15f,10f);
+            timer = Time.time + spawnInterval;
+            float z = Random.Range(zRange.x,zRange.y);
             float y = Random.Range(3.5f,4.5f);
-            Vector3 spawnLocation = new Vector3(12, y, z);
+            Vector3 spawnLocation = new Vector3(xOffset + Camera.main.transform.position.x, y, z + Camera.main.transform.position.z);
             GameObject c = Instantiate(cloud, spawnLocation, Quaternion.identity);
             Vector3 scale = new Vector3(Random.Range(1f,1.5f),Random.Range(0.2f,0.5f),Random.Range(1f,1.5f));
             c.transform.localScale = scale;
             float x = Random.Range(1f,2f);
             c.GetComponent<Rigidbody>().velocity = new Vector3(-x * moveSpeed, 0, 0);
-            Destroy(c, 30f);
+            Destroy(c, 60f / x);
         }
         dirLight.GetComponent<Light>().intensity = 0.2f + Mathf.PingPong(Time.time + 24, dayCycle) / dayCycle;
     }

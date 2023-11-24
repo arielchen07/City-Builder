@@ -62,7 +62,7 @@ public class PlacementSystem : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0)) {
                     if (currentlyHovering.CompareTag("Object")) {
                         SelectObject();
-                    } else if (currentlySelecting != null && currentlyPlacing != null){
+                    } else if (currentlySelecting != null){
                         DeselectObject();
                     }
                 }

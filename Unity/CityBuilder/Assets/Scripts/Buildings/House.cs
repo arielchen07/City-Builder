@@ -28,6 +28,7 @@ public class House : PlaceableObject
         adjacentTiles = new List<GameObject>();
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
+        UpdatePopulation();
     }
     void Update() {
         currentlyColliding = GetCollidingTiles();
