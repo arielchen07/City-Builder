@@ -106,11 +106,11 @@ public class PlaceableObject : MonoBehaviour
         }
         return adjacentTiles;
     }
-    public void OnPlace() {
+    public virtual void OnPlace() {
         UtilitiesManager.utilManager.UpdateUtilities();
     }
 
-    public void OnDelete(){
+    public virtual void OnDelete(){
         isActive = false;
         UtilitiesManager.utilManager.UpdateUtilities();
     }
