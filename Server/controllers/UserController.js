@@ -29,12 +29,20 @@ const register = async(req, res) => {
         const item5 = await Item.create({userID: user._id, quantity:2, category: "water", name: "waterTower"});
         const item6 = await Item.create({userID: user._id, quantity:2, category: "sewage", name: "sewageTreatment"});
 
+        const item7 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "wood"});
+        const item8 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "stone"});
+        const item9 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "metal"});
+
         user.items.push(item1._id);
         user.items.push(item2._id);
         user.items.push(item3._id);
         user.items.push(item4._id);
         user.items.push(item5._id);
         user.items.push(item6._id);
+
+        user.items.push(item7._id);
+        user.items.push(item8._id);
+        user.items.push(item9._id);
 
         user.status = "online";
         await user.save();

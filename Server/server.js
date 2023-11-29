@@ -38,7 +38,7 @@ const app = express();
 
 // Middleware setup
 app.use(morgan('dev'));
-app.use(express.json()); // For parsing JSON
+app.use(express.json({limit: '10mb'})); // For parsing JSON, request body size limit = 10MB
 // app.use(express.urlencoded({ extended: true})); // For parsing URL-encoded data
 app.use(pino);
 app.use(cors());

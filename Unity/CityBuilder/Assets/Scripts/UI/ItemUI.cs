@@ -43,7 +43,7 @@ public class ItemUI : MonoBehaviour
         return quantity;
     }
 
-    public void PlaceItem(){
+    public void TakeItem(){
         itemID = InventoryInfo.GetItemID(itemName, category);
         print("itemID: " + itemID);
         inventoryManager.UpdateItemQuantityToServer(itemID, -1);
@@ -52,7 +52,7 @@ public class ItemUI : MonoBehaviour
         UpdateItemQuantity();
     }
 
-    public void RecycleItem(){
+    public void StoreItem(){
         itemID = InventoryInfo.GetItemID(itemName, category);
         inventoryManager.UpdateItemQuantityToServer(itemID, 1);
         quantity = quantity + 1;

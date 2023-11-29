@@ -70,7 +70,7 @@ public class MenuManager : MonoBehaviour
             GameObject newButton = Instantiate(button, content.transform);
             newButton.GetComponent<ItemUI>().inventoryManager = inventoryManager;
             newButton.GetComponent<Button>().onClick.AddListener(() => ps.HoverObject(newButton));
-            newButton.GetComponent<Button>().onClick.AddListener(() => newButton.GetComponent<ItemUI>().PlaceItem());
+            newButton.GetComponent<Button>().onClick.AddListener(() => newButton.GetComponent<ItemUI>().TakeItem());
         }
     }
     public void CloseInventory(){
