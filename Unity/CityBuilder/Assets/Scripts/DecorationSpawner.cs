@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecorationManager : MonoBehaviour
+public class DecorationSpawner : MonoBehaviour
 {
     public InventoryList inventory;
     private List<MapTile> availableTiles;
 
     void Start()
+    {
+
+    }
+
+    public void SpawnDecoration()
     {
         availableTiles = new List<MapTile>();
         GameObject[] allTiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -21,11 +26,6 @@ public class DecorationManager : MonoBehaviour
                 availableTiles.Add(tileScript);
             }
         }
-    }
-
-    public void SpawnDecoration()
-    {
-        Debug.Log("HI");
         List<GameObject> decorations = inventory.inventoryLst.FindAll(item => item.tag == "Decoration");
 
         if (availableTiles.Count > 0)

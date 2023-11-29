@@ -6,7 +6,7 @@ public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryList inventory;
-    public DecorationManager decorationManager;
+    public DecorationSpawner decorationSpawner;
     public PlacementSystem placementSystem;
     public InputManager inputManager;
     public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3"});
@@ -72,7 +72,7 @@ public class MapDataManager : MonoBehaviour
         if (Time.timeSinceLevelLoad > timer)
         {
             timer = Time.timeSinceLevelLoad + interval;
-            decorationManager.SpawnDecoration();
+            decorationSpawner.SpawnDecoration();
             if (!string.IsNullOrEmpty(GlobalVariables.MapID))
             {
                 print("save start");
