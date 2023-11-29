@@ -6,10 +6,11 @@ public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryList inventory;
+    public DecorationManager decorationManager;
     public PlacementSystem placementSystem;
     public InputManager inputManager;
-    public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3" });
-    public HashSet<string> DECOR = new HashSet<string>(new string[] { "tree1", "tree2", "treeWall1" });
+    public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3"});
+    public HashSet<string> DECOR = new HashSet<string>(new string[] { "tree1", "tree2", "treeWall1", "rock1", "treeLarge1" });
     public int WIDTH = 10;
     public int LENGTH = 10;
     public float WATER_PERCENTAGE = 30f;
@@ -70,8 +71,8 @@ public class MapDataManager : MonoBehaviour
 
         if (Time.timeSinceLevelLoad > timer)
         {
-            print("more");
             timer = Time.timeSinceLevelLoad + interval;
+            decorationManager.SpawnDecoration();
             if (!string.IsNullOrEmpty(GlobalVariables.MapID))
             {
                 print("save start");
