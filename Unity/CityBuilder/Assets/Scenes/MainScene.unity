@@ -862,9 +862,9 @@ MonoBehaviour:
   HoverValid: {fileID: 276143802}
   HoverInvalid: {fileID: 946919407}
   pointer: {fileID: 1062023144}
-  diameter: 3
   inputManager: {fileID: 1137430705}
   resourceDataManager: {fileID: 1711028920}
+  harvesterManager: {fileID: 716432995}
 --- !u!4 &167926338
 Transform:
   m_ObjectHideFlags: 0
@@ -878,8 +878,9 @@ Transform:
   m_Children:
   - {fileID: 276143805}
   - {fileID: 946919410}
+  - {fileID: 716432996}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &177077776 stripped
 Transform:
@@ -3833,9 +3834,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bb11343a5976b47a8b301a34c29493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numTreeHarvester: 0
+  numTreeHarvester: 1
   numOccupiedTreeHarvesters: 0
-  numRockHarvester: 0
+  numRockHarvester: 1
   numOccupiedRockHarvesters: 0
 --- !u!4 &716432996
 Transform:
@@ -3844,12 +3845,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716432994}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.0393157, y: -5.5612555, z: 0.46743345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 167926338}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &740489908
 PrefabInstance:
@@ -7211,7 +7212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1132317292 stripped
 RectTransform:
@@ -10564,7 +10565,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604651367
 GameObject:
@@ -11498,7 +11499,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1723456095
 PrefabInstance:
