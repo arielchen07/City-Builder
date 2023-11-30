@@ -21,7 +21,9 @@ public class MenuManager : MonoBehaviour
     public List<GameObject> sewage;
     public List<GameObject> water;
     public List<GameObject> internet;
+    public List<GameObject> gas;
     public List<GameObject> harvester;
+    public List<GameObject> government;
     public GameObject content;
     public PlacementSystem ps;
     public InventoryManager inventoryManager;
@@ -60,8 +62,14 @@ public class MenuManager : MonoBehaviour
             case "internet":  
                 buttonList = internet;
             break;
+            case "gas":  
+                buttonList = gas;
+            break;
             case "harvester":
                 buttonList = harvester;
+                break;
+            case "government":
+                buttonList = government;
                 break;
             default:
                 buttonList = housing;
