@@ -17,17 +17,6 @@ public class HarvesterManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
-
     public void AddTreeHarvester(){
         numTreeHarvester += 1;
     }

@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5715903204428083980}
   - component: {fileID: 2126274610721873295}
   m_Layer: 5
-  m_Name: LumberYard
+  m_Name: LumberYardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
