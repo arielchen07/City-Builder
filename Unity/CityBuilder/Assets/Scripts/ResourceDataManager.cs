@@ -10,7 +10,7 @@ public class ResourceDataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("UpdateCounts", 0, 1f);
+        InvokeRepeating("UpdateCounts", 0, 1f);
     }
 
     // Update is called once per frame
