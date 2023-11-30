@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class HarvestSystem : MonoBehaviour
 {
-    private bool isHoverMode = false;
+    private bool isHovering = false;
     private List<GameObject> hoveredTiles = new List<GameObject>();
     public GameObject HoverValid;
     public GameObject HoverInvalid;
     [SerializeField] private GameObject pointer;
     public int diameter = 3;
     public InputManager inputManager;
-    // Start is called before the first frame update
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
+        HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
+
+        HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
         if (Input.GetKeyDown(KeyCode.X))
         {
-            isHoverMode = !isHoverMode;
+            isHovering = !isHovering;
 
-            if (isHoverMode)
+            if (isHovering)
             {
-                HighlightTiles();
+                Highlight();
             }
             else
             {
@@ -35,13 +37,22 @@ public class HarvestSystem : MonoBehaviour
         }
     }
 
-    void HighlightTiles()
+    void Highlight()
     {
+        HoverValid.SetActive(true);
         
     }
 
     void Harvest()
-    {/*
+    {
+        HoverValid.SetActive(false);
+        HoverInvalid.SetActive(false);
+        GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
+        centerTile.GetComponent<MapTile>().isOccupied = false;
+        
+
+
+        /*
         // Get the center tile from the mouse position or hovered tile
         Vector3Int centerTilePos = pointer.GetComponent<PointerDetector>().indicator.transform.position;
 
