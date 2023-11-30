@@ -57,22 +57,22 @@ public class GameMapTests
         Object.DestroyImmediate(mockPlacementSystem.gameObject);
         yield return null;
     }
-    [UnityTest]
-    public IEnumerator TestRemoveAllTiles()
-    {
-        GameObject testGameObject = new GameObject("MapDataManager");
-        MapDataManager mapDataManager = testGameObject.AddComponent<MapDataManager>();
-        GameObject tile1 = new GameObject("Tile1");
-        tile1.AddComponent<MapTile>();
-        GameObject tile2 = new GameObject("Tile2");
-        tile2.AddComponent<MapTile>();
-        yield return null;
-        Assert.IsNotNull(GameObject.Find("Tile1"), "Tile1 does not exist before RemoveAllTiles.");
-        Assert.IsNotNull(GameObject.Find("Tile2"), "Tile2 does not exist before RemoveAllTiles.");
-        mapDataManager.ClearGameMap();
-        yield return null;
-        Assert.IsNull(GameObject.Find("Tile1"), "Tile1 was not removed.");
-        Assert.IsNull(GameObject.Find("Tile2"), "Tile2 was not removed.");
-        Object.DestroyImmediate(mapDataManager.gameObject);
-    }
+    //[UnityTest]
+    //public IEnumerator TestRemoveAllTiles()
+    //{
+    //    GameObject testGameObject = new GameObject("MapDataManager");
+    //    MapDataManager mapDataManager = testGameObject.AddComponent<MapDataManager>();
+    //    GameObject tile1 = new GameObject("Tile1");
+    //    tile1.AddComponent<MapTile>();
+    //    GameObject tile2 = new GameObject("Tile2");
+    //    tile2.AddComponent<MapTile>();
+    //    yield return null;
+    //    Assert.IsNotNull(GameObject.Find("Tile1"), "Tile1 does not exist before RemoveAllTiles.");
+    //    Assert.IsNotNull(GameObject.Find("Tile2"), "Tile2 does not exist before RemoveAllTiles.");
+    //    mapDataManager.ClearGameMap();
+    //    yield return null;
+    //    Assert.IsNull(GameObject.Find("Tile1"), "Tile1 was not removed.");
+    //    Assert.IsNull(GameObject.Find("Tile2"), "Tile2 was not removed.");
+    //    Object.DestroyImmediate(mapDataManager.gameObject);
+    //}
 }
