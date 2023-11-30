@@ -9,7 +9,6 @@ public class PlacementSystem : MonoBehaviour
     public int testInt = 10;
     [SerializeField] private GameObject pointer;
     [SerializeField] private InputManager inputManager;
-    [SerializeField] private GameObject[] placeableObjects;
     public GameObject road;
     public GameObject currentlyPlacing;
     public GameObject currentlySelecting;
