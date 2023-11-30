@@ -28,11 +28,9 @@ public class UtilitiesManager : MonoBehaviour
             }
         }
         foreach (GameObject h in houses){
-            Debug.Log("resetting: " + h.name);
             h.GetComponent<House>().ResetUtilities();
         }
         foreach (GameObject p in providers){
-            Debug.Log("allocating: " + p.name);
             p.GetComponent<IProvider>().Allocate();
         }
     }

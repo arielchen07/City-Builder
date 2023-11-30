@@ -6,16 +6,17 @@ public class MapDataManager : MonoBehaviour
 {
     public SaveFile saveSystem;
     public InventoryList inventory;
+    public DecorationSpawner decorationSpawner;
     public PlacementSystem placementSystem;
     public InputManager inputManager;
-    public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3" });
-    public HashSet<string> DECOR = new HashSet<string>(new string[] { "tree1", "tree2", "treeWall1" });
+    public HashSet<string> TILES = new HashSet<string>(new string[] { "grass1", "grass2", "grass3"});
+    public HashSet<string> DECOR = new HashSet<string>(new string[] { "tree1", "tree2", "treeWall1", "rock1", "treeLarge1" });
     public int WIDTH = 10;
     public int LENGTH = 10;
     public float WATER_PERCENTAGE = 30f;
     public int TREES_PER_TILE = 5;
     float timer = 3;
-    float interval = 2f;
+    public float interval = 2f;
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
@@ -70,8 +71,8 @@ public class MapDataManager : MonoBehaviour
 
         if (Time.timeSinceLevelLoad > timer)
         {
-            print("more");
             timer = Time.timeSinceLevelLoad + interval;
+            decorationSpawner.SpawnDecoration();
             if (!string.IsNullOrEmpty(GlobalVariables.MapID))
             {
                 print("save start");
@@ -123,8 +124,8 @@ public class MapDataManager : MonoBehaviour
         List<GameObject> tileObjects = GetObjectsByName(inventory.inventoryLst, TILES);
         List<GameObject> decors = GetObjectsByName(inventory.inventoryLst, DECOR);
 
-        float[,] tileGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 3); /// the last parameter is the scale, the higher it is, the more "zoomed out" and less detailed it is
-        float[,] decorGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 6);
+        float[,] tileGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 7); /// the last parameter is the scale, the higher it is, the more "zoomed out" and less detailed it is
+        float[,] decorGrid = GeneratePerlinNoiseGrid(WIDTH + 1, LENGTH + 1, 15);
 
         for (int x = 0; x < WIDTH + 1; x++)
         {
