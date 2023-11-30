@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ResourceDataManager : MonoBehaviour
 {
-    public int woodCount = 0;
-    public int stoneCount = 0;
+    public int woodCount;
+    public int stoneCount;
     public InventoryManager inventoryManager;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,8 @@ public class ResourceDataManager : MonoBehaviour
     {
         int wood = InventoryInfo.GetItemQuantity("wood", "resource");
         int stone = InventoryInfo.GetItemQuantity("stone", "resource");
-        Debug.Log("wood = " + wood.ToString() + ", stone = " + stone.ToString());
+        woodCount = wood;
+        stoneCount = stone;
     }
 
     public void ConsumeResource(string itemName, int consumedCount)
