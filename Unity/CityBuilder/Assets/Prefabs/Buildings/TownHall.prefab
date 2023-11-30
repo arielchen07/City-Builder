@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2763284084424204598}
   - component: {fileID: 5350509562647772516}
   - component: {fileID: 6177155832838749129}
-  - component: {fileID: 6414273461608048124}
+  - component: {fileID: 4413774682136122977}
   m_Layer: 3
   m_Name: TownHall
   m_TagString: Object
@@ -147,7 +147,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6414273461608048124
+--- !u!114 &4413774682136122977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,29 +156,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3402843517139241138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2823f94b1af1d464685f8d3ab4d85c03, type: 3}
+  m_Script: {fileID: 11500000, guid: 481b5972a41d5194fb07bbc394964bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentlyColliding: []
-  adjacentTiles: []
-  HoverValid: {fileID: 3478956617698699891}
-  HoverInvalid: {fileID: 902055142380289558}
-  worldCenter: {x: 0, y: 0, z: 0}
-  worldHalfExtents: {x: 0, y: 0, z: 0}
-  dimensions: {x: 2, y: 2}
-  canBePlaced: 0
-  isHovering: 0
-  evenDimensions: 1
-  hasBeenPlaced: 0
-  objectName: coalPlant
-  displayName: Coal Plant
-  category: energy
-  item: {fileID: 0}
-  isActive: 1
-  serviceRange: {fileID: 5630164164284756430}
-  maxPower: 50
-  currPowerAllocated: 0
-  housesInRange: []
+  interval: 10
+  timer: 0
+  coinPerCapita: 10
 --- !u!1 &3478956617698699891
 GameObject:
   m_ObjectHideFlags: 0
