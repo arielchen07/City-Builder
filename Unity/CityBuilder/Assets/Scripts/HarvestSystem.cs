@@ -11,74 +11,86 @@ public class HarvestSystem : MonoBehaviour
     [SerializeField] private GameObject pointer;
     public int diameter = 3;
     public InputManager inputManager;
-
+    List<GameObject> currentlyColliding;
     void Start()
     {
-
+        currentlyColliding = new List<GameObject>();
     }
 
     void Update()
     {
         HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
-
         HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             isHovering = !isHovering;
 
-            if (isHovering)
+            if (!isHovering)
             {
-                Highlight();
+                if (currentlyColliding.Count > 0)
+                {
+                    Debug.Log("Harvest");
+                    Harvest();
+                }
+                else
+                {
+                    HoverInvalid.SetActive(false);
+                }
+                
             }
-            else
-            {
-                Harvest();
-            }
+        }
+
+        if (isHovering)
+        {
+            Debug.Log("Hovering");
+            Highlight();
         }
     }
 
     void Highlight()
     {
-        HoverValid.SetActive(true);
-        
+        GetCollidingDecorations();
+        if (currentlyColliding.Count > 0)
+        {
+            Debug.Log("1");
+            HoverValid.SetActive(true);
+            HoverInvalid.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("2");
+            HoverInvalid.SetActive(true);
+            HoverValid.SetActive(false);
+        }
     }
 
     void Harvest()
     {
         HoverValid.SetActive(false);
-        HoverInvalid.SetActive(false);
         GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
         centerTile.GetComponent<MapTile>().isOccupied = false;
-        
-
-
-        /*
-        // Get the center tile from the mouse position or hovered tile
-        Vector3Int centerTilePos = pointer.GetComponent<PointerDetector>().indicator.transform.position;
-
-        // Calculate the bounds of the 3x3 area based on the center tile
-        Vector3Int minTileBounds = centerTilePos - new Vector3Int(1, 1, 0);
-        Vector3Int maxTileBounds = centerTilePos + new Vector3Int(1, 1, 0);
-
-        for (int x = minTileBounds.x; x <= maxTileBounds.x; x++)
+        foreach (GameObject decor in currentlyColliding)
         {
-            for (int y = minTileBounds.y; y <= maxTileBounds.y; y++)
+            Destroy(decor);
+        }
+        currentlyColliding.Clear();
+    }
+
+    private void GetCollidingDecorations()
+    {
+        currentlyColliding.Clear();
+        BoxCollider collider = HoverValid.GetComponent<BoxCollider>();
+        Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
+        Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
+
+        Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, collider.transform.rotation);
+        foreach (Collider col in cols)
+        {
+            if (col.CompareTag("Decoration"))
             {
-                Vector3Int currentTilePos = new Vector3Int(x, y, 0);
-                // Check if the tile is within your tilemap and get the MapTile script
-                MapTile mapTile = GetMapTileAtPosition(currentTilePos);
-                if (mapTile != null && mapTile.isOccupied)
-                {
-                    // Remove the decoration
-                    Destroy(mapTile.placedObject);
-                    // Reset the tile's isOccupied property
-                    mapTile.isOccupied = false;
-                    mapTile.placedObject = null;
-                }
+                currentlyColliding.Add(col.gameObject);
             }
         }
-
-        // Clear the highlighted tiles after removing decorations
-        ClearHighlightedTiles();*/
     }
 }

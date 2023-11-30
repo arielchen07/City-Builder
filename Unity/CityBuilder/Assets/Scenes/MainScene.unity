@@ -1407,6 +1407,7 @@ GameObject:
   - component: {fileID: 276143805}
   - component: {fileID: 276143804}
   - component: {fileID: 276143803}
+  - component: {fileID: 276143806}
   m_Layer: 0
   m_Name: HoverValid
   m_TagString: Untagged
@@ -1477,6 +1478,19 @@ Transform:
   m_Father: {fileID: 167926338}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &276143806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276143802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &282862950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 211771763075448818, guid: 27756ec1c285fe0429b7c4a8c39f54d1, type: 3}
@@ -5462,6 +5476,7 @@ GameObject:
   - component: {fileID: 946919410}
   - component: {fileID: 946919409}
   - component: {fileID: 946919408}
+  - component: {fileID: 946919411}
   m_Layer: 0
   m_Name: HoverInvalid
   m_TagString: Untagged
@@ -5532,6 +5547,19 @@ Transform:
   m_Father: {fileID: 167926338}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &946919411
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946919407}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &949580057
 GameObject:
   m_ObjectHideFlags: 0
