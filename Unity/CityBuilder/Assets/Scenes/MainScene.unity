@@ -9991,10 +9991,10 @@ MonoBehaviour:
   decorationSpawner: {fileID: 1586827660}
   placementSystem: {fileID: 1223942980}
   inputManager: {fileID: 1137430705}
-  WIDTH: 10
-  LENGTH: 10
+  WIDTH: 100
+  LENGTH: 100
   WATER_PERCENTAGE: 30
-  TREES_PER_TILE: 5
+  TREES_PER_TILE: 7
 --- !u!4 &1586827659
 Transform:
   m_ObjectHideFlags: 0
