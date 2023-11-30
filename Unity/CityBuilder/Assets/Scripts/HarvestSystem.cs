@@ -5,16 +5,19 @@ using UnityEngine;
 public class HarvestSystem : MonoBehaviour
 {
     private bool isHovering = false;
-    private List<GameObject> hoveredTiles = new List<GameObject>();
     public GameObject HoverValid;
     public GameObject HoverInvalid;
     [SerializeField] private GameObject pointer;
-    public int diameter = 3;
     public InputManager inputManager;
-    List<GameObject> currentlyColliding;
+    List<GameObject> treesColliding;
+    List<GameObject> rocksColliding;
+    public ResourceDataManager resourceDataManager;
+    public HarvesterManager harvesterManager;
+
     void Start()
     {
-        currentlyColliding = new List<GameObject>();
+        treesColliding = new List<GameObject>();
+        rocksColliding = new List<GameObject>();
     }
 
     void Update()
@@ -28,9 +31,8 @@ public class HarvestSystem : MonoBehaviour
 
             if (!isHovering)
             {
-                if (currentlyColliding.Count > 0)
+                if (HoverValid.activeSelf == true)
                 {
-                    Debug.Log("Harvest");
                     Harvest();
                 }
                 else
@@ -43,7 +45,6 @@ public class HarvestSystem : MonoBehaviour
 
         if (isHovering)
         {
-            Debug.Log("Hovering");
             Highlight();
         }
     }
@@ -51,15 +52,13 @@ public class HarvestSystem : MonoBehaviour
     void Highlight()
     {
         GetCollidingDecorations();
-        if (currentlyColliding.Count > 0)
+        if (treesColliding.Count > 0 && harvesterManager.numTreeHarvester - harvesterManager.numOccupiedTreeHarvesters > 0 || rocksColliding.Count > 0 && harvesterManager.numRockHarvester - harvesterManager.numOccupiedRockHarvesters > 0)
         {
-            Debug.Log("1");
             HoverValid.SetActive(true);
             HoverInvalid.SetActive(false);
         }
         else
         {
-            Debug.Log("2");
             HoverInvalid.SetActive(true);
             HoverValid.SetActive(false);
         }
@@ -70,16 +69,35 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.SetActive(false);
         GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
         centerTile.GetComponent<MapTile>().isOccupied = false;
-        foreach (GameObject decor in currentlyColliding)
+        int woodCount = 0;
+        int stoneCount = 0;
+        if (treesColliding.Count > 0 && harvesterManager.AddActiveTreeHarvester())
         {
-            Destroy(decor);
+            foreach (GameObject tree in treesColliding)
+            {
+                woodCount++;
+                Destroy(tree);
+            }
+            treesColliding.Clear();
         }
-        currentlyColliding.Clear();
+        if (rocksColliding.Count > 0 && harvesterManager.AddActiveRockHarvester())
+        {
+            foreach (GameObject rock in rocksColliding)
+            {
+                stoneCount++;
+                Destroy(rock);
+            }
+            rocksColliding.Clear();
+        }
+        Debug.Log("wood = " + woodCount.ToString() + "stone = " + stoneCount.ToString());
+        resourceDataManager.GainResource("wood", woodCount);
+        resourceDataManager.GainResource("stone", stoneCount);
     }
 
     private void GetCollidingDecorations()
     {
-        currentlyColliding.Clear();
+        treesColliding.Clear();
+        rocksColliding.Clear();
         BoxCollider collider = HoverValid.GetComponent<BoxCollider>();
         Vector3 worldCenter = collider.transform.TransformPoint(collider.center);
         Vector3 worldHalfExtents = Vector3.Scale(collider.size, collider.transform.lossyScale) * 0.5f;
@@ -89,7 +107,14 @@ public class HarvestSystem : MonoBehaviour
         {
             if (col.CompareTag("Decoration"))
             {
-                currentlyColliding.Add(col.gameObject);
+                if (col.gameObject.GetComponent<Decoration>().resourceType == "wood")
+                {
+                    treesColliding.Add(col.gameObject);
+                }
+                else if (col.gameObject.GetComponent<Decoration>().resourceType == "stone")
+                {
+                    rocksColliding.Add(col.gameObject);
+                }
             }
         }
     }
