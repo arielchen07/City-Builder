@@ -33,6 +33,10 @@ const register = async(req, res) => {
         const item8 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "stone"});
         const item9 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "metal"});
 
+        const item10 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "lumberYard"});
+        const item11 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "stoneQuary"});
+        const item12 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "coins"});
+
         user.items.push(item1._id);
         user.items.push(item2._id);
         user.items.push(item3._id);
@@ -43,6 +47,10 @@ const register = async(req, res) => {
         user.items.push(item7._id);
         user.items.push(item8._id);
         user.items.push(item9._id);
+
+        user.items.push(item10._id);
+        user.items.push(item11._id);
+        user.items.push(item12._id);
 
         user.status = "online";
         await user.save();
