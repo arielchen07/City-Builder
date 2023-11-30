@@ -5,13 +5,13 @@ using UnityEngine;
 public class HarvestSystem : MonoBehaviour
 {
     private bool isHovering = false;
-    private List<GameObject> hoveredTiles = new List<GameObject>();
     public GameObject HoverValid;
     public GameObject HoverInvalid;
     [SerializeField] private GameObject pointer;
-    public int diameter = 3;
     public InputManager inputManager;
     List<GameObject> currentlyColliding;
+    public ResourceDataManager resourceDataManager;
+
     void Start()
     {
         currentlyColliding = new List<GameObject>();
@@ -30,7 +30,6 @@ public class HarvestSystem : MonoBehaviour
             {
                 if (currentlyColliding.Count > 0)
                 {
-                    Debug.Log("Harvest");
                     Harvest();
                 }
                 else
@@ -43,7 +42,6 @@ public class HarvestSystem : MonoBehaviour
 
         if (isHovering)
         {
-            Debug.Log("Hovering");
             Highlight();
         }
     }
@@ -53,13 +51,11 @@ public class HarvestSystem : MonoBehaviour
         GetCollidingDecorations();
         if (currentlyColliding.Count > 0)
         {
-            Debug.Log("1");
             HoverValid.SetActive(true);
             HoverInvalid.SetActive(false);
         }
         else
         {
-            Debug.Log("2");
             HoverInvalid.SetActive(true);
             HoverValid.SetActive(false);
         }
@@ -70,11 +66,24 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.SetActive(false);
         GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
         centerTile.GetComponent<MapTile>().isOccupied = false;
+        int woodCount = 0;
+        int stoneCount = 0;
         foreach (GameObject decor in currentlyColliding)
         {
+            if (decor.GetComponent<Decoration>().resourceType == "wood")
+            {
+                woodCount++;
+            }
+            else if (decor.GetComponent<Decoration>().resourceType == "stone")
+            {
+                stoneCount++;
+            }
             Destroy(decor);
         }
         currentlyColliding.Clear();
+        Debug.Log("wood = " + woodCount.ToString() + "stone = " + stoneCount.ToString());
+        resourceDataManager.GainResource("wood", woodCount);
+        resourceDataManager.GainResource("stone", stoneCount);
     }
 
     private void GetCollidingDecorations()
