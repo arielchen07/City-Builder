@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class UtilitiesManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class UtilitiesManager : MonoBehaviour
         } else {
             utilManager = this;
         }
+    }
+    public void Start(){
+        UpdateUtilities();
     }
 
     public void UpdateUtilities(){

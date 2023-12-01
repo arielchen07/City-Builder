@@ -12,10 +12,12 @@ public class Logout : MonoBehaviour
 
     [SerializeField] private Button logoutButton;
     [SerializeField] private MapDataManager mapManager;
+    public GameObject logoutCover;
     // [SerializeField] private Transform loginBackgroundTransform; 
     // [SerializeField] private Transform loginWindowTransform;
     public void OnLogoutClick()
     {
+        logoutCover.SetActive(true);
         logoutButton.interactable = false;
         print("map id: " + GlobalVariables.MapID);
 

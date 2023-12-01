@@ -15,8 +15,11 @@ public class MapDataManager : MonoBehaviour
     public int LENGTH = 10;
     public float WATER_PERCENTAGE = 30f;
     public int TREES_PER_TILE = 5;
-    float timer = 3;
+    float timer = 0;
     public float interval;
+    public bool finish_loading_map;
+    public GameObject cover;
+    public GameObject cloudsOnLoad;
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
@@ -27,6 +30,9 @@ public class MapDataManager : MonoBehaviour
                 //LoadGameMapServer(); // will be changed to Generate game map
                 //SaveGameMapServer(GlobalVariables.MapID);
                 GenerateGameMap();
+                finish_loading_map = true;
+                cover.GetComponent<Animator>().SetTrigger("loadScene");
+                cloudsOnLoad.SetActive(true);
             }
             else
             {
@@ -69,7 +75,7 @@ public class MapDataManager : MonoBehaviour
         //print("timer: " + timer);
         //print("Time.deltaTime: " + Time.deltaTime);
 
-        if (Time.timeSinceLevelLoad > timer)
+        if (Time.timeSinceLevelLoad > timer && finish_loading_map)
         {
             timer = Time.timeSinceLevelLoad + interval;
             // decorationSpawner.SpawnDecoration();
@@ -271,6 +277,9 @@ public class MapDataManager : MonoBehaviour
         DrawTilesFromJson(mapObjs);
         DrawStructureObjects(mapObjs);
         DrawDecorFromJson(mapObjs);
+        finish_loading_map = true;
+        cover.GetComponent<Animator>().SetTrigger("loadScene");
+        cloudsOnLoad.SetActive(true);
     }
     public void DrawStructureObjects(MapSerialization mapObjs)
     {
