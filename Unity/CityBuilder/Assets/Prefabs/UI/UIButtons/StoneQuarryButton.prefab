@@ -379,7 +379,7 @@ MonoBehaviour:
   itemID: 
   inventoryManager: {fileID: 0}
   quantityText: {fileID: 5106199059334633508}
-  objectPrefab: {fileID: 3402843517139241138, guid: fd406e723e64b904bbb9c0ec107c4854, type: 3}
+  objectPrefab: {fileID: 3402843517139241138, guid: 0fc3d0e24dac6114385d59212c631dce, type: 3}
   updateInterval: 5
   isNew: 1
 --- !u!1 &5683472268718648891

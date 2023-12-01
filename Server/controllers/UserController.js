@@ -28,17 +28,18 @@ const register = async(req, res) => {
         const item4 = await Item.create({userID: user._id, quantity:2, category: "energy", name: "solarEnergyPlant"});
         const item5 = await Item.create({userID: user._id, quantity:2, category: "water", name: "waterTower"});
         const item6 = await Item.create({userID: user._id, quantity:2, category: "sewage", name: "sewageTreatment"});
+	const item7 = await Item.create({userID: user._id, quantity:2, category: "internet", name: "internetTower"});
 
-        const item7 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "wood"});
-        const item8 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "stone"});
-        const item9 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "metal"});
+        const item8 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "wood"});
+        const item9 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "stone"});
+        const item10 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "metal"});
 
-        const item10 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "lumberYard"});
-        const item11 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "stoneQuary"});
-        const item12 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "coins"});
+        const item11 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "lumberYard"});
+        const item12 = await Item.create({userID: user._id, quantity:2, category: "harvester", name: "stoneQuary"});
+        const item13 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "coins"});
 
-        const item13 = await Item.create({userID: user._id, quantity:2, category: "havester", name: "townHall"});
-        const item14 = await Item.create({userID: user._id, quantity:2, category: "gas", name: "gasDistributor"});
+        const item14 = await Item.create({userID: user._id, quantity:1, category: "harvester", name: "townHall"});
+        const item15 = await Item.create({userID: user._id, quantity:2, category: "gas", name: "gasDistributor"});
 
         user.items.push(item1._id);
         user.items.push(item2._id);
@@ -46,16 +47,18 @@ const register = async(req, res) => {
         user.items.push(item4._id);
         user.items.push(item5._id);
         user.items.push(item6._id);
+	user.items.push(item7._id);
 
-        user.items.push(item7._id);
         user.items.push(item8._id);
         user.items.push(item9._id);
-
         user.items.push(item10._id);
+
         user.items.push(item11._id);
         user.items.push(item12._id);
         user.items.push(item13._id);
+
         user.items.push(item14._id);
+	user.items.push(item15._id);
 
         user.status = "online";
         await user.save();

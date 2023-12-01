@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: townHall
-  category: harvester
+  category: havester
   quantity: 5
   itemID: 
   inventoryManager: {fileID: 0}
