@@ -12,10 +12,10 @@
 #### [Unity](#unity)
 #### [Deployment and Github Workflow](#deployment-and-github-workflow)
 ##### [Pull request](#pull-request)
-##### [Naming conventions] (#naming-conventions)
-##### [Deployment] (#deployment)
-###### [Automated testing & deployment] (#automated-testing-&-deployment)
-#### [Coding Standards and Guidelines] (#coding-standards-and-guidelines)
+##### [Naming conventions](#naming-conventions)
+##### [Deployment](#deployment)
+###### [Automated testing & deployment](#automated-testing-&-deployment)
+#### [Coding Standards and Guidelines](#coding-standards-and-guidelines)
 #### [Licenses] (#licenses)
 
 
