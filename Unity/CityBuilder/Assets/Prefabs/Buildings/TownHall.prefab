@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5350509562647772516}
   - component: {fileID: 6177155832838749129}
   - component: {fileID: 4413774682136122977}
+  - component: {fileID: -2985497451265224653}
   m_Layer: 3
   m_Name: TownHall
   m_TagString: Object
@@ -162,6 +163,34 @@ MonoBehaviour:
   interval: 10
   timer: 0
   coinPerCapita: 10
+--- !u!114 &-2985497451265224653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3402843517139241138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9c17e52a61f1541b1fce32627f86f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentlyColliding: []
+  adjacentTiles: []
+  HoverValid: {fileID: 3478956617698699891}
+  HoverInvalid: {fileID: 902055142380289558}
+  worldCenter: {x: 0, y: 0, z: 0}
+  worldHalfExtents: {x: 0, y: 0, z: 0}
+  dimensions: {x: 2, y: 2}
+  canBePlaced: 0
+  isHovering: 0
+  evenDimensions: 1
+  hasBeenPlaced: 0
+  objectName: townHall
+  displayName: Town Hall
+  category: harvester
+  item: {fileID: 0}
+  isActive: 1
 --- !u!1 &3478956617698699891
 GameObject:
   m_ObjectHideFlags: 0
