@@ -16,7 +16,7 @@
 ##### [Deployment](#deployment)
 ###### [Automated testing & deployment](#automated-testing-&-deployment)
 #### [Coding Standards and Guidelines](#coding-standards-and-guidelines)
-#### [Licenses] (#licenses)
+#### [Licenses](#licenses)
 
 
 ## Partner Intro
@@ -175,8 +175,16 @@ We will follow the standard naming conventions for each language/framework (ie. 
 Our game is supposed to be embedded in a website, which is currently under development by the partner and is not ready for integration. Thus, for deployment, we have temporarily uploaded the game to a third party website (itch.io) for the demo. This website is accessible via a link and password. (See Instruction part above) We have also created a locally hosted server to test the game’s save, load, and update features. Similar to the website, the partner is developing a backend for their product, but that server is not currently available for us. We are expecting to be able to move our server code and integrate it into theirs, but if that doesn’t happen for reasons outside of our control then we will move on with our own server.
 
 #### Automated testing & deployment
-We enabled automated testing and deployment for our project. When the repository receives an pushed commit, the github action will automatically run our tests for both unity and server first. If all tests are passes, then the github action will automatically make the deployment. Otherwise, github action will show failure cases for testing. Corresponding files for automated testing and deployment can be found in .github/workflows.
+We enabled automated testing and deployment for our project using github actions, triggered every commit to main. The process is divided into automatic testing and deployment/build after tests passed. Otherwise, github action will show failure cases for testing. Corresponding files for automated testing and deployment can be found in .github/workflows. 
 
+Frontend (Unity) deployment
+- Final result is zip file of desktop executable.
+- Unity needs Licence for build, change Unity licence information in GitHub secrets (professional account: email, password and serial, personal account: license)
+
+Backend (Derver) deployment:
+- deployed to Render, name: unity-game-server
+- current account email: ruiting.chen.soc@gmail.com, password: 1234567890
+- can change repositories connected to server and other deployment info after logging on to the account
 
 
 ## Coding Standards and Guidelines
