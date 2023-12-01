@@ -16,7 +16,7 @@ public class MapDataManager : MonoBehaviour
     public float WATER_PERCENTAGE = 30f;
     public int TREES_PER_TILE = 5;
     float timer = 3;
-    public float interval = 2f;
+    public float interval;
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);

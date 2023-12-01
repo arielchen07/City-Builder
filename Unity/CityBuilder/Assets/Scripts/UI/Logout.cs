@@ -71,7 +71,6 @@ public class Logout : MonoBehaviour
                         //Application.Quit();
 
                         // Return to the login or main scene
-                        Time.timeScale = 1;
                         SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
                     }
                     else
