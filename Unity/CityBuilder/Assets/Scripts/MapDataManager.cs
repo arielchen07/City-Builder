@@ -72,7 +72,7 @@ public class MapDataManager : MonoBehaviour
         if (Time.timeSinceLevelLoad > timer)
         {
             timer = Time.timeSinceLevelLoad + interval;
-            decorationSpawner.SpawnDecoration();
+            // decorationSpawner.SpawnDecoration();
             if (!string.IsNullOrEmpty(GlobalVariables.MapID))
             {
                 print("save start");

@@ -8024,18 +8024,14 @@ MonoBehaviour:
   - {fileID: 5388757486949290415, guid: 7dffb4a92d261c5469b0777ae571938d, type: 3}
   housing:
   - {fileID: 7675797048029699197, guid: b30d600bab174504e95801132144c894, type: 3}
-  - {fileID: 5884131306741727931, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
   power:
   - {fileID: 2202875553821931810, guid: e22a8931bbfaac64c87a873904e9c745, type: 3}
   - {fileID: 8885982787277443801, guid: 54fecee99591f3945883085bc17b9841, type: 3}
   - {fileID: 5884131306741727931, guid: a38d2cff74a6bf74f929419caa6bc5cc, type: 3}
-  - {fileID: 5884131306741727931, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
   sewage:
   - {fileID: 2225576793674104087, guid: d07a769fe201ee04c9bc6c365366a802, type: 3}
-  - {fileID: 5884131306741727931, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
   water:
   - {fileID: 659497854817936448, guid: d8b3be378b6e0e74ebadad91847def97, type: 3}
-  - {fileID: 5884131306741727931, guid: d41bba7a06785df44bd9999e0c969aa5, type: 3}
   internet:
   - {fileID: 2202875553821931810, guid: fc8c3a897bc5fad4bb7b1a6dc62de656, type: 3}
   gas:
@@ -10227,6 +10223,7 @@ MonoBehaviour:
   LENGTH: 100
   WATER_PERCENTAGE: 30
   TREES_PER_TILE: 7
+  interval: 3
 --- !u!4 &1586827659
 Transform:
   m_ObjectHideFlags: 0
