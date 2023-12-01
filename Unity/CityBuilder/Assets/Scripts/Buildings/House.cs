@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class House : PlaceableObject
 {
@@ -81,5 +82,6 @@ public class House : PlaceableObject
         sewageAllocated = 0;
         internetAllocated = 0;
         gasAllocated = 0;
+        UpdatePopulation();
     }
 }

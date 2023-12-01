@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         }
         moveDir = WInput + SInput + AInput + DInput; //has issues with normalizing movement when for example w and a are pressed at the same time, but if normalized, the sqrt2 multiplier to w and s will stop working
         if(!isLocked){
-            transform.Translate(0.05f * cameraSensitivity * moveDir); //0.05 is an arbitrary number to scale down the movement speeed, so that a moveSpeed of 1 is manageable
+            transform.Translate(0.05f * cameraSensitivity * moveDir * camSize); //0.05 is an arbitrary number to scale down the movement speeed, so that a moveSpeed of 1 is manageable
         }
         
         if (!EventSystem.current.IsPointerOverGameObject())
