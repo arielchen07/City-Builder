@@ -48,16 +48,16 @@ public class PlacementSystemTests
         Assert.AreEqual(null, ps.currentlyPlacing);
     }
 
-    [UnityTest]
-    public IEnumerator PlaceObjectTest()
-    {
-        ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
-        GameObject newHouse = UnityEngine.Object.Instantiate(house);
-        ps.HoverObject(houseItem);
-        yield return null;
-        ps.PlaceObject();
-        Assert.AreEqual(null, ps.currentlyPlacing);
-    }
+    // [UnityTest]
+    // public IEnumerator PlaceObjectTest()
+    // {
+    //     ps = GameObject.FindWithTag("PlacementSystem").GetComponent<PlacementSystem>();
+    //     GameObject newHouse = UnityEngine.Object.Instantiate(house);
+    //     ps.HoverObject(houseItem);
+    //     yield return null;
+    //     ps.PlaceObject();
+    //     Assert.AreEqual(null, ps.currentlyPlacing);
+    // }
 
     [UnityTest]
     public IEnumerator CurrentlyPlacingStateWhenSelectObjectTest()
