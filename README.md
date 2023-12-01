@@ -1,5 +1,24 @@
 # Game Engine/ Code Connoisseurs
-Note: This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical.​
+
+### Table of contents
+#### [Partner Intro](#partner-intro)
+#### [Description about the project](#description-about-the-project)
+#### [Key Features](#key-features)
+#### [Instructions](#instructions)
+##### [How to run server](#how-to-run-server)
+##### [Start the Game](#start-the-game)
+#### [Development requirements](#development-requirements)
+#### [Server](#server)
+#### [Unity](#unity)
+#### [Deployment and Github Workflow](#deployment-and-github-workflow)
+##### [Pull request](#pull-request)
+##### [Naming conventions](#naming-conventions)
+##### [Deployment](#deployment)
+###### [Automated testing & deployment](#automated-testing-&-deployment)
+#### [Coding Standards and Guidelines](#coding-standards-and-guidelines)
+#### [Licenses] (#licenses)
+
+
 ## Partner Intro
 
 1. James Rhule, jamesrhule@projecthumancity.com, Project: Human City organization leader, primary contact  
@@ -99,7 +118,7 @@ For Developers, we suggest to use the local server, so that it’s easier to acc
 If one chooses to use the remote server for development, one can access by going to the Render website, https://render.com/ . And login with email: ruiting.chen.soc@gmai.com and password: 1234567890. The deployed server is at unity-game-server.
 
 
-### Server:
+### Server
 
 
 1. Developers need to install .Net and Node.js before running the project.
@@ -126,7 +145,7 @@ If one chooses to use the remote server for development, one can access by going
 A remote server is hosted on Render. If one chooses to use the remote server for development, one can access it by going to the Render website https://render.com/. And login with email: ruiting.chen.soc@gmai.com and password: 1234567890. The deployed server is at unity-game-server. Click on the unity-game-server and go to the log tab to see the messages from the server.
 
 
-### Unity:
+### Unity
 #### Technology requirements: 
 - Download Unity Hub
 - In Unity Hub, download Unity Editor version 2020.3.20f1
@@ -144,16 +163,20 @@ For the Unity game to be able to login/logout, save/load map and update/load inv
 
 
 ## Deployment and Github Workflow
-### Pull request:
+### Pull request
 We separated ourselves into two subteams (web game and mobile app), three people per team. When a team member starts a pull request, at least one person from their subteam needs to review the pull request in order to merge the code. The pull request needs to have detailed descriptions of what is done/changed in each file. Ideally one should create a pull request after each task they finish and name the pull request as the task they worked on.
 
 
-### Naming conventions:
+### Naming conventions
 We will follow the standard naming conventions for each language/framework (ie. Camel case for C#)
 
 
-### Deployment:
+### Deployment
 Our game is supposed to be embedded in a website, which is currently under development by the partner and is not ready for integration. Thus, for deployment, we have temporarily uploaded the game to a third party website (itch.io) for the demo. This website is accessible via a link and password. (See Instruction part above) We have also created a locally hosted server to test the game’s save, load, and update features. Similar to the website, the partner is developing a backend for their product, but that server is not currently available for us. We are expecting to be able to move our server code and integrate it into theirs, but if that doesn’t happen for reasons outside of our control then we will move on with our own server.
+
+#### Automated testing & deployment
+We enabled automated testing and deployment for our project. When the repository receives an pushed commit, the github action will automatically run our tests for both unity and server first. If all tests are passes, then the github action will automatically make the deployment. Otherwise, github action will show failure cases for testing. Corresponding files for automated testing and deployment can be found in .github/workflows.
+
 
 
 ## Coding Standards and Guidelines
