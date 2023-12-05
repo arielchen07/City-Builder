@@ -44,13 +44,10 @@ public class InventoryManager : MonoBehaviour
 {
     public InventoryToServer toServer;
     public ServerInventoryData inventory;
-    //Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict= new Dictionary<string, Dictionary<string, inventoryItem>>();
 
     private void Awake()
     {
         // Regularily gets live inventory information from server and updates unity inventory
-        //toServer.RegularUpdateInventory(userID);
-        // TODO: Initialize inventory with some amount of items
 
         if (!string.IsNullOrEmpty(GlobalVariables.UserID)){
             toServer.LoadInventoryFromServer(GlobalVariables.UserID);
@@ -113,7 +110,6 @@ public class InventoryManager : MonoBehaviour
     public void UpdateInventory(ServerInventoryData inventory)
     {
         //print("call UpdateInventory");
-        // TODO: change this to actual updates to the Unity inventory data structure and UI
         this.inventory = inventory;
         foreach (var item in inventory.items){
             UpdateInventoryItem(item);
@@ -123,7 +119,6 @@ public class InventoryManager : MonoBehaviour
     public void UpdateInventoryItem(ServerItemData item)
     {
         //print("call UpdateInventoryItem");
-        // TODO: change this to actual updates to the Unity inventory data structure and UI
         if (InventoryInfo.itemInventoryDict.ContainsKey(item.category))
         {
             if (InventoryInfo.itemInventoryDict[item.category].ContainsKey(item.name))
@@ -144,7 +139,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void UpdateItemQuantityToServer(string itemID, int quantityChanged){
-        // Update number of item by +/-1: UpdateItemServer(userID, itemID, +/-1);
+        // Update number of item by quantityChanged: UpdateItemServer(userID, itemID, quantityChanged);
         toServer.UpdateItemToServer(GlobalVariables.UserID, itemID, quantityChanged);
         print("update item quantity change" + quantityChanged + "to server");
     }
