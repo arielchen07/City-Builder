@@ -48,9 +48,9 @@ public class DecorationSpawner : MonoBehaviour
                 }
             }
             Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-0.5f,0.5f), UnityEngine.Random.Range(-0.5f,0.5f));
-            float randomRotation = UnityEngine.Random.Range(0, 360);
+            int randomRotation = UnityEngine.Random.Range(0, 4);
             GameObject decorationInstance = Instantiate(randomDecoration, selectedTile.transform.position + new Vector3(randomOffset.x, 0 , randomOffset.y), Quaternion.identity);
-            decorationInstance.transform.Rotate(new Vector3(0,randomRotation, 0));
+            decorationInstance.transform.Rotate(new Vector3(0,randomRotation * 90, 0));
             selectedTile.hasDecorations = true;
             selectedTile.numDecorations += 1;
             if(selectedTile.numDecorations == maxDecorationsPerTile){

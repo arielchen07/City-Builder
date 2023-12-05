@@ -169,7 +169,7 @@ MonoBehaviour:
   isHovering: 0
   evenDimensions: 1
   hasBeenPlaced: 0
-  objectName: stoneQuary
+  objectName: stoneQuarry
   displayName: Stone Quarry
   category: harvester
   item: {fileID: 0}

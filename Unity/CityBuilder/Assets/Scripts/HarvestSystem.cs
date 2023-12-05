@@ -51,6 +51,9 @@ public class HarvestSystem : MonoBehaviour
             if (Input.GetKey(KeyCode.Escape)){
                 isHovering = false;
             }
+        } else {
+            HoverValid.SetActive(false);
+            HoverInvalid.SetActive(false);
         }
     }
 
