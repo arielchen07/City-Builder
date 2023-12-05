@@ -175,6 +175,7 @@ public class PlacementSystem : MonoBehaviour
     public void SelectObject() {        
         isSelectingObject = true;
         currentlySelecting = currentlyHovering;
+        currentlySelecting.GetComponent<PlaceableObject>().OnSelect();
         ToggleObjectMenu();
         cameraController.ZoomToItem(currentlySelecting.transform.position);
         menuManager.CloseInventory();
