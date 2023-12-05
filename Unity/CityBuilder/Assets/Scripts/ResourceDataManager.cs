@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceDataManager : MonoBehaviour
 {
     public int woodCount;
     public int stoneCount;
     public InventoryManager inventoryManager;
+    public Text woodText;
+    public Text stoneText;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,8 @@ public class ResourceDataManager : MonoBehaviour
         int stone = InventoryInfo.GetItemQuantity("stone", "resource");
         woodCount = wood;
         stoneCount = stone;
+        woodText.text = wood.ToString();
+        stoneText.text = stone.ToString();
     }
 
     public void ConsumeResource(string itemName, int consumedCount)

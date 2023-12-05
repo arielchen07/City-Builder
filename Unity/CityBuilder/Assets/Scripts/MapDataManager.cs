@@ -20,6 +20,7 @@ public class MapDataManager : MonoBehaviour
     public bool finish_loading_map;
     public GameObject cover;
     public GameObject cloudsOnLoad;
+    public bool spawnDecorations;
     private void Start()
     {
         print("At start: userID = " + GlobalVariables.UserID + " mapID = " + GlobalVariables.MapID);
@@ -78,7 +79,9 @@ public class MapDataManager : MonoBehaviour
         if (Time.timeSinceLevelLoad > timer && finish_loading_map)
         {
             timer = Time.timeSinceLevelLoad + interval;
-            // decorationSpawner.SpawnDecoration();
+            if(spawnDecorations){
+                decorationSpawner.SpawnDecoration();
+            }
             if (!string.IsNullOrEmpty(GlobalVariables.MapID))
             {
                 print("save start");

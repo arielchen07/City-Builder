@@ -7,6 +7,7 @@ public class DecorationSpawner : MonoBehaviour
 {
     public InventoryList inventory;
     private List<MapTile> availableTiles;
+    public int maxDecorationsPerTile;
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class DecorationSpawner : MonoBehaviour
         foreach (GameObject tileGameObject in allTiles)
         {
             MapTile tileScript = tileGameObject.GetComponent<MapTile>();
-            if (!tileScript.isOccupied)
+            if (!tileScript.isOccupied && tileScript.numDecorations < maxDecorationsPerTile)
             {
                 availableTiles.Add(tileScript);
             }
@@ -46,12 +47,15 @@ public class DecorationSpawner : MonoBehaviour
                     break;
                 }
             }
-            
-               GameObject decorationInstance = Instantiate(randomDecoration, selectedTile.transform.position, Quaternion.identity);
-
-               selectedTile.isOccupied = true;
-
-               availableTiles.RemoveAt(randomIndex);
+            Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-0.5f,0.5f), UnityEngine.Random.Range(-0.5f,0.5f));
+            float randomRotation = UnityEngine.Random.Range(0, 360);
+            GameObject decorationInstance = Instantiate(randomDecoration, selectedTile.transform.position + new Vector3(randomOffset.x, 0 , randomOffset.y), Quaternion.identity);
+            decorationInstance.transform.Rotate(new Vector3(0,randomRotation, 0));
+            selectedTile.hasDecorations = true;
+            selectedTile.numDecorations += 1;
+            if(selectedTile.numDecorations == maxDecorationsPerTile){
+                availableTiles.RemoveAt(randomIndex);
+            }
         }
     }
 

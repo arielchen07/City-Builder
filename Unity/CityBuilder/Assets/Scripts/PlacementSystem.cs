@@ -241,7 +241,7 @@ public class PlacementSystem : MonoBehaviour
                     }
                 }
             }
-            if (closest.GetComponent<MapTile>().isOccupied){
+            if (closest.GetComponent<MapTile>().isOccupied || closest.GetComponent<MapTile>().hasDecorations){
                 canPlace = false;
             }
             if(canPlace){
