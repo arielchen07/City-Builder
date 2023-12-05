@@ -114,4 +114,8 @@ public class PlaceableObject : MonoBehaviour
         isActive = false;
         UtilitiesManager.utilManager.UpdateUtilities();
     }
+
+    public virtual void OnSelect(){
+        UtilitiesManager.utilManager.UpdateUtilities();
+    }
 }
