@@ -44,7 +44,6 @@ public class InventoryManager : MonoBehaviour
 {
     public InventoryToServer toServer;
     public ServerInventoryData inventory;
-    public string userID = "65517d2ab753aa75060ea62c";
     //Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict= new Dictionary<string, Dictionary<string, inventoryItem>>();
 
     private void Awake()
@@ -60,36 +59,36 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Period))
-        {
-            // Increase number of item by 1: UpdateItemServer(userID, itemID, 1);
-            toServer.UpdateItemToServer(userID, "65517d2ab753aa75060ea62e", 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Comma))
-        {
-            // Decrease number of item by 1: UpdateItemServer(userID, itemID, -1);
-            toServer.UpdateItemToServer(userID, "65517d2ab753aa75060ea62e", -1);
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            toServer.LoadInventoryFromServer(userID);
-        }
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            // Create a new item (item not in server invenotry): CreateItemServer(category, name, amount);
-            toServer.CreateItemToServer(userID, "c2", "n2", 1);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            foreach (var category in InventoryInfo.itemInventoryDict.Keys)
-            {
-                print("category: " + category);
-                foreach( var item in InventoryInfo.itemInventoryDict[category].Keys)
-                {
-                    print("item name: " + item + ", quantity:" + InventoryInfo.itemInventoryDict[category][item].quantity + ", itemID:" + InventoryInfo.itemInventoryDict[category][item].itemID);
-                }
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Period))
+        //{
+        //    // Increase number of item by 1: UpdateItemServer(userID, itemID, 1);
+        //    toServer.UpdateItemToServer(GlobalVariables.UserID, "65517d2ab753aa75060ea62e", 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Comma))
+        //{
+        //    // Decrease number of item by 1: UpdateItemServer(userID, itemID, -1);
+        //    toServer.UpdateItemToServer(GlobalVariables.UserID, "65517d2ab753aa75060ea62e", -1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    toServer.LoadInventoryFromServer(GlobalVariables.UserID);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Equals))
+        //{
+        //    // Create a new item (item not in server invenotry): CreateItemServer(category, name, amount);
+        //    toServer.CreateItemToServer(GlobalVariables.UserID, "c2", "n2", 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    foreach (var category in InventoryInfo.itemInventoryDict.Keys)
+        //    {
+        //        print("category: " + category);
+        //        foreach( var item in InventoryInfo.itemInventoryDict[category].Keys)
+        //        {
+        //            print("item name: " + item + ", quantity:" + InventoryInfo.itemInventoryDict[category][item].quantity + ", itemID:" + InventoryInfo.itemInventoryDict[category][item].itemID);
+        //        }
+        //    }
+        //}
     }
 
     private Dictionary<string, inventoryItem> initializeInventoryCategory(List<string> objectNameList, int quantity)
@@ -146,7 +145,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateItemQuantityToServer(string itemID, int quantityChanged){
         // Update number of item by +/-1: UpdateItemServer(userID, itemID, +/-1);
-        toServer.UpdateItemToServer(userID, itemID, quantityChanged);
+        toServer.UpdateItemToServer(GlobalVariables.UserID, itemID, quantityChanged);
         print("update item quantity change" + quantityChanged + "to server");
     }
 }
