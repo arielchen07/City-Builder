@@ -16,9 +16,11 @@ public class TownHallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > timer) {
-            timer += interval;
-            GenerateCoins();
+        if(GetComponent<PlaceableObject>().hasBeenPlaced){
+            if (Time.time > timer) {
+                timer += interval;
+                GenerateCoins();
+            }
         }
     }
 

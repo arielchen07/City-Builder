@@ -57,7 +57,7 @@ public class PlaceableObject : MonoBehaviour
         foreach(GameObject collidingObject in currentlyColliding){
             MapTile tile = collidingObject.GetComponent<MapTile>();
             if (tile != null) {
-                if (tile.isOccupied){
+                if (tile.isOccupied || tile.hasDecorations){
                     return false;
                 }
             }

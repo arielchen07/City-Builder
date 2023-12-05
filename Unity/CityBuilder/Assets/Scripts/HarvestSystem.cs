@@ -69,6 +69,7 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.SetActive(false);
         GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
         centerTile.GetComponent<MapTile>().isOccupied = false;
+        centerTile.GetComponent<MapTile>().numDecorations = 0;
         int woodCount = 0;
         int stoneCount = 0;
         if (treesColliding.Count > 0 && harvesterManager.AddActiveTreeHarvester())
