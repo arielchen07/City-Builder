@@ -18,6 +18,7 @@ public class HarvestSystem : MonoBehaviour
     {
         treesColliding = new List<GameObject>();
         rocksColliding = new List<GameObject>();
+        isHovering = false;
     }
 
     void Update()
@@ -25,30 +26,40 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
         HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            isHovering = !isHovering;
+        // if (Input.GetKeyDown(KeyCode.X))
+        // {
+        //     isHovering = !isHovering;
 
-            if (!isHovering)
-            {
-                if (HoverValid.activeSelf == true)
-                {
-                    Harvest();
-                }
-                else
-                {
-                    HoverInvalid.SetActive(false);
-                }
+        //     if (!isHovering)
+        //     {
+        //         if (HoverValid.activeSelf == true)
+        //         {
+        //             Harvest();
+        //         }
+        //         else
+        //         {
+        //             HoverInvalid.SetActive(false);
+        //         }
                 
-            }
-        }
-
-        if (isHovering)
-        {
+        //     }
+        // }
+        if (isHovering) {
             Highlight();
+            if (Input.GetKeyDown(KeyCode.Mouse0)){
+                Harvest();
+            }
+            if (Input.GetKey(KeyCode.Escape)){
+                isHovering = false;
+            }
+        } else {
+            HoverValid.SetActive(false);
+            HoverInvalid.SetActive(false);
         }
     }
 
+    public void Hover(){
+        isHovering = true;
+    }
     void Highlight()
     {
         GetCollidingDecorations();
@@ -69,7 +80,6 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.SetActive(false);
         GameObject centerTile = pointer.GetComponent<PointerDetector>().currentlyColliding;
         centerTile.GetComponent<MapTile>().isOccupied = false;
-        centerTile.GetComponent<MapTile>().numDecorations = 0;
         int woodCount = 0;
         int stoneCount = 0;
         if (treesColliding.Count > 0 && harvesterManager.AddActiveTreeHarvester())
