@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HarvesterManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HarvesterManager : MonoBehaviour
     public int numOccupiedTreeHarvesters = 0;
     public int numRockHarvester = 0;
     public int numOccupiedRockHarvesters = 0;
+    public float cooldown;
+    public GameObject harvestButton;
     private void Awake(){
         if (harvesterManager != null && harvesterManager != this){
             Destroy(this);
@@ -37,6 +40,8 @@ public class HarvesterManager : MonoBehaviour
             return false;
         }
         numOccupiedTreeHarvesters += 1;
+        Invoke("ResetTreeHarvester", cooldown);
+        DisableButton();
         return true;
     }
     public bool AddActiveRockHarvester(){
@@ -44,6 +49,32 @@ public class HarvesterManager : MonoBehaviour
             return false;
         }
         numOccupiedRockHarvesters += 1;
+        Invoke("ResetRockHarvester", cooldown);
+        DisableButton();
         return true;
+    }
+
+    public void ResetTreeHarvester(){
+        numOccupiedTreeHarvesters--;
+        EnableButton();
+    }
+
+    public void ResetRockHarvester(){
+        numOccupiedRockHarvesters--;
+        EnableButton();
+    }
+
+    public void EnableButton(){
+        if(numOccupiedRockHarvesters < numRockHarvester || numOccupiedTreeHarvesters < numTreeHarvester){
+            harvestButton.GetComponent<Image>().color = new Color(1,1,1,1);
+            harvestButton.GetComponent<Button>().interactable = true;
+        }
+    }
+    
+    public void DisableButton(){
+        if(numOccupiedRockHarvesters == numRockHarvester && numOccupiedTreeHarvesters == numTreeHarvester){
+            harvestButton.GetComponent<Image>().color = new Color(1,1,1,0.7f);
+            harvestButton.GetComponent<Button>().interactable = false;
+        }
     }
 }

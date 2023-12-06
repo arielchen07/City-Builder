@@ -2777,7 +2777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3996,6 +3996,8 @@ MonoBehaviour:
   numOccupiedTreeHarvesters: 0
   numRockHarvester: 1
   numOccupiedRockHarvesters: 0
+  cooldown: 10
+  harvestButton: {fileID: 1587726274}
 --- !u!4 &716432996
 Transform:
   m_ObjectHideFlags: 0
@@ -9947,7 +9949,6 @@ MonoBehaviour:
   toServer: {fileID: 1503918467}
   inventory:
     items: []
-  userID: 65517d2ab753aa75060ea62c
 --- !u!4 &1503918469
 Transform:
   m_ObjectHideFlags: 0
@@ -14655,7 +14656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
