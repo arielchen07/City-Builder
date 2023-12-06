@@ -32,7 +32,7 @@ const showAllMatch = (req, res) => {
     });
 };
 
-const decOne = (req, res) => {
+const dec = (req, res) => {
     const itemID = req.params.itemID;
     const quantity = req.body.quantity || -1;
     Item.findById(itemID)
@@ -59,7 +59,7 @@ const decOne = (req, res) => {
     });
 };
 
-const addOne = (req, res) => {
+const add = (req, res) => {
     const itemID = req.params.itemID;
     const quantity = req.body.quantity || 1;
     Item.findById(itemID)
@@ -131,5 +131,5 @@ const getOneUID = async (req, res) => {
 };
 
 module.exports = {
-    createItem, showAllMatch, decOne, addOne, deleteItem, getUserIDMiddleware, getItemIDMiddleware, getOneUID 
+    createItem, showAllMatch, dec, add, deleteItem, getUserIDMiddleware, getItemIDMiddleware, getOneUID 
 };

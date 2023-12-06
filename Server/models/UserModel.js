@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
+//User Schema and Model
 const userSchema = new Schema({
     name: {
         type: String
@@ -25,7 +26,7 @@ const userSchema = new Schema({
 
 }, { timestamps: true });
 
-
+// Middleware: Pre-save hook to hash the password before saving
 userSchema.pre('save', function (next) {
     const user = this;
     if (!user.isModified('password')) return next();
@@ -44,6 +45,7 @@ userSchema.pre('save', function (next) {
   
   })
 
+  // Static method to find user by credentials (email and password)
   userSchema.statics.findByCredentials = async function (email, password) {
     const user = await User.findOne({ email });
     if (!user) throw new Error('invalid email or password');
@@ -53,7 +55,7 @@ userSchema.pre('save', function (next) {
     return user
   }
   
-
+// Creating User model based on the userSchema
 const User = mongoose.model('User', userSchema);
 
 
