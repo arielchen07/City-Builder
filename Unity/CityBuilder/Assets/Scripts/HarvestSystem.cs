@@ -25,7 +25,7 @@ public class HarvestSystem : MonoBehaviour
     {
         HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
         HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
-        
+
         if (isHovering) {
             if (Highlight() == true && Input.GetKeyDown(KeyCode.Mouse0)){
                 Harvest();
@@ -73,6 +73,7 @@ public class HarvestSystem : MonoBehaviour
             {
                 woodCount++;
                 Destroy(tree);
+                PollutionManager.pollutionManager.numTrees--;
             }
             treesColliding.Clear();
         }

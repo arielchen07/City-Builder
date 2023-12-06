@@ -34,6 +34,8 @@ public class MapDataManager : MonoBehaviour
                 finish_loading_map = true;
                 cover.GetComponent<Animator>().SetTrigger("loadScene");
                 cloudsOnLoad.SetActive(true);
+                PollutionManager.pollutionManager.UpdateTreeCount();
+                PollutionManager.pollutionManager.UpdatePolluters();
             }
             else
             {
@@ -283,6 +285,9 @@ public class MapDataManager : MonoBehaviour
         finish_loading_map = true;
         cover.GetComponent<Animator>().SetTrigger("loadScene");
         cloudsOnLoad.SetActive(true);
+        PollutionManager.pollutionManager.UpdateTreeCount();
+        PollutionManager.pollutionManager.UpdatePollutionIndex();
+        PollutionManager.pollutionManager.UpdatePolluters();
     }
     public void DrawStructureObjects(MapSerialization mapObjs)
     {

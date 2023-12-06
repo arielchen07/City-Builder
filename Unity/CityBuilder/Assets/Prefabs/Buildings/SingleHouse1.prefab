@@ -394,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyColliding: []
+  adjacentTiles: []
   HoverValid: {fileID: 8809755575687296569}
   HoverInvalid: {fileID: 8837545560038693539}
   worldCenter: {x: 0, y: 0, z: 0}
@@ -407,6 +408,7 @@ MonoBehaviour:
   displayName: Single Family House
   category: housing
   item: {fileID: 0}
+  isActive: 1
   basePopulation: 10
   population: 0
   powerCost: 10
@@ -424,6 +426,8 @@ MonoBehaviour:
   sewageX: 1
   gasX: 1
   internetX: 1
+  pollutionTreshold: 100
+  pollutionModifier: 0.01
 --- !u!1 &8809755575687296569
 GameObject:
   m_ObjectHideFlags: 0

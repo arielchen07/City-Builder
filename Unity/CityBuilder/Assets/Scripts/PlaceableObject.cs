@@ -108,11 +108,27 @@ public class PlaceableObject : MonoBehaviour
     }
     public virtual void OnPlace() {
         UtilitiesManager.utilManager.UpdateUtilities();
+        if(gameObject.TryGetComponent<Polluter>(out var p)){
+            if(!PollutionManager.pollutionManager.polluters.Contains(p)){
+                PollutionManager.pollutionManager.polluters.Add(p);
+            }
+        }
+        if(gameObject.TryGetComponent<House>(out var h)){
+            if(!PollutionManager.pollutionManager.houses.Contains(h)){
+                PollutionManager.pollutionManager.houses.Add(h);
+            }
+        }
     }
 
     public virtual void OnDelete(){
         isActive = false;
         UtilitiesManager.utilManager.UpdateUtilities();
+        if(gameObject.TryGetComponent<Polluter>(out var p)){
+            PollutionManager.pollutionManager.polluters.Remove(p);
+        }
+        if(gameObject.TryGetComponent<House>(out var h)){
+            PollutionManager.pollutionManager.houses.Remove(h);
+        }
     }
 
     public virtual void OnSelect(){
