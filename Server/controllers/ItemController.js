@@ -34,6 +34,7 @@ const showAllMatch = (req, res) => {
 
 const decOne = (req, res) => {
     const itemID = req.params.itemID;
+    const quantity = req.body.quantity || -1;
     Item.findById(itemID)
     .then(item => {
         if (!item) {
@@ -46,7 +47,7 @@ const decOne = (req, res) => {
             throw new Error('Item quantity is already 0 or less');
         }
 
-        item.quantity -= 1;
+        item.quantity += quantity;
         return item.save();
     })
     .then(updatedItem => {
@@ -60,13 +61,14 @@ const decOne = (req, res) => {
 
 const addOne = (req, res) => {
     const itemID = req.params.itemID;
+    const quantity = req.body.quantity || 1;
     Item.findById(itemID)
     .then(item => {
         if (!item) {
             res.status(404).json({ message: 'Item not found' });
             throw new Error('Item not found');
         }
-        item.quantity += 1;
+        item.quantity += quantity;
         return item.save();
     })
     .then(updatedItem => {

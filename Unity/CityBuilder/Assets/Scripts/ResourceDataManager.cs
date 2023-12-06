@@ -44,9 +44,6 @@ public class ResourceDataManager : MonoBehaviour
             stoneCount += gainedCount;
         }
         string itemID = InventoryInfo.GetItemID(itemName, "resource");
-        for (int i = 0; i < gainedCount; i++)
-        {
-            inventoryManager.UpdateItemQuantityToServer(itemID, 1);
-        }
+        inventoryManager.UpdateItemQuantityToServer(itemID, gainedCount);
     }
 }

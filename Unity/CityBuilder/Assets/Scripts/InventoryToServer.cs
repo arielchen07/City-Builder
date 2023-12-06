@@ -108,8 +108,13 @@ public class InventoryToServer : MonoBehaviour
             action = "/dec/";
         }
 
+        UpdateItemQuantity item = new UpdateItemQuantity(amount);
+        string item_json = JsonUtility.ToJson(item);
+
         using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + userID + action + itemID, "POST"))
         {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(item_json);
+            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();

@@ -49,3 +49,14 @@ public class InitServerItemData
         this.quantity = quantity;
     }
 }
+
+[Serializable]
+public class UpdateItemQuantity
+{
+    public int quantity;
+
+    public UpdateItemQuantity(int quantity)
+    {
+        this.quantity = quantity;
+    }
+}
