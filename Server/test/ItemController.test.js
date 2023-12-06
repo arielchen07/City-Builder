@@ -9,6 +9,7 @@ const ItemRoute = require('../routes/ItemRoute');
 
 const request = supertest(app);
 
+// Test suite for Item Creation
 describe('Item Creation Test', () => {
     let userID;
 
@@ -41,6 +42,7 @@ describe('Item Creation Test', () => {
     });
 });
 
+// Test suite for Item Retrieval
 describe('Item retrival Test', () => {
     let userID;
 
@@ -87,6 +89,7 @@ describe('Item retrival Test', () => {
     });
 });
 
+// Test suite for Increase/Decrease Quantity
 describe('Increase Decrease Quantity Test', () => {
     let userID;
     let itemID;
@@ -144,6 +147,7 @@ describe('Increase Decrease Quantity Test', () => {
     });
 });
 
+// Test suite for Item Deletion
 describe('Item Deletion Test', () => {
     let userID;
     let itemID;

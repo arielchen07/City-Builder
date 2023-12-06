@@ -6,7 +6,10 @@ const User = require('../models/UserModel');
 const {register, login, userProfile} = require('../controllers/UserController'); 
 const UserRoute = require('../routes/UserRoute')
 
+// Create a request agent for testing
 const request = supertest(app); 
+
+// Test suite for User Registration
 describe('User Registration Test', () => {
   it('should successfully register a new user', async () => {
     const newUser = {

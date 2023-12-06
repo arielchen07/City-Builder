@@ -10,6 +10,7 @@ const MapRoute = require('../routes/MapRoute');
 
 const request = supertest(app);
 
+// Test suite for Map Creation
 describe('Map Creation', () => {
     let userID;
 
@@ -46,6 +47,7 @@ describe('Map Creation', () => {
     });
 });
 
+// Test suite for Map Deletion
 describe('Create Map Test', () => {
     let userID;
     let mapID;
@@ -96,7 +98,7 @@ describe('Create Map Test', () => {
     });
 });
 
-
+// Test suite for Saving a Map
 describe('Save Map Test', () => {
     let userID;
     let mapID;
@@ -149,6 +151,7 @@ describe('Save Map Test', () => {
     });
 });
 
+// Test suite for Retrieving Maps
 describe('Retrieve Maps Test', () => {
     let userID;
     let maps = [];
@@ -206,6 +209,7 @@ describe('Retrieve Maps Test', () => {
     });
 });
 
+// Test suite for Loading a Map
 describe('Load Map Test', () => {
     let userID;
     let mapID;
