@@ -3,12 +3,34 @@
 ### Table of contents
 #### [Architecture](#architecture)
 #### [Development requirements](#development-requirements)
-#### [Deployment and Github Workflow](#deployment-and-github-workflow)
+#### [DevOps and Github Workflow](#devops-and-github-workflow)
 #### [Coding Standards and Guidelines](#coding-standards-and-guidelines)
 
 ## Architecture
+The main components of this projects are Unity for game interactions, Node.js and React for server, and MongoDB Atlas for database.  
+Here we provide an diagram of the overall architecture of the project.  
+![30](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/9604d3b5-5b64-4ec8-83f5-1abf787f171a)
 
+### Unity: Game interactions
+Unity plays the most important role in our project, handling not only the graphics and user inputs but also the !
+game logic. It communicate with the server by sending request via RESTful APIs for state management and content updates.  
+[Unity architecture diagram](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/105243552/389dca7a-8cee-433f-b603-7efc44c14043)
 
+### Node.js and React: Server framework
+The server use Node.js and React frameworks and include the following major components:
+- models: define schema for map, user, inventory in mongodb
+- controllers: functions that handle different requests for map, user, inventory
+- routes: provides RESTful API endpoint to trigger functions in controller
+
+The server handles request from Unity and updates to Database. It will also receive feedback such as data information or error from Database and send back to Unity.
+
+### MongoDB Atlas: Dadabase Design
+MongoDB Atlas, as our chosen database service, offers:
+- Cloud-based flexibility and scalability for game data needs.
+- NoSQL allows us to handle a variety of data types efficiently.
+
+> For a detailed understanding of the folder and file structure in this repository, please refer to `City-Builder-Game-technical-document.pdf`.  
+> To gain insight into the current state and future plans of the City Builder Game, including what has been built and our envisioned features, please refer to `City-Builder-Game-design-document.pdf`.  
 
 ## Development requirements
 ### Server
@@ -37,7 +59,6 @@ If you need access to remote server on Render or MangoDB datset, please contact 
 4. You can access the database through: https://cloud.mongodb.com/v2/651f66de2b31664012c78bb6#/metrics/replicaSet/651f6806fc79f50af45b831a/explorer/lalala 
 
 ### Unity
-#### Technology requirements: 
 - Download Unity Hub
 - In Unity Hub, download Unity Editor version 2020.3.20f1
 - Developer should download unity’s WebGL build or desktop build support based on their need for the final product
@@ -52,7 +73,7 @@ To edit scripts, go to Assets/Scripts and double-click on any script, the code w
 For the Unity game to be able to login/logout, save/load map and update/load inventory properly, and test out the save/load map and update/load inventory features with the database, the developer also needs to start the server (described above).
 
 
-## Deployment and Github Workflow
+## DevOps and Github Workflow
 ### Automated testing & deployment
 We enabled automated testing and deployment for our project using github actions, triggered every commit to main. The process is divided into automatic testing and deployment/build after tests passed. Otherwise, github action will show failure cases for testing. Corresponding files for automated testing and deployment can be found in .github/workflows. 
 

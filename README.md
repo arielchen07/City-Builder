@@ -1,10 +1,14 @@
 # Game Engine/ Code Connoisseurs
 
+> Welcome to the City Builder Game developed by team Code Connoisseurs!
+> 
+> If you are a player, please refer to this README for user instructions.  
+> Developers continuing work on the project should check out the README and files in the [`Developer-Documentations`](Developer-Documentations) directory for more detailed development information.  
+
 ### Table of contents
 #### [Partner Intro](#partner-intro)
 #### [Description of the project](#description-of-the-project)
 #### [Key Features](#key-features)
-#### [Project architecture](#project-architecture)
 #### [Instructions](#instructions)
 #### [Licenses](#licenses)
 
@@ -51,46 +55,6 @@ City building game (Web game):
 - Build different types of buildings and develop your city (Future development)
 	- There are various building types, such as housing, utilities, production etc. Each type serves a key purpose in the expansion of the city. Each building also has different requirements to build.
 
-## Project architecture 
-This guide provides an in-depth look at the architecture and technical components of our project. It covers the integration of Unity for client-side interactions, Node.js and React for server-side operations, and MongoDB Atlas as our database solution. Understanding these elements is crucial for efficient development and maintenance of the project.
-![30](https://github.com/csc301-2023-fall/31-Project-Human-City-M/assets/80373621/9604d3b5-5b64-4ec8-83f5-1abf787f171a)
-
-#### Unity: Advanced Client-Side Interface
-Unity plays a pivotal role in our project, handling not just graphics and user inputs but also orchestrating client-side logic. Its advanced capabilities allow for:
-- Real-time interaction with dynamic content delivery.
-- Efficient communication with the server via RESTful APIs for state management and content updates.
-- Enhanced user experience through sophisticated graphical rendering and input management.
-
-#### Node.js and React: Robust Server-Side Framework
-The combination of Node.js and React forms the backbone of our server-side operations. They bring to the table:
-- Efficient request handling and business logic implementation using Node.js, crucial for real-time applications and multiplayer game environments.
-- Secure authentication processes and streamlined data handling capabilities.
-- React's contribution in data formatting ensures user data is relayed in an intuitive and user-friendly format to the client-side.
-
-#### MongoDB Atlas: Scalable Database Solution
-MongoDB Atlas, as our chosen database service, offers:
-- Cloud-based flexibility and scalability, catering to our growing data needs.
-- NoSQL capabilities, allowing us to handle a variety of data types efficiently.
-- Real-time data processing and analysis, enhancing overall application performance.
-
-#### Comprehensive System Integration
-The integration of Unity, Node.js/React, and MongoDB Atlas is the cornerstone of our architecture. This integration facilitates:
-- Seamless data exchange between Unity and Node.js, vital for real-time communication and gameplay experience.
-- Efficient CRUD operations between Node.js and MongoDB Atlas, ensuring data integrity and accessibility.
-- A unified development environment, leveraging JavaScript's capabilities across the stack.
-
-#### Advanced Controller Design Strategies
-Our controller design is crafted with precision, focusing on:
-- Optimal server-side logic for effective user request handling and data manipulation.
-- Ensuring a clear separation of concerns across game logic, data handling, and presentation layers.
-- Enhancing system performance by offloading intensive data processing and storage tasks to the server and database layers.
-- Scalability and flexibility in handling increasing loads and complex game scenarios.
-
-This enriched architecture not only capitalizes on the unified environment of JavaScript but also sets a new standard in real-time data processing and efficient data management. It is a comprehensive solution that addresses the complexities of modern game development and interactive applications, ensuring scalability, dynamic interaction, and broad accessibility.
-
-
-
-
  
 # Instructions
 
@@ -110,11 +74,9 @@ On the other hand, a user can choose to start a local server for the backend. To
 
 
 ## Start the Game:
-- To commence your City Builder web game experience, please navigate to the web version on [itch.io](https://arkye7.itch.io/csc301-code-connoisseurs-city-builder-online-server-version) in your web browser. Upon reaching the website, enter the password "codeconnoisseurs" to access the dedicated web page for the game.   
-
-You can find this demo to learn the current features to play: ​​ 
-https://utoronto.zoom.us/rec/share/_riVgGoHgsMYBZ7QFPMr6-m60EPLWRVH3y2t6pL5YxuA3yi9OfarXGS3r5vGuWC5.4Kn6_NsqB7Em5PDs?startTime=1700117523000  
-Passcode: s2z@HxE**z  
+- Please navigate to the `Builds` folder and choose the specific build you'd like to play with.
+  
+You can find our demo [here](https://youtu.be/tul3IDK8kkM) to learn the current UI features to play.
 
 Here are all the keyboard and mouse features that you should know:  
 1. WASD for moving the map  
