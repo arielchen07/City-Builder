@@ -182,7 +182,11 @@ public class MapDataManager : MonoBehaviour
             {
                 Vector3 randomOffset = new Vector3(UnityEngine.Random.value - 0.5f, 0, UnityEngine.Random.value - 0.5f);
                 Vector3 position = tile.transform.position + randomOffset;
+                float randSize = UnityEngine.Random.Range(0.8f,1.2f);
+                float randRot = UnityEngine.Random.Range(0,4);
                 GameObject decoration = Instantiate(decors[UnityEngine.Random.Range(0, decors.Count)], position, Quaternion.identity);
+                decoration.transform.localScale *= randSize;
+                decoration.transform.Rotate(new Vector3(0,randRot * 90, 0));
                 decoration.tag = "Decoration";
                 tile.GetComponent<MapTile>().isOccupied = true;
             }
