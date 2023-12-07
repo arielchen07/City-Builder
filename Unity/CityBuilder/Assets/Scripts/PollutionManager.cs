@@ -9,7 +9,6 @@ public class PollutionManager : MonoBehaviour
     public int numTrees = 0;
     public static PollutionManager pollutionManager;
     public List<Polluter> polluters;
-    public List<House> houses;
     public Text pollutionText;
     public float pollutionPerCapita;
     public float numTreesPerPollutionPoint;
@@ -45,7 +44,6 @@ public class PollutionManager : MonoBehaviour
     }
     public void UpdatePolluters(){
         polluters = new List<Polluter>(FindObjectsOfType<Polluter>());
-        houses = new List<House>(FindObjectsOfType<House>());
     }
 
     public void UpdatePollutionIndex(){
@@ -53,9 +51,7 @@ public class PollutionManager : MonoBehaviour
         foreach (Polluter p in polluters) {
             pollutionIndex += p.pollution;
         }
-        foreach (House h in houses){
-            pollutionIndex += h.basePopulation * pollutionPerCapita;
-        }
+        pollutionIndex += PopulationManager.populationManager.basePopulation * pollutionPerCapita;
         pollutionIndex -= numTrees / numTreesPerPollutionPoint;
         pollutionIndex = Mathf.Clamp(pollutionIndex, 0, Mathf.Infinity);
         pollutionText.text = ((int)pollutionIndex).ToString();

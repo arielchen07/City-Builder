@@ -35,7 +35,7 @@ public class RockHarvester : PlaceableObject, IHarvester
     public override void OnDelete(){
         isActive = false;
         UtilitiesManager.utilManager.UpdateUtilities();
-        HarvesterManager.harvesterManager.RemoveTreeHarvester();
+        HarvesterManager.harvesterManager.RemoveRockHarvester();
     }
     public void AddHarvester(){
         HarvesterManager.harvesterManager.AddRockHarvester();

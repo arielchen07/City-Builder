@@ -19,20 +19,27 @@ public class HarvesterManager : MonoBehaviour
             harvesterManager = this;
         }
     }
-
+    void Start(){
+        DisableButton();
+        EnableButton();
+    }
     public void AddTreeHarvester(){
         numTreeHarvester += 1;
+        EnableButton();
     }
 
     public void AddRockHarvester(){
         numRockHarvester += 1;
+        EnableButton();
     }
     public void RemoveTreeHarvester(){
         numTreeHarvester -= 1;
+        DisableButton();
     }
 
     public void RemoveRockHarvester(){
         numRockHarvester -= 1;
+        DisableButton();
     }
 
     public bool AddActiveTreeHarvester(){
@@ -76,5 +83,13 @@ public class HarvesterManager : MonoBehaviour
             harvestButton.GetComponent<Image>().color = new Color(1,1,1,0.7f);
             harvestButton.GetComponent<Button>().interactable = false;
         }
+    }
+
+    public void UpdateHarvester(){
+        List<RockHarvester> rockHarvesters = new List<RockHarvester>(FindObjectsOfType<RockHarvester>());
+        List<TreeHarvester> treeHarvesters = new List<TreeHarvester>(FindObjectsOfType<TreeHarvester>());
+        numRockHarvester = rockHarvesters.Count;
+        numTreeHarvester = treeHarvesters.Count;
+        EnableButton();
     }
 }

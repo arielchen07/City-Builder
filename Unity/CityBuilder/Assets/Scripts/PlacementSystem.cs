@@ -213,6 +213,7 @@ public class PlacementSystem : MonoBehaviour
         CursorManager.cursorManager.SetCursorMode("placing");
         currentlyPlacing = currentlySelecting;
         isSelectingObject = false;
+        cameraController.isLocked = false;
         ToggleObjectMenu();
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         oldPosition = currentlyPlacing.transform.position;

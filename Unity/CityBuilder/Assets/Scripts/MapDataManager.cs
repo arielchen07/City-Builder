@@ -36,6 +36,8 @@ public class MapDataManager : MonoBehaviour
                 cloudsOnLoad.SetActive(true);
                 PollutionManager.pollutionManager.UpdateTreeCount();
                 PollutionManager.pollutionManager.UpdatePolluters();
+                PopulationManager.populationManager.UpdateHouses();
+                HarvesterManager.harvesterManager.UpdateHarvester();
             }
             else
             {
@@ -290,6 +292,8 @@ public class MapDataManager : MonoBehaviour
         PollutionManager.pollutionManager.UpdateTreeCount();
         PollutionManager.pollutionManager.UpdatePollutionIndex();
         PollutionManager.pollutionManager.UpdatePolluters();
+        PopulationManager.populationManager.UpdateHouses();
+        HarvesterManager.harvesterManager.UpdateHarvester();
     }
     public void DrawStructureObjects(MapSerialization mapObjs)
     {

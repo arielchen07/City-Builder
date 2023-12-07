@@ -31,7 +31,7 @@ const register = async(req, res) => {
         const item4 = await Item.create({userID: user._id, quantity:2, category: "energy", name: "solarEnergyPlant"});
         const item5 = await Item.create({userID: user._id, quantity:2, category: "water", name: "waterTower"});
         const item6 = await Item.create({userID: user._id, quantity:2, category: "sewage", name: "sewageTreatment"});
-	      const item7 = await Item.create({userID: user._id, quantity:2, category: "internet", name: "internetTower"});
+	const item7 = await Item.create({userID: user._id, quantity:2, category: "internet", name: "internetTower"});
         const item8 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "wood"});
         const item9 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "stone"});
         const item10 = await Item.create({userID: user._id, quantity:0, category: "resource", name: "metal"});
@@ -48,7 +48,7 @@ const register = async(req, res) => {
         user.items.push(item4._id);
         user.items.push(item5._id);
         user.items.push(item6._id);
-	      user.items.push(item7._id);
+	user.items.push(item7._id);
         user.items.push(item8._id);
         user.items.push(item9._id);
         user.items.push(item10._id);
@@ -56,7 +56,7 @@ const register = async(req, res) => {
         user.items.push(item12._id);
         user.items.push(item13._id);
         user.items.push(item14._id);
-	      user.items.push(item15._id);
+	user.items.push(item15._id);
 
         //save the changes
         await user.save();

@@ -114,8 +114,8 @@ public class PlaceableObject : MonoBehaviour
             }
         }
         if(gameObject.TryGetComponent<House>(out var h)){
-            if(!PollutionManager.pollutionManager.houses.Contains(h)){
-                PollutionManager.pollutionManager.houses.Add(h);
+            if(!PopulationManager.populationManager.houses.Contains(h)){
+                PopulationManager.populationManager.houses.Add(h);
             }
         }
     }
@@ -127,7 +127,7 @@ public class PlaceableObject : MonoBehaviour
             PollutionManager.pollutionManager.polluters.Remove(p);
         }
         if(gameObject.TryGetComponent<House>(out var h)){
-            PollutionManager.pollutionManager.houses.Remove(h);
+            PopulationManager.populationManager.houses.Remove(h);
         }
     }
 

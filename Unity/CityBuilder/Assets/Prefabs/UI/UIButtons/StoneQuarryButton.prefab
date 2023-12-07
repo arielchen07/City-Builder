@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8416ad922dc40c6843652df3331b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: stoneQuary
+  itemName: stoneQuarry
   category: harvester
   quantity: 5
   itemID: 
