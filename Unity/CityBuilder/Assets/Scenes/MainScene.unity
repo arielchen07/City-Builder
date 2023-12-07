@@ -9821,10 +9821,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804649ee5b0946c49855dcfbdcf57023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSensitivity: 1
+  cameraSensitivity: 0.5
   zoomSensitivity: 0.5
   cam: {fileID: 1808414536}
   isLocked: 0
+  xBound: 20
+  zBound: 20
 --- !u!4 &1468783143
 Transform:
   m_ObjectHideFlags: 0

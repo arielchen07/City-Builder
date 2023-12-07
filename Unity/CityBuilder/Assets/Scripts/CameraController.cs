@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
     Vector3 moveDir;
     float camSize = 5;
     public bool isLocked = false;
+    public float xBound;
+    public float zBound;
     // WASD controls for the camera
     void Update()
     {
@@ -47,6 +49,11 @@ public class CameraController : MonoBehaviour
             camSize = Mathf.Clamp(camSize, 1, 10);
             cam.orthographicSize = camSize;
         }
+        float camX = transform.position.x;
+        float camZ = transform.position.z;
+        transform.position = new Vector3(Mathf.Clamp(camX, -(xBound+1) * 10f/(camSize+1), 
+        (xBound-5) * 10f/camSize), transform.position.y, 
+        Mathf.Clamp(camZ,-(zBound+1) * 10f/(camSize+1), (zBound-5) * 10f/camSize));
     }
 
     public void ZoomToItem(Vector3 targetPos){
