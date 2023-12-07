@@ -51,6 +51,9 @@ public class DecorationSpawner : MonoBehaviour
             int randomRotation = UnityEngine.Random.Range(0, 4);
             GameObject decorationInstance = Instantiate(randomDecoration, selectedTile.transform.position + new Vector3(randomOffset.x, 0 , randomOffset.y), Quaternion.identity);
             decorationInstance.transform.Rotate(new Vector3(0,randomRotation * 90, 0));
+            if (decorationInstance.GetComponent<Decoration>().resourceType == "wood"){
+                PollutionManager.pollutionManager.numTrees++;
+            }
             selectedTile.hasDecorations = true;
             selectedTile.numDecorations += 1;
             if(selectedTile.numDecorations == maxDecorationsPerTile){

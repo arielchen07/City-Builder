@@ -26,27 +26,10 @@ public class HarvestSystem : MonoBehaviour
         HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
         HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
 
-        // if (Input.GetKeyDown(KeyCode.X))
-        // {
-        //     isHovering = !isHovering;
-
-        //     if (!isHovering)
-        //     {
-        //         if (HoverValid.activeSelf == true)
-        //         {
-        //             Harvest();
-        //         }
-        //         else
-        //         {
-        //             HoverInvalid.SetActive(false);
-        //         }
-                
-        //     }
-        // }
         if (isHovering) {
-            Highlight();
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
+            if (Highlight() == true && Input.GetKeyDown(KeyCode.Mouse0)){
                 Harvest();
+                isHovering = false;
             }
             if (Input.GetKey(KeyCode.Escape)){
                 isHovering = false;
@@ -60,18 +43,20 @@ public class HarvestSystem : MonoBehaviour
     public void Hover(){
         isHovering = true;
     }
-    void Highlight()
+    bool Highlight()
     {
         GetCollidingDecorations();
         if (treesColliding.Count > 0 && harvesterManager.numTreeHarvester - harvesterManager.numOccupiedTreeHarvesters > 0 || rocksColliding.Count > 0 && harvesterManager.numRockHarvester - harvesterManager.numOccupiedRockHarvesters > 0)
         {
             HoverValid.SetActive(true);
             HoverInvalid.SetActive(false);
+            return true;
         }
         else
         {
             HoverInvalid.SetActive(true);
             HoverValid.SetActive(false);
+            return false;
         }
     }
 
@@ -88,6 +73,7 @@ public class HarvestSystem : MonoBehaviour
             {
                 woodCount++;
                 Destroy(tree);
+                PollutionManager.pollutionManager.numTrees--;
             }
             treesColliding.Clear();
         }

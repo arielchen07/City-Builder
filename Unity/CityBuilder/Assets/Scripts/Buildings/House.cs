@@ -23,6 +23,8 @@ public class House : PlaceableObject
     public float sewageX = 1f;
     public float gasX = 1f;
     public float internetX = 1f;
+    public float pollutionTreshold;
+    public float pollutionModifier;
     void Start()
     {
         currentlyColliding = new List<GameObject>();
@@ -74,6 +76,9 @@ public class House : PlaceableObject
         internetX = internetAllocated / internetCost;
         float utilMod = basePopulation / 10;
         population = (basePopulation / 2) + (int)(utilMod * powerX) + (int)(utilMod * waterX) + (int)(utilMod * sewageX) + (int)(utilMod * gasX) + (int)(utilMod * internetX);
+        if(PollutionManager.pollutionManager != null){
+            population -= (int)(Mathf.Clamp(PollutionManager.pollutionManager.pollutionIndex - pollutionTreshold, 0, Mathf.Infinity) * pollutionModifier);
+        }
     }
 
     public void ResetUtilities(){

@@ -22,9 +22,6 @@ public class MoneyManager : MonoBehaviour
     void Start(){
         UpdateItemQuantity();
     }
-    // void Update()
-    // {
-    // }
 
     private int UpdateItemQuantity(){
         quantity = InventoryInfo.GetItemQuantity(itemName, category);
@@ -38,9 +35,7 @@ public class MoneyManager : MonoBehaviour
         }
         itemID = InventoryInfo.GetItemID(itemName, category);
         print("itemID: " + itemID);
-        for (int i = 0; i < amount; i++){
-            inventoryManager.UpdateItemQuantityToServer(itemID, -1);
-        }
+        inventoryManager.UpdateItemQuantityToServer(itemID, -amount);
         quantity -= amount;
         quantityText.text = quantity.ToString();
         UpdateItemQuantity();
@@ -49,9 +44,7 @@ public class MoneyManager : MonoBehaviour
 
     public void IncreaseCoins(int amount){
         itemID = InventoryInfo.GetItemID(itemName, category);
-        for (int i = 0; i < amount; i++){
-            inventoryManager.UpdateItemQuantityToServer(itemID, 1);
-        }
+        inventoryManager.UpdateItemQuantityToServer(itemID, amount);
         quantity += amount;
         quantityText.text = quantity.ToString();
         UpdateItemQuantity();

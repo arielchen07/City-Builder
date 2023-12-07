@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6594877488714937862}
   - component: {fileID: 3632836858942846725}
   - component: {fileID: 2623607430309232127}
+  - component: {fileID: -3557033267786956120}
   m_Layer: 3
   m_Name: SewagePlant
   m_TagString: Object
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyColliding: []
+  adjacentTiles: []
   HoverValid: {fileID: 5786073596291454356}
   HoverInvalid: {fileID: 7707119392296217106}
   worldCenter: {x: 0, y: 0, z: 0}
@@ -205,11 +207,23 @@ MonoBehaviour:
   displayName: Sewage Plant
   category: sewage
   item: {fileID: 0}
+  isActive: 1
   serviceRange: {fileID: 2044932535877620316}
   maxSewage: 50
   currSewageAllocated: 0
-  updateInterval: 2
-  timer: 0
+--- !u!114 &-3557033267786956120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594877488714937865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff7bcb8a2e21a047b31f1848942ad9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pollution: 20
 --- !u!1 &6594877488855682048
 GameObject:
   m_ObjectHideFlags: 0

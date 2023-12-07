@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5350509562647772516}
   - component: {fileID: 6177155832838749129}
   - component: {fileID: 5062434335746955692}
+  - component: {fileID: 207751501957343278}
   m_Layer: 3
   m_Name: StoneQuarry
   m_TagString: Object
@@ -174,6 +175,19 @@ MonoBehaviour:
   category: harvester
   item: {fileID: 0}
   isActive: 1
+--- !u!114 &207751501957343278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3402843517139241138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff7bcb8a2e21a047b31f1848942ad9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pollution: 20
 --- !u!1 &3478956617698699891
 GameObject:
   m_ObjectHideFlags: 0
