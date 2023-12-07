@@ -49,10 +49,8 @@ public class DecorationSpawner : MonoBehaviour
             }
             Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-0.5f,0.5f), UnityEngine.Random.Range(-0.5f,0.5f));
             int randomRotation = UnityEngine.Random.Range(0, 4);
-            float randomSize = UnityEngine.Random.Range(0.8f, 1.2f);
             GameObject decorationInstance = Instantiate(randomDecoration, selectedTile.transform.position + new Vector3(randomOffset.x, 0 , randomOffset.y), Quaternion.identity);
             decorationInstance.transform.Rotate(new Vector3(0,randomRotation * 90, 0));
-            decorationInstance.transform.localScale *= randomSize;
             if (decorationInstance.GetComponent<Decoration>().resourceType == "wood"){
                 PollutionManager.pollutionManager.numTrees++;
             }
