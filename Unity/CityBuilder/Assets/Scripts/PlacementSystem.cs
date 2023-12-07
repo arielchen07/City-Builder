@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
 
+/// <summary>
+/// The PlacementSystem class is responsible for implementing all object placement features.
+/// Note: this class can be implemented as a singleton, which would simplify some code in classes that utilize this class.
+/// </summary>
 public class PlacementSystem : MonoBehaviour
 {
+    //testInt is used in the unit tests.
     public int testInt = 10;
     [SerializeField] private GameObject pointer;
     [SerializeField] private InputManager inputManager;
@@ -28,7 +30,7 @@ public class PlacementSystem : MonoBehaviour
     public bool isPlacingContinousObjects = true;
     void Start()
     {
-        currentRotation = new Vector3(0,0,0);
+        currentRotation = new Vector3(0, 0, 0);
     }
     void Update()
     {
@@ -36,84 +38,136 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePos = inputManager.GetSelectedMapPosition();
         pointer.transform.position = mousePos;
         //get object the cursor is currently colliding with
-        if(inputManager.hitObject != null){
+        if (inputManager.hitObject != null)
+        {
             currentlyHovering = inputManager.hitObject;
         }
-        if(!EventSystem.current.IsPointerOverGameObject()){
-            if (beginPlacingContinuousObjects) {
+        //Gets user input if the cursor is not currently hovering over a UI elements, i.e the cursor hovering over the map. 
+        //Placement of continuous objects such as roads is implemented differently from single objects.
+        //Thus, the placement is also differentiated here.
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (beginPlacingContinuousObjects)
+            {
                 menuManager.ToggleRoadPlacementModeButtonVisual(isPlacingContinousObjects);
-                if(isPlacingContinousObjects){
+                if (isPlacingContinousObjects)
+                {
                     CursorManager.cursorManager.SetCursorMode("placing");
                     PlaceContinuousObjects(road);
-                } else {
+                }
+                else
+                {
                     CursorManager.cursorManager.SetCursorMode("deleting");
                     DeleteContinuousObjects();
                 }
             }
-            if(currentlyPlacing != null && !beginPlacingContinuousObjects){
-                if(Input.GetKeyDown(KeyCode.Mouse0)){
+            //Place an object if currentlyPlacing points to an object.
+            if (currentlyPlacing != null && !beginPlacingContinuousObjects)
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
                     PlaceObject();
                 }
-                else if(Input.GetKeyDown(KeyCode.Escape)){
+                else if (Input.GetKeyDown(KeyCode.Escape))
+                {
                     DropObject();
                 }
-            } else if (currentlyHovering != null) {
-                if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                    if (currentlyHovering.CompareTag("Object")) {
+                //Otherwise, select or deselect objects depending on if the cursor is hovering over an object or not when left click is pressed.
+            }
+            else if (currentlyHovering != null)
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    if (currentlyHovering.CompareTag("Object"))
+                    {
                         SelectObject();
-                    } else if (currentlySelecting != null){
+                    }
+                    else if (currentlySelecting != null)
+                    {
                         DeselectObject();
                     }
                 }
             }
 
         }
-
-        if(isSelectingObject) {
+        //If an object is selected, ignore objects in the foreground layer and only collide with tiles in the ground layer.
+        if (isSelectingObject)
+        {
             inputManager.placementLayermask = LayerMask.GetMask("Ground");
-        } else {
+        }
+        else
+        {
             inputManager.placementLayermask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Foreground");
         }
     }
 
-    public void PlaceRoads(){
+    /// <summary>
+    /// Called when the user clicks the road button. <br/>
+    /// Begins placing or deleting roads.
+    /// </summary>
+    public void PlaceRoads()
+    {
         beginPlacingContinuousObjects = true;
         menuManager.ToggleRightMenu();
     }
-
-    public void StopPlacingRoads(){
+    /// <summary>
+    /// Called when the user exits the road placement/deletion menu. <br/>
+    /// Stops placing or deleting roads.
+    /// </summary>
+    public void StopPlacingRoads()
+    {
         beginPlacingContinuousObjects = false;
         CursorManager.cursorManager.SetCursorMode(""); //default
     }
-    public void DeleteObject(){
-        foreach(GameObject tile in currentlySelecting.GetComponent<PlaceableObject>().currentlyColliding){
+    /// <summary>
+    /// Deletes the object that is currently selected.<br/>
+    /// Frees all tiles the object was on.
+    /// </summary>
+    public void DeleteObject()
+    {
+        foreach (GameObject tile in currentlySelecting.GetComponent<PlaceableObject>().currentlyColliding)
+        {
             tile.GetComponent<MapTile>().isOccupied = false;
             tile.GetComponent<MapTile>().placedObject = null;
         }
-        if(currentlySelecting != null){
+        if (currentlySelecting != null)
+        {
             currentlySelecting.GetComponent<PlaceableObject>().OnDelete();
             Destroy(currentlySelecting);
             currentlySelecting = null;
         }
         DeselectObject();
     }
-    public void RotateObject(bool rotateLeft){
+    /// <summary>
+    /// Rotate the selected object.
+    /// </summary>
+    /// <param name="rotateLeft">True if rotating left, false if rotating right.</param>
+    public void RotateObject(bool rotateLeft)
+    {
         float yRot = -90f;
-        if(rotateLeft){
+        if (rotateLeft)
+        {
             yRot = 90f;
         }
-        currentlySelecting.transform.Rotate(new Vector3(0,yRot,0));
+        currentlySelecting.transform.Rotate(new Vector3(0, yRot, 0));
         currentRotation = currentlySelecting.transform.rotation.eulerAngles;
     }
-    /*
-    PlaceObject is called when the user is currently selecting an object and wants to place it.
-    */
-    public void PlaceObject(){
-        CursorManager.cursorManager.SetCursorMode("");
-        if (currentlyPlacing.GetComponent<PlaceableObject>().CanBePlaced()){
+    /// <summary>
+    /// Attempts to place the object that is currently selected. <br/>
+    /// Does nothing if the object cannot be placed. <br/>
+    /// Updates the occupancy of tiles beneath the placed object. <br/>
+    /// Resets the layermask of the inputManager to be able to detect both tiles and building objects. <br/>
+    /// Deselects the placed object.
+    /// </summary>
+    public void PlaceObject()
+    {
+        if (currentlyPlacing.GetComponent<PlaceableObject>().CanBePlaced())
+        {
+            CursorManager.cursorManager.SetCursorMode("");
             DeselectObject();
             currentlyPlacing.transform.parent = null;
-            foreach(GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding){
+            foreach (GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding)
+            {
                 tile.GetComponent<MapTile>().isOccupied = true;
                 tile.GetComponent<MapTile>().placedObject = currentlyPlacing;
             }
@@ -126,14 +180,19 @@ public class PlacementSystem : MonoBehaviour
         isSelectingObject = false;
     }
 
-    /*
-    HoverObject is called when the user creates a new building and needs to place it.
-    */
-    public void HoverObject(GameObject itemObject){
+    /// <summary>
+    /// This function is called when the user wants to place an object from their inventory. <br/>
+    /// Gets the object prefab from itemObject. <br/>
+    /// Spawns and attaches the object to the cursor. <br/>
+    /// </summary>
+    /// <param name="itemObject">The inventory object prefab that contains ItemUI</param>
+    public void HoverObject(GameObject itemObject)
+    {
         CursorManager.cursorManager.SetCursorMode("placing");
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         isSelectingObject = true;
-        if(currentlyPlacing != null){
+        if (currentlyPlacing != null)
+        {
             Destroy(currentlyPlacing);
             currentlyPlacing = null;
         }
@@ -145,16 +204,22 @@ public class PlacementSystem : MonoBehaviour
         AssignObjectToCursor();
     }
 
-    /*
-    DropObject is called when the user selects an object and presses escape. Ie the player wants to move an object but decides
-    to not move it.
-    */
-    public void DropObject() {
-        if(currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true) {
+    /// <summary>
+    /// Drop the object that the user is currently moving. <br/>
+    /// Called when the user wanted to move an object, but cancels it by pressing escape, 
+    /// or when the user is placing an object from their inventory but no longer wants the place it. <br/>
+    /// Returns the object to its original position or puts it back into the inventory. 
+    /// </summary>
+    public void DropObject()
+    {
+        if (currentlyPlacing.GetComponent<PlaceableObject>().hasBeenPlaced == true)
+        {
             currentlyPlacing.transform.SetPositionAndRotation(oldPosition, Quaternion.Euler(oldRotation));
             currentlyPlacing.GetComponent<PlaceableObject>().isHovering = false;
             currentlyPlacing.transform.parent = null;
-        } else {
+        }
+        else
+        {
             PlaceableObject po = currentlyPlacing.GetComponent<PlaceableObject>();
             string itemID = InventoryInfo.GetItemID(po.objectName, po.category);
             inventoryManager.UpdateItemQuantityToServer(itemID, 1);
@@ -164,15 +229,23 @@ public class PlacementSystem : MonoBehaviour
         isSelectingObject = false;
     }
 
-    void AssignObjectToCursor(){
+    /// <summary>
+    /// Attaches the selected object to the cursor, aligned based on if the object has even or odd dimensions.
+    /// </summary>
+    void AssignObjectToCursor()
+    {
         pointer.GetComponent<PointerDetector>().currentlyPlacing = currentlyPlacing;
         pointer.GetComponent<PointerDetector>().AlignObject();
         currentlyPlacing.GetComponent<PlaceableObject>().isHovering = true;
     }
-    /*
-    SelectObject is called when a user hovers their cursor over an object and wants to select it.
-    */
-    public void SelectObject() {        
+
+    /// <summary>
+    /// Selects the object the cursor is currently hovering over. <br/>
+    /// Opens the object menu and zooms to the selected object. <br/>
+    /// Updates the object's information before showing the menu.
+    /// </summary>
+    public void SelectObject()
+    {
         isSelectingObject = true;
         currentlySelecting = currentlyHovering;
         currentlySelecting.GetComponent<PlaceableObject>().OnSelect();
@@ -182,15 +255,27 @@ public class PlacementSystem : MonoBehaviour
         objectMenu.GetComponent<ObjectMenuManager>().UpdateInfo(currentlySelecting);
         objectMenu.GetComponent<ObjectMenuManager>().inventoryManager = inventoryManager;
     }
-    public void ToggleObjectMenu(){
-        if(objectMenu != null){
+
+    /// <summary>
+    /// Opens or closes the object menu showed when the user selects an object.
+    /// </summary>
+    public void ToggleObjectMenu()
+    {
+        if (objectMenu != null)
+        {
             objectMenu.GetComponent<Animator>().SetBool("isOpen", isSelectingObject);
             objectMenu.GetComponent<Animator>().SetTrigger("toggle");
-        } else {
-            if (currentlySelecting != null){
-                if(currentlySelecting.TryGetComponent<House>(out var h)){
+        }
+        else
+        {
+            if (currentlySelecting != null)
+            {
+                if (currentlySelecting.TryGetComponent<House>(out var h))
+                {
                     objectMenu = Instantiate(objectMenuHousingPrefab, gameCanvas.transform);
-                } else {
+                }
+                else
+                {
                     objectMenu = Instantiate(objectMenuPrefab, gameCanvas.transform);
                 }
                 objectMenu.GetComponent<ObjectMenuManager>().ps = this;
@@ -200,8 +285,11 @@ public class PlacementSystem : MonoBehaviour
             }
         }
     }
-
-    public void DeselectObject(){
+    /// <summary>
+    /// Deselects the currently selected object, closing its menu and unlocks the camera.
+    /// </summary>
+    public void DeselectObject()
+    {
         isSelectingObject = false;
         currentlySelecting = null;
         ToggleObjectMenu();
@@ -209,7 +297,11 @@ public class PlacementSystem : MonoBehaviour
         menuManager.OpenInventory();
     }
 
-    public void MoveObject(){
+    /// <summary>
+    /// Picks up a placed object and attaches it to the cursor. Frees all tiles underneath the object and allows the cursor to only interact with tiles.
+    /// </summary>
+    public void MoveObject()
+    {
         CursorManager.cursorManager.SetCursorMode("placing");
         currentlyPlacing = currentlySelecting;
         isSelectingObject = false;
@@ -218,49 +310,69 @@ public class PlacementSystem : MonoBehaviour
         inputManager.placementLayermask = LayerMask.GetMask("Ground");
         oldPosition = currentlyPlacing.transform.position;
         oldRotation = currentlyPlacing.transform.rotation.eulerAngles;
-        foreach(GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding){
+        foreach (GameObject tile in currentlyPlacing.GetComponent<PlaceableObject>().currentlyColliding)
+        {
             tile.GetComponent<MapTile>().isOccupied = false;
             tile.GetComponent<MapTile>().placedObject = null;
         }
         currentlyPlacing.transform.parent = pointer.GetComponent<PointerDetector>().indicator.transform;
-        currentlyPlacing.transform.localPosition = new Vector3(0,0,0);
+        currentlyPlacing.transform.localPosition = new Vector3(0, 0, 0);
         AssignObjectToCursor();
     }
 
-    void PlaceContinuousObjects(GameObject objectToPlace){
+    /// <summary>
+    /// Places continuous objects when the user holds down the left mouse button.
+    /// </summary>
+    /// <param name="objectToPlace">The object to place, i.e. the road prefab.</param>
+    void PlaceContinuousObjects(GameObject objectToPlace)
+    {
         GameObject pointerIndicator = pointer.GetComponent<PointerDetector>().indicator;
-        if (Input.GetKey(KeyCode.Mouse0)){
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
             bool canPlace = true;
             Collider[] cols = Physics.OverlapSphere(pointerIndicator.transform.position, 0.1f, LayerMask.GetMask("Ground"));
             GameObject closest = cols[0].gameObject;
             float minDistance = Mathf.Infinity;
-            foreach(Collider col in cols){
-                if(col.TryGetComponent<MapTile>(out var m)){
-                    float distance = Mathf.Abs((col.transform.position-pointerIndicator.transform.position).sqrMagnitude);
-                    if(distance < minDistance){
+            foreach (Collider col in cols)
+            {
+                if (col.TryGetComponent<MapTile>(out var m))
+                {
+                    float distance = Mathf.Abs((col.transform.position - pointerIndicator.transform.position).sqrMagnitude);
+                    if (distance < minDistance)
+                    {
                         minDistance = distance;
                         closest = col.gameObject;
                     }
                 }
             }
-            if (closest.GetComponent<MapTile>().isOccupied || closest.GetComponent<MapTile>().hasDecorations){
+            if (closest.GetComponent<MapTile>().isOccupied || closest.GetComponent<MapTile>().hasDecorations)
+            {
                 canPlace = false;
             }
-            if(canPlace){
+            if (canPlace)
+            {
                 GameObject road = Instantiate(objectToPlace, pointerIndicator.transform.position, Quaternion.identity);
                 closest.GetComponent<MapTile>().placedObject = road;
                 closest.GetComponent<MapTile>().isOccupied = true;
             }
         }
     }
-
-    void DeleteContinuousObjects(){
+    /// <summary>
+    /// Deletes continuous objects when the user holds down the left mouse button. <br/>
+    /// Frees all tiles under the deleted objects.
+    /// </summary>
+    void DeleteContinuousObjects()
+    {
         GameObject pointerIndicator = pointer.GetComponent<PointerDetector>().indicator;
-        if (Input.GetKey(KeyCode.Mouse0)){
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
             Collider[] cols = Physics.OverlapSphere(pointerIndicator.transform.position, 0.1f, LayerMask.GetMask("Ground"));
-            foreach (Collider col in cols){
-                if(col.TryGetComponent<MapTile>(out var m)){
-                    if(m.placedObject != null && m.placedObject.TryGetComponent<Road>(out var r)){
+            foreach (Collider col in cols)
+            {
+                if (col.TryGetComponent<MapTile>(out var m))
+                {
+                    if (m.placedObject != null && m.placedObject.TryGetComponent<Road>(out var r))
+                    {
                         Destroy(r.gameObject);
                         m.isOccupied = false;
                         m.placedObject = null;
@@ -269,20 +381,35 @@ public class PlacementSystem : MonoBehaviour
             }
         }
     }
-
-    public void SetRoadsPlaceMode(){
+    /// <summary>
+    /// Changes road placement mode to placing roads.
+    /// This function is called by the place road button in the road submenu.
+    /// </summary>
+    public void SetRoadsPlaceMode()
+    {
         isPlacingContinousObjects = true;
     }
-
-    public void SetRoadsDeleteMode(){
+    /// <summary>
+    /// Changes road placement mode to deleting roads.
+    /// This function is called by the delete road button in the road submenu.
+    /// </summary>
+    public void SetRoadsDeleteMode()
+    {
         isPlacingContinousObjects = false;
     }
 
+    /// <summary>
+    /// Gets the object that is currently being placed by the user.
+    /// </summary>
+    /// <returns>The gameobject the player is currently trying to place.</returns>
     public GameObject GetCurrentlyPlacing()
     {
         return this.currentlyPlacing;
     }
-
+    /// <summary>
+    /// Gets the object that is currently selected by the user.
+    /// </summary>
+    /// <returns>The gameobject the player currently selected.</returns>
     public GameObject GetCurrentlySelecting()
     {
         return this.currentlySelecting;

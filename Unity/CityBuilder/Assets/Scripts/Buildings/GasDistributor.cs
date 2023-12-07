@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The GasDistributor class is attached to any building that provides the gas utility.
+/// This class inherits from PlaceableObject and implements IProvider
+/// </summary>
 public class GasDistributor : PlaceableObject, IProvider
 {
     public GameObject serviceRange;
@@ -15,19 +19,26 @@ public class GasDistributor : PlaceableObject, IProvider
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
     }
-    void Update() {
+    void Update()
+    {
         currentlyColliding = GetCollidingTiles();
         adjacentTiles = GetAdjacentTiles();
         canBePlaced = CanBePlaced();
-        if (isHovering) {
-            if (canBePlaced) {
+        if (isHovering)
+        {
+            if (canBePlaced)
+            {
                 HoverValid.SetActive(true);
                 HoverInvalid.SetActive(false);
-            } else {
+            }
+            else
+            {
                 HoverValid.SetActive(false);
                 HoverInvalid.SetActive(true);
             }
-        } else {
+        }
+        else
+        {
             HoverValid.SetActive(false);
             HoverInvalid.SetActive(false);
         }
@@ -40,17 +51,23 @@ public class GasDistributor : PlaceableObject, IProvider
         Vector3 worldHalfExtents = Vector3.Scale(serviceRangeCollider.size, serviceRangeCollider.transform.lossyScale) * 0.5f;
         Collider[] cols = Physics.OverlapBox(worldCenter, worldHalfExtents, serviceRangeCollider.transform.rotation);
         currGasAllocated = 0;
-        foreach (Collider col in cols) {
-            if (col.gameObject.TryGetComponent<House>(out var h)) {
-                if(currGasAllocated == maxGas){
+        foreach (Collider col in cols)
+        {
+            if (col.gameObject.TryGetComponent<House>(out var h))
+            {
+                if (currGasAllocated == maxGas)
+                {
                     break;
                 }
                 int gasNeeded = h.gasCost - h.gasAllocated;
-                if (currGasAllocated + gasNeeded <= maxGas) {       //can fill up
+                if (currGasAllocated + gasNeeded <= maxGas)
+                {
                     currGasAllocated += gasNeeded;
                     h.gasAllocated = h.gasCost;
-                } else {                                            //can't fully fill up
-                    h.gasAllocated = maxGas - currGasAllocated;     // the remaining left in this distributor
+                }
+                else
+                {
+                    h.gasAllocated = maxGas - currGasAllocated;
                     currGasAllocated = maxGas;
                 }
                 h.UpdatePopulation();

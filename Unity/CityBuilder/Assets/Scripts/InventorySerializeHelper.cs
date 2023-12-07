@@ -4,12 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Serializable data structure for recieving full invenotry list from server
+/// </summary>
 [Serializable]
 public class ServerInventoryData
 {
     public List<ServerItemData> items = new List<ServerItemData>();
 }
 
+/// <summary>
+/// Serializable data structure for recieving invenotry items from server
+/// </summary>
 [Serializable]
 public class ServerItemData
 {
@@ -35,6 +41,9 @@ public class ServerItemData
     }
 }
 
+/// <summary>
+/// Serializable data structure for update inventory item information to server
+/// </summary>
 [Serializable]
 public class InitServerItemData
 {
@@ -50,6 +59,9 @@ public class InitServerItemData
     }
 }
 
+/// <summary>
+/// Serializable data structure for update item quantity to server
+/// </summary>
 [Serializable]
 public class UpdateItemQuantity
 {

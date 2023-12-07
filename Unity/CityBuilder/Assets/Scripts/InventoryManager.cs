@@ -1,38 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The inventoryItem class is a data structure designed to store the name, quantity and id of an item in the inventory.
+/// Each attribute of the item can be taken or updated through get/set functions.
+/// </summary>
 public class inventoryItem{
     public string name { get; set; }
     public int quantity { get; set; }
     public string itemID { get; set; }
 }
 
+/// <summary>
+/// The inventoryInfo class is data structure that designed to manage all item information currently in the inventory. 
+/// It contains itemInventoryDict, a dictionry of dictionaries of inventoryItem to store information.
+/// </summary>
 public static class InventoryInfo
 {
     public static Dictionary<string, Dictionary<string, inventoryItem>> itemInventoryDict = new Dictionary<string, Dictionary<string, inventoryItem>>();
-    public static bool isNew = true;
 
+    /// <summary>
+    /// Gets the item's quantity from the itemInventoryDict. <br/>
+    /// </summary>
+    /// <param name="itemName">The name of the required item</param>
+    /// <param name="category">The catogory that the required item belongs to</param>
+    /// <returns>The quantity of this item as an integer. Return 0 if the item does not exist in current inventory.</returns>
     public static int GetItemQuantity(string itemName, string category)
     {
         if (InventoryInfo.itemInventoryDict.ContainsKey(category))
         {
             if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
             {
-                //Debug.Log("get quantity of item: " + itemName + "in category: " + category);
                 return InventoryInfo.itemInventoryDict[category][itemName].quantity;
             }
         }
         return 0;
     }
 
+    /// <summary>
+    /// Gets the item's ID from the itemInventoryDict. <br/>
+    /// </summary>
+    /// <param name="itemName">The name of the required item</param>
+    /// <param name="category">The catogory that the required item belongs to</param>
+    /// <returns>The ID of this item as a string. Return null if the item does not exist in current inventory.</returns>
     public static string GetItemID(string itemName, string category)
     {
         if (InventoryInfo.itemInventoryDict.ContainsKey(category))
         {
-            //Debug.Log("get id for category: " + category);
             if (InventoryInfo.itemInventoryDict[category].ContainsKey(itemName))
             {
-                //Debug.Log("get id for item: " + itemName);
                 return InventoryInfo.itemInventoryDict[category][itemName].itemID;
             }
         }
@@ -40,15 +56,22 @@ public static class InventoryInfo
     }
 }
 
+/// <summary>
+/// The InventoryManager class is attached to the InventoryManager Object. <br/>
+/// This class is a singleton and is globally accessible. <br/>
+/// This class is responsible for tracking and updating the information in the inventory the player has,
+/// including catogories of items, item names, item ids and quantities.
+/// </summary>
 public class InventoryManager : MonoBehaviour
 {
     public InventoryToServer toServer;
     public ServerInventoryData inventory;
 
+    /// <summary>
+    /// Load inventory information from server based on the userID of the current user
+    /// </summary>
     private void Awake()
     {
-        // Regularily gets live inventory information from server and updates unity inventory
-
         if (!string.IsNullOrEmpty(GlobalVariables.UserID)){
             toServer.LoadInventoryFromServer(GlobalVariables.UserID);
         }
@@ -56,50 +79,19 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Period))
-        //{
-        //    // Increase number of item by 1: UpdateItemServer(userID, itemID, 1);
-        //    toServer.UpdateItemToServer(GlobalVariables.UserID, "65517d2ab753aa75060ea62e", 1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Comma))
-        //{
-        //    // Decrease number of item by 1: UpdateItemServer(userID, itemID, -1);
-        //    toServer.UpdateItemToServer(GlobalVariables.UserID, "65517d2ab753aa75060ea62e", -1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    toServer.LoadInventoryFromServer(GlobalVariables.UserID);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Equals))
-        //{
-        //    // Create a new item (item not in server invenotry): CreateItemServer(category, name, amount);
-        //    toServer.CreateItemToServer(GlobalVariables.UserID, "c2", "n2", 1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.J))
-        //{
-        //    foreach (var category in InventoryInfo.itemInventoryDict.Keys)
-        //    {
-        //        print("category: " + category);
-        //        foreach( var item in InventoryInfo.itemInventoryDict[category].Keys)
-        //        {
-        //            print("item name: " + item + ", quantity:" + InventoryInfo.itemInventoryDict[category][item].quantity + ", itemID:" + InventoryInfo.itemInventoryDict[category][item].itemID);
-        //        }
-        //    }
-        //}
+
     }
 
-    private Dictionary<string, inventoryItem> initializeInventoryCategory(List<string> objectNameList, int quantity)
-    {
-        Dictionary<string, inventoryItem> objectNameToInfoDict = new Dictionary<string, inventoryItem>();
-
-        for (int i = 0; i < objectNameList.Count; i++)
-        {
-            objectNameToInfoDict.Add(objectNameList[i], new inventoryItem { name = objectNameList[i], quantity = quantity, itemID = null });
-        }
-
-        return objectNameToInfoDict;
-    }
-
+    /// <summary>
+    /// Initailize a new dictionary for a catogory with an inventoryItem, 
+    /// which is created based on given objectName, quantity and itemID.
+    /// This function is intended to be called by UpdateInventoryItem when the category of 
+    /// the item received from the server does not already exist in the current inventory.    
+    /// </summary>
+    /// <param name="objectName">The name of the object item</param>
+    /// <param name="quantity">The quantity of the object item</param>
+    /// <param name="itemID">The itemID of the object item</param>
+    /// <returns></returns>
     private Dictionary<string, inventoryItem> createDictByCategory(string objectName, int quantity, string itemID)
     {
         Dictionary<string, inventoryItem> objectNameToInfoDict = new Dictionary<string, inventoryItem>();
@@ -107,18 +99,25 @@ public class InventoryManager : MonoBehaviour
         return objectNameToInfoDict;
     }
 
+    /// <summary>
+    /// Update InventoryInfo based on the information sent back from the server.
+    /// </summary>
+    /// <param name="inventory">the inventory information sent back from server</param>
     public void UpdateInventory(ServerInventoryData inventory)
     {
-        //print("call UpdateInventory");
         this.inventory = inventory;
         foreach (var item in inventory.items){
             UpdateInventoryItem(item);
         }
     }
 
+    /// <summary>
+    /// Update InventoryInfo based on the given item information that sent back from server.
+    /// This function will be called by UpdateInventory to update information of one item each time.
+    /// </summary>
+    /// <param name="item">the item information sent back from server</param>
     public void UpdateInventoryItem(ServerItemData item)
     {
-        //print("call UpdateInventoryItem");
         if (InventoryInfo.itemInventoryDict.ContainsKey(item.category))
         {
             if (InventoryInfo.itemInventoryDict[item.category].ContainsKey(item.name))
@@ -130,7 +129,6 @@ public class InventoryManager : MonoBehaviour
             {
                 InventoryInfo.itemInventoryDict[item.category][item.name] = new inventoryItem { name = item.name, quantity = item.quantity, itemID = item._id };
             }
-
         }
         else
         {
@@ -138,8 +136,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the amount of item quantity that has changed to the server
+    /// </summary>
+    /// <param name="itemID">the id of the item</param>
+    /// <param name="quantityChanged">the amount of quantity that has changed</param>
     public void UpdateItemQuantityToServer(string itemID, int quantityChanged){
-        // Update number of item by quantityChanged: UpdateItemServer(userID, itemID, quantityChanged);
         toServer.UpdateItemToServer(GlobalVariables.UserID, itemID, quantityChanged);
         print("update item quantity change" + quantityChanged + "to server");
     }

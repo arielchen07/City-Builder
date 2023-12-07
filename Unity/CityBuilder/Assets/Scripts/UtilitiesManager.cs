@@ -1,8 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
+
+/// <summary>
+/// The UtilitiesManager class is responsible for tracking the current utility providers on the map and updating the utility values of houses. <br/>
+/// This class is a singleton and is globally accessible.
+/// </summary>
 public class UtilitiesManager : MonoBehaviour
 {
     public static UtilitiesManager utilManager {get; private set;}
@@ -17,6 +20,10 @@ public class UtilitiesManager : MonoBehaviour
         UpdateUtilities();
     }
 
+    /// <summary>
+    /// Finds all houses and provider objects in the scene. Resets the utility values of all housing and redistributes the utilities provided by the providers. <br/>
+    /// This function is not called at a regular interval. Instead, it is called when the map is loaded and when objects are placed or deleted. This saves performance.
+    /// </summary>
     public void UpdateUtilities(){
         List<GameObject> objects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Object"));
         List<GameObject> houses = new List<GameObject>();

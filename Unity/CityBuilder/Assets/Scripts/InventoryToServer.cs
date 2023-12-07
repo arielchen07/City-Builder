@@ -9,61 +9,18 @@ public class InventoryToServer : MonoBehaviour
     public InventoryManager inventoryManager;
     public float updateInterval = 5.0f; // Checks for server inventory data every 5 seconds
 
-    //string serverAccessEndpoint = "http://localhost:3000/api/";
-    //string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
-
-    public void CreateItemToServer(string userID, string category, string name, int quantity = 2)
-    {
-        StartCoroutine(
-            CreateItemRequest(userID, category, name, quantity,
-                (UnityWebRequest request) =>
-                {
-                    // call to load game objects after recieved data from get request
-                    if (request.result == UnityWebRequest.Result.Success)
-                    {
-                        string data = request.downloadHandler.text;
-                        print("Create item read from server recieved: " + data);
-                        if (String.IsNullOrEmpty(data))
-                        {
-                            return;
-                        }
-                        var item = JsonUtility.FromJson<ServerItemData>(
-                            data
-                        );
-                        print(item.name);
-                        inventoryManager.UpdateInventoryItem(item);
-
-                        Debug.Log("Successfully updated new item info to server");
-                        //LoadInventoryFromServer(userID);
-                    }
-                    else
-                    {
-                        Debug.LogError("Update new item to server failed: " + request.error);
-                    }
-                }
-            )
-        );
-    }
-
-    IEnumerator CreateItemRequest(string userID, string category, string name, int quantity, Action<UnityWebRequest> callback)
-    {
-        // Currently using hard coded URL to store to a specific map id of a specific user in database
-        // will change this later
-        InitServerItemData item = new InitServerItemData(category, name, quantity);
-        string item_json = JsonUtility.ToJson(item);
-
-        using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + userID + "/create", "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(item_json);
-            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            yield return request.SendWebRequest();
-            callback(request);
-        }
-    }
+    /// <summary>
+    /// Update inventory item quantity on server, calls UpdateItemRequest, syncs unity inventory with server
+    /// </summary>
+    /// <param name="userID">Unique id for the user</param>
+    /// <param name="itemID">Unique id for the inventory item that is being updated</param>
+    /// <param name="amount">Quantity changed for the item</param>
     public void UpdateItemToServer(string userID, string itemID, int amount)
     {
+        if (string.IsNullOrEmpty(userID) || string.IsNullOrEmpty(itemID)) {
+            Debug.Log("No userID or itemID information, change will not be updated to server");
+            return;
+        }
         StartCoroutine(
             UpdateItemRequest(userID, itemID, amount,
                 (UnityWebRequest request) =>
@@ -80,11 +37,9 @@ public class InventoryToServer : MonoBehaviour
                         var item = JsonUtility.FromJson<ServerItemData>(
                             data
                         );
-                        print(item.name);
                         inventoryManager.UpdateInventoryItem(item);
 
                         Debug.Log("Successfully updated item info to server");
-                        //LoadInventoryFromServer(userID);
                     }
                     else
                     {
@@ -95,15 +50,22 @@ public class InventoryToServer : MonoBehaviour
         );
     }
 
+    /// <summary>
+    /// Sends UpdateItemRequest to server, callback after recieve result from server
+    /// </summary>
+    /// <param name="userID">Unique id for the user</param>
+    /// <param name="itemID">Unique id for the inventory item that is being updated</param>
+    /// <param name="amount">Quantity changed for the item</param>
+    /// <param name="callback">Function to run after recieved result from server</param>
+    /// <returns></returns>
     IEnumerator UpdateItemRequest(string userID, string itemID, int amount, Action<UnityWebRequest> callback)
     {
-        // Currently using hard coded URL to store to a specific map id of a specific user in database
-        // will change this later
         string action = "";
         if (amount > 0)
         {
             action = "/inc/";
-        } else
+        }
+        else
         {
             action = "/dec/";
         }
@@ -122,13 +84,21 @@ public class InventoryToServer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Load full inventory data from server
+    /// </summary>
+    /// <param name="userID">Unique id for the user</param>
     public void LoadInventoryFromServer(string userID)
     {
+        if (string.IsNullOrEmpty(userID)) {
+            Debug.Log("No userID information, change will not be loaded from server");
+            return;
+        }
         StartCoroutine(
             GetInventoryRequest(userID,
                 (UnityWebRequest request) =>
                 {
-                    // call to load game objects after recieved data from get request
+                    // call to load inventory information after recieved data from get request
                     if (request.result == UnityWebRequest.Result.Success)
                     {
                         string data = request.downloadHandler.text;
@@ -140,10 +110,6 @@ public class InventoryToServer : MonoBehaviour
                         var inventory = JsonUtility.FromJson<ServerInventoryData>(
                             data
                         );
-                        foreach (var item in inventory.items)
-                        {
-                            print(item.name + ", " + item.quantity + ", " + item._id);
-                        }
                         inventoryManager.UpdateInventory(inventory);
                         Debug.Log("Successfully loaded inventory from server");
                     }
@@ -156,11 +122,14 @@ public class InventoryToServer : MonoBehaviour
         );
     }
 
+    /// <summary>
+    /// Send get request to server to retrieve inventory information
+    /// </summary>
+    /// <param name="userID">Unique id for the user</param>
+    /// <param name="callback">Function to run after recieved result from server</param>
+    /// <returns></returns>
     IEnumerator GetInventoryRequest(string userID, Action<UnityWebRequest> callback)
     {
-        // Currently using hard coded URL to load from a specific map id of a specific user in database
-        // will change this later
-
         // send get request to server, triggers callback after response recieved
         using (UnityWebRequest request = UnityWebRequest.Get(GlobalVariables.serverAccessBaseURL + "/api/" + userID + "/all"))
         {
@@ -170,6 +139,10 @@ public class InventoryToServer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Regularily loads up to date inventory information from server
+    /// </summary>
+    /// <param name="userID">Unique id for user in database</param>
     public void RegularUpdateInventory(string userID)
     {
         StartCoroutine(CheckUpdatesForInventory(userID));

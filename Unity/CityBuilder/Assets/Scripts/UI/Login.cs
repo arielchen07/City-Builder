@@ -14,14 +14,6 @@ public static class GlobalVariables
 }
 
 public class Login : MonoBehaviour{
-
-    //[SerializeField] private string authenticationEndpoint = "http://localhost:3000/api/login";
-    //[SerializeField] private string registrationEndpoint = "http://localhost:3000/api/register";
-
-    // private string authenticationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/login";
-    // private string registrationEndpoint = GlobalVariables.serverAccessBaseURL + "/api/register";
-    // string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
-
     [SerializeField] private TextMeshProUGUI alertText;
     [SerializeField] private Button loginButton;
     [SerializeField] private Button signupButton;  
@@ -31,8 +23,6 @@ public class Login : MonoBehaviour{
     [SerializeField] private Toggle serverToggle;
     public CloudManager cloudManager;
     public Animator anim;
-    //[SerializeField] private Transform loginWindowTransform;
-    //[SerializeField] private Transform loginBackgroundTransform;  
 
     [System.Serializable]
 
@@ -94,7 +84,6 @@ public class Login : MonoBehaviour{
     public void OnLoginClick()
     {
         alertText.text = "Signing in ...";
-        // loginButton.interactable = false;
         StartCoroutine(TryLogin());
         
     }
@@ -102,11 +91,14 @@ public class Login : MonoBehaviour{
     {
         Debug.Log("serever port: " + GlobalVariables.serverAccessBaseURL + "/api/register");
         alertText.text = "Signing up ...";
-        //signupButton.interactable = false;
         StartCoroutine(TrySignup());
         
     }
 
+    /// <summary>
+    /// Verifies email and password, on success, gets mapID from server to prepare for load map 
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator TryLogin()
     {
         LoginData loginData = new LoginData
@@ -162,9 +154,7 @@ public class Login : MonoBehaviour{
                 alertText.text = "Welcome";
         
                 loginButton.interactable = false;
-              
-                //StartCoroutine(MoveLoginWindowUp());
-                //SceneManager.LoadScene("MainScene");
+ 
                 StartLoginAnimations();
             }
             else
@@ -180,6 +170,10 @@ public class Login : MonoBehaviour{
         }
     }
 
+    /// <summary>
+    /// Saves new user information to server, on success, calls TryCreateMap
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator TrySignup()
     {
         SignupData signupData = new SignupData
@@ -237,9 +231,12 @@ public class Login : MonoBehaviour{
         }
     }
 
+    /// <summary>
+    /// Creates a new map on server for the user, retrieves mapID of new map for future map saving to server
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator TryCreateMap()
     {
-        //string createMapUrl = "http://localhost:3000/api/" + GlobalVariables.UserID + "/createmap";
         string createMapUrl = GlobalVariables.serverAccessBaseURL + "/api/" + GlobalVariables.UserID + "/createmap";
         print(createMapUrl);
         UnityWebRequest request = new UnityWebRequest(createMapUrl, "POST");
@@ -259,8 +256,6 @@ public class Login : MonoBehaviour{
                     
                     GlobalVariables.IsNewUser = true;
                     StartLoginAnimations();
-                    //SceneManager.LoadScene("MainScene");
-
                 }
                 else
                 {
@@ -276,40 +271,12 @@ public class Login : MonoBehaviour{
         
     }
 
+    /// <summary>
+    /// Starts cloud animation
+    /// </summary>
     public void StartLoginAnimations(){
         cloudManager.OnLogin();
         anim.SetTrigger("login");
     }
-
-    //private IEnumerator MoveLoginWindowUp()
-    //{
-    //    yield return new WaitForSeconds(2);
-    //    Vector3 startPosition1 = loginWindowTransform.position;
-    //    Vector3 endPosition1 = startPosition1 + new Vector3(0, 700, 0);  
-    //    Vector3 startPosition2 = loginBackgroundTransform.position;
-    //    Vector3 endPosition2 = startPosition2 + new Vector3(0, -700, 0);  
-
-    //    float duration = 1.0f;  
-    //    float elapsedTime = 0;
-
-    //    while (elapsedTime < duration)
-    //    {
-    //        loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
-    //        elapsedTime += Time.deltaTime;
-    //        loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
-    //        elapsedTime += Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    loginWindowTransform.position = endPosition1;  
-    //    loginBackgroundTransform.position = endPosition2;
-    //    usernameInputField.text = "";  // Clear the username field
-    //    emailInputField.text = "";     // Clear the email field
-    //    passwordInputField.text = "";  // Clear the password field
-    //    loginButton.interactable = true;
-    //    signupButton.interactable = true;
-    //    alertText.text = "LOG IN";
-
-    //}
 }
 

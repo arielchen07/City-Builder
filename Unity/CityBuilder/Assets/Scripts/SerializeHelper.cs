@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Serializable wrapper data structure for map data to be send to server
+/// </summary>
 [Serializable]
 public class MapRequestBody
 {
@@ -13,6 +16,9 @@ public class MapRequestBody
     }
 }
 
+/// <summary>
+/// Serializable data structure for map data
+/// </summary>
 [Serializable]
 public class MapSerialization
 {
@@ -37,6 +43,9 @@ public class MapSerialization
 
 }
 
+/// <summary>
+/// Serializable data structure for building objects
+/// </summary>
 [Serializable]
 public class StructureObjSerialization
 {
@@ -52,6 +61,9 @@ public class StructureObjSerialization
     }
 }
 
+/// <summary>
+/// Serializable data structure for tile objects
+/// </summary>
 [Serializable]
 public class TileSerialization
 {
@@ -69,6 +81,9 @@ public class TileSerialization
     }
 }
 
+/// <summary>
+/// Serializable data structure for decor objects such as trees
+/// </summary>
 [Serializable]
 public class DecorSerialization
 {
@@ -84,6 +99,9 @@ public class DecorSerialization
     }
 }
 
+/// <summary>
+/// Serializable data structure vector of 3 elements
+/// </summary>
 [Serializable]
 public class Vector3Serialization
 {

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The TreeHarvester class is attached to all objects that enable the user to harvest trees. <br/>
+/// This class inherits PlaceableObject and implements IHarvester.
+/// </summary>
 public class TreeHarvester : PlaceableObject, IHarvester
 {
     void Start()
@@ -11,36 +15,52 @@ public class TreeHarvester : PlaceableObject, IHarvester
         HoverValid.SetActive(false);
         HoverInvalid.SetActive(false);
     }
-    void Update() {
+    void Update()
+    {
         currentlyColliding = GetCollidingTiles();
         adjacentTiles = GetAdjacentTiles();
         canBePlaced = CanBePlaced();
-        if (isHovering) {
-            if (canBePlaced) {
+        if (isHovering)
+        {
+            if (canBePlaced)
+            {
                 HoverValid.SetActive(true);
                 HoverInvalid.SetActive(false);
-            } else {
+            }
+            else
+            {
                 HoverValid.SetActive(false);
                 HoverInvalid.SetActive(true);
             }
-        } else {
+        }
+        else
+        {
             HoverValid.SetActive(false);
             HoverInvalid.SetActive(false);
         }
     }
-    public override void OnPlace(){
-        UtilitiesManager.utilManager.UpdateUtilities();
+    /// <summary>
+    /// Calls AddHarvester to add a tree harvester to the HarvesterManager when this object is initially placed
+    /// </summary>
+    public override void OnPlace()
+    {
         AddHarvester();
     }
-    public override void OnDelete(){
+    /// <summary>
+    /// Calls RemoveHarvester to remove a tree harvester from the HarvesterManager when this object is deleted
+    /// </summary>
+    public override void OnDelete()
+    {
         isActive = false;
-        UtilitiesManager.utilManager.UpdateUtilities();
-        HarvesterManager.harvesterManager.RemoveTreeHarvester();
+        RemoveHarvester();
     }
-    public void AddHarvester(){
+    public void AddHarvester()
+    {
         HarvesterManager.harvesterManager.AddTreeHarvester();
     }
-    public void RemoveHarvester(){
+
+    public void RemoveHarvester()
+    {
         HarvesterManager.harvesterManager.RemoveTreeHarvester();
     }
 }

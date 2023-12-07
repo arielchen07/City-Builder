@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The HarvestSystem class is attached to the HarvestSystem object. <br/>
+/// This class is responsible for implementing the resource harvesting feature.
+/// </summary>
 public class HarvestSystem : MonoBehaviour
 {
     private bool isHovering = false;
@@ -21,32 +25,51 @@ public class HarvestSystem : MonoBehaviour
         isHovering = false;
     }
 
+    /// <summary>
+    /// Responsible for listening to user input, and following pointer.
+    /// </summary>
     void Update()
     {
         HoverValid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
         HoverInvalid.transform.position = pointer.GetComponent<PointerDetector>().indicator.transform.position + new Vector3(0, 0.5f, 0);
 
-        if (isHovering) {
-            if (Highlight() == true && Input.GetKeyDown(KeyCode.Mouse0)){
+        if (isHovering)
+        {
+            if (Highlight() == true && Input.GetKeyDown(KeyCode.Mouse0))
+            {
                 Harvest();
                 isHovering = false;
             }
-            if (Input.GetKey(KeyCode.Escape)){
+            if (Input.GetKey(KeyCode.Escape))
+            {
                 isHovering = false;
             }
-        } else {
+        }
+        else
+        {
             HoverValid.SetActive(false);
             HoverInvalid.SetActive(false);
         }
     }
 
-    public void Hover(){
+    /// <summary>
+    /// Allows other scripts to begin harvesting hover.
+    /// </summary>
+    public void Hover()
+    {
         isHovering = true;
     }
+
+    /// <summary>
+    /// Displays HoverValid object if the user can harvest something in range and they have sufficient harvest charges. <br/>
+    /// Displays HoverInvalid otherwise.
+    /// </summary>
+    /// <returns>true if user can harvest, false otherwise</returns>
     bool Highlight()
     {
         GetCollidingDecorations();
-        if (treesColliding.Count > 0 && harvesterManager.numTreeHarvester - harvesterManager.numOccupiedTreeHarvesters > 0 || rocksColliding.Count > 0 && harvesterManager.numRockHarvester - harvesterManager.numOccupiedRockHarvesters > 0)
+        if (treesColliding.Count > 0 && harvesterManager.numTreeHarvester - harvesterManager.numOccupiedTreeHarvesters > 0
+            || rocksColliding.Count > 0 && harvesterManager.numRockHarvester - harvesterManager.numOccupiedRockHarvesters > 0)
         {
             HoverValid.SetActive(true);
             HoverInvalid.SetActive(false);
@@ -60,6 +83,9 @@ public class HarvestSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Harvests available resources, deletings their objects, and updating resource counts with ResourceDataManager.
+    /// </summary>
     void Harvest()
     {
         HoverValid.SetActive(false);
@@ -86,11 +112,13 @@ public class HarvestSystem : MonoBehaviour
             }
             rocksColliding.Clear();
         }
-        Debug.Log("wood = " + woodCount.ToString() + "stone = " + stoneCount.ToString());
         resourceDataManager.GainResource("wood", woodCount);
         resourceDataManager.GainResource("stone", stoneCount);
     }
 
+    /// <summary>
+    /// Updates treesColliding and rocksColliding appropriately.
+    /// </summary>
     private void GetCollidingDecorations()
     {
         treesColliding.Clear();

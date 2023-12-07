@@ -11,8 +11,11 @@ public class SaveFile : MonoBehaviour
     [Range(0, 10)]
     public int saveDataIndex = 1;
     public MapDataManager mapDataManager;
-    //string serverAccessEndpoint = "http://localhost:3000/api/";
-    //string serverAccessEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
+
+    /// <summary>
+    /// Calls WriteToFile to save map data to local file
+    /// </summary>
+    /// <param name="dataToSave">Data to be saved</param>
     public void SaveDataLocal(string dataToSave)
     {
         if (WriteToFile(saveName + saveDataIndex, dataToSave))
@@ -20,6 +23,13 @@ public class SaveFile : MonoBehaviour
             Debug.Log("Successfully saved data to file");
         }
     }
+
+    /// <summary>
+    /// Saves data to local file: name
+    /// </summary>
+    /// <param name="name">Filename to store data</param> 
+    /// <param name="content">Data be be stored</param>
+    /// <returns>Whether save is successful</returns>
     public bool WriteToFile(string name, string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
@@ -35,8 +45,18 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
-    public void SaveDataServer(string mapID, string dataToSave, bool logout = false)
+
+    /// <summary>
+    /// Calls PostRequestServer and logs whether save is successful after recieved result from server
+    /// </summary>
+    /// <param name="mapID">Unique id for map in database</param>
+    /// <param name="dataToSave">Data to be saved</param>
+    public void SaveDataServer(string mapID, string dataToSave)
     {
+        if (string.IsNullOrEmpty(mapID)) {
+            Debug.Log("No mapID information, map data will not be saved to server");
+            return;
+        }
         MapRequestBody data = new MapRequestBody(dataToSave);
         var mapDataRequestBody = JsonUtility.ToJson(data);
         StartCoroutine(
@@ -55,10 +75,16 @@ public class SaveFile : MonoBehaviour
             )
         );
     }
+
+    /// <summary>
+    /// Send post request to server to save map information, triggers callback after response recieved
+    /// </summary>
+    /// <param name="mapID">Unique id for map in database</param>
+    /// <param name="data">Data to be saved</param>
+    /// <param name="callback">Function to run after recieved result from server</param>
+    /// <returns></returns>
     public IEnumerator PostRequestServer(string mapID, string data, Action<UnityWebRequest> callback)
     {
-        // Currently using hard coded URL to store to a specific map id of a specific user in database
-        // will change this later
         using (var request = new UnityWebRequest(GlobalVariables.serverAccessBaseURL + "/api/" + mapID + "/savemap", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
@@ -69,6 +95,11 @@ public class SaveFile : MonoBehaviour
             callback(request);
         }
     }
+
+    /// <summary>
+    /// Calls ReadFromFile to load map data from local file
+    /// </summary>
+    /// <returns>Data loaded from file</returns>
     public string LoadDataLocal()
     {
         string data = "";
@@ -78,6 +109,13 @@ public class SaveFile : MonoBehaviour
         }
         return data;
     }
+
+    /// <summary>
+    /// Reads data from local file: name
+    /// </summary>
+    /// <param name="name">Filename to read data from</param>
+    /// <param name="content">Data read from file</param>
+    /// <returns>Whether read is successful</returns>
     private bool ReadFromFile(string name, out string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, name);
@@ -93,13 +131,21 @@ public class SaveFile : MonoBehaviour
         }
         return false;
     }
+
+    /// <summary>
+    /// Calls GetRequestServer and calls ReDrawGameMap in MapDataManager to redraw the map after recieved data from server
+    /// </summary>
+    /// <param name="mapID">Unique id for map in database</param>
     public void LoadDataServer(string mapID)
     {
+        if (string.IsNullOrEmpty(mapID)) {
+            Debug.Log("No mapID, map data will not be loaded from server");
+            return;
+        }
         StartCoroutine(
             GetRequestServer(mapID,
                 (UnityWebRequest request) =>
                 {
-                    // call to load game objects after recieved data from get request
                     if (request.result == UnityWebRequest.Result.Success)
                     {
                         string data = request.downloadHandler.text;
@@ -120,11 +166,14 @@ public class SaveFile : MonoBehaviour
             )
         );
     }
+
+    /// <summary>
+    /// Send get request to server to get map information, triggers callback after response recieved
+    /// </summary>
+    /// <param name="mapID">Unique id for map in database</param>
+    /// <param name="callback">Function to run after recieved result from server</param>
     public IEnumerator GetRequestServer(string mapID, Action<UnityWebRequest> callback)
     {
-        // Currently using hard coded URL to load from a specific map id of a specific user in database
-        // will change this later
-        // send get request to server, triggers callback after response recieved
         using (UnityWebRequest request = UnityWebRequest.Get(GlobalVariables.serverAccessBaseURL + "/api/" + mapID + "/map"))
         {
             request.SetRequestHeader("Content-Type", "application/json");

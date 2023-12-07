@@ -7,14 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class Logout : MonoBehaviour
 {
-    //[SerializeField] private string logoutEndpoint = "http://localhost:3000/api/";
-    //private string logoutEndpoint = GlobalVariables.serverAccessBaseURL + "/api/";
-
     [SerializeField] private Button logoutButton;
     [SerializeField] private MapDataManager mapManager;
     public GameObject logoutCover;
-    // [SerializeField] private Transform loginBackgroundTransform; 
-    // [SerializeField] private Transform loginWindowTransform;
+
+    /// <summary>
+    /// Saves map information to server, on success, calls LogoutAfterSave
+    /// </summary>
     public void OnLogoutClick()
     {
         logoutCover.SetActive(true);
@@ -23,7 +22,7 @@ public class Logout : MonoBehaviour
 
         if (string.IsNullOrEmpty(GlobalVariables.MapID))
         {
-            Debug.Log("No valid MapID, map will not be saved");
+            Debug.Log("No MapID information, map will not be saved");
             logoutButton.interactable = true;
             return;
         }
@@ -52,6 +51,9 @@ public class Logout : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Return to the login screen, reset user information variables
+    /// </summary>
     public void LogoutAfterSave()
     {
         StartCoroutine(
@@ -67,11 +69,6 @@ public class Logout : MonoBehaviour
                         GlobalVariables.MapID = string.Empty;
                         GlobalVariables.IsNewUser = true;
 
-
-                        //StartCoroutine(MoveLoginWindowDown());
-
-                        //Application.Quit();
-
                         // Return to the login or main scene
                         SceneManager.LoadScene("LoginScene"); // Change "LoginScene" to your actual scene name
                     }
@@ -85,10 +82,15 @@ public class Logout : MonoBehaviour
         );
         
     }
+
+    /// <summary>
+    /// Sends logout post request to server
+    /// </summary>
+    /// <param name="callback">Function to run after recieved result from server</param>
+    /// <returns></returns>
     private IEnumerator TryLogout(Action<UnityWebRequest> callback)
     {
         string logoutURL = GlobalVariables.serverAccessBaseURL + "/api/" + GlobalVariables.UserID + "/logout";
-        print("logout url: " + logoutURL);
 
         using (var request = new UnityWebRequest(logoutURL, "POST"))
         {
@@ -98,34 +100,5 @@ public class Logout : MonoBehaviour
             callback(request);
         }
     }
-
-
-
-//    private IEnumerator MoveLoginWindowDown()
-//     {
-//         yield return new WaitForSeconds(2);
-//         Vector3 startPosition1 = loginWindowTransform.position;
-//         Vector3 endPosition1 = startPosition1 + new Vector3(0, -700, 0);  
-//         Vector3 startPosition2 = loginBackgroundTransform.position;
-//         Vector3 endPosition2 = startPosition2 + new Vector3(0, 700, 0);  
-
-//         float duration = 1.0f;  
-//         float elapsedTime = 0;
-
-//         while (elapsedTime < duration)
-//         {
-//             loginWindowTransform.position = Vector3.Lerp(startPosition1, endPosition1, (elapsedTime / duration));
-//             elapsedTime += Time.deltaTime;
-//             loginBackgroundTransform.position = Vector3.Lerp(startPosition2, endPosition2, (elapsedTime / duration));
-//             elapsedTime += Time.deltaTime;
-//             yield return null;
-//         }
-
-//         // loginWindowTransform.position = endPosition1;  
-//         loginBackgroundTransform.position = endPosition2;
-//         logoutButton.interactable = true;
-//         mapManager.ClearGameMap();
-
-//     }
 }
 

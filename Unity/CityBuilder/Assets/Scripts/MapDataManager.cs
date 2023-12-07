@@ -14,7 +14,7 @@ public class MapDataManager : MonoBehaviour
     public int WIDTH = 10;
     public int LENGTH = 10;
     public float WATER_PERCENTAGE = 30f;
-    public int TREES_PER_TILE = 5;
+    public int DECORATIONS_PER_TILE = 5;
     float timer = 0;
     public float interval;
     public bool finish_loading_map;
@@ -28,8 +28,6 @@ public class MapDataManager : MonoBehaviour
         {
             if (GlobalVariables.IsNewUser)
             {
-                //LoadGameMapServer(); // will be changed to Generate game map
-                //SaveGameMapServer(GlobalVariables.MapID);
                 GenerateGameMap();
                 finish_loading_map = true;
                 cover.GetComponent<Animator>().SetTrigger("loadScene");
@@ -47,39 +45,6 @@ public class MapDataManager : MonoBehaviour
     }
     private void Update()
     {
-        // Key press for save/load the game, will be replaced by click button in UI at later stage
-        //if (Input.GetKeyDown(KeyCode.Alpha0))
-        //{
-        //    SaveGameMapLocal();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //{
-        //    LoadGameMapLocal();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha8))
-        //{
-        //    SaveGameMapServer();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha7))
-        //{
-        //    LoadGameMapServer();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha6))
-        //{
-        //    RemoveStructureObjs();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    ClearGameMap();
-        //}
-        //if (Input.GetKeyDown(KeyCode.M))
-        //{
-        //    GenerateGameMap();
-        //}
-        //print("Time.timeSinceLevelLoad: " + Time.timeSinceLevelLoad);
-        //print("timer: " + timer);
-        //print("Time.deltaTime: " + Time.deltaTime);
-
         if (Time.timeSinceLevelLoad > timer && finish_loading_map)
         {
             timer = Time.timeSinceLevelLoad + interval;
@@ -95,7 +60,6 @@ public class MapDataManager : MonoBehaviour
                 Debug.Log("Cannot save: No avaliable MapID");
             }
         }
-        //timer += Time.deltaTime;
     }
     public void RemoveStructureObjs()
     {
@@ -114,6 +78,10 @@ public class MapDataManager : MonoBehaviour
             item.placedObject = null;
         }
     }
+
+    /// <summary>
+    /// Clears tiles and decorations.
+    /// </summary>
     public void ClearGameMap()
     {
         RemoveStructureObjs();
@@ -131,6 +99,10 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates a WIDTH x HEIGHT map with roughly WATER_PERCENTAGE% of water using a perlin noise grid, <br/>
+    /// then places DECORATIONS_PER_TILE decorations per tile using a different perlin noise grid.
+    /// </summary>
     public void GenerateGameMap()
     {
         ClearGameMap();
@@ -155,17 +127,25 @@ public class MapDataManager : MonoBehaviour
         return objects.Where(obj => names.Contains(obj.name)).ToList();
     }
 
-    private GameObject CreateTile(int x, int z, float[,] grid, List<GameObject> objects)
+    /// <summary>
+    /// Creates a tile, using a different tile or no tile at all depending on perlin noise.
+    /// </summary>
+    /// <param name="x">The x coordinate of the tile</param>
+    /// <param name="z">The z coordinate of the tile</param>
+    /// <param name="grid">The value from perlin noise at that coordinate</param>
+    /// <param name="tiles">The list of tiles in inventory</param>
+    /// <returns>The tile object if instantiated, null if it was not instantiated (water)</returns>
+    private GameObject CreateTile(int x, int z, float[,] grid, List<GameObject> tiles)
     {
         Transform landTransform = GameObject.Find("Land").transform;
         float yHeight = landTransform.position.y;
 
-        int perlin = (int)Math.Floor((grid[x, z] / (1 - (WATER_PERCENTAGE / 100f))) * (float)(objects.Count));
+        int perlin = (int)Math.Floor((grid[x, z] / (1 - (WATER_PERCENTAGE / 100f))) * (float)(tiles.Count));
 
-        if (perlin >= 0 && perlin < objects.Count)
+        if (perlin >= 0 && perlin < tiles.Count)
         {
             Vector3 position = new Vector3(x - WIDTH / 2, yHeight, z - LENGTH / 2); // center on origin
-            GameObject tile = Instantiate(objects[perlin], position, Quaternion.identity);
+            GameObject tile = Instantiate(tiles[perlin], position, Quaternion.identity);
             tile.transform.SetParent(landTransform, true);
             return tile;
         }
@@ -173,11 +153,19 @@ public class MapDataManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Spawns DECORATIONS_PER_TILE random decorations on the given tile.
+    /// </summary>
+    /// <param name="x">The x coordinate of the tile</param>
+    /// <param name="z">The z coordinate of the tile</param>
+    /// <param name="grid">The value from perlin noise at that coordinate</param>
+    /// <param name="decors">List of decors in inventory</param>
+    /// <param name="tile">The tile that the decorations will be spawned on</param>
     private void CreateDecorations(int x, int z, float[,] grid, List<GameObject> decors, GameObject tile)
     {
         if (tile == null) return;
 
-        for (int c = 0; c < TREES_PER_TILE; c++)
+        for (int c = 0; c < DECORATIONS_PER_TILE; c++)
         {
             int perlin = (int)Math.Floor(grid[x, z] * 100);
             if (perlin < 35)
@@ -193,6 +181,14 @@ public class MapDataManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates a perlin noise grid. <br/>
+    /// While perlin noise grids are deterministic, we introduce a random offset to generate unique maps.
+    /// </summary>
+    /// <param name="width">The width of the grid (x-axis)</param>
+    /// <param name="length">The length of the grid (z-axis)</param>
+    /// <param name="scale">The higher it is, the more "zoomed out" and less detailed it is</param>
+    /// <returns>A 2d array of floats between 0 and 1, representing a perlin grid</returns>
     private float[,] GeneratePerlinNoiseGrid(int width, int length, float scale)
     {
         float[,] grid = new float[width, length];
