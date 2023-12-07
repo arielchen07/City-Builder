@@ -35,6 +35,7 @@ public class PollutionManager : MonoBehaviour
         }
     }
     public void UpdateTreeCount(){
+        numTrees = 0;
         Decoration[] decos = FindObjectsOfType<Decoration>();
         foreach(Decoration d in decos){
             if(d.resourceType == "wood"){
