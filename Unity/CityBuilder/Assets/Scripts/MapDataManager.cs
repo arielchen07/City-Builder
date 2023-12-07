@@ -182,8 +182,10 @@ public class MapDataManager : MonoBehaviour
             {
                 Vector3 randomOffset = new Vector3(UnityEngine.Random.value - 0.5f, 0, UnityEngine.Random.value - 0.5f);
                 Vector3 position = tile.transform.position + randomOffset;
+                int randomRot = UnityEngine.Random.Range(0,4);
                 GameObject decoration = Instantiate(decors[UnityEngine.Random.Range(0, decors.Count)], position, Quaternion.identity);
                 decoration.tag = "Decoration";
+                decoration.transform.Rotate(new Vector3(0, randomRot * 90, 0));
                 tile.GetComponent<MapTile>().isOccupied = true;
             }
         }
@@ -366,6 +368,7 @@ public class MapDataManager : MonoBehaviour
                     {
                         GameObject decoration = Instantiate(decorObj);
                         decoration.transform.position = decor.position.GetValue();
+                        decoration.transform.Rotate(decor.rotation.GetValue());
                         decoration.tag = "Decoration";
                         Transform landTransform = GameObject.Find("Land").transform;
                         decoration.transform.SetParent(landTransform, true);
