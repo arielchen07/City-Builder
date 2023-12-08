@@ -103,7 +103,7 @@ We are using Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Internati
 - use the same license as this codebase, when you share and adapt the material
 - do not restrict others from doing anything this license permits
 
-  Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
