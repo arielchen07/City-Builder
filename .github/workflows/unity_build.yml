@@ -16,8 +16,8 @@ env:
   UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
 jobs:
-  buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  testUnityGame:
+    name: Test Unity Game
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
@@ -28,8 +28,6 @@ jobs:
       matrix:
         projectPath:
           - ./Unity/CityBuilder
-        targetPlatform:
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
         testMode:
           - ./Unity/
     steps:
@@ -46,12 +44,36 @@ jobs:
           restore-keys: |
             Library-${{ matrix.projectPath }}-
             Library-
-      - if: matrix.targetPlatform == 'Android'
-        uses: jlumbroso/free-disk-space@v1.3.1
       - name: Unity - Test runner
         uses: game-ci/unity-test-runner@v4.0.0
         with:
           projectPath: ${{ matrix.projectPath }}
+  buildUnityGame:
+    name: Build for ${{ matrix.targetPlatform }}
+    needs: testUnityGame
+    runs-on: ubuntu-latest
+    if: ${{ needs.testUnityGame.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - ./Unity/CityBuilder
+        targetPlatform:
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-
+            Library-
       - name: Build
         uses: game-ci/unity-builder@v4
         with:
